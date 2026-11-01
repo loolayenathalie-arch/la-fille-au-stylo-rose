@@ -19,6 +19,43 @@
     vivants[i].style.setProperty('--dl', (-Math.random() * duree).toFixed(1) + 's');
   }
 
+  /* Les étoiles : des points de lumière ronds, de tailles variées (quelques grandes, beaucoup de minuscules).
+     Chacune respire à son rythme (4 à 9 s) et dérive très lentement vers le haut ; --z donne la profondeur
+     (léger décalage au défilement). Quelques-unes glissent vers les Doudous quand ils apparaissent et se posent autour. */
+  var astres = document.querySelector('.astres');
+  if (astres) {
+    var mobile = window.innerWidth < 700;
+    var total = mobile ? 12 : 26, grandes = mobile ? 2 : 4, versDoudous = mobile ? 4 : 7;
+    for (var k = 0; k < total; k++) {
+      var a = document.createElement('span');
+      var g = k < grandes;
+      var gauche = 4 + Math.random() * 92, haut = 4 + Math.random() * 78;
+      a.className = 'astre' + (g ? ' grande' : '') + (!g && Math.random() < 0.12 ? (Math.random() < 0.5 ? ' rose' : ' bleu') : '');
+      a.style.left = gauche.toFixed(1) + '%';
+      a.style.top = haut.toFixed(1) + '%';
+      if (!g) { a.style.setProperty('--t', (4 + Math.random() * 5).toFixed(1) + 'px'); }
+      else { a.style.setProperty('--t', (26 + Math.random() * 12).toFixed(0) + 'px'); }
+      a.style.setProperty('--z', (g ? 24 : 40 + Math.random() * 90).toFixed(0));
+      var dur = 4 + Math.random() * 5;
+      var i = document.createElement('i');
+      i.style.setProperty('--d', dur.toFixed(1) + 's');
+      i.style.setProperty('--dl', (-Math.random() * dur).toFixed(1) + 's');
+      var dd = (g ? 80 : 40) + Math.random() * 50;
+      i.style.setProperty('--dd', dd.toFixed(0) + 's');
+      i.style.setProperty('--dl2', (-Math.random() * dd).toFixed(0) + 's');
+      i.style.setProperty('--dv', (-(g ? 6 : 8 + Math.random() * 12)).toFixed(1) + 'vh');
+      i.style.setProperty('--dr', ((Math.random() - 0.5) * 18).toFixed(0) + 'px');
+      if (k >= grandes && k < grandes + versDoudous) {
+        /* cible : autour des deux Doudous, en bas de la scène */
+        var cx = 50 + (Math.random() - 0.5) * 56, cy = 66 + Math.random() * 20;
+        a.style.setProperty('--dx', (cx - gauche).toFixed(1) + 'vw');
+        a.style.setProperty('--dy', (cy - haut).toFixed(1) + 'svh');
+      }
+      a.appendChild(i);
+      astres.appendChild(a);
+    }
+  }
+
   /* Le mode calme est géré par js/site.js (réglage du système ou bouton) ; ici on le suit. */
   var calme = racine.classList.contains('calme');
   var attente = false;

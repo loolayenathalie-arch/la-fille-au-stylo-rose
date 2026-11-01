@@ -46,14 +46,13 @@
     <div class="brume brume-1" data-vie="97"></div>
     <div class="brume brume-2" data-vie="131"></div>
     <div class="brume brume-3" data-vie="79"></div>
-    <div class="brume brume-4" data-vie="157"></div>
-    <div class="brume brume-5" data-vie="113"></div>
-    <div class="poussiere">
-     <span data-vie="83"></span><span data-vie="107"></span><span data-vie="71"></span><span data-vie="127"></span>
-     <span data-vie="93"></span><span data-vie="119"></span><span data-vie="101"></span>
-    </div>
+    <!-- Étoiles : posées par js/accueil.js (une douzaine sur téléphone) -->
+    <div class="astres"></div>
     <div class="grain"></div>
    </div>
+
+   <!-- Le nuage d'ouverture : arrive lentement, enveloppe l'écran, puis se dissipe en laissant apparaître le titre. -->
+   <div class="nuage-ouverture" aria-hidden="true"><span class="n n0"></span><span class="n n1"></span><span class="n n2"></span><span class="n n3"></span><span class="n n4"></span></div>
 
    <button class="calmer" id="calmer" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
 
@@ -76,11 +75,12 @@
      <svg class="fil" viewBox="0 0 400 160" aria-hidden="true" focusable="false">
       <defs>
        <linearGradient id="fil-degrade" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0" stop-color="#D3B58A" stop-opacity="0"/>
-        <stop offset=".5" stop-color="#D3B58A" stop-opacity="1"/>
-        <stop offset="1" stop-color="#D3B58A" stop-opacity="0"/>
+        <stop offset="0" stop-color="#D9A66E" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#D9A66E" stop-opacity="1"/>
+        <stop offset="1" stop-color="#D9A66E" stop-opacity="0"/>
        </linearGradient>
       </defs>
+      <path class="fil-halo" d="M26 104 C 110 44, 150 70, 205 58 S 320 52, 374 102" pathLength="1"/>
       <path class="fil-trait" d="M26 104 C 110 44, 150 70, 205 58 S 320 52, 374 102" pathLength="1"/>
      </svg>
 
@@ -99,6 +99,8 @@
        <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
       </div>
      </div>
+     <!-- Un nuage doux qui enveloppe les Doudous -->
+     <div class="nuage-bas" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
    </div>
 

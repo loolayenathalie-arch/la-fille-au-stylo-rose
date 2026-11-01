@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" fill="none">
+<!-- Image provisoire : formes douces. Remplace ce fichier par ton illustration (même nom, fond transparent). -->
+<path d="M0 300C120 250 220 330 360 290C500 250 620 330 800 280V360H0Z" fill="#D9EDE6"/><circle cx="640" cy="90" r="46" fill="#FFF1D6"/><ellipse cx="200" cy="230" rx="90" ry="60" fill="#F9DDE3" stroke="#D9A9B8" stroke-width="5"/><circle cx="420" cy="200" r="70" fill="#DCE5EC" stroke="#A9BBCB" stroke-width="5"/>
+</svg>

@@ -1,0 +1,18 @@
+REMPLACER UNE IMAGE
+-------------------
+Chaque personnage, livre ou portrait a UN fichier. Les images actuelles sont des formes
+provisoires. Pour changer une image : déposer la vraie illustration dans le même dossier,
+avec le même nom (PNG ou SVG, fond transparent).
+
+Si ton fichier est un .png, change aussi l'extension dans la page HTML : repère le
+commentaire « EMPLACEMENT IMAGE » juste au-dessus de la balise <img>.
+
+Dossiers
+  personnages/  doudou-tout-mou, doudou-grosse-tete, doudou-a-nommer-3, doudou-a-nommer-4,
+                la-fille-au-stylo-rose  (renommer « a-nommer » quand les noms sont choisis)
+  livres/       livre-1-couverture, livre-2-couverture
+  autrice/      portrait-nathalie
+  accueil/      scene-accueil
+
+Pense au texte alternatif (attribut alt) : il est marqué [texte de Nath : description de l'image].
+Aucune image générée par IA dans ce site.

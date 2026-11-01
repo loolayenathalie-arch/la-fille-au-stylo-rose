@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact – La fille au stylo rose</title>
+<!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
+<meta name="robots" content="noindex, nofollow">
+<!-- TODO : description de la page -->
+<meta name="description" content="[texte de Nath]">
+<meta name="theme-color" content="#F9DDE3">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
+<header class="entete">
+ <div class="entete-interieur">
+  <a class="nom-du-site" href="index.html">La fille au stylo rose</a>
+  <nav class="menu" aria-label="Menu principal">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="les-livres.html">Les livres</a></li>
+    <li><a href="les-doudous.html">Les Doudous</a></li>
+    <li><a href="a-propos.html">À propos de l'autrice</a></li>
+    <li><a href="coin-des-parents.html">Coin des parents</a></li>
+    <li><a href="contact.html" aria-current="page">Contact</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="contenu">
+<div class="contenu">
+ <h1>Contact</h1>
+ <p class="chapeau vide">[texte de Nath]</p>
+ <!-- TODO formulaire de contact : adresse de destination = contact@lafilleaustylorose.com (à créer chez OVH,
+      pas encore disponible). Un site statique ne peut pas envoyer d'e-mail seul : prévoir soit une fonction Vercel
+      (avec envoi par Brevo/SMTP OVH), soit un service de formulaires. Tant que ce n'est pas branché, le bouton
+      d'envoi reste désactivé (attribut disabled) pour ne pas faire croire à un envoi. -->
+ <form class="formulaire" method="post" action="" aria-describedby="note-formulaire">
+  <div><label for="nom">Votre nom</label><input id="nom" name="nom" type="text" autocomplete="name" required></div>
+  <div><label for="courriel">Votre adresse e-mail</label><input id="courriel" name="courriel" type="email" autocomplete="email" required></div>
+  <div><label for="message">Votre message</label><textarea id="message" name="message" required></textarea></div>
+  <p id="note-formulaire" class="vide">[texte de Nath]</p>
+  <button class="bouton" type="submit" disabled>Envoyer</button>
+ </form>
+</div>
+</main>
+<footer class="pied">
+ <div class="pied-interieur">
+  <nav aria-label="Pied de page">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="les-livres.html">Les livres</a></li>
+    <li><a href="les-doudous.html">Les Doudous</a></li>
+    <li><a href="a-propos.html">À propos de l'autrice</a></li>
+    <li><a href="coin-des-parents.html">Coin des parents</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+   </ul>
+  </nav>
+  <p>[texte de Nath]</p>
+ </div>
+</footer>
+</body>
+</html>

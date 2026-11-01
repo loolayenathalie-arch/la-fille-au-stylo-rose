@@ -1,0 +1,3 @@
+# TODO (lancement public) : remplacer par "User-agent: *" suivi de "Allow: /" et ajouter le Sitemap.
+User-agent: *
+Disallow: /

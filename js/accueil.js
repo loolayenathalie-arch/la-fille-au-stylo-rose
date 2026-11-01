@@ -139,6 +139,7 @@
     scene.style.setProperty('--p', p.toFixed(3));
     scene.style.setProperty('--t', t.toFixed(3));
     scene.style.setProperty('--f', f.toFixed(3));
+    scene.classList.toggle('net', p >= 0.995);   /* révélation terminée : le filtre de flou est retiré (filter: none) */
     trace();
   }
 

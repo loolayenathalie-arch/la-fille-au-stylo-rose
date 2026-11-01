@@ -265,3 +265,4 @@ body::before{
 html.calme .etoile,html.calme .etoile-ame::before,html.calme .etoile-ame i{animation:none;opacity:.6;transform:none}
 html.calme .etoile-ame i{opacity:1}
 .collection{margin:0 0 .3rem;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.15rem;color:var(--brun-fonce)}
+.cadre-portrait img[src$=".png"]{aspect-ratio:560/900}

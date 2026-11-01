@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le livre – Les Doudous de Lili</title>
+<!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
+<meta name="robots" content="noindex, nofollow">
+<!-- TODO : description de la page -->
+<meta name="description" content="[texte de Nath]">
+<meta name="theme-color" content="#EFE3CE">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
+<header class="entete">
+ <div class="entete-interieur">
+  <a class="nom-du-site" href="index.html">Les Doudous de Lili<small>La fille au stylo rose</small></a>
+  <nav class="menu" aria-label="Menu principal">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html" aria-current="page">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="contenu">
+<div class="contenu">
+ <header class="page-tete"><h1>Le livre</h1></header>
+ <div class="livre-fiche">
+  <!-- EMPLACEMENT IMAGE : images/livres/livre-1-couverture.svg (couverture ; remplacer le fichier, même nom) -->
+  <div class="cadre-aquarelle cadre-livre apparait"><img class="format-livre" src="images/livres/livre-1-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]"></div>
+  <div class="livre-texte apparait">
+   <p class="etiquette">Bientôt disponible</p>
+   <p class="chapeau vide">[texte de Nath]</p>
+   <p class="age"><strong>Âge conseillé :</strong> <span class="vide">[à compléter]</span></p>
+  </div>
+ </div>
+ <div class="lavis" aria-hidden="true"></div>
+ <!-- RÈGLE : rien de commercial sur cette page (pas de prix, pas de bouton d'achat, pas de QR code). -->
+ <section class="bandeau bandeau-bleu apparait" aria-labelledby="prevenir">
+  <h2 id="prevenir">Être prévenu(e) de la sortie</h2>
+  <!-- TODO Brevo : brancher ce formulaire à la liste d'inscription (même démarche que la lettre du bas de page) :
+       (1) liste + formulaire dans Brevo ; (2) autoriser le domaine Brevo dans vercel.json (form-action) ;
+       (3) case de consentement + mention RGPD. Aucun script de suivi. Bouton désactivé tant que ce n'est pas branché. -->
+  <form class="formulaire" method="post" action="" aria-describedby="note-prevenir">
+   <div><label for="prevenir-courriel">Votre adresse e-mail</label><input id="prevenir-courriel" name="courriel" type="email" autocomplete="email" required></div>
+   <p id="note-prevenir" class="vide">[texte de Nath]</p>
+   <button class="bouton" type="submit" disabled>Être prévenu(e) de la sortie</button>
+  </form>
+ </section>
+</div>
+</main>
+<footer class="pied">
+ <div class="pied-interieur">
+  <div class="bas-blocs">
+   <section class="bas-bloc" aria-labelledby="bas-autrice">
+    <h2 id="bas-autrice">L'autrice</h2>
+    <p class="vide">[texte de Nath]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-contact">
+    <h2 id="bas-contact">Contact</h2>
+    <!-- TODO : adresse contact@lafilleaustylorose.com à créer chez OVH ; la remplacer ici, puis en faire un lien mailto:. -->
+    <p class="vide">[adresse e-mail à compléter]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-lettre">
+    <h2 id="bas-lettre">La lettre</h2>
+    <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
+         domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
+         Bouton désactivé tant que ce n'est pas branché. -->
+    <form class="formulaire formulaire-bas" method="post" action="">
+     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
+     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
+    </form>
+   </section>
+  </div>
+  <nav aria-label="Pied de page">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+   </ul>
+  </nav>
+  <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+ </div>
+
+</footer>
+</body>
+</html>

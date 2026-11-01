@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'univers – Les Doudous de Lili</title>
+<!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
+<meta name="robots" content="noindex, nofollow">
+<!-- TODO : description de la page -->
+<meta name="description" content="[texte de Nath]">
+<meta name="theme-color" content="#EFE3CE">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
+<header class="entete">
+ <div class="entete-interieur">
+  <a class="nom-du-site" href="index.html">Les Doudous de Lili<small>La fille au stylo rose</small></a>
+  <nav class="menu" aria-label="Menu principal">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html" aria-current="page">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="contenu">
+<div class="contenu">
+ <header class="page-tete"><h1>L'univers</h1></header>
+ <section class="bandeau bandeau-rose apparait" aria-labelledby="lili">
+  <div class="deux-colonnes">
+   <!-- EMPLACEMENT IMAGE : images/personnages/la-fille-au-stylo-rose.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+   <div class="cadre-aquarelle cadre-portrait"><img src="images/personnages/la-fille-au-stylo-rose.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+   <div><h2 id="lili">Lili</h2><p class="vide">[texte de Nath]</p></div>
+  </div>
+ </section>
+ <section class="bandeau  apparait" aria-labelledby="tout-mou">
+  <div class="deux-colonnes">
+   <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+   <div class="cadre-aquarelle cadre-portrait"><img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+   <div><h2 id="tout-mou">Doudou tout mou</h2><p class="vide">[texte de Nath]</p></div>
+  </div>
+ </section>
+ <section class="bandeau bandeau-bleu apparait" aria-labelledby="grosse-tete">
+  <div class="deux-colonnes">
+   <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+   <div class="cadre-aquarelle cadre-portrait"><img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+   <div><h2 id="grosse-tete">Doudou Grosse Tête</h2><p class="vide">[texte de Nath]</p></div>
+  </div>
+ </section>
+</div>
+</main>
+<footer class="pied">
+ <div class="pied-interieur">
+  <div class="bas-blocs">
+   <section class="bas-bloc" aria-labelledby="bas-autrice">
+    <h2 id="bas-autrice">L'autrice</h2>
+    <p class="vide">[texte de Nath]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-contact">
+    <h2 id="bas-contact">Contact</h2>
+    <!-- TODO : adresse contact@lafilleaustylorose.com à créer chez OVH ; la remplacer ici, puis en faire un lien mailto:. -->
+    <p class="vide">[adresse e-mail à compléter]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-lettre">
+    <h2 id="bas-lettre">La lettre</h2>
+    <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
+         domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
+         Bouton désactivé tant que ce n'est pas branché. -->
+    <form class="formulaire formulaire-bas" method="post" action="">
+     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
+     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
+    </form>
+   </section>
+  </div>
+  <nav aria-label="Pied de page">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+   </ul>
+  </nav>
+  <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+ </div>
+
+</footer>
+</body>
+</html>

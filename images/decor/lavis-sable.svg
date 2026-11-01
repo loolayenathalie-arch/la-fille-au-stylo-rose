@@ -1,4 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 40" preserveAspectRatio="none"><!-- Lavis d'aquarelle sable (séparateur) -->
-<path d="M0 20C60 8 110 30 180 18S300 6 380 20S520 32 600 16S730 10 800 22L800 28C720 36 650 24 560 31S420 38 340 29S200 36 120 29S40 34 0 28Z" fill="#E4D2B8" fill-opacity=".6"/>
-<path d="M0 24C90 14 190 30 310 21S520 12 650 24S760 18 800 22" fill="none" stroke="#B3924F" stroke-opacity=".4" stroke-width="1.2" vector-effect="non-scaling-stroke"/>
+<path d="M0 20C60 8 110 30 180 18S300 6 380 20S520 32 600 16S730 10 800 22L800 28C720 36 650 24 560 31S420 38 340 29S200 36 120 29S40 34 0 28Z" fill="#DFC8A7" fill-opacity=".6"/>
 </svg>

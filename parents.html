@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parents – Les Doudous de Lili</title>
+<!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
+<meta name="robots" content="noindex, nofollow">
+<!-- TODO : description de la page -->
+<meta name="description" content="[texte de Nath]">
+<meta name="theme-color" content="#EFE3CE">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
+<header class="entete">
+ <div class="entete-interieur">
+  <a class="nom-du-site" href="index.html">Les Doudous de Lili<small>La fille au stylo rose</small></a>
+  <nav class="menu" aria-label="Menu principal">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html" aria-current="page">Parents</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="contenu">
+<div class="contenu">
+ <header class="page-tete"><h1>Parents</h1></header>
+ <section class="section" aria-labelledby="maison">
+  <h2 id="maison">À la maison</h2>
+  <ul class="grille">
+  <li class="carte apparait"><h3>Une respiration à deux</h3><p class="vide">[texte de Nath]</p></li>
+  <li class="carte apparait"><h3>Un coin des émotions</h3><p class="vide">[texte de Nath]</p></li>
+  <li class="carte apparait"><h3>Une échelle pour dire comment ça va</h3><p class="vide">[texte de Nath]</p></li>
+  </ul>
+ </section>
+ <section class="bandeau apparait" aria-labelledby="fiche">
+  <!-- EMPLACEMENT : fiche à imprimer (PDF). Déposer le fichier dans /fiches puis lier ici, ex. <a class="bouton" href="fiches/nom.pdf">. -->
+  <h2 id="fiche">Une fiche à imprimer</h2>
+  <p class="vide">[texte de Nath]</p>
+ </section>
+ <section class="section apparait" aria-labelledby="pas-ca">
+  <h2 id="pas-ca">Ce que ce livre n'est pas</h2>
+  <p class="vide">[texte de Nath]</p>
+ </section>
+ <div class="pinceau" aria-hidden="true"></div>
+ <!-- Une seule ligne, discrète, vers le cabinet ArmoniLux. -->
+ <!-- TODO : remplacer ce texte par la ligne voulue avec le lien vers le site du cabinet ArmoniLux (adresse à fournir par Nath). -->
+ <p class="vide"><small>[texte de Nath]</small></p>
+</div>
+</main>
+<footer class="pied">
+ <div class="pied-interieur">
+  <div class="bas-blocs">
+   <section class="bas-bloc" aria-labelledby="bas-autrice">
+    <h2 id="bas-autrice">L'autrice</h2>
+    <p class="vide">[texte de Nath]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-contact">
+    <h2 id="bas-contact">Contact</h2>
+    <!-- TODO : adresse contact@lafilleaustylorose.com à créer chez OVH ; la remplacer ici, puis en faire un lien mailto:. -->
+    <p class="vide">[adresse e-mail à compléter]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-lettre">
+    <h2 id="bas-lettre">La lettre</h2>
+    <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
+         domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
+         Bouton désactivé tant que ce n'est pas branché. -->
+    <form class="formulaire formulaire-bas" method="post" action="">
+     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
+     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
+    </form>
+   </section>
+  </div>
+  <nav aria-label="Pied de page">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+   </ul>
+  </nav>
+  <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+ </div>
+
+</footer>
+</body>
+</html>

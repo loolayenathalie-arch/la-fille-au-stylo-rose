@@ -1,6 +1,6 @@
 /* La fille au stylo rose : système de style réutilisable.
    Polices hébergées dans /fonts (aucun appel à un service externe).
-   Palette des Doudous (aquarelle de Nathalie) + fil doré repris du site armonilux.
+   Palette : beige miel #DFC8A7, caramel doux #B87A46, blanc cassé #FAF7F0 ; touches bleu pluie #89A8B8, rose poudré #E6B8A2, vert d eau pâle.
    Sommaire : 1 jetons · 2 typographie · 3 en-tête et menu · 4 mise en page · 5 cartes et cadres
    · 6 séparateurs · 7 boutons · 8 formulaire · 9 pied de page · 10 mouvement · 11 mode calme. */
 
@@ -14,25 +14,26 @@
 /* ===== 1. Jetons ===== */
 :root{
   /* couleurs des Doudous */
-  --creme:#F9F6EA;
-  --sable-clair:#F0E4CE;
-  --sable:#E4D2B8;
-  --beige:#D8BFA0;
-  --caramel:#C7AB8B;
+  --creme:#FAF7F0;
+  --sable-clair:#EFE3CE;
+  --sable:#DFC8A7;
+  --beige:#DFC8A7;
+  --caramel:#B87A46;
   --brun:#7C5C43;         /* titres (grand texte) : 5,6:1 sur crème */
   --texte:#6B4E38;        /* texte courant : 7:1 sur crème */
   --brun-fonce:#5B4330;   /* sous-titres, menu : 8,5:1 sur crème */
   --papier:#FFFDF6;
   /* touches rares, jamais en grands aplats */
-  --peche:#EDC9B8;
-  --eau:#B9D3CC;
+  --peche:#E6B8A2;
+  --eau:#89A8B8;
+  --vert-eau:#DCE9E3;
   /* le rose ne sert qu'au stylo (trait du menu, trait de l'accueil) */
   --rose-stylo:#C06A82;
-  /* le fil doré d'armonilux */
-  --or:#B3924F;
-  --or-clair:#D8C294;
-  --voile-or:#F6EFE0;
-  --lisere:rgba(179,146,79,.38);
+  /* beige miel et caramel doux */
+  --or:#B87A46;
+  --or-clair:#DFC8A7;
+  --voile-or:#F6EEDF;
+  --lisere:rgba(223,200,167,.75);   /* contour très doux, couleur du beige miel (pas de liseré doré) */
   /* ombre chaude très douce, grain de papier */
   --ombre:0 10px 30px -14px rgba(124,92,67,.35),0 2px 6px -2px rgba(124,92,67,.14);
   --ombre-haute:0 16px 36px -14px rgba(124,92,67,.42),0 3px 8px -2px rgba(124,92,67,.16);
@@ -61,7 +62,7 @@ h2{font-size:clamp(1.9rem,6vw,2.6rem)}
 h3{font-size:1.7rem}
 .sous-titre,.chapeau,.accroche{font-family:var(--police-fine);font-weight:500;font-style:italic;font-size:clamp(1.35rem,4.6vw,1.65rem);line-height:1.45;color:var(--brun-fonce)}
 blockquote,.citation{
-  margin:1.5rem 0;padding:.4rem 0 .4rem 1.2rem;border-left:2px solid var(--or-clair);
+  margin:1.5rem 0;padding:.4rem 0 .4rem 1.2rem;
   font-family:var(--police-fine);font-weight:500;font-style:italic;font-size:clamp(1.35rem,4.6vw,1.65rem);line-height:1.45;color:var(--brun-fonce);
 }
 .vide{opacity:.92}  /* emplacement de texte à remplir */
@@ -107,8 +108,8 @@ main{display:block}
 .carte h2,.carte h3{font-size:1.7rem;margin-bottom:.3em}
 /* Bandeaux : même famille que les cartes, teintes sable (les noms de classes gardent leurs anciens noms). */
 .bandeau{background:var(--grain),var(--sable-clair);padding:1.5rem;margin:1.5rem 0}
-.bandeau-bleu{background:var(--grain),#EBDCC4}
-.bandeau-rose{background:var(--grain),#F7E6DB}
+.bandeau-bleu{background:var(--grain),#E4ECEE}
+.bandeau-rose{background:var(--grain),#F8E8DF}
 .grille{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
 
 /* Images : « photo posée » dans un cadre doux, formats fixes. */
@@ -126,8 +127,8 @@ main{display:block}
   position:relative;isolation:isolate;margin:0 auto 1.25rem;padding:clamp(.6rem,3vw,1.1rem);
   border:1px solid var(--lisere);border-radius:30px 38px 32px 42px / 36px 30px 40px 32px;
   background:
-    radial-gradient(ellipse 60% 70% at 8% 12%,rgba(237,201,184,.35),rgba(237,201,184,0) 70%),
-    radial-gradient(ellipse 55% 60% at 94% 92%,rgba(185,211,204,.3),rgba(185,211,204,0) 70%),
+    radial-gradient(ellipse 60% 70% at 8% 12%,rgba(230,184,162,.35),rgba(230,184,162,0) 70%),
+    radial-gradient(ellipse 55% 60% at 94% 92%,rgba(137,168,184,.22),rgba(137,168,184,0) 70%),
     var(--grain),var(--voile-or);
   box-shadow:var(--ombre);
 }
@@ -214,3 +215,18 @@ html.calme .js .apparait,html.calme.js .apparait{opacity:1;transform:none}
 html.calme .menu a::after{transform:none}
 html.calme main{animation:none}
 html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.calme::view-transition-new(*){animation:none}
+
+/* ===== 12. Page « Le livre » et bas de page (autrice, contact, lettre) ===== */
+.livre-fiche{display:grid;gap:1.5rem;align-items:center;justify-items:center;text-align:center}
+.cadre-livre{max-width:14rem;margin:0}
+.cadre-livre img{aspect-ratio:3/4}
+.etiquette{display:inline-block;margin:0 0 .8rem;padding:.25rem 1rem;border-radius:999px;background:var(--vert-eau);color:var(--brun-fonce);font-weight:700;font-size:.95rem}
+.age{margin:0}
+.bas-blocs{display:grid;gap:1.5rem;margin-bottom:1.5rem}
+.bas-bloc h2{font-size:1.6rem;margin-bottom:.2em}
+.formulaire-bas{max-width:none;margin:0;gap:.7rem}
+.formulaire-bas .bouton{justify-self:start}
+@media (min-width:48rem){
+  .livre-fiche{grid-template-columns:14rem 1fr;text-align:left;justify-items:start}
+  .bas-blocs{grid-template-columns:repeat(3,1fr);gap:2rem}
+}

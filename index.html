@@ -24,11 +24,9 @@
   <nav class="menu" aria-label="Menu principal">
    <ul>
     <li><a href="index.html" aria-current="page">Accueil</a></li>
-    <li><a href="les-livres.html">Les livres</a></li>
-    <li><a href="les-doudous.html">Les Doudous</a></li>
-    <li><a href="a-propos.html">À propos de l'autrice</a></li>
-    <li><a href="coin-des-parents.html">Coin des parents</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
    </ul>
   </nav>
  </div>
@@ -116,20 +114,40 @@
 </main>
 <footer class="pied">
  <div class="pied-interieur">
+  <div class="bas-blocs">
+   <section class="bas-bloc" aria-labelledby="bas-autrice">
+    <h2 id="bas-autrice">L'autrice</h2>
+    <p class="vide">[texte de Nath]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-contact">
+    <h2 id="bas-contact">Contact</h2>
+    <!-- TODO : adresse contact@lafilleaustylorose.com à créer chez OVH ; la remplacer ici, puis en faire un lien mailto:. -->
+    <p class="vide">[adresse e-mail à compléter]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-lettre">
+    <h2 id="bas-lettre">La lettre</h2>
+    <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
+         domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
+         Bouton désactivé tant que ce n'est pas branché. -->
+    <form class="formulaire formulaire-bas" method="post" action="">
+     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
+     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
+    </form>
+   </section>
+  </div>
   <nav aria-label="Pied de page">
    <ul>
     <li><a href="index.html">Accueil</a></li>
-    <li><a href="les-livres.html">Les livres</a></li>
-    <li><a href="les-doudous.html">Les Doudous</a></li>
-    <li><a href="a-propos.html">À propos de l'autrice</a></li>
-    <li><a href="coin-des-parents.html">Coin des parents</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="parents.html">Parents</a></li>
     <li><a href="mentions-legales.html">Mentions légales</a></li>
    </ul>
   </nav>
   <p>[texte de Nath]</p>
   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
+
 </footer>
 </body>
 </html>

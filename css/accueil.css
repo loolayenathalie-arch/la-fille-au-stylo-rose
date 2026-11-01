@@ -1,5 +1,5 @@
 /* Accueil : un cocon doré, comme une pièce éclairée par une fenêtre, à l'aquarelle sur papier.
-   Palette des Doudous : crème #F9F6EA / #F0E4CE, sable #E4D2B8, beige #D8BFA0, caramel #C7AB8B,
+   Palette des Doudous : crème #FAF7F0 / #F0E4CE, sable #E4D2B8, beige #D8BFA0, caramel #C7AB8B,
    lumière ambrée #F6D9A8, miel #EBCB9B, abricot #F2D2A9, caramel chaud #D9A66E, brun doux #7C5C43.
    Touches seulement : rose-pêche #EDC9B8, vert d'eau #B9D3CC.
    Rien de régulier : chaque élément a sa durée et ses courbes (le script ajoute un peu de hasard).
@@ -10,9 +10,9 @@
 .page-accueil{
   --encre:#7C5C43;       /* titre, brun doux (grand texte) */
   --encre-douce:#6B4E38; /* petits textes et bouton : contraste > 5:1, même sur le miel */
-  --rose-poudre:#E8BDA9; /* le trait du stylo rose : rose-pêche un peu appuyé pour rester visible */
+  --rose-poudre:#E6B8A2; /* le trait du stylo rose : rose-pêche un peu appuyé pour rester visible */
   --flou-final:1.2px;    /* flou restant sur les Doudous une fois « précisés » (0 = net) */
-  background:#F9F6EA;
+  background:#FAF7F0;
 }
 .page-accueil .nom-du-site{color:var(--encre)}
 
@@ -27,7 +27,7 @@
     radial-gradient(ellipse 75% 36% at 90% 72%,rgba(235,203,155,.75),rgba(235,203,155,0) 72%),
     radial-gradient(ellipse 62% 32% at 8% 60%,rgba(242,210,169,.8),rgba(242,210,169,0) 72%),
     radial-gradient(ellipse 85% 26% at 100% 100%,rgba(217,166,110,.4),rgba(217,166,110,0) 72%),
-    linear-gradient(180deg,#F9F6EA 0%,#F6E8CC 42%,#EEDAB6 100%);
+    linear-gradient(180deg,#FAF7F0 0%,#F6E8CC 42%,#DFC8A7 100%);
 }
 html:not(.js) .scene{--p:1;--t:1;--f:1}
 
@@ -35,7 +35,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .ciel{position:absolute;inset:0;z-index:0;pointer-events:none}
 .ciel::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,#F8EFD8 0%,#F3DFB8 50%,#EBD0A2 84%,#EEDAB6 100%);
+  background:linear-gradient(180deg,#F8EFD8 0%,#F3DFB8 50%,#EBD0A2 84%,#DFC8A7 100%);
   opacity:0;animation:respire 67s ease-in-out infinite alternate;
 }
 @keyframes respire{0%{opacity:0}40%{opacity:.35}100%{opacity:.75}}
@@ -44,7 +44,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .ciel::after{
   content:"";position:absolute;inset:0;
   background:
-    linear-gradient(0deg,#EEDAB6 0%,rgba(238,218,182,0) 14%),
+    linear-gradient(0deg,#DFC8A7 0%,rgba(223,200,167,0) 14%),
     linear-gradient(90deg,rgba(124,92,67,.2) 0%,rgba(124,92,67,0) 26%,rgba(124,92,67,0) 74%,rgba(124,92,67,.2) 100%),
     linear-gradient(180deg,rgba(124,92,67,.14) 0%,rgba(124,92,67,0) 20%);
 }
@@ -85,7 +85,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .brume-3{top:44%;left:-20%;width:140%;height:42%;opacity:.78;animation-name:brume-c;animation-duration:var(--d,79s);animation-delay:var(--dl,-31s);
   background:radial-gradient(ellipse 28% 34% at 20% 50%,rgba(255,243,214,.9),rgba(255,243,214,0)),
              radial-gradient(ellipse 34% 30% at 54% 44%,rgba(242,210,169,.7),rgba(242,210,169,0)),
-             radial-gradient(ellipse 14% 20% at 88% 52%,rgba(185,211,204,.4),rgba(185,211,204,0))}
+             radial-gradient(ellipse 14% 20% at 88% 52%,rgba(137,168,184,.4),rgba(137,168,184,0))}
 .brume-4{top:62%;left:-50%;width:170%;height:44%;opacity:.72;animation-name:brume-a;animation-duration:var(--d,157s);animation-delay:var(--dl,-90s);
   background:radial-gradient(ellipse 32% 36% at 30% 50%,rgba(250,228,186,.9),rgba(250,228,186,0)),
              radial-gradient(ellipse 26% 32% at 66% 46%,rgba(217,166,110,.34),rgba(217,166,110,0))}
@@ -240,14 +240,14 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .calmer{
   position:absolute;top:.75rem;right:.75rem;z-index:3;
   font:inherit;font-size:.9rem;font-weight:400;color:var(--encre-douce);
-  background:rgba(249,246,234,.9);border:1.5px solid #8A6D52;border-radius:999px;
+  background:rgba(250,247,240,.9);border:1.5px solid #8A6D52;border-radius:999px;
   padding:.4rem .95rem;min-height:44px;cursor:pointer;
 }
 .calmer:hover{background:#FFFDF6}
 .calmer[aria-pressed="true"]{box-shadow:inset 0 -3px 0 #8A6D52}
 
 /* ---------- Après la scène ---------- */
-.apres{background:linear-gradient(180deg,#EEDAB6 0%,#F9F6EA 55%)}
+.apres{background:linear-gradient(180deg,#DFC8A7 0%,#FAF7F0 55%)}
 .apres .chapeau{font-size:1rem;color:var(--encre-douce)}
 
 @media (min-width:48rem){

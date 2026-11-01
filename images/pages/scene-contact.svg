@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+<!-- Illustration provisoire (format 4/3, fond transparent). Remplace ce fichier par ton dessin (même nom, PNG ou SVG). -->
+<path d="M0 430C120 380 240 450 380 410C520 370 650 440 800 395V600H0Z" fill="#E4D2B8" fill-opacity=".75"/>
+<path d="M0 500C150 460 300 520 460 485C600 455 710 505 800 480V600H0Z" fill="#D8BFA0" fill-opacity=".6"/>
+<circle cx="200" cy="170" r="62" fill="#F6D9A8" fill-opacity=".85"/>
+<ellipse cx="580" cy="300" rx="110" ry="55" fill="#EDC9B8" fill-opacity=".7"/>
+</svg>

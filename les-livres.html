@@ -12,6 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
@@ -32,20 +33,25 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <h1>Les livres</h1>
- <p class="chapeau vide">[texte de Nath]</p>
- <!-- Un livre = un bloc <li class="carte">. Pour ajouter un livre : copier un bloc, changer l'image dans images/livres/.
+ <header class="page-tete">
+  <!-- EMPLACEMENT IMAGE : images/pages/scene-les-livres.svg (scène 4/3 ; remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+  <div class="cadre-aquarelle cadre-scene apparait"><img src="images/pages/scene-les-livres.svg" width="800" height="600" alt="[texte de Nath : description de l’image]"></div>
+  <h1>Les livres</h1>
+  <p class="chapeau vide">[texte de Nath]</p>
+ </header>
+ <div class="lavis" aria-hidden="true"></div>
+ <!-- Un livre = un bloc <li class="carte apparait">. Pour ajouter un livre : copier un bloc, changer l'image dans images/livres/.
       RÈGLE : rien de commercial dans cette page (pas de prix, pas de bouton d'achat, pas de QR code). -->
  <ul class="grille">
-  <li class="carte">
+  <li class="carte apparait">
    <!-- EMPLACEMENT IMAGE : images/livres/livre-1-couverture.svg -->
-   <img src="images/livres/livre-1-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]">
+   <img class="format-livre" src="images/livres/livre-1-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]">
    <h2 class="vide">[titre du livre]</h2>
    <p class="vide">[texte de Nath]</p>
   </li>
-  <li class="carte">
+  <li class="carte apparait">
    <!-- EMPLACEMENT IMAGE : images/livres/livre-2-couverture.svg -->
-   <img src="images/livres/livre-2-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]">
+   <img class="format-livre" src="images/livres/livre-2-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]">
    <h2 class="vide">[titre du livre]</h2>
    <p class="vide">[texte de Nath]</p>
   </li>
@@ -66,6 +72,7 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
 </footer>
 </body>

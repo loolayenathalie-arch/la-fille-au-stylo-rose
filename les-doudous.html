@@ -12,6 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
@@ -32,40 +33,46 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <h1>Les Doudous</h1>
- <p class="chapeau vide">[texte de Nath]</p>
- <!-- Un Doudou = un bloc <li class="carte"> + un fichier dans images/personnages/ (nom : doudou-nom-du-personnage).
+ <header class="page-tete">
+  <!-- EMPLACEMENT IMAGE : images/pages/scene-les-doudous.svg (scène 4/3 ; remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+  <div class="cadre-aquarelle cadre-scene apparait"><img src="images/pages/scene-les-doudous.svg" width="800" height="600" alt="[texte de Nath : description de l’image]"></div>
+  <h1>Les Doudous</h1>
+  <p class="chapeau vide">[texte de Nath]</p>
+ </header>
+ <div class="lavis" aria-hidden="true"></div>
+ <!-- Un Doudou = un bloc <li class="carte apparait"> + un fichier dans images/personnages/ (nom : doudou-nom-du-personnage).
       « Doudou » prend toujours une majuscule (nom propre). -->
  <ul class="grille">
-  <li class="carte">
+  <li class="carte apparait">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (ou .png fond transparent : changer l'extension ici) -->
-   <img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+   <img class="format-carre" src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
    <h2 class="vide">[nom du Doudou]</h2>
    <p class="vide">[texte de Nath]</p>
   </li>
-  <li class="carte">
+  <li class="carte apparait">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (ou .png fond transparent : changer l'extension ici) -->
-   <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+   <img class="format-carre" src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
    <h2 class="vide">[nom du Doudou]</h2>
    <p class="vide">[texte de Nath]</p>
   </li>
-  <li class="carte">
+  <li class="carte apparait">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-a-nommer-3.svg (ou .png fond transparent : changer l'extension ici) -->
-   <img src="images/personnages/doudou-a-nommer-3.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+   <img class="format-carre" src="images/personnages/doudou-a-nommer-3.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
    <h2 class="vide">[nom du Doudou]</h2>
    <p class="vide">[texte de Nath]</p>
   </li>
-  <li class="carte">
+  <li class="carte apparait">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-a-nommer-4.svg (ou .png fond transparent : changer l'extension ici) -->
-   <img src="images/personnages/doudou-a-nommer-4.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+   <img class="format-carre" src="images/personnages/doudou-a-nommer-4.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
    <h2 class="vide">[nom du Doudou]</h2>
    <p class="vide">[texte de Nath]</p>
   </li>
  </ul>
- <section class="bandeau bandeau-rose" aria-labelledby="heroine">
+ <div class="pinceau" aria-hidden="true"></div>
+ <section class="bandeau bandeau-rose apparait" aria-labelledby="heroine">
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/la-fille-au-stylo-rose.svg -->
-   <div class="portrait"><img src="images/personnages/la-fille-au-stylo-rose.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+   <div class="cadre-aquarelle cadre-portrait"><img src="images/personnages/la-fille-au-stylo-rose.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
    <div><h2 id="heroine" class="vide">[nom du personnage]</h2><p class="vide">[texte de Nath]</p></div>
   </div>
  </section>
@@ -85,6 +92,7 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
 </footer>
 </body>

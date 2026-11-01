@@ -13,6 +13,7 @@
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/accueil.css">
+<script src="js/site.js" defer></script>
 <script src="js/accueil.js" defer></script>
 </head>
 <body class="page-accueil">
@@ -56,7 +57,7 @@
     <div class="grain"></div>
    </div>
 
-   <button class="calmer" id="calmer" type="button" aria-pressed="false">Réduire les animations</button>
+   <button class="calmer" id="calmer" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
 
    <div class="scene-contenu">
     <div class="halo-titre" data-vie="53" aria-hidden="true"></div>
@@ -125,6 +126,7 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
 </footer>
 </body>

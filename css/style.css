@@ -1,102 +1,214 @@
-/* La fille au stylo rose : feuille de style unique.
+/* La fille au stylo rose : système de style réutilisable.
    Polices hébergées dans /fonts (aucun appel à un service externe).
-   Palette des Doudous (mesurée sur une illustration à l'aquarelle de Nathalie) :
-   crème, sable, beige, caramel, brun doux ; seulement de petites touches de rose-pêche et de vert d'eau. */
+   Palette des Doudous (aquarelle de Nathalie) + fil doré repris du site armonilux.
+   Sommaire : 1 jetons · 2 typographie · 3 en-tête et menu · 4 mise en page · 5 cartes et cadres
+   · 6 séparateurs · 7 boutons · 8 formulaire · 9 pied de page · 10 mouvement · 11 mode calme. */
 
 @font-face{font-family:"Caveat";src:url("../fonts/caveat-latin-700-normal.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url("../fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url("../fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url("../fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url("../fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2");font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url("../fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 
+/* ===== 1. Jetons ===== */
 :root{
+  /* couleurs des Doudous */
   --creme:#F9F6EA;
   --sable-clair:#F0E4CE;
   --sable:#E4D2B8;
   --beige:#D8BFA0;
   --caramel:#C7AB8B;
   --brun:#7C5C43;         /* titres (grand texte) : 5,6:1 sur crème */
-  --texte:#6B4E38;        /* texte courant, brun doux un peu plus foncé : 7:1 sur crème, 6:1 sur sable clair */
-  --brun-fonce:#5B4330;   /* menu, focus */
-  --peche:#EDC9B8;        /* touche rose-pêche, jamais en grand aplat */
-  --eau:#B9D3CC;          /* touche vert d'eau, jamais en grand aplat */
-  --papier:#FFFDF6;       /* fond des cartes et des champs */
+  --texte:#6B4E38;        /* texte courant : 7:1 sur crème */
+  --brun-fonce:#5B4330;   /* sous-titres, menu : 8,5:1 sur crème */
+  --papier:#FFFDF6;
+  /* touches rares, jamais en grands aplats */
+  --peche:#EDC9B8;
+  --eau:#B9D3CC;
+  /* le rose ne sert qu'au stylo (trait du menu, trait de l'accueil) */
+  --rose-stylo:#C06A82;
+  /* le fil doré d'armonilux */
+  --or:#B3924F;
+  --or-clair:#D8C294;
+  --voile-or:#F6EFE0;
+  --lisere:rgba(179,146,79,.38);
+  /* ombre chaude très douce, grain de papier */
+  --ombre:0 10px 30px -14px rgba(124,92,67,.35),0 2px 6px -2px rgba(124,92,67,.14);
+  --ombre-haute:0 16px 36px -14px rgba(124,92,67,.42),0 3px 8px -2px rgba(124,92,67,.16);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --focus:#5B4330;
   --rayon:22px;
   --police-titre:"Caveat","Segoe Print","Bradley Hand",cursive;
   --police-texte:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;
+  --police-fine:"Cormorant Garamond",Georgia,"Times New Roman",serif;
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--creme);color:var(--texte);font-family:var(--police-texte);font-size:1.125rem;line-height:1.7}
+body{margin:0;background:var(--grain),var(--creme);color:var(--texte);font-family:var(--police-texte);font-size:1.125rem;line-height:1.7}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--brun);text-underline-offset:.2em}
 a:hover{text-decoration-thickness:.15em}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+p{margin:0 0 1em}
 
+/* ===== 2. Typographie ===== */
+/* Titres : écriture manuscrite. Sous-titres et citations : écriture fine à empattements. Texte courant : lisible. */
 h1,h2,h3{font-family:var(--police-titre);font-weight:700;line-height:1.15;color:var(--brun);margin:0 0 .5em}
 h1{font-size:clamp(2.6rem,9vw,4.2rem)}
 h2{font-size:clamp(1.9rem,6vw,2.6rem)}
 h3{font-size:1.7rem}
-p{margin:0 0 1em}
+.sous-titre,.chapeau,.accroche{font-family:var(--police-fine);font-weight:500;font-style:italic;font-size:clamp(1.35rem,4.6vw,1.65rem);line-height:1.45;color:var(--brun-fonce)}
+blockquote,.citation{
+  margin:1.5rem 0;padding:.4rem 0 .4rem 1.2rem;border-left:2px solid var(--or-clair);
+  font-family:var(--police-fine);font-weight:500;font-style:italic;font-size:clamp(1.35rem,4.6vw,1.65rem);line-height:1.45;color:var(--brun-fonce);
+}
+.vide{opacity:.92}  /* emplacement de texte à remplir */
 
 .passer-au-contenu{position:absolute;left:1rem;top:-4rem;background:var(--brun-fonce);color:var(--creme);padding:.6rem 1rem;border-radius:12px;z-index:10}
 .passer-au-contenu:focus{top:1rem}
 
-/* ----- En-tête et menu (sans JavaScript) ----- */
-.entete{background:var(--sable-clair);padding:1rem 1rem .8rem}
-.entete-interieur{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1.5rem}
+/* ===== 3. En-tête et menu ===== */
+.entete{position:relative;background:var(--grain),var(--sable-clair);padding:1rem 1rem .9rem;border-bottom:1px solid var(--lisere)}
+.entete-interieur{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1.5rem}
 .nom-du-site{font-family:var(--police-titre);font-weight:700;font-size:1.9rem;line-height:1.1;color:var(--brun);text-decoration:none}
-.menu ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
-.menu a{display:inline-block;padding:.45rem .9rem;min-height:44px;line-height:1.6;border-radius:999px;color:var(--brun-fonce);text-decoration:none;font-weight:700;font-size:1rem}
-.menu a:hover{background:var(--creme)}
-.menu a[aria-current="page"]{background:var(--creme);box-shadow:inset 0 -4px 0 var(--brun)}
+.menu ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.1rem .35rem}
+/* Menu simple : pas de pastille. La page en cours est soulignée d'un petit trait de stylo rose fait main. */
+.menu a{position:relative;display:inline-block;padding:.5rem .7rem .7rem;min-height:44px;line-height:1.5;color:var(--brun-fonce);text-decoration:none;font-weight:700;font-size:1rem}
+.menu a::after{
+  content:"";position:absolute;left:.55rem;right:.55rem;bottom:.3rem;height:.5rem;
+  background:url("../images/decor/trait-stylo.svg") center/100% 100% no-repeat;
+  opacity:0;transform:scaleX(.6);transform-origin:left center;transition:opacity .5s ease,transform .6s ease;
+}
+.menu a:hover::after{opacity:.4;transform:scaleX(1)}
+.menu a[aria-current="page"]::after{opacity:1;transform:scaleX(1)}
 
-/* ----- Contenu ----- */
+/* ===== 4. Mise en page ===== */
 main{display:block}
-.contenu{max-width:64rem;margin:0 auto;padding:2rem 1rem 3rem}
-.chapeau{font-size:1.25rem;max-width:42rem}
-/* Les noms de classes gardent leurs anciens noms (les pages HTML ne changent pas) ; seules les couleurs changent. */
-.bandeau{background:var(--sable-clair);border-radius:var(--rayon);padding:1.5rem;margin:1.5rem 0}
-.bandeau-bleu{background:#E9D9BF}
-.bandeau-rose{background:#F7E6DB}
-.vide{opacity:.9}  /* emplacement de texte à remplir */
-
-.grille{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
-.carte{background:var(--papier);border:2px solid var(--sable);border-radius:var(--rayon);padding:1.25rem;text-align:center;transition:transform .25s ease,border-color .25s ease}
-.carte:hover{transform:translateY(-4px);border-color:var(--eau)}
-.carte img{margin:0 auto 1rem;width:100%;max-width:12rem}
-.carte h2,.carte h3{font-size:1.7rem;margin-bottom:.3em}
-
+.contenu{max-width:64rem;margin:0 auto;padding:1.5rem 1rem 3rem}
+.page-tete{text-align:center;margin-bottom:.5rem}
+.page-tete h1{margin-top:.3rem}
+.page-tete .chapeau,.page-tete .accroche{max-width:36rem;margin:0 auto 1rem}
+.section{margin:2rem 0}
 .image-large{margin:1.5rem auto;max-width:44rem}
 .deux-colonnes{display:grid;gap:1.5rem;align-items:center}
-.portrait{max-width:16rem;margin:0 auto}
 
-/* ----- Formulaire ----- */
-.formulaire{display:grid;gap:1.1rem;max-width:36rem}
+/* ===== 5. Cartes et cadres ===== */
+/* Carte : coins arrondis, ombre chaude très douce, fin liseré doré, léger grain de papier. */
+.carte,.bandeau{
+  position:relative;border:1px solid var(--lisere);border-radius:var(--rayon);box-shadow:var(--ombre);
+  background:var(--grain),var(--papier);
+}
+.carte{padding:1.25rem;text-align:center;transition:transform .5s ease,box-shadow .5s ease}
+.carte:hover{transform:translateY(-4px);box-shadow:var(--ombre-haute)}
+.carte h2,.carte h3{font-size:1.7rem;margin-bottom:.3em}
+/* Bandeaux : même famille que les cartes, teintes sable (les noms de classes gardent leurs anciens noms). */
+.bandeau{background:var(--grain),var(--sable-clair);padding:1.5rem;margin:1.5rem 0}
+.bandeau-bleu{background:var(--grain),#EBDCC4}
+.bandeau-rose{background:var(--grain),#F7E6DB}
+.grille{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
+
+/* Images : « photo posée » dans un cadre doux, formats fixes. */
+.carte img{
+  width:100%;max-width:14rem;margin:0 auto 1rem;padding:.55rem;object-fit:contain;
+  background:var(--grain),var(--papier);border:1px solid var(--lisere);border-radius:16px;box-shadow:var(--ombre);
+  transform:rotate(-.7deg);
+}
+.grille>li:nth-child(even) img{transform:rotate(.7deg)}
+.carte img.format-carre{aspect-ratio:1/1}
+.carte img.format-livre{aspect-ratio:3/4;max-width:11rem}
+
+/* Cadre aquarelle : emplacement d'illustration (scène 4/3 ou portrait carré), bords doux comme un lavis. */
+.cadre-aquarelle{
+  position:relative;isolation:isolate;margin:0 auto 1.25rem;padding:clamp(.6rem,3vw,1.1rem);
+  border:1px solid var(--lisere);border-radius:30px 38px 32px 42px / 36px 30px 40px 32px;
+  background:
+    radial-gradient(ellipse 60% 70% at 8% 12%,rgba(237,201,184,.35),rgba(237,201,184,0) 70%),
+    radial-gradient(ellipse 55% 60% at 94% 92%,rgba(185,211,204,.3),rgba(185,211,204,0) 70%),
+    var(--grain),var(--voile-or);
+  box-shadow:var(--ombre);
+}
+.cadre-aquarelle::before{ /* halo de lavis qui déborde un peu du cadre */
+  content:"";position:absolute;inset:-9px;z-index:-1;border-radius:40px 46px 38px 50px / 44px 38px 48px 40px;
+  background:radial-gradient(ellipse 70% 80% at 30% 20%,rgba(228,210,184,.7),rgba(228,210,184,0) 72%),radial-gradient(ellipse 60% 70% at 80% 85%,rgba(216,194,148,.45),rgba(216,194,148,0) 72%);
+  filter:blur(7px);
+}
+.cadre-aquarelle img{width:100%;height:auto;object-fit:contain;border-radius:18px}
+.cadre-scene{max-width:40rem}
+.cadre-scene img{aspect-ratio:4/3}
+.cadre-portrait{max-width:17rem}
+.cadre-portrait img{aspect-ratio:1/1}
+
+/* ===== 6. Séparateurs : lavis et traits de pinceau, jamais de lignes droites ===== */
+.lavis,.pinceau{display:block;width:100%;pointer-events:none}
+.lavis{height:2.2rem;margin:1.5rem 0;background:url("../images/decor/lavis-sable.svg") center/100% 100% no-repeat}
+.pinceau{height:.9rem;max-width:22rem;margin:1.25rem auto;background:url("../images/decor/lavis-or.svg") center/100% 100% no-repeat}
+
+/* ===== 7. Boutons : caramel et brun doux, texte crème, fin contour doré, léger halo au survol ===== */
+.bouton{
+  font:inherit;font-weight:700;color:var(--creme);justify-self:start;cursor:pointer;min-height:44px;
+  padding:.7rem 1.7rem;border-radius:999px;border:1px solid var(--or);
+  background:linear-gradient(180deg,#86644A 0%,#6B4E38 100%);   /* caramel foncé vers brun doux : crème dessus > 4,9:1 */
+  box-shadow:0 3px 10px -4px rgba(124,92,67,.5);
+  transition:box-shadow .5s ease,transform .5s ease;
+}
+.bouton:hover{box-shadow:0 0 0 4px rgba(246,217,168,.5),0 8px 20px -6px rgba(217,166,110,.6);transform:translateY(-1px)}
+.bouton[disabled]{cursor:not-allowed;opacity:.65;box-shadow:none;transform:none}
+
+/* ===== 8. Formulaire ===== */
+.formulaire{display:grid;gap:1.1rem;max-width:36rem;margin:0 auto}
 .formulaire label{display:block;font-weight:700;margin-bottom:.25rem}
-.formulaire input,.formulaire textarea{width:100%;font:inherit;color:var(--texte);background:var(--papier);border:2px solid #8A6D52;border-radius:14px;padding:.7rem .9rem}
+.formulaire input,.formulaire textarea{width:100%;font:inherit;color:var(--texte);background:var(--grain),var(--papier);border:1.5px solid #8A6D52;border-radius:14px;padding:.7rem .9rem}
+.formulaire input:focus-visible,.formulaire textarea:focus-visible{border-color:var(--or)}
 .formulaire textarea{min-height:9rem;resize:vertical}
-.bouton{font:inherit;font-weight:700;color:var(--brun-fonce);background:var(--sable-clair);border:2px solid var(--brun);border-radius:999px;padding:.7rem 1.6rem;min-height:44px;cursor:pointer;justify-self:start}
-.bouton:hover{background:var(--peche)}
-.bouton[disabled]{cursor:not-allowed;opacity:.7}
 
-/* ----- Pied de page ----- */
-.pied{background:var(--sable-clair);padding:2rem 1rem}
+/* ===== 9. Pied de page ===== */
+.pied{position:relative;margin-top:2.5rem;background:var(--grain),var(--sable-clair);padding:2.2rem 1rem 2rem;border-top:1px solid var(--lisere)}
+.pied::before{content:"";position:absolute;left:0;right:0;top:-1.6rem;height:2rem;background:url("../images/decor/lavis-sable.svg") center/100% 100% no-repeat;pointer-events:none}
 .pied-interieur{max-width:64rem;margin:0 auto}
 .pied ul{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
 .pied a{display:inline-block;padding:.5rem 0;min-height:44px;color:var(--brun-fonce);font-weight:700}
-.pied p{margin:0;font-size:1rem}
+.pied p{margin:0 0 .6rem;font-size:1rem}
+.calmer-pied{
+  font:inherit;font-size:.9rem;color:var(--brun-fonce);background:transparent;cursor:pointer;min-height:44px;
+  padding:.4rem 1rem;border:1px solid var(--or);border-radius:999px;
+}
+.calmer-pied:hover{background:rgba(246,217,168,.45)}
+.calmer-pied[aria-pressed="true"]{box-shadow:inset 0 -3px 0 var(--or)}
 
 @media (min-width:48rem){
   body{font-size:1.1875rem}
   .deux-colonnes{grid-template-columns:16rem 1fr}
-  .contenu{padding:3rem 1.5rem 4rem}
+  .contenu{padding:2rem 1.5rem 4rem}
 }
 
-/* ----- Respect de prefers-reduced-motion ----- */
-/* Toute animation ou transition est supprimée pour les personnes qui le demandent
-   (l'accueil lit aussi ce réglage côté JavaScript, voir js/accueil.js). */
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .carte:hover{transform:none}
+/* ===== 10. Mouvement : tout est lent et doux ===== */
+/* Apparition au défilement : fondu léger qui monte à peine (js/site.js pose .visible). */
+.js .apparait{opacity:0;transform:translateY(10px);transition:opacity 1.3s ease,transform 1.5s cubic-bezier(.3,.6,.3,1)}
+.js .apparait.visible{opacity:1;transform:none}
+
+/* Transitions de page en fondu : fondu croisé natif quand le navigateur sait le faire,
+   sinon un fondu d'entrée simple. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.55s;animation-timing-function:ease}
+@keyframes entree{from{opacity:0}to{opacity:1}}
+@supports not (view-transition-name:none){
+  main{animation:entree .7s ease both}
 }
+
+/* ===== 11. Mode calme : réglage du système OU bouton « Réduire les animations » ===== */
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .carte:hover,.bouton:hover{transform:none}
+  .js .apparait{opacity:1;transform:none}
+  .menu a::after{transform:none}
+}
+html.calme *,html.calme *::before,html.calme *::after{transition:none!important;scroll-behavior:auto!important}
+html.calme{scroll-behavior:auto}
+html.calme .carte:hover,html.calme .bouton:hover{transform:none}
+html.calme .js .apparait,html.calme.js .apparait{opacity:1;transform:none}
+html.calme .menu a::after{transform:none}
+html.calme main{animation:none}
+html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.calme::view-transition-new(*){animation:none}

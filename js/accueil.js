@@ -1,14 +1,12 @@
 /* Accueil animé : simple, sans bibliothèque, sans cookie, sans stockage.
    - lit le défilement et pose trois variables CSS sur la scène :
        --p brume -> net, --t les Doudous se tournent, --f le fil de lumière apparaît ;
-   - gère le mode calme (prefers-reduced-motion + bouton « Réduire les animations »). */
+   - suit le mode calme (prefers-reduced-motion + bouton « Réduire les animations », géré par js/site.js). */
 (function () {
   var racine = document.documentElement;
-  racine.classList.add('js');
 
   var parcours = document.getElementById('parcours');
   var scene = document.getElementById('scene');
-  var bouton = document.getElementById('calmer');
   if (!parcours || !scene) { return; }
 
   /* Un peu de hasard : chaque élément vivant reçoit sa propre durée et son propre décalage,
@@ -21,8 +19,8 @@
     vivants[i].style.setProperty('--dl', (-Math.random() * duree).toFixed(1) + 's');
   }
 
-  var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var calme = !!(mq && mq.matches);
+  /* Le mode calme est géré par js/site.js (réglage du système ou bouton) ; ici on le suit. */
+  var calme = racine.classList.contains('calme');
   var attente = false;
   var dernier = '';
 
@@ -52,8 +50,6 @@
   }
 
   function applique() {
-    racine.classList.toggle('calme', calme);
-    if (bouton) { bouton.setAttribute('aria-pressed', calme ? 'true' : 'false'); }
     if (calme) {
       scene.style.removeProperty('--p');
       scene.style.removeProperty('--t');
@@ -64,14 +60,10 @@
     }
   }
 
-  if (bouton) {
-    bouton.addEventListener('click', function () { calme = !calme; applique(); });
-  }
-  if (mq) {
-    var suit = function (e) { calme = e.matches; applique(); };
-    if (mq.addEventListener) { mq.addEventListener('change', suit); }
-    else if (mq.addListener) { mq.addListener(suit); }
-  }
+  document.addEventListener('calme-change', function (e) {
+    calme = !!(e.detail && e.detail.calme);
+    applique();
+  });
   window.addEventListener('scroll', demande, { passive: true });
   window.addEventListener('resize', demande);
 

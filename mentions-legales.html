@@ -12,6 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
@@ -32,16 +33,17 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <h1>Mentions légales</h1>
+ <header class="page-tete"><h1>Mentions légales</h1></header>
+ <div class="lavis" aria-hidden="true"></div>
  <!-- TODO : compléter tout ce qui est marqué [à compléter]. Seuls les éléments donnés par Nath sont renseignés. -->
- <section aria-labelledby="editrice"><h2 id="editrice">Éditrice du site</h2>
+ <section class="section" aria-labelledby="editrice"><h2 id="editrice">Éditrice du site</h2>
   <p>Amotessa S.à r.l.-S<br>RCS Luxembourg B279710<br>Gérante : Nathalie Diaz<br>
   Siège social : [à compléter]<br>E-mail : [à compléter] <!-- TODO : contact@lafilleaustylorose.com quand la boîte existe --><br>
   Numéro de TVA / autorisation d'établissement : [à compléter]</p></section>
- <section aria-labelledby="directeur"><h2 id="directeur">Direction de la publication</h2><p>[à compléter]</p></section>
- <section aria-labelledby="hebergeur"><h2 id="hebergeur">Hébergement</h2><p>[à compléter] <!-- Hébergeur actuel : Vercel Inc. (adresse à vérifier avant publication) --></p></section>
- <section aria-labelledby="pi"><h2 id="pi">Propriété intellectuelle</h2><p>[à compléter]</p></section>
- <section aria-labelledby="donnees"><h2 id="donnees">Données personnelles et cookies</h2><p>[à compléter]</p></section>
+ <section class="section" aria-labelledby="directeur"><h2 id="directeur">Direction de la publication</h2><p>[à compléter]</p></section>
+ <section class="section" aria-labelledby="hebergeur"><h2 id="hebergeur">Hébergement</h2><p>[à compléter] <!-- Hébergeur actuel : Vercel Inc. (adresse à vérifier avant publication) --></p></section>
+ <section class="section" aria-labelledby="pi"><h2 id="pi">Propriété intellectuelle</h2><p>[à compléter]</p></section>
+ <section class="section" aria-labelledby="donnees"><h2 id="donnees">Données personnelles et cookies</h2><p>[à compléter]</p></section>
 </div>
 </main>
 <footer class="pied">
@@ -58,6 +60,7 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
 </footer>
 </body>

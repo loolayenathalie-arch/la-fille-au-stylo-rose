@@ -12,6 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
@@ -32,13 +33,18 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <h1>Contact</h1>
- <p class="chapeau vide">[texte de Nath]</p>
+ <header class="page-tete">
+  <!-- EMPLACEMENT IMAGE : images/pages/scene-contact.svg (scène 4/3 ; remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+  <div class="cadre-aquarelle cadre-scene apparait"><img src="images/pages/scene-contact.svg" width="800" height="600" alt="[texte de Nath : description de l’image]"></div>
+  <h1>Contact</h1>
+  <p class="chapeau vide">[texte de Nath]</p>
+ </header>
+ <div class="lavis" aria-hidden="true"></div>
  <!-- TODO formulaire de contact : adresse de destination = contact@lafilleaustylorose.com (à créer chez OVH,
       pas encore disponible). Un site statique ne peut pas envoyer d'e-mail seul : prévoir soit une fonction Vercel
       (avec envoi par Brevo/SMTP OVH), soit un service de formulaires. Tant que ce n'est pas branché, le bouton
       d'envoi reste désactivé (attribut disabled) pour ne pas faire croire à un envoi. -->
- <form class="formulaire" method="post" action="" aria-describedby="note-formulaire">
+ <form class="formulaire apparait" method="post" action="" aria-describedby="note-formulaire">
   <div><label for="nom">Votre nom</label><input id="nom" name="nom" type="text" autocomplete="name" required></div>
   <div><label for="courriel">Votre adresse e-mail</label><input id="courriel" name="courriel" type="email" autocomplete="email" required></div>
   <div><label for="message">Votre message</label><textarea id="message" name="message" required></textarea></div>
@@ -61,6 +67,7 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
 </footer>
 </body>

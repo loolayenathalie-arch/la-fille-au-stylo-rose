@@ -12,6 +12,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
 </head>
 <body>
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
@@ -32,12 +33,15 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <h1>À propos de l'autrice</h1>
- <div class="deux-colonnes">
-  <!-- EMPLACEMENT IMAGE : images/autrice/portrait-nathalie.svg (remplacer par une illustration ou une photo choisie par Nath) -->
-  <div class="portrait"><img src="images/autrice/portrait-nathalie.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
-  <div class="vide"><p class="chapeau">[texte de Nath]</p><p>[texte de Nath]</p></div>
- </div>
+ <header class="page-tete">
+  <!-- EMPLACEMENT IMAGE : images/autrice/portrait-nathalie.svg (portrait carré ; remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
+  <div class="cadre-aquarelle cadre-portrait apparait"><img src="images/autrice/portrait-nathalie.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+  <h1>À propos de l'autrice</h1>
+  <p class="chapeau vide">[texte de Nath]</p>
+ </header>
+ <div class="lavis" aria-hidden="true"></div>
+ <!-- Portrait : remplacer images/autrice/portrait-nathalie.svg par une illustration ou une photo choisie par Nath. -->
+ <div class="section apparait"><p class="vide">[texte de Nath]</p></div>
 </div>
 </main>
 <footer class="pied">
@@ -54,6 +58,7 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
+  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
  </div>
 </footer>
 </body>

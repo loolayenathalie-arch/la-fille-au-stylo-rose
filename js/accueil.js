@@ -11,6 +11,16 @@
   var bouton = document.getElementById('calmer');
   if (!parcours || !scene) { return; }
 
+  /* Un peu de hasard : chaque élément vivant reçoit sa propre durée et son propre décalage,
+     pour que rien ne batte au même rythme. */
+  var vivants = document.querySelectorAll('[data-vie]');
+  for (var i = 0; i < vivants.length; i++) {
+    var base = parseFloat(vivants[i].getAttribute('data-vie')) || 60;
+    var duree = base * (0.8 + Math.random() * 0.45);
+    vivants[i].style.setProperty('--d', duree.toFixed(1) + 's');
+    vivants[i].style.setProperty('--dl', (-Math.random() * duree).toFixed(1) + 's');
+  }
+
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var calme = !!(mq && mq.matches);
   var attente = false;

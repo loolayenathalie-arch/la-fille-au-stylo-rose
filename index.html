@@ -8,14 +8,14 @@
 <meta name="robots" content="noindex, nofollow">
 <!-- TODO : description de la page -->
 <meta name="description" content="[texte de Nath]">
-<meta name="theme-color" content="#F9DDE3">
+<meta name="theme-color" content="#ECEFEA">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/accueil.css">
 <script src="js/accueil.js" defer></script>
 </head>
-<body>
+<body class="page-accueil">
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
 <header class="entete">
  <div class="entete-interieur">
@@ -34,58 +34,62 @@
 </header>
 <main id="contenu" class="accueil">
 
- <!-- Zone de défilement : la scène reste fixée pendant qu'on descend, et les Doudous se précisent. -->
+ <!-- La scène reste posée pendant qu'on descend : les Doudous sortent doucement de la brume. -->
  <div class="parcours" id="parcours">
   <div class="scene" id="scene">
 
-   <!-- Fond qui respire, nuages, poussière de lumière : purement décoratif -->
+   <!-- Décor purement décoratif : brume en couches, poussière de lumière, grain de papier.
+        data-vie = durée de base en secondes ; le script y ajoute un peu de hasard. -->
    <div class="ciel" aria-hidden="true">
-    <div class="nuage nuage-1"></div>
-    <div class="nuage nuage-2"></div>
-    <div class="nuage nuage-3"></div>
+    <div class="brume brume-1" data-vie="97"></div>
+    <div class="brume brume-2" data-vie="131"></div>
+    <div class="brume brume-3" data-vie="79"></div>
+    <div class="brume brume-4" data-vie="157"></div>
+    <div class="brume brume-5" data-vie="113"></div>
     <div class="poussiere">
-     <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-     <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+     <span data-vie="83"></span><span data-vie="107"></span><span data-vie="71"></span><span data-vie="127"></span>
+     <span data-vie="93"></span><span data-vie="119"></span><span data-vie="101"></span>
     </div>
+    <div class="grain"></div>
    </div>
 
    <button class="calmer" id="calmer" type="button" aria-pressed="false">Réduire les animations</button>
 
    <div class="scene-contenu">
-    <!-- Titre « tracé au stylo rose ». Le texte réel est pour les lecteurs d'écran ; le dessin est décoratif. -->
+    <!-- Titre : l'encre se dépose et s'éclaircit, puis un petit trait de stylo rose. -->
     <h1 class="titre">
-     <span class="sr-only">La fille au stylo rose</span>
-     <svg viewBox="0 0 640 290" aria-hidden="true" focusable="false">
-      <text class="l1" x="320" y="115">La fille</text>
-      <text class="l2" x="320" y="250">au stylo rose</text>
-     </svg>
+     <span class="ligne l1">La fille</span>
+     <span class="ligne l2">au stylo rose</span>
     </h1>
+    <svg class="trait-stylo" viewBox="0 0 300 20" aria-hidden="true" focusable="false">
+     <path d="M6 12 C 44 5, 84 17, 138 10 S 232 5, 294 12" pathLength="1"/>
+    </svg>
     <p class="chapeau-accueil">[texte de Nath]</p>
 
     <div class="doudous">
-     <!-- Fil de lumière entre les deux Doudous (décoratif) -->
+     <!-- Fil de lumière, très fin (décoratif) -->
      <svg class="fil" viewBox="0 0 400 160" aria-hidden="true" focusable="false">
       <defs>
        <linearGradient id="fil-degrade" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0" stop-color="#F3B9C8" stop-opacity="0"/>
-        <stop offset=".5" stop-color="#F6D9A0" stop-opacity="1"/>
-        <stop offset="1" stop-color="#BFE0D4" stop-opacity="0"/>
+        <stop offset="0" stop-color="#E3CFA0" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#E3CFA0" stop-opacity="1"/>
+        <stop offset="1" stop-color="#E3CFA0" stop-opacity="0"/>
        </linearGradient>
       </defs>
-      <path class="fil-halo" d="M30 100 C 120 30, 280 30, 370 100" pathLength="1"/>
-      <path class="fil-trait" d="M30 100 C 120 30, 280 30, 370 100" pathLength="1"/>
+      <path class="fil-trait" d="M26 104 C 110 44, 150 70, 205 58 S 320 52, 374 102" pathLength="1"/>
      </svg>
 
-     <!-- Les emplacements des Doudous : remplacer les fichiers (même nom, PNG ou SVG fond transparent).
-          Si le fichier est un .png, changer l'extension ci-dessous. -->
+     <!-- Emplacements des Doudous : remplacer les fichiers (même nom, PNG ou SVG fond transparent).
+          Si le fichier est un .png, changer l'extension ci-dessous.
+          Le flou final (silhouettes douces) se règle avec --flou-final dans css/accueil.css. -->
      <div class="doudou doudou-gauche">
-      <div class="doudou-flotte">
+      <div class="doudou-flotte" data-vie="13">
        <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg -->
        <img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
       </div>
      </div>
      <div class="doudou doudou-droite">
-      <div class="doudou-flotte">
+      <div class="doudou-flotte" data-vie="17">
        <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg -->
        <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
       </div>
@@ -93,7 +97,7 @@
     </div>
    </div>
 
-   <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 10l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
  </div>
 

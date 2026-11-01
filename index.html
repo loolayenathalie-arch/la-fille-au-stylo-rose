@@ -13,6 +13,8 @@
 <meta name="theme-color" content="#F0E4CE">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Le duo des Doudous est préchargé dès l'ouverture : il est prêt avant qu'on arrive dessus. -->
+<link rel="preload" as="image" href="images/personnages/doudous-duo.webp" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/accueil.css">
 <script src="js/site.js" defer></script>
@@ -83,7 +85,7 @@
           Les deux cœurs (.coeur) se règlent avec --cx / --cy (en %) dans css/accueil.css : .coeur-ours et .coeur-chien. -->
      <div class="doudou doudou-duo">
       <div class="doudou-flotte" data-vie="15">
-       <img src="images/personnages/doudous-duo.png" width="750" height="848" alt="[texte de Nath : description de l’image]">
+       <picture><source type="image/webp" srcset="images/personnages/doudous-duo.webp"><img src="images/personnages/doudous-duo.png" width="750" height="848" fetchpriority="high" decoding="async" alt="[texte de Nath : description de l’image]"></picture>
        <span class="coeur coeur-ours" aria-hidden="true"></span>
        <span class="coeur coeur-chien" aria-hidden="true"></span>
       </div>

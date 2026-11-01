@@ -61,6 +61,21 @@
   var attente = false;
   var dernier = '';
 
+  /* Révélation des Doudous, de la grande étoile et de la poussière d'étoile : tout ensemble, dès que le HAUT de
+     l'illustration entre dans l'écran (pas besoin d'attendre qu'elle soit au centre). */
+  var duo = document.querySelector('.doudou-duo');
+  function revele() { scene.classList.add('revele'); }
+  if (calme || !('IntersectionObserver' in window) || !duo) { revele(); }
+  else {
+    var vue = new IntersectionObserver(function (entrees) {
+      for (var i = 0; i < entrees.length; i++) {
+        if (entrees[i].isIntersecting) { revele(); vue.disconnect(); }
+      }
+    }, { threshold: 0 });
+    vue.observe(duo);
+  }
+  document.addEventListener('calme-change', function (e) { if (e.detail && e.detail.calme) { revele(); } });
+
   function borne(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
   function adoucit(x) { return x * x * (3 - 2 * x); } /* départ et arrivée en douceur */
 
@@ -139,12 +154,17 @@
     scene.style.setProperty('--p', p.toFixed(3));
     scene.style.setProperty('--t', t.toFixed(3));
     scene.style.setProperty('--f', f.toFixed(3));
-    scene.classList.toggle('net', p >= 0.995);   /* révélation terminée : le filtre de flou est retiré (filter: none) */
     trace();
+  }
+
+  /* Filet de sécurité (si l'observateur tarde) : le haut de l'image est dans l'écran. */
+  function verifie() {
+    if (duo && duo.getBoundingClientRect().top < window.innerHeight) { revele(); }
   }
 
   function met() {
     attente = false;
+    verifie();
     if (calme) { return; }
     var r = parcours.getBoundingClientRect();
     var course = r.height - window.innerHeight;
@@ -175,5 +195,7 @@
   window.addEventListener('scroll', demande, { passive: true });
   window.addEventListener('resize', demande);
 
+  verifie();
+  window.addEventListener('load', verifie);
   applique();
 })();

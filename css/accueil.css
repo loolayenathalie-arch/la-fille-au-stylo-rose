@@ -162,11 +162,13 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 /* ---------- La grande étoile : dans le ciel libre au-dessus des deux Doudous, centrée entre eux ----------
    --r : elle apparaît quand les Doudous apparaissent ; --r2 : le flux d'éclats se met à couler, les cœurs s'illuminent.
    Taille et hauteur sont calculées par js/accueil.js (au milieu de l'espace libre entre le texte et les Doudous). */
-.doudous{--r:clamp(0,calc((var(--p) - .5) * 2.4),1);--r2:clamp(0,calc((var(--p) - .72) * 3.6),1)}
+/* Tout apparaît d'un coup, dès que le haut de l'image entre dans l'écran (classe .revele posée par js/accueil.js) : fondu léger de 1,7 s. */
+.doudous{--r2:1}
 .grande-etoile{
   position:absolute;left:50%;top:-8rem;width:clamp(5rem,26vw,6.25rem);aspect-ratio:1;z-index:3;pointer-events:none;
-  opacity:var(--r);transform:translate(-50%,-50%) scale(calc(.8 + var(--r) * .2));
+  transition:opacity 1.7s ease,transform 1.7s ease;
 }
+.js .scene:not(.revele) .grande-etoile{opacity:0;transform:translate(-50%,-50%) scale(.85)}
 .grande-etoile svg{display:block;width:100%;height:100%;overflow:visible}
 .ge-halo{transform-origin:center;transform-box:fill-box;animation:ge-pulse 7s ease-in-out infinite alternate}
 .ge-rayons{transform-origin:center;animation:ge-tourne 120s linear infinite}
@@ -193,12 +195,14 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .ge-nuage{
   position:absolute;inset:-30%;border-radius:50%;
   background:radial-gradient(circle,rgba(255,252,243,.97) 0,rgba(255,247,230,.7) 45%,rgba(255,247,230,0) 72%);
-  opacity:calc(1 - var(--r));transform:scale(calc(1 + var(--r) * .6));
+  transition:opacity 1.7s ease,transform 2.2s ease;transform:scale(1.6);opacity:0;
 }
+.js .scene:not(.revele) .ge-nuage{opacity:1;transform:scale(1)}
 /* Le flux d'éclats : une poussière d'étoile coule doucement de l'étoile vers le cœur de chaque Doudou (aucun trait).
    Chaque éclat suit une courbe légère : l'enveloppe externe glisse en travers, l'interne descend (transform et opacity seulement).
    js/accueil.js pose --fx / --fy (distance jusqu'au cœur) et crée les éclats. */
-.flux{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:3;opacity:var(--r2)}
+.flux{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:3;transition:opacity 1.7s ease}
+.js .scene:not(.revele) .flux{opacity:0}
 .flux-o{position:absolute;left:0;top:0;animation:flux-x var(--fd,6s) cubic-bezier(.3,.6,.5,1) var(--fl,0s) infinite}
 .flux-o i{
   display:block;width:var(--s,3px);height:var(--s,3px);margin:calc(var(--s,3px) / -2) 0 0 calc(var(--s,3px) / -2);border-radius:50%;
@@ -227,7 +231,8 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 @keyframes chaud{0%{opacity:calc(var(--r2) * .35)}100%{opacity:calc(var(--r2) * .85)}}
 
 /* ---------- Le nuage qui reste : dérive très lentement et enveloppe les Doudous ---------- */
-.nuage-bas{position:absolute;inset:-34% -26% -22%;pointer-events:none;z-index:2;opacity:calc(.95 - var(--p) * .8)}
+.nuage-bas{position:absolute;inset:-34% -26% -22%;pointer-events:none;z-index:2;opacity:.15;transition:opacity 2s ease}
+.js .scene:not(.revele) .nuage-bas{opacity:.95}
 .nuage-bas span{position:absolute;will-change:transform;animation:nuage-derive 21s ease-in-out 0s infinite alternate}
 .nuage-bas span:nth-child(1){left:0;bottom:0;width:60%;height:58%;animation-duration:19s;
   background:radial-gradient(ellipse 50% 50% at 50% 54%,rgba(255,252,243,.95),rgba(255,247,230,.5) 55%,rgba(255,247,230,0) 100%)}
@@ -301,7 +306,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 }
 @keyframes trait{to{stroke-dashoffset:0}}
 
-.chapeau-accueil{margin:1.6rem 0 0;text-align:center;font-size:.98rem;line-height:1.7;color:var(--encre-douce);max-width:26rem}
+.chapeau-accueil{margin:1.6rem 0 0;text-align:center;font-size:1rem;line-height:1.7;color:var(--encre-douce);max-width:26rem}
 
 /* ---------- Les deux Doudous : silhouettes simples et douces ---------- */
 .doudous{
@@ -309,12 +314,13 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   display:flex;justify-content:center;align-items:flex-end;gap:clamp(.5rem,5vw,3rem);
 }
 .doudou{
-  position:relative;filter:blur(calc((1 - var(--p)) * 8px));
-  opacity:calc(.2 + var(--p) * .78);
+  position:relative;transition:opacity 1.7s ease,transform 1.7s ease;
 }
-/* Révélation terminée : le filtre est retiré complètement (aucun flou résiduel, ni sur l'image ni sur ses parents) */
-.scene.net .doudou,html.calme .doudou{filter:none}
-.scene.net .doudou-duo img,html.calme .doudou-duo img{filter:none}
+.js .scene:not(.revele) .doudou{opacity:0;transform:translate3d(0,16px,0)}
+.js .scene:not(.revele) .coeur{opacity:0}
+.coeur{transition:opacity 1.7s ease}
+/* Aucun filtre de flou sur les Doudous : l'image est nette dès qu'elle apparaît. */
+.doudou picture{display:block}
 /* Grande illustration (source 750 px de large : jamais plus de ~1,9 fois la taille d'affichage). */
 .doudou-duo{width:clamp(240px,70vw,400px)}
 /* Fondu doux sur les bords bas et latéraux : l'illustration se fond dans le fond doré */
@@ -399,6 +405,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   .doudous{margin-top:15.6rem}
 }
 html.calme .scene{--p:1;--t:1;--f:1}
+html.calme .doudou,html.calme .grande-etoile,html.calme .ge-nuage,html.calme .flux,html.calme .nuage-bas,html.calme .coeur{transition:none}
 html.calme .brume,html.calme .lumiere,html.calme .halo-titre,html.calme .ciel::before,html.calme .astre i,html.calme .doudou img,html.calme .doudou::before,html.calme .nuage-bas span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fil-halo,html.calme .fleche,html.calme .ge-halo,html.calme .ge-rayons,html.calme .ge-eclat,html.calme .lien-halo,html.calme .lien,html.calme .voyageur,html.calme .coeur::before,html.calme .coeur::after{animation:none!important}
 html.calme .flux-o{transform:translate3d(calc(var(--fx) * var(--k,.9)),0,0)}
 html.calme .flux-o i{transform:translate3d(0,calc(var(--fy) * var(--k,.9)),0);opacity:.9}

@@ -110,6 +110,7 @@ main{display:block}
 .bandeau{background:var(--grain),var(--sable-clair);padding:1.5rem;margin:1.5rem 0}
 .bandeau-bleu{background:var(--grain),#E4ECEE}
 .bandeau-rose{background:var(--grain),#F8E8DF}
+.bandeau-miel{background:var(--grain),#EBD6B6}
 .grille{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
 
 /* Images : « photo posée » dans un cadre doux, formats fixes. */

@@ -1,0 +1,169 @@
+/* Accueil animé. Tout est lent, doux, et ne touche que transform / opacity (léger sur mobile).
+   Trois mécanismes :
+   - animations CSS autonomes (fond, nuages, poussière, titre, flottement) ;
+   - variables --p (brume), --t (se tourner), --f (fil de lumière) pilotées par js/accueil.js au défilement ;
+   - mode calme (html.calme) : posé par prefers-reduced-motion OU par le bouton « Réduire les animations ». */
+
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.accueil{overflow-x:clip}
+.parcours{position:relative;height:260vh;height:260svh}
+
+.scene{
+  --p:0;--t:0;--f:0;            /* 0 = dans la brume, 1 = net */
+  position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  isolation:isolate;
+  background:linear-gradient(180deg,#FFF8EC 0%,#FBEBEA 48%,#E4ECEF 100%);
+}
+/* Sans JavaScript : on montre directement la scène nette. */
+html:not(.js) .scene{--p:1;--t:1;--f:1}
+
+/* ---------- Fond qui respire ---------- */
+.ciel{position:absolute;inset:0;z-index:0;pointer-events:none}
+.ciel::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,#F7F1EA 0%,#F9DDE3 40%,#D9EDE6 78%,#E4ECEF 100%);
+  opacity:0;animation:respire 38s ease-in-out infinite alternate;
+}
+@keyframes respire{from{opacity:0}to{opacity:.75}}
+
+/* ---------- Nuages : quelques taches douces qui dérivent à peine ---------- */
+.nuage{
+  position:absolute;width:70vmax;height:26vmax;opacity:.8;will-change:transform;
+  background:
+    radial-gradient(ellipse 28% 40% at 28% 55%,rgba(255,255,255,.85),rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 28% 45% at 52% 45%,rgba(220,229,236,.9),rgba(220,229,236,0) 100%),
+    radial-gradient(ellipse 28% 40% at 74% 55%,rgba(249,221,227,.85),rgba(249,221,227,0) 100%);
+}
+.nuage-1{top:4%;left:-22vmax;animation:derive-a 110s ease-in-out infinite alternate}
+.nuage-2{top:34%;right:-30vmax;opacity:.65;animation:derive-b 140s ease-in-out infinite alternate}
+.nuage-3{bottom:-4%;left:-12vmax;opacity:.7;animation:derive-a 125s ease-in-out -40s infinite alternate}
+@keyframes derive-a{from{transform:translate3d(-4vw,0,0)}to{transform:translate3d(9vw,1.5vh,0)}}
+@keyframes derive-b{from{transform:translate3d(5vw,0,0)}to{transform:translate3d(-8vw,-2vh,0)}}
+
+/* ---------- Poussière de lumière qui monte ---------- */
+.poussiere span{
+  position:absolute;bottom:-12px;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle,#FFFFFF 0,rgba(255,255,255,.7) 40%,rgba(255,255,255,0) 72%);
+  opacity:0;will-change:transform,opacity;
+  animation:monte 26s linear infinite;
+}
+@keyframes monte{
+  0%{transform:translate3d(0,0,0);opacity:0}
+  12%{opacity:.85}
+  85%{opacity:.6}
+  100%{transform:translate3d(14px,-105vh,0);transform:translate3d(14px,-105svh,0);opacity:0}
+}
+.poussiere span:nth-child(1){left:6%;animation-duration:30s;animation-delay:-4s}
+.poussiere span:nth-child(2){left:14%;width:4px;height:4px;animation-duration:24s;animation-delay:-17s}
+.poussiere span:nth-child(3){left:22%;width:8px;height:8px;animation-duration:34s;animation-delay:-9s}
+.poussiere span:nth-child(4){left:31%;animation-duration:27s;animation-delay:-21s}
+.poussiere span:nth-child(5){left:39%;width:5px;height:5px;animation-duration:32s;animation-delay:-2s}
+.poussiere span:nth-child(6){left:47%;animation-duration:25s;animation-delay:-13s}
+.poussiere span:nth-child(7){left:54%;width:8px;height:8px;animation-duration:36s;animation-delay:-26s}
+.poussiere span:nth-child(8){left:61%;width:4px;height:4px;animation-duration:28s;animation-delay:-7s}
+.poussiere span:nth-child(9){left:68%;animation-duration:31s;animation-delay:-19s}
+.poussiere span:nth-child(10){left:75%;width:5px;height:5px;animation-duration:23s;animation-delay:-11s}
+.poussiere span:nth-child(11){left:82%;width:7px;height:7px;animation-duration:35s;animation-delay:-30s}
+.poussiere span:nth-child(12){left:88%;animation-duration:29s;animation-delay:-15s}
+.poussiere span:nth-child(13){left:93%;width:4px;height:4px;animation-duration:26s;animation-delay:-23s}
+.poussiere span:nth-child(14){left:44%;width:5px;height:5px;animation-duration:38s;animation-delay:-33s}
+
+/* ---------- Contenu de la scène ---------- */
+.scene-contenu{
+  position:relative;z-index:1;height:100%;max-width:44rem;margin:0 auto;padding:1.5rem 1rem 2rem;
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* Titre tracé au stylo rose : contour qui se dessine, puis remplissage. */
+.titre{margin:0;width:min(92vw,40rem);line-height:0}
+.titre svg{display:block;width:100%;height:auto;overflow:visible}
+.titre text{
+  font-family:var(--police-titre);font-weight:700;font-size:110px;text-anchor:middle;
+  fill:#8B3A5A;fill-opacity:0;
+  stroke:#C4607F;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:700;stroke-dashoffset:700;
+  animation:trace 4.2s ease-in-out .8s forwards,remplit 2.4s ease 4.4s forwards;
+}
+.titre .l2{animation-delay:3.2s,7.2s}
+@keyframes trace{to{stroke-dashoffset:0}}
+@keyframes remplit{to{fill-opacity:1;stroke-opacity:0}}
+
+.chapeau-accueil{margin:1rem 0 0;text-align:center;font-size:1.15rem;max-width:30rem}
+
+/* ---------- Les deux Doudous ---------- */
+.doudous{
+  position:relative;margin-top:auto;margin-bottom:12svh;width:100%;
+  display:flex;justify-content:center;align-items:flex-end;gap:clamp(.5rem,6vw,3rem);
+}
+.doudou{
+  width:clamp(7.5rem,36vw,15rem);
+  /* brume -> net, selon --p ; se tournent l'un vers l'autre selon --t */
+  filter:blur(calc((1 - var(--p)) * 16px));
+  opacity:calc(.28 + var(--p) * .72);
+  will-change:transform,filter,opacity;
+}
+.doudou-gauche{transform:translateX(calc(var(--t) * 3vw)) rotate(calc(var(--t) * 9deg));transform-origin:50% 90%}
+.doudou-droite{transform:translateX(calc(var(--t) * -3vw)) rotate(calc(var(--t) * -9deg));transform-origin:50% 90%}
+.doudou-flotte{animation:flotte 9s ease-in-out infinite alternate}
+.doudou-droite .doudou-flotte{animation-duration:11s;animation-delay:-4s}
+@keyframes flotte{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+.doudou img{width:100%;height:auto}
+
+/* Fil de lumière entre eux */
+.fil{
+  position:absolute;left:50%;bottom:38%;width:min(60vw,22rem);height:auto;
+  transform:translateX(-50%);pointer-events:none;overflow:visible;
+}
+.fil path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--f))}
+.fil-trait{stroke:url(#fil-degrade);stroke-width:3.5}
+.fil-halo{stroke:rgba(250,226,170,.55);stroke-width:12;opacity:.6;animation:halo 7s ease-in-out infinite alternate}
+@keyframes halo{from{opacity:.25}to{opacity:.75}}
+
+/* Petite flèche douce qui invite à descendre (disparaît dès qu'on descend) */
+.fleche{
+  position:absolute;left:50%;bottom:1rem;width:2rem;height:2rem;margin-left:-1rem;z-index:1;
+  color:#8B3A5A;opacity:calc(1 - var(--p) * 3);pointer-events:none;
+  animation:flecheflotte 3.5s ease-in-out infinite alternate;
+}
+@keyframes flecheflotte{from{transform:translateY(0)}to{transform:translateY(7px)}}
+
+/* ---------- Bouton « Réduire les animations » ---------- */
+.calmer{
+  position:absolute;top:.75rem;right:.75rem;z-index:3;
+  font:inherit;font-size:.95rem;font-weight:700;color:var(--texte);
+  background:rgba(255,248,236,.92);border:2px solid var(--rose-texte);border-radius:999px;
+  padding:.45rem 1rem;min-height:44px;cursor:pointer;
+}
+.calmer:hover{background:#fff}
+.calmer[aria-pressed="true"]{box-shadow:inset 0 -4px 0 var(--rose-texte)}
+
+/* ---------- Après la scène ---------- */
+.apres{background:linear-gradient(180deg,#E4ECEF 0%,var(--creme) 55%)}
+
+@media (min-width:48rem){
+  .scene-contenu{padding-top:2.5rem}
+  .doudous{margin-bottom:9svh}
+}
+@media (max-height:520px){
+  .parcours{height:320vh}
+  .doudous{margin-bottom:2svh}
+}
+
+/* ---------- Mode calme : quasi fixe ----------
+   Titre écrit, Doudous nets et tournés l'un vers l'autre, fil visible, plus aucun mouvement. */
+@media (prefers-reduced-motion:reduce){
+  .scene{--p:1;--t:1;--f:1}
+  .ciel *,.ciel::before,.doudou-flotte,.fil-halo,.fleche{animation:none!important}
+  .titre text{animation:none!important;stroke-dashoffset:0;fill-opacity:1;stroke-opacity:0}
+  .poussiere{display:none}
+  .fleche{display:none}
+  .parcours{height:auto}
+  .scene{position:relative;height:auto;min-height:100svh}
+}
+html.calme .scene{--p:1;--t:1;--f:1}
+html.calme .ciel *,html.calme .ciel::before,html.calme .doudou-flotte,html.calme .fil-halo,html.calme .fleche{animation:none!important}
+html.calme .titre text{animation:none!important;stroke-dashoffset:0;fill-opacity:1;stroke-opacity:0}
+html.calme .poussiere,html.calme .fleche{display:none}
+html.calme .parcours{height:auto}
+html.calme .scene{position:relative;height:auto;min-height:100svh}

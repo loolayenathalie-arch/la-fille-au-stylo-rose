@@ -12,6 +12,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/accueil.css">
+<script src="js/accueil.js" defer></script>
 </head>
 <body>
 <a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
@@ -30,16 +32,76 @@
   </nav>
  </div>
 </header>
-<main id="contenu">
-<div class="contenu">
- <!-- TODO accueil animé : page provisoire. L'accueil animé sera demandé dans une étape suivante.
-      Prévoir : image fixe de repli si prefers-reduced-motion: reduce. -->
- <h1>La fille au stylo rose</h1>
- <p class="chapeau vide">[texte de Nath]</p>
- <!-- EMPLACEMENT IMAGE : images/accueil/scene-accueil.svg (remplacer par la vraie scène) -->
- <div class="image-large"><img src="images/accueil/scene-accueil.svg" width="800" height="360" alt="[texte de Nath : description de l’image]"></div>
- <p class="vide">[texte de Nath]</p>
-</div>
+<main id="contenu" class="accueil">
+
+ <!-- Zone de défilement : la scène reste fixée pendant qu'on descend, et les Doudous se précisent. -->
+ <div class="parcours" id="parcours">
+  <div class="scene" id="scene">
+
+   <!-- Fond qui respire, nuages, poussière de lumière : purement décoratif -->
+   <div class="ciel" aria-hidden="true">
+    <div class="nuage nuage-1"></div>
+    <div class="nuage nuage-2"></div>
+    <div class="nuage nuage-3"></div>
+    <div class="poussiere">
+     <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+     <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+   </div>
+
+   <button class="calmer" id="calmer" type="button" aria-pressed="false">Réduire les animations</button>
+
+   <div class="scene-contenu">
+    <!-- Titre « tracé au stylo rose ». Le texte réel est pour les lecteurs d'écran ; le dessin est décoratif. -->
+    <h1 class="titre">
+     <span class="sr-only">La fille au stylo rose</span>
+     <svg viewBox="0 0 640 290" aria-hidden="true" focusable="false">
+      <text class="l1" x="320" y="115">La fille</text>
+      <text class="l2" x="320" y="250">au stylo rose</text>
+     </svg>
+    </h1>
+    <p class="chapeau-accueil">[texte de Nath]</p>
+
+    <div class="doudous">
+     <!-- Fil de lumière entre les deux Doudous (décoratif) -->
+     <svg class="fil" viewBox="0 0 400 160" aria-hidden="true" focusable="false">
+      <defs>
+       <linearGradient id="fil-degrade" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#F3B9C8" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#F6D9A0" stop-opacity="1"/>
+        <stop offset="1" stop-color="#BFE0D4" stop-opacity="0"/>
+       </linearGradient>
+      </defs>
+      <path class="fil-halo" d="M30 100 C 120 30, 280 30, 370 100" pathLength="1"/>
+      <path class="fil-trait" d="M30 100 C 120 30, 280 30, 370 100" pathLength="1"/>
+     </svg>
+
+     <!-- Les emplacements des Doudous : remplacer les fichiers (même nom, PNG ou SVG fond transparent).
+          Si le fichier est un .png, changer l'extension ci-dessous. -->
+     <div class="doudou doudou-gauche">
+      <div class="doudou-flotte">
+       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg -->
+       <img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+      </div>
+     </div>
+     <div class="doudou doudou-droite">
+      <div class="doudou-flotte">
+       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg -->
+       <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <svg class="fleche" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+ </div>
+
+ <div class="apres">
+  <div class="contenu">
+   <p class="chapeau">[texte de Nath]</p>
+  </div>
+ </div>
 </main>
 <footer class="pied">
  <div class="pied-interieur">

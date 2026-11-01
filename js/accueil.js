@@ -117,8 +117,9 @@
     var tb = texte.getBoundingClientRect(), bb = bloc.getBoundingClientRect();
     /* ciel libre entre le texte et les Doudous, sans la remontée : on veut au moins 250 px */
     var gapNat = z.top - (tb.bottom - liftNow);
+    var cible = window.innerWidth < 768 ? 180 : 250;
     var place = Math.max(0, bb.top - liftNow - 14);
-    var neuf = calme ? 0 : -Math.min(Math.max(0, 250 - gapNat), place);
+    var neuf = calme ? 0 : -Math.min(Math.max(0, cible - gapNat), place);
     if (Math.abs(neuf - lift) > 0.5) { lift = neuf; bloc.style.setProperty('--lift', lift.toFixed(0) + 'px'); liftNow = lift * pNow; }
     var libre = z.top - texte.getBoundingClientRect().bottom;
     var mobile = window.innerWidth < 700;

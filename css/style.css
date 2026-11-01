@@ -242,12 +242,17 @@ body::before{
     radial-gradient(ellipse 60% 40% at 88% 100%,rgba(223,200,167,.5),rgba(223,200,167,0) 70%);
 }
 .etoiles{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+/* Perles de lumière : de petits points ronds avec un halo doux, qui respirent et montent à peine (comme sur l'accueil). */
 .etoile{
-  position:absolute;width:var(--t,10px);height:var(--t,10px);background:var(--c,#D9A66E);
-  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
-  opacity:.2;animation:scintille var(--d,5s) ease-in-out var(--dl,0s) infinite;
+  position:absolute;width:var(--t,8px);height:var(--t,8px);border-radius:50%;opacity:.5;will-change:transform,opacity;
+  background:radial-gradient(circle,#FFF3D6 0,#FFF3D6 16%,rgba(246,217,168,.95) 34%,rgba(232,185,138,.42) 56%,rgba(246,217,168,0) 72%);
+  box-shadow:0 0 .55rem .12rem rgba(232,185,138,.5);
+  animation:perle var(--d,6s) ease-in-out var(--dl,0s) infinite alternate,perle-monte var(--dd,60s) ease-in-out var(--dl2,0s) infinite alternate;
 }
-@keyframes scintille{0%,100%{opacity:.15;transform:scale(.55) rotate(0)}50%{opacity:.95;transform:scale(1.15) rotate(18deg)}}
+.etoile.rose{background:radial-gradient(circle,#FFF3D6 0,#FFF3D6 16%,rgba(240,200,190,.95) 34%,rgba(230,184,162,.42) 56%,rgba(230,184,162,0) 72%)}
+.etoile.bleu{background:radial-gradient(circle,#FFF6E3 0,#FFF6E3 16%,rgba(176,203,216,.95) 34%,rgba(137,168,184,.4) 56%,rgba(137,168,184,0) 72%)}
+@keyframes perle{0%{opacity:.3;scale:.8}100%{opacity:1;scale:1.12}}
+@keyframes perle-monte{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(var(--dr,6px),var(--dv,-8vh),0)}}
 /* L'étoile de l'âme : plus grande, toujours là, un halo qui respire. */
 .etoile-ame{position:absolute;right:6%;bottom:9vh;width:2.6rem;height:2.6rem;display:grid;place-items:center}
 .etoile-ame::before{

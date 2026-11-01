@@ -245,9 +245,12 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 
 /* ---------- Contenu ---------- */
 .scene-contenu{
-  position:relative;z-index:1;height:100%;max-width:44rem;margin:0 auto;padding:14svh 1.25rem 2rem;
+  position:relative;z-index:1;height:100%;max-width:44rem;margin:0 auto;padding:8svh 1.25rem 2rem;
   display:flex;flex-direction:column;align-items:center;
 }
+
+/* Le bloc de texte remonte doucement en descendant, pour laisser un grand ciel libre à l'étoile (--lift posé par js/accueil.js) */
+.bloc-texte{display:flex;flex-direction:column;align-items:center;will-change:transform;transform:translate3d(0,calc(var(--lift,0px) * var(--p)),0)}
 
 /* Halo lumineux autour du titre */
 .halo-titre{
@@ -301,7 +304,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 
 /* ---------- Les deux Doudous : silhouettes simples et douces ---------- */
 .doudous{
-  position:relative;margin-top:auto;margin-bottom:10svh;width:100%;
+  position:relative;margin-top:auto;margin-bottom:3svh;width:100%;
   display:flex;justify-content:center;align-items:flex-end;gap:clamp(.5rem,5vw,3rem);
 }
 .doudou{
@@ -309,7 +312,15 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   opacity:calc(.2 + var(--p) * .78);
   will-change:transform,filter,opacity;
 }
-.doudou-duo{width:clamp(13rem,64vw,24rem)}
+/* La taille suit la hauteur de l'écran : de la place pour le texte, ~250 px de ciel libre, puis les Doudous */
+.doudou-duo{width:clamp(9.5rem,calc((100svh - 560px) * .88),24rem);max-width:70vw}
+/* Fondu doux sur les bords bas et latéraux : l'illustration se fond dans le fond doré */
+.doudou-duo img{
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 98%),linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 98%),linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  mask-composite:intersect;
+}
 .doudou-flotte{animation:flotte-a var(--d,13s) ease-in-out var(--dl,-3s) infinite alternate}
 @keyframes flotte-a{0%{transform:translate3d(0,0,0) rotate(0)}37%{transform:translate3d(1px,-4px,0) rotate(.5deg)}100%{transform:translate3d(-1px,-7px,0) rotate(-.3deg)}}
 @keyframes flotte-b{0%{transform:translate3d(0,-5px,0) rotate(.3deg)}46%{transform:translate3d(-2px,-1px,0) rotate(-.4deg)}100%{transform:translate3d(1px,-6px,0) rotate(.4deg)}}
@@ -355,8 +366,8 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .apres .chapeau{font-size:1rem;color:var(--encre-douce)}
 
 @media (min-width:48rem){
-  .scene-contenu{padding-top:16svh}
-  .doudous{margin-bottom:8svh}
+  .scene-contenu{padding-top:11svh}
+  .doudous{margin-bottom:4svh}
 }
 @media (max-height:520px){
   .parcours{height:320vh}

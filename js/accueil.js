@@ -72,6 +72,8 @@
   var etoile = document.querySelector('.grande-etoile');
   var zone = document.querySelector('.doudous');
   var texte = document.querySelector('.chapeau-accueil');
+  var bloc = document.querySelector('.bloc-texte');
+  var lift = 0;                                   /* remontée du texte (px, négative), à p = 1 */
   var coeurs = document.querySelectorAll('.coeur');
   var flux = [document.querySelector('.flux-g'), document.querySelector('.flux-d')];
   var gardeCle = '';
@@ -93,15 +95,22 @@
     }
   }
   function trace() {
-    if (!etoile || !zone || !texte || coeurs.length < 2) { return; }
+    if (!etoile || !zone || !texte || !bloc || coeurs.length < 2) { return; }
+    var pNow = calme ? 1 : (parseFloat(scene.style.getPropertyValue('--p')) || 0);
+    var liftNow = calme ? 0 : lift * pNow;
     var z = zone.getBoundingClientRect();
-    var bas = texte.getBoundingClientRect().bottom;
-    var libre = z.top - bas;                       /* ciel libre entre le texte et les Doudous */
-    var max = window.innerWidth < 700 ? 100 : 160;
-    var taille = Math.max(72, Math.min(max, libre * 0.92));
-    var cy = -libre / 2;                           /* milieu de l'espace libre, relatif aux Doudous */
+    var tb = texte.getBoundingClientRect(), bb = bloc.getBoundingClientRect();
+    /* ciel libre entre le texte et les Doudous, sans la remontée : on veut au moins 250 px */
+    var gapNat = z.top - (tb.bottom - liftNow);
+    var place = Math.max(0, bb.top - liftNow - 14);
+    var neuf = calme ? 0 : -Math.min(Math.max(0, 250 - gapNat), place);
+    if (Math.abs(neuf - lift) > 0.5) { lift = neuf; bloc.style.setProperty('--lift', lift.toFixed(0) + 'px'); liftNow = lift * pNow; }
+    var libre = z.top - texte.getBoundingClientRect().bottom;
+    var mobile = window.innerWidth < 700;
+    var taille = Math.max(mobile ? 80 : 120, Math.min(mobile ? 100 : 160, libre * 0.92));
+    var cy = -libre / 2;                           /* milieu du ciel libre, relatif aux Doudous */
     var cx = z.width / 2;
-    var cle = [taille, cy, cx].map(Math.round).join();
+    var cle = [taille, cy, cx, lift].map(Math.round).join();
     var coeurPos = [];
     for (var n = 0; n < 2; n++) {
       var c = coeurs[n].getBoundingClientRect();

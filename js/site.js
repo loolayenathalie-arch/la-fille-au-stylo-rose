@@ -65,22 +65,27 @@
   }
 
   /* ---------- Ciel d'étoiles ----------
-     Quelques petites étoiles qui scintillent doucement, et une étoile plus grande (l'âme) qui brille tout le temps.
+     Quelques perles de lumière qui respirent doucement, et une étoile plus grande (l'âme) qui brille tout le temps.
      Purement décoratif ; figé en mode calme (CSS). */
   var ciel = document.createElement('div');
   ciel.className = 'etoiles';
   ciel.setAttribute('aria-hidden', 'true');
-  var teintes = ['#D9A66E', '#D9A66E', '#E6B8A2', '#89A8B8', '#B87A46'];
-  var nb = window.innerWidth < 700 ? 16 : 30;
+  var nb = window.innerWidth < 700 ? 9 : 15;
   for (var n = 0; n < nb; n++) {
     var e = document.createElement('span');
-    e.className = 'etoile';
+    var teinte = Math.random();
+    e.className = 'etoile' + (teinte < 0.1 ? ' rose' : (teinte < 0.2 ? ' bleu' : ''));
     e.style.left = (Math.random() * 96 + 1).toFixed(1) + '%';
     e.style.top = (Math.random() * 94 + 2).toFixed(1) + '%';
-    e.style.setProperty('--t', (8 + Math.random() * 14).toFixed(1) + 'px');
-    e.style.setProperty('--c', teintes[Math.floor(Math.random() * teintes.length)]);
-    e.style.setProperty('--d', (3.5 + Math.random() * 5).toFixed(1) + 's');
-    e.style.setProperty('--dl', (-Math.random() * 8).toFixed(1) + 's');
+    e.style.setProperty('--t', (n < 2 ? 18 + Math.random() * 8 : 4 + Math.random() * 6).toFixed(1) + 'px');
+    var dur = 4 + Math.random() * 5;
+    e.style.setProperty('--d', dur.toFixed(1) + 's');
+    e.style.setProperty('--dl', (-Math.random() * dur).toFixed(1) + 's');
+    var dd = 50 + Math.random() * 50;
+    e.style.setProperty('--dd', dd.toFixed(0) + 's');
+    e.style.setProperty('--dl2', (-Math.random() * dd).toFixed(0) + 's');
+    e.style.setProperty('--dv', (-(5 + Math.random() * 9)).toFixed(1) + 'vh');
+    e.style.setProperty('--dr', ((Math.random() - 0.5) * 16).toFixed(0) + 'px');
     ciel.appendChild(e);
   }
   var ame = document.createElement('span');

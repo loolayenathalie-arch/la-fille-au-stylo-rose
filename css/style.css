@@ -231,3 +231,36 @@ html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.cal
   .livre-fiche{grid-template-columns:14rem 1fr;text-align:left;justify-items:start}
   .bas-blocs{grid-template-columns:repeat(3,1fr);gap:2rem}
 }
+
+/* ===== 13. Ciel rêveur : lueur douce en fond, étoiles qui scintillent, étoile de l'âme ===== */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 45% at 12% 8%,rgba(223,200,167,.55),rgba(223,200,167,0) 70%),
+    radial-gradient(ellipse 60% 40% at 92% 38%,rgba(230,184,162,.28),rgba(230,184,162,0) 70%),
+    radial-gradient(ellipse 70% 45% at 10% 78%,rgba(137,168,184,.18),rgba(137,168,184,0) 70%),
+    radial-gradient(ellipse 60% 40% at 88% 100%,rgba(223,200,167,.5),rgba(223,200,167,0) 70%);
+}
+.etoiles{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.etoile{
+  position:absolute;width:var(--t,10px);height:var(--t,10px);background:var(--c,#D9A66E);
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  opacity:.2;animation:scintille var(--d,5s) ease-in-out var(--dl,0s) infinite;
+}
+@keyframes scintille{0%,100%{opacity:.15;transform:scale(.55) rotate(0)}50%{opacity:.95;transform:scale(1.15) rotate(18deg)}}
+/* L'étoile de l'âme : plus grande, toujours là, un halo qui respire. */
+.etoile-ame{position:absolute;right:6%;bottom:9vh;width:2.6rem;height:2.6rem;display:grid;place-items:center}
+.etoile-ame::before{
+  content:"";position:absolute;inset:-1.4rem;border-radius:50%;
+  background:radial-gradient(circle,rgba(246,217,168,.85) 0,rgba(246,217,168,.35) 38%,rgba(246,217,168,0) 70%);
+  animation:halo 3.8s ease-in-out infinite;
+}
+.etoile-ame i{
+  position:relative;display:block;width:100%;height:100%;background:#E7B66F;
+  clip-path:polygon(50% 0,59% 38%,100% 50%,59% 62%,50% 100%,41% 62%,0 50%,41% 38%);
+  animation:brille 3.8s ease-in-out infinite;
+}
+@keyframes halo{0%,100%{opacity:.55;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes brille{0%,100%{transform:scale(.88) rotate(0);opacity:.85}50%{transform:scale(1.08) rotate(12deg);opacity:1}}
+html.calme .etoile,html.calme .etoile-ame::before,html.calme .etoile-ame i{animation:none;opacity:.6;transform:none}
+html.calme .etoile-ame i{opacity:1}

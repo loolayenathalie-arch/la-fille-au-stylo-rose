@@ -64,5 +64,30 @@
     else if (mq.addListener) { mq.addListener(suit); }
   }
 
+  /* ---------- Ciel d'étoiles ----------
+     Quelques petites étoiles qui scintillent doucement, et une étoile plus grande (l'âme) qui brille tout le temps.
+     Purement décoratif ; figé en mode calme (CSS). */
+  var ciel = document.createElement('div');
+  ciel.className = 'etoiles';
+  ciel.setAttribute('aria-hidden', 'true');
+  var teintes = ['#D9A66E', '#D9A66E', '#E6B8A2', '#89A8B8', '#B87A46'];
+  var nb = window.innerWidth < 700 ? 16 : 30;
+  for (var n = 0; n < nb; n++) {
+    var e = document.createElement('span');
+    e.className = 'etoile';
+    e.style.left = (Math.random() * 96 + 1).toFixed(1) + '%';
+    e.style.top = (Math.random() * 94 + 2).toFixed(1) + '%';
+    e.style.setProperty('--t', (8 + Math.random() * 14).toFixed(1) + 'px');
+    e.style.setProperty('--c', teintes[Math.floor(Math.random() * teintes.length)]);
+    e.style.setProperty('--d', (3.5 + Math.random() * 5).toFixed(1) + 's');
+    e.style.setProperty('--dl', (-Math.random() * 8).toFixed(1) + 's');
+    ciel.appendChild(e);
+  }
+  var ame = document.createElement('span');
+  ame.className = 'etoile-ame';
+  ame.appendChild(document.createElement('i'));
+  ciel.appendChild(ame);
+  document.body.appendChild(ciel);
+
   applique(false);
 })();

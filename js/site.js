@@ -96,9 +96,14 @@
       pale = el('path', { 'class': 'fil-pale' });
       vif = el('path', { 'class': 'fil-vif' });
       fleur = el('g', { 'class': 'fil-fleur' });
-      fleur.appendChild(el('circle', { 'class': 'fil-fleur-halo', r: 13 }));
-      var cx = [[0, 0], [6.5, 0], [-6.5, 0], [3.25, 5.63], [-3.25, 5.63], [3.25, -5.63], [-3.25, -5.63]];
-      for (i = 0; i < cx.length; i++) { fleur.appendChild(el('circle', { r: 6.5, cx: cx[i][0], cy: cx[i][1] })); }
+      /* Un stylo rose, pointe sur le bout du fil, incliné comme une main qui écrit */
+      var stylo = el('g', { transform: 'rotate(32)' });
+      stylo.appendChild(el('path', { d: 'M0 0 L-3.2 -9 L3.2 -9 Z', fill: '#E8BDA9' }));
+      stylo.appendChild(el('path', { d: 'M0 0 L-1 -3 L1 -3 Z', fill: '#7C5C43' }));
+      stylo.appendChild(el('rect', { x: -3.2, y: -30, width: 6.4, height: 21, rx: 1, fill: '#C06A82' }));
+      stylo.appendChild(el('rect', { x: -3.2, y: -12, width: 6.4, height: 2, fill: '#F6D9A8' }));
+      stylo.appendChild(el('rect', { x: -3.2, y: -34, width: 6.4, height: 5, rx: 2, fill: '#A9546C' }));
+      fleur.appendChild(stylo);
       fil.appendChild(pale); fil.appendChild(vif); fil.appendChild(fleur);
       var porte = document.createElement('div');
       porte.className = 'fil-lateral';
@@ -126,8 +131,8 @@
       fleur.setAttribute('opacity', 0);
     } else {
       var pt = vif.getPointAtLength(longueur * p);
-      var echelle = racine.clientWidth < 700 ? 0.62 : 0.85;
-      fleur.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ') rotate(' + (p * 540).toFixed(1) + ') scale(' + echelle + ')');
+      var echelle = racine.clientWidth < 700 ? 0.85 : 1.1;
+      fleur.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ') scale(' + echelle + ')');
       fleur.setAttribute('opacity', 1);
     }
   }

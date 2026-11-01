@@ -191,8 +191,6 @@ main{display:block}
 .fil-pale,.fil-vif{fill:none;stroke:var(--or);vector-effect:non-scaling-stroke}
 .fil-pale{stroke-width:1;opacity:.16}
 .fil-vif{stroke-width:2;opacity:.9;stroke-linecap:round}
-.fil-fleur-halo{fill:rgba(246,217,168,.4);stroke:none}
-.fil-fleur circle:not(.fil-fleur-halo){fill:rgba(255,250,235,.75);stroke:var(--or);stroke-width:.8}
 @media (max-width:840px){.fil-vif{stroke-width:1.4;opacity:.7}.fil-pale{opacity:.1}}
 @media (max-width:699px){.fil-vif{stroke-width:1.2;opacity:.6}}
 html.calme .fil-fleur{display:none}

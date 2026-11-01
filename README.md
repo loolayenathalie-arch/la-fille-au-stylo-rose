@@ -1,6 +1,6 @@
-# Les Doudous de Lili
+# Les Doudous et l'Étoile
 
-Site de « La fille au stylo rose » (l’autrice). Titre du site : Les Doudous de Lili.
+Site de « La fille au stylo rose » (l’autrice). Titre du site : Les Doudous et l'Étoile.
 
 Site statique d'autrice (albums jeunesse, 4 à 7 ans). HTML + CSS, aucun JavaScript, aucun cookie, aucun traceur.
 Polices hébergées dans `fonts/` (Caveat et Atkinson Hyperlegible, licences incluses).

@@ -73,7 +73,7 @@ blockquote,.citation{
 /* ===== 3. En-tête et menu ===== */
 .entete{position:relative;background:var(--grain),var(--sable-clair);padding:1rem 1rem .9rem;border-bottom:1px solid var(--lisere)}
 .entete-interieur{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1.5rem}
-/* Le titre du site est « Les Doudous de Lili » ; « La fille au stylo rose » est l'autrice, en signature. */
+/* Le titre du site est « Les Doudous et l'Étoile » ; « La fille au stylo rose » est l'autrice, en signature. */
 .nom-du-site{display:flex;flex-direction:column;font-family:var(--police-titre);font-weight:700;font-size:1.9rem;line-height:1.05;color:var(--brun);text-decoration:none}
 .nom-du-site small{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.05rem;line-height:1.2;color:var(--brun-fonce)}
 .menu ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.1rem .35rem}
@@ -264,3 +264,4 @@ body::before{
 @keyframes brille{0%,100%{transform:scale(.88) rotate(0);opacity:.85}50%{transform:scale(1.08) rotate(12deg);opacity:1}}
 html.calme .etoile,html.calme .etoile-ame::before,html.calme .etoile-ame i{animation:none;opacity:.6;transform:none}
 html.calme .etoile-ame i{opacity:1}
+.collection{margin:0 0 .3rem;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.15rem;color:var(--brun-fonce)}

@@ -1,4 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
-<!-- Image provisoire : formes douces. Remplace ce fichier par ton illustration (même nom, fond transparent). -->
-<path d="M60 250C20 200 40 110 110 80C170 55 250 90 265 170C275 225 240 262 160 265C110 267 80 268 60 250Z" fill="#F9DDE3" stroke="#D9A9B8" stroke-width="5"/>
+<!-- Image provisoire : ours crème assis (silhouette simple, grain d'aquarelle). Remplace ce fichier par ton illustration (même nom, fond transparent). -->
+<defs>
+ <filter id="aq" x="-10%" y="-10%" width="120%" height="120%">
+  <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3" result="w"/>
+  <feDisplacementMap in="SourceGraphic" in2="w" scale="6" result="d"/>
+  <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="8" result="g"/>
+  <feColorMatrix in="g" type="matrix" values="0 0 0 0 .55  0 0 0 0 .42  0 0 0 0 .3  0 0 0 .55 -.12" result="gc"/>
+  <feComposite in="gc" in2="d" operator="in" result="gi"/>
+  <feMerge><feMergeNode in="d"/><feMergeNode in="gi"/></feMerge>
+ </filter>
+</defs>
+<g filter="url(#aq)" stroke="#D8BFA0" stroke-width="4">
+ <ellipse cx="112" cy="268" rx="27" ry="14" fill="#FBF6E6"/>
+ <ellipse cx="188" cy="268" rx="27" ry="14" fill="#FBF6E6"/>
+ <ellipse cx="150" cy="212" rx="70" ry="62" fill="#FBF6E6"/>
+ <ellipse cx="150" cy="222" rx="40" ry="38" fill="#F3E7CC" stroke="none"/>
+ <circle cx="104" cy="78" r="21" fill="#FBF6E6"/>
+ <circle cx="196" cy="78" r="21" fill="#FBF6E6"/>
+ <circle cx="104" cy="80" r="10" fill="#EDC9B8" stroke="none"/>
+ <circle cx="196" cy="80" r="10" fill="#EDC9B8" stroke="none"/>
+ <circle cx="150" cy="120" r="56" fill="#FBF6E6"/>
+ <ellipse cx="150" cy="138" rx="25" ry="18" fill="#F3E7CC" stroke="none"/>
+ <ellipse cx="150" cy="129" rx="7" ry="5" fill="#7C5C43" stroke="none"/>
+ <circle cx="128" cy="112" r="4" fill="#7C5C43" stroke="none"/>
+ <circle cx="172" cy="112" r="4" fill="#7C5C43" stroke="none"/>
+</g>
 </svg>

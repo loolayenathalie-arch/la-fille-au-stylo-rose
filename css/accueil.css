@@ -1,65 +1,96 @@
-/* Accueil : brume, papier, encre. Neutre et enveloppant : blanc nuage, crème, sable, gris-bleu de brume,
-   vert d'eau très pâle. Le rose n'est qu'une touche (le trait du stylo rose).
-   Rien de régulier : chaque élément a sa durée, ses décalages et ses courbes (le script ajoute un peu de hasard).
+/* Accueil : un cocon doré, comme une pièce éclairée par une fenêtre, à l'aquarelle sur papier.
+   Palette des Doudous : crème #F9F6EA / #F0E4CE, sable #E4D2B8, beige #D8BFA0, caramel #C7AB8B,
+   lumière ambrée #F6D9A8, miel #EBCB9B, abricot #F2D2A9, caramel chaud #D9A66E, brun doux #7C5C43.
+   Touches seulement : rose-pêche #EDC9B8, vert d'eau #B9D3CC.
+   Rien de régulier : chaque élément a sa durée et ses courbes (le script ajoute un peu de hasard).
    Seuls transform / opacity bougent en continu (léger sur mobile).
    Variables --p (brume), --t (se tourner), --f (fil) pilotées par js/accueil.js au défilement.
    Mode calme (html.calme) : prefers-reduced-motion OU bouton « Réduire les animations ». */
 
-/* Palette aquarelle (mesurée sur une illustration de Nathalie) :
-   fonds #F9F6EA / #F0E4CE ; brume sable #E4D2B8, beige #D8BFA0, caramel #C7AB8B ; ombres #B69575 / #A07E5F ;
-   texte brun doux #7C5C43 ; touches rares : rose-pêche #EDC9B8, vert d'eau #B9D3CC (jamais en grands aplats). */
 .page-accueil{
-  --encre:#7C5C43;       /* titre, brun doux : contraste 5,6:1 sur #F9F6EA */
-  --encre-douce:#6B4E38; /* petits textes et bouton : contraste > 7:1 */
-  --rose-poudre:#E8BDA9; /* uniquement le trait du stylo rose (rose-pêche un peu appuyé pour rester visible) */
-  --flou-final:2.5px;    /* flou restant sur les Doudous une fois « précisés » (0 = net) */
+  --encre:#7C5C43;       /* titre, brun doux (grand texte) */
+  --encre-douce:#6B4E38; /* petits textes et bouton : contraste > 5:1, même sur le miel */
+  --rose-poudre:#E8BDA9; /* le trait du stylo rose : rose-pêche un peu appuyé pour rester visible */
+  --flou-final:1.2px;    /* flou restant sur les Doudous une fois « précisés » (0 = net) */
   background:#F9F6EA;
 }
-.page-accueil .entete{background:#F0E4CE}
 .page-accueil .nom-du-site{color:var(--encre)}
-.page-accueil .menu a{color:#5B4330}
-.page-accueil .menu a:hover{background:#F9F6EA}
-.page-accueil .menu a[aria-current="page"]{background:#F9F6EA;box-shadow:inset 0 -4px 0 #7C5C43}
-.page-accueil .pied{background:#F0E4CE}
-.page-accueil .pied a,.page-accueil .pied p{color:#5B4330}
 
 .accueil{overflow-x:clip}
 .parcours{position:relative;height:250vh;height:250svh}
 
+/* Fond de scène : crème en haut, et des zones de miel, d'abricot et de caramel pour le relief. */
 .scene{
   --p:0;--t:0;--f:0;
   position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate;
-  background:linear-gradient(180deg,#F9F6EA 0%,#F5ECDA 48%,#F0E4CE 100%);
+  background:
+    radial-gradient(ellipse 75% 36% at 90% 72%,rgba(235,203,155,.75),rgba(235,203,155,0) 72%),
+    radial-gradient(ellipse 62% 32% at 8% 60%,rgba(242,210,169,.8),rgba(242,210,169,0) 72%),
+    radial-gradient(ellipse 85% 26% at 100% 100%,rgba(217,166,110,.4),rgba(217,166,110,0) 72%),
+    linear-gradient(180deg,#F9F6EA 0%,#F6E8CC 42%,#EEDAB6 100%);
 }
 html:not(.js) .scene{--p:1;--t:1;--f:1}
 
-/* ---------- Fond : deux ciels qui se fondent l'un dans l'autre, très lentement ---------- */
+/* ---------- Le fond respire : un second ciel plus doré se fond dans le premier ---------- */
 .ciel{position:absolute;inset:0;z-index:0;pointer-events:none}
 .ciel::before{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,#F7F1E0 0%,#EFE2CB 50%,#E9D8BE 84%,#F0E4CE 100%);
+  background:linear-gradient(180deg,#F8EFD8 0%,#F3DFB8 50%,#EBD0A2 84%,#EEDAB6 100%);
   opacity:0;animation:respire 67s ease-in-out infinite alternate;
 }
-@keyframes respire{0%{opacity:0}40%{opacity:.35}100%{opacity:.8}}
+@keyframes respire{0%{opacity:0}40%{opacity:.35}100%{opacity:.75}}
 
-/* ---------- Brume : taches irrégulières superposées, aux bords qui se perdent ---------- */
+/* Vignette : un léger voile brun chaud sur les bords (le bas rejoint la suite de la page). */
+.ciel::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(0deg,#EEDAB6 0%,rgba(238,218,182,0) 14%),
+    linear-gradient(90deg,rgba(124,92,67,.2) 0%,rgba(124,92,67,0) 26%,rgba(124,92,67,0) 74%,rgba(124,92,67,.2) 100%),
+    linear-gradient(180deg,rgba(124,92,67,.14) 0%,rgba(124,92,67,0) 20%);
+}
+
+/* ---------- Lumière dorée : source douce d'un côté, qui respire très lentement ---------- */
+.lumiere{position:absolute;pointer-events:none;will-change:transform,opacity;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate}
+.lumiere-1{
+  left:-50%;top:-20%;width:135%;height:95%;
+  background:radial-gradient(ellipse 50% 50% at 38% 42%,rgba(246,217,168,.98) 0,rgba(244,208,150,.6) 38%,rgba(246,217,168,0) 72%);
+  animation-name:souffle-a;animation-duration:var(--d,47s);animation-delay:var(--dl,-10s);
+}
+.lumiere-2{
+  right:-45%;bottom:-12%;width:120%;height:62%;
+  background:radial-gradient(ellipse 50% 50% at 60% 55%,rgba(242,210,169,.9) 0,rgba(235,203,155,.5) 42%,rgba(235,203,155,0) 72%);
+  animation-name:souffle-b;animation-duration:var(--d,71s);animation-delay:var(--dl,-25s);
+}
+@keyframes souffle-a{
+  0%{opacity:.62;transform:translate3d(0,0,0) scale(1)}
+  31%{opacity:.88;transform:translate3d(3vw,1vh,0) scale(1.08)}
+  67%{opacity:.74;transform:translate3d(1vw,-1.5vh,0) scale(1.04)}
+  100%{opacity:1;transform:translate3d(5vw,2vh,0) scale(1.13)}
+}
+@keyframes souffle-b{
+  0%{opacity:.5;transform:translate3d(0,0,0) scale(1.05)}
+  44%{opacity:.85;transform:translate3d(-3vw,-1vh,0) scale(1)}
+  100%{opacity:.65;transform:translate3d(-1vw,1.5vh,0) scale(1.1)}
+}
+
+/* ---------- Brume : taches irrégulières, éclairées de l'intérieur par la lumière dorée ---------- */
 .brume{position:absolute;opacity:.8;will-change:transform;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate}
 .brume-1{top:-6%;left:-30%;width:150%;height:46%;animation-name:brume-a;animation-duration:var(--d,97s);animation-delay:var(--dl,-20s);
-  background:radial-gradient(ellipse 34% 40% at 24% 52%,rgba(255,251,238,.95),rgba(255,251,238,0)),
-             radial-gradient(ellipse 22% 33% at 58% 38%,rgba(255,251,238,.8),rgba(255,251,238,0)),
+  background:radial-gradient(ellipse 34% 40% at 24% 52%,rgba(255,243,214,.95),rgba(255,243,214,0)),
+             radial-gradient(ellipse 22% 33% at 58% 38%,rgba(246,217,168,.7),rgba(246,217,168,0)),
              radial-gradient(ellipse 26% 30% at 80% 60%,rgba(228,210,184,.7),rgba(228,210,184,0))}
-.brume-2{top:22%;left:-40%;width:160%;height:40%;opacity:.7;animation-name:brume-b;animation-duration:var(--d,131s);animation-delay:var(--dl,-60s);
-  background:radial-gradient(ellipse 30% 36% at 36% 48%,rgba(216,191,160,.5),rgba(216,191,160,0)),
-             radial-gradient(ellipse 24% 28% at 70% 56%,rgba(228,210,184,.7),rgba(228,210,184,0))}
-.brume-3{top:44%;left:-20%;width:140%;height:42%;opacity:.75;animation-name:brume-c;animation-duration:var(--d,79s);animation-delay:var(--dl,-31s);
-  background:radial-gradient(ellipse 28% 34% at 20% 50%,rgba(255,251,238,.9),rgba(255,251,238,0)),
-             radial-gradient(ellipse 34% 30% at 54% 44%,rgba(228,210,184,.65),rgba(228,210,184,0)),
+.brume-2{top:22%;left:-40%;width:160%;height:40%;opacity:.72;animation-name:brume-b;animation-duration:var(--d,131s);animation-delay:var(--dl,-60s);
+  background:radial-gradient(ellipse 30% 36% at 36% 48%,rgba(255,236,196,.8),rgba(255,236,196,0)),
+             radial-gradient(ellipse 24% 28% at 70% 56%,rgba(235,203,155,.65),rgba(235,203,155,0))}
+.brume-3{top:44%;left:-20%;width:140%;height:42%;opacity:.78;animation-name:brume-c;animation-duration:var(--d,79s);animation-delay:var(--dl,-31s);
+  background:radial-gradient(ellipse 28% 34% at 20% 50%,rgba(255,243,214,.9),rgba(255,243,214,0)),
+             radial-gradient(ellipse 34% 30% at 54% 44%,rgba(242,210,169,.7),rgba(242,210,169,0)),
              radial-gradient(ellipse 14% 20% at 88% 52%,rgba(185,211,204,.4),rgba(185,211,204,0))}
-.brume-4{top:62%;left:-50%;width:170%;height:44%;opacity:.7;animation-name:brume-a;animation-duration:var(--d,157s);animation-delay:var(--dl,-90s);
-  background:radial-gradient(ellipse 32% 36% at 30% 50%,rgba(240,228,206,.95),rgba(240,228,206,0)),
-             radial-gradient(ellipse 26% 32% at 66% 46%,rgba(199,171,139,.32),rgba(199,171,139,0))}
+.brume-4{top:62%;left:-50%;width:170%;height:44%;opacity:.72;animation-name:brume-a;animation-duration:var(--d,157s);animation-delay:var(--dl,-90s);
+  background:radial-gradient(ellipse 32% 36% at 30% 50%,rgba(250,228,186,.9),rgba(250,228,186,0)),
+             radial-gradient(ellipse 26% 32% at 66% 46%,rgba(217,166,110,.34),rgba(217,166,110,0))}
 .brume-5{top:78%;left:-25%;width:150%;height:34%;opacity:.85;animation-name:brume-b;animation-duration:var(--d,113s);animation-delay:var(--dl,-45s);
-  background:radial-gradient(ellipse 34% 40% at 42% 54%,rgba(255,251,238,.95),rgba(255,251,238,0)),
+  background:radial-gradient(ellipse 34% 40% at 42% 54%,rgba(255,240,206,.95),rgba(255,240,206,0)),
              radial-gradient(ellipse 16% 24% at 80% 48%,rgba(237,201,184,.45),rgba(237,201,184,0))}
 @keyframes brume-a{
   0%{transform:translate3d(-7vw,0,0) rotate(-1.5deg) scale(1)}
@@ -80,18 +111,18 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   100%{transform:translate3d(-6vw,-.5vh,0) rotate(-.4deg) scale(1.08)}
 }
 
-/* ---------- Poussière de lumière : rare, minuscule, presque transparente, monte à peine ---------- */
+/* ---------- Poussière de lumière : rare, minuscule, dorée, monte à peine ---------- */
 .poussiere span{
   position:absolute;width:3px;height:3px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,244,214,.95) 0,rgba(255,240,205,.45) 45%,rgba(255,240,205,0) 72%);
+  background:radial-gradient(circle,rgba(255,244,214,.95) 0,rgba(255,236,190,.45) 45%,rgba(255,236,190,0) 72%);
   opacity:0;will-change:transform,opacity;
   animation:poussiere-a var(--d,90s) ease-in-out var(--dl,-30s) infinite;
 }
 @keyframes poussiere-a{
   0%{transform:translate3d(0,0,0);opacity:0}
-  18%{transform:translate3d(5px,-3vh,0);opacity:.5}
-  52%{transform:translate3d(-4px,-9vh,0);opacity:.28}
-  81%{transform:translate3d(7px,-15vh,0);opacity:.4}
+  18%{transform:translate3d(5px,-3vh,0);opacity:.55}
+  52%{transform:translate3d(-4px,-9vh,0);opacity:.3}
+  81%{transform:translate3d(7px,-15vh,0);opacity:.45}
   100%{transform:translate3d(1px,-21vh,0);opacity:0}
 }
 .poussiere span:nth-child(1){left:12%;top:70%}
@@ -103,15 +134,15 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .poussiere span:nth-child(7){left:36%;top:84%;width:4px;height:4px}
 @keyframes poussiere-b{
   0%{transform:translate3d(0,0,0);opacity:0}
-  30%{transform:translate3d(-6px,-5vh,0);opacity:.35}
-  63%{transform:translate3d(4px,-10vh,0);opacity:.2}
+  30%{transform:translate3d(-6px,-5vh,0);opacity:.4}
+  63%{transform:translate3d(4px,-10vh,0);opacity:.22}
   100%{transform:translate3d(-3px,-17vh,0);opacity:0}
 }
 
 /* ---------- Grain de papier : très subtil, fixe ---------- */
 .grain{
-  position:absolute;inset:0;opacity:.09;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .32 0 0 0 0 .27 0 0 0 .75 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  position:absolute;inset:0;opacity:.1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .75 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:220px 220px;
 }
 
@@ -119,6 +150,19 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .scene-contenu{
   position:relative;z-index:1;height:100%;max-width:44rem;margin:0 auto;padding:14svh 1.25rem 2rem;
   display:flex;flex-direction:column;align-items:center;
+}
+
+/* Halo lumineux autour du titre */
+.halo-titre{
+  position:absolute;left:-30%;right:-30%;top:3svh;height:40svh;pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,246,222,.95) 0,rgba(250,226,184,.55) 42%,rgba(246,217,168,0) 72%);
+  will-change:transform,opacity;
+  animation:halo-vie var(--d,53s) ease-in-out var(--dl,-8s) infinite alternate;
+}
+@keyframes halo-vie{
+  0%{opacity:.7;transform:scale(1)}
+  38%{opacity:.95;transform:scale(1.07) translate3d(1vw,0,0)}
+  100%{opacity:.8;transform:scale(1.03) translate3d(-1vw,.5vh,0)}
 }
 
 /* Titre : l'encre se dépose puis s'éclaircit (fondu + flou qui se précise) */
@@ -148,25 +192,24 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 }
 @keyframes trait{to{stroke-dashoffset:0}}
 
-.chapeau-accueil{margin:1.6rem 0 0;text-align:center;font-size:.98rem;line-height:1.7;color:var(--encre-douce);max-width:26rem;opacity:.9}
+.chapeau-accueil{margin:1.6rem 0 0;text-align:center;font-size:.98rem;line-height:1.7;color:var(--encre-douce);max-width:26rem}
 
-/* ---------- Les deux Doudous : silhouettes douces ---------- */
+/* ---------- Les deux Doudous : silhouettes simples et douces ---------- */
 .doudous{
   position:relative;margin-top:auto;margin-bottom:10svh;width:100%;
-  display:flex;justify-content:center;align-items:flex-end;gap:clamp(1rem,8vw,4rem);
+  display:flex;justify-content:center;align-items:flex-end;gap:clamp(.5rem,5vw,3rem);
 }
 .doudou{
-  width:clamp(6rem,27vw,11rem);
-  filter:blur(calc(var(--flou-final) + (1 - var(--p)) * 17px));
-  opacity:calc(.16 + var(--p) * .6);
+  filter:blur(calc(var(--flou-final) + (1 - var(--p)) * 16px));
+  opacity:calc(.2 + var(--p) * .78);
   will-change:transform,filter,opacity;
 }
-.doudou-gauche{transform:translateX(calc(var(--t) * 2.2vw)) rotate(calc(var(--t) * 5deg));transform-origin:50% 92%}
-.doudou-droite{transform:translateX(calc(var(--t) * -2.2vw)) rotate(calc(var(--t) * -4deg));transform-origin:50% 92%}
+.doudou-gauche{width:clamp(5rem,22vw,8.5rem);transform:translateX(calc(var(--t) * 2.2vw)) rotate(calc(var(--t) * 4deg));transform-origin:50% 92%}
+.doudou-droite{width:clamp(7.5rem,33vw,13rem);transform:translateX(calc(var(--t) * -2.2vw)) rotate(calc(var(--t) * -3deg));transform-origin:50% 92%}
 .doudou-flotte{animation:flotte-a var(--d,13s) ease-in-out var(--dl,-3s) infinite alternate}
 .doudou-droite .doudou-flotte{animation-name:flotte-b}
-@keyframes flotte-a{0%{transform:translate3d(0,0,0) rotate(0)}37%{transform:translate3d(1px,-5px,0) rotate(.6deg)}100%{transform:translate3d(-1px,-9px,0) rotate(-.4deg)}}
-@keyframes flotte-b{0%{transform:translate3d(0,-6px,0) rotate(.3deg)}46%{transform:translate3d(-2px,-1px,0) rotate(-.5deg)}100%{transform:translate3d(1px,-8px,0) rotate(.5deg)}}
+@keyframes flotte-a{0%{transform:translate3d(0,0,0) rotate(0)}37%{transform:translate3d(1px,-4px,0) rotate(.5deg)}100%{transform:translate3d(-1px,-7px,0) rotate(-.3deg)}}
+@keyframes flotte-b{0%{transform:translate3d(0,-5px,0) rotate(.3deg)}46%{transform:translate3d(-2px,-1px,0) rotate(-.4deg)}100%{transform:translate3d(1px,-6px,0) rotate(.4deg)}}
 .doudou img{width:100%;height:auto}
 
 /* Fil de lumière : très fin, doré pâle, presque imperceptible */
@@ -176,7 +219,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 }
 .fil path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--f))}
 .fil-trait{stroke:url(#fil-degrade);stroke-width:1.2;opacity:.75;animation:fil-vie 19s ease-in-out -5s infinite alternate}
-@keyframes fil-vie{0%{opacity:.35}45%{opacity:.8}100%{opacity:.5}}
+@keyframes fil-vie{0%{opacity:.4}45%{opacity:.85}100%{opacity:.55}}
 
 .fleche{
   position:absolute;left:50%;bottom:.9rem;width:1.75rem;height:1.75rem;margin-left:-.875rem;z-index:1;
@@ -189,14 +232,14 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .calmer{
   position:absolute;top:.75rem;right:.75rem;z-index:3;
   font:inherit;font-size:.9rem;font-weight:400;color:var(--encre-douce);
-  background:rgba(249,246,234,.88);border:1.5px solid #8A6D52;border-radius:999px;
+  background:rgba(249,246,234,.9);border:1.5px solid #8A6D52;border-radius:999px;
   padding:.4rem .95rem;min-height:44px;cursor:pointer;
 }
-.calmer:hover{background:#fff}
+.calmer:hover{background:#FFFDF6}
 .calmer[aria-pressed="true"]{box-shadow:inset 0 -3px 0 #8A6D52}
 
 /* ---------- Après la scène ---------- */
-.apres{background:linear-gradient(180deg,#F0E4CE 0%,#F9F6EA 55%)}
+.apres{background:linear-gradient(180deg,#EEDAB6 0%,#F9F6EA 55%)}
 .apres .chapeau{font-size:1rem;color:var(--encre-douce)}
 
 @media (min-width:48rem){
@@ -210,10 +253,10 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 }
 
 /* ---------- Mode calme : quasi fixe ----------
-   Titre posé, trait de stylo tracé, Doudous doux et tournés l'un vers l'autre, fil visible, plus de mouvement. */
+   Titre posé, trait de stylo tracé, Doudous nets et tournés l'un vers l'autre, fil visible, plus de mouvement. */
 @media (prefers-reduced-motion:reduce){
   .scene{--p:1;--t:1;--f:1}
-  .brume,.ciel::before,.poussiere span,.doudou-flotte,.fil-trait,.fleche{animation:none!important}
+  .brume,.lumiere,.halo-titre,.ciel::before,.poussiere span,.doudou-flotte,.fil-trait,.fleche{animation:none!important}
   .titre .ligne{animation:none!important;opacity:1;filter:none}
   .trait-stylo path{animation:none!important;stroke-dashoffset:0}
   .poussiere,.fleche{display:none}
@@ -221,7 +264,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   .scene{position:relative;height:auto;min-height:100svh}
 }
 html.calme .scene{--p:1;--t:1;--f:1}
-html.calme .brume,html.calme .ciel::before,html.calme .poussiere span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fleche{animation:none!important}
+html.calme .brume,html.calme .lumiere,html.calme .halo-titre,html.calme .ciel::before,html.calme .poussiere span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fleche{animation:none!important}
 html.calme .titre .ligne{animation:none!important;opacity:1;filter:none}
 html.calme .trait-stylo path{animation:none!important;stroke-dashoffset:0}
 html.calme .poussiere,html.calme .fleche{display:none}

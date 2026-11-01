@@ -41,6 +41,9 @@
    <!-- Décor purement décoratif : brume en couches, poussière de lumière, grain de papier.
         data-vie = durée de base en secondes ; le script y ajoute un peu de hasard. -->
    <div class="ciel" aria-hidden="true">
+    <!-- Lumière dorée venant d'un côté, comme une fenêtre qui éclaire la pièce -->
+    <div class="lumiere lumiere-1" data-vie="47"></div>
+    <div class="lumiere lumiere-2" data-vie="71"></div>
     <div class="brume brume-1" data-vie="97"></div>
     <div class="brume brume-2" data-vie="131"></div>
     <div class="brume brume-3" data-vie="79"></div>
@@ -56,6 +59,7 @@
    <button class="calmer" id="calmer" type="button" aria-pressed="false">Réduire les animations</button>
 
    <div class="scene-contenu">
+    <div class="halo-titre" data-vie="53" aria-hidden="true"></div>
     <!-- Titre : l'encre se dépose et s'éclaircit, puis un petit trait de stylo rose. -->
     <h1 class="titre">
      <span class="ligne l1">La fille</span>
@@ -84,13 +88,13 @@
           Le flou final (silhouettes douces) se règle avec --flou-final dans css/accueil.css. -->
      <div class="doudou doudou-gauche">
       <div class="doudou-flotte" data-vie="13">
-       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg -->
+       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (provisoire : ours crème assis, petit) -->
        <img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
       </div>
      </div>
      <div class="doudou doudou-droite">
       <div class="doudou-flotte" data-vie="17">
-       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg -->
+       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (provisoire : chien brun caramel assis, plus grand) -->
        <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
       </div>
      </div>

@@ -158,59 +158,72 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   100%{opacity:0;transform:translate3d(var(--x1),var(--y1),0) scale(1.22)}
 }
 
-/* ---------- La grande étoile, reliée au cœur de chaque Doudou ----------
-   --r : l'étoile apparaît (quand les Doudous apparaissent) ; --r2 : les fils se tracent, les cœurs s'illuminent. */
+/* ---------- La grande étoile : dans le ciel libre au-dessus des deux Doudous, centrée entre eux ----------
+   --r : elle apparaît quand les Doudous apparaissent ; --r2 : le flux d'éclats se met à couler, les cœurs s'illuminent.
+   Taille et hauteur sont calculées par js/accueil.js (au milieu de l'espace libre entre le texte et les Doudous). */
 .doudous{--r:clamp(0,calc((var(--p) - .5) * 2.4),1);--r2:clamp(0,calc((var(--p) - .72) * 3.6),1)}
 .grande-etoile{
-  position:absolute;left:50%;bottom:calc(min(33vw,13rem) + 3.4rem);width:clamp(4.6rem,20vw,7.4rem);aspect-ratio:1;z-index:3;pointer-events:none;
-  opacity:var(--r);transform:translateX(-50%) scale(calc(.8 + var(--r) * .2));
+  position:absolute;left:50%;top:-8rem;width:clamp(5rem,26vw,6.25rem);aspect-ratio:1;z-index:3;pointer-events:none;
+  opacity:var(--r);transform:translate(-50%,-50%) scale(calc(.8 + var(--r) * .2));
 }
 .grande-etoile svg{display:block;width:100%;height:100%;overflow:visible}
 .ge-halo{transform-origin:center;transform-box:fill-box;animation:ge-pulse 7s ease-in-out infinite alternate}
-.ge-rayons{transform-origin:center;animation:ge-tourne 90s linear infinite}
-.ge-eclat{transform-box:fill-box;transform-origin:center;opacity:0;animation:ge-eclat 5.5s ease-in-out infinite}
-.ge-eclat:nth-of-type(2){animation-delay:-1.4s;animation-duration:6.8s}
-.ge-eclat:nth-of-type(3){animation-delay:-3.1s;animation-duration:4.9s}
-.ge-eclat:nth-of-type(4){animation-delay:-4.4s;animation-duration:7.6s}
+.ge-rayons{transform-origin:center;animation:ge-tourne 120s linear infinite}
+.ge-coeur{transform-origin:center;transform-box:fill-box;animation:ge-scintille 1.7s ease-in-out infinite alternate}
+/* Éclats : s'allument et s'éteignent vite (≈ 0,8 à 1,5 s), à des moments irréguliers */
+.ge-eclat{transform-box:fill-box;transform-origin:center;opacity:0;animation:ge-eclat 3.1s ease-in-out infinite}
+.ge-eclat:nth-of-type(2){animation-delay:-.7s;animation-duration:3.9s}
+.ge-eclat:nth-of-type(3){animation-delay:-1.9s;animation-duration:2.6s}
+.ge-eclat:nth-of-type(4){animation-delay:-2.4s;animation-duration:4.4s}
+.ge-eclat:nth-of-type(5){animation-delay:-1.1s;animation-duration:3.4s}
+.ge-eclat:nth-of-type(6){animation-delay:-3.3s;animation-duration:2.9s}
+/* Minuscules étincelles tout autour */
+.ge-etincelle{opacity:0;animation:ge-etincelle 2.2s ease-in-out infinite}
+.ge-etincelle:nth-of-type(odd){animation-duration:1.5s;animation-delay:-.4s}
+.ge-etincelle:nth-of-type(3n){animation-duration:3.1s;animation-delay:-1.3s}
+.ge-etincelle:nth-of-type(4n){animation-duration:1.9s;animation-delay:-.9s}
+.ge-etincelle:nth-of-type(5n){animation-duration:2.7s;animation-delay:-2s}
 @keyframes ge-pulse{0%{opacity:.6;transform:scale(.9)}100%{opacity:1;transform:scale(1.08)}}
 @keyframes ge-tourne{to{transform:rotate(360deg)}}
-@keyframes ge-eclat{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1)}70%{opacity:.2;transform:scale(.7)}}
+@keyframes ge-scintille{0%{transform:scale(.88);opacity:.85}100%{transform:scale(1.12);opacity:1}}
+@keyframes ge-eclat{0%,55%,100%{opacity:0;transform:scale(.3)}72%{opacity:1;transform:scale(1)}90%{opacity:0;transform:scale(.6)}}
+@keyframes ge-etincelle{0%,50%,100%{opacity:0}70%{opacity:1}85%{opacity:.1}}
 /* Un petit nuage qui s'écarte pour la laisser apparaître */
 .ge-nuage{
   position:absolute;inset:-30%;border-radius:50%;
   background:radial-gradient(circle,rgba(255,252,243,.97) 0,rgba(255,247,230,.7) 45%,rgba(255,247,230,0) 72%);
   opacity:calc(1 - var(--r));transform:scale(calc(1 + var(--r) * .6));
 }
-/* Les fils de lumière : de l'étoile au cœur de chaque Doudou */
-.liens{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
-.liens path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--r2))}
-.lien-halo{stroke:#FFF3D6;stroke-width:7;opacity:.5;animation:fil-vie 6.5s ease-in-out -1s infinite alternate}
-.lien{stroke:#E9B968;stroke-width:1.8;animation:fil-vie 5s ease-in-out -3s infinite alternate}
-.voyageurs{position:absolute;inset:0;pointer-events:none;z-index:3;opacity:var(--r2)}
-.voyageur{
-  position:absolute;left:0;top:0;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;opacity:0;offset-rotate:0deg;
-  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 30%,rgba(246,217,168,.8) 55%,rgba(246,217,168,0) 75%);
-  box-shadow:0 0 .6rem .15rem rgba(246,217,168,.7);
-  animation:voyage 7s ease-in-out infinite;
+/* Le flux d'éclats : une poussière d'étoile coule doucement de l'étoile vers le cœur de chaque Doudou (aucun trait).
+   Chaque éclat suit une courbe légère : l'enveloppe externe glisse en travers, l'interne descend (transform et opacity seulement).
+   js/accueil.js pose --fx / --fy (distance jusqu'au cœur) et crée les éclats. */
+.flux{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:3;opacity:var(--r2)}
+.flux-o{position:absolute;left:0;top:0;animation:flux-x var(--fd,6s) cubic-bezier(.3,.6,.5,1) var(--fl,0s) infinite}
+.flux-o i{
+  display:block;width:var(--s,3px);height:var(--s,3px);margin:calc(var(--s,3px) / -2) 0 0 calc(var(--s,3px) / -2);border-radius:50%;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 38%,rgba(246,217,168,.85) 62%,rgba(246,217,168,0) 80%);
+  box-shadow:0 0 .4rem .08rem rgba(246,217,168,.85);
+  animation:flux-y var(--fd,6s) cubic-bezier(.45,0,.55,1) var(--fl,0s) infinite,flux-o var(--fd,6s) ease-in-out var(--fl,0s) infinite;
 }
-.voyageur-d{animation-delay:.6s}
-@keyframes voyage{0%{offset-distance:0%;opacity:0}10%{opacity:1}86%{opacity:1}100%{offset-distance:100%;opacity:0}}
+@keyframes flux-x{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(calc(var(--fx) + var(--jx,0px)),0,0)}}
+@keyframes flux-y{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(0,calc(var(--fy) + var(--jy,0px)),0)}}
+@keyframes flux-o{0%{opacity:0}16%{opacity:1}80%{opacity:1}100%{opacity:0}}
 /* Le cœur de chaque Doudou : une petite lumière qui s'allume quand la lumière l'atteint, puis le halo se réchauffe */
 .doudou-flotte{position:relative}
 .coeur{position:absolute;left:var(--cx,50%);top:var(--cy,70%);width:0;height:0;pointer-events:none}
 .coeur::before{
   content:"";position:absolute;width:2.1rem;height:2.1rem;margin:-1.05rem 0 0 -1.05rem;border-radius:50%;
   background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 24%,rgba(246,217,168,.85) 48%,rgba(246,217,168,0) 72%);
-  opacity:0;animation:coeur 7s ease-in-out var(--cd,0s) infinite;
+  opacity:0;animation:coeur 3.6s ease-in-out var(--cd,0s) infinite alternate;
 }
 .coeur::after{
   content:"";position:absolute;z-index:-1;width:11rem;height:11rem;margin:-5.5rem 0 0 -5.5rem;border-radius:50%;
   background:radial-gradient(circle,rgba(238,190,120,.62) 0,rgba(240,200,140,.3) 40%,rgba(240,200,140,0) 70%);
-  opacity:0;animation:chaud 7s ease-in-out var(--cd,0s) infinite;
+  opacity:0;animation:chaud 5.4s ease-in-out var(--cd,0s) infinite alternate;
 }
 .doudou-droite .coeur{--cd:.6s}
-@keyframes coeur{0%,68%{opacity:calc(var(--r2) * .25);scale:.7}86%{opacity:var(--r2);scale:1.5}100%{opacity:calc(var(--r2) * .45);scale:1}}
-@keyframes chaud{0%,74%{opacity:calc(var(--r2) * .25)}92%{opacity:var(--r2)}100%{opacity:calc(var(--r2) * .6)}}
+@keyframes coeur{0%{opacity:calc(var(--r2) * .4);scale:.9}100%{opacity:var(--r2);scale:1.35}}
+@keyframes chaud{0%{opacity:calc(var(--r2) * .35)}100%{opacity:calc(var(--r2) * .85)}}
 
 /* ---------- Le nuage qui reste : dérive très lentement et enveloppe les Doudous ---------- */
 .nuage-bas{position:absolute;inset:-34% -26% -22%;pointer-events:none;z-index:2;opacity:calc(.95 - var(--p) * .8)}
@@ -359,21 +372,26 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
    Titre posé, trait de stylo tracé, Doudous nets et tournés l'un vers l'autre, fil visible, plus de mouvement. */
 @media (prefers-reduced-motion:reduce){
   .scene{--p:1;--t:1;--f:1}
-  .brume,.lumiere,.halo-titre,.ciel::before,.astre i,.doudou img,.doudou::before,.nuage-bas span,.doudou-flotte,.fil-trait,.fil-halo,.fleche,.ge-halo,.ge-rayons,.ge-eclat,.lien-halo,.lien,.voyageur,.coeur::before,.coeur::after{animation:none!important}
+  .brume,.lumiere,.halo-titre,.ciel::before,.astre i,.doudou img,.doudou::before,.nuage-bas span,.doudou-flotte,.fil-trait,.fil-halo,.fleche,.ge-halo,.ge-rayons,.ge-eclat,.ge-coeur,.ge-etincelle,.flux-o,.flux-o i,.coeur::before,.coeur::after{animation:none!important}
   .titre .ligne,.auteur-accueil{animation:none!important;opacity:1;filter:none}
   .trait-stylo path{animation:none!important;stroke-dashoffset:0}
-  .fleche,.nuage-ouverture,.voyageur{display:none}
+  .fleche,.nuage-ouverture{display:none}
+  .flux-o{transform:translate3d(calc(var(--fx) * var(--k,.9)),0,0)}
+  .flux-o i{transform:translate3d(0,calc(var(--fy) * var(--k,.9)),0);opacity:.9}
+  .ge-etincelle{opacity:.7}
   .ge-eclat{opacity:.8}
   .coeur::before{opacity:.9}
   .coeur::after{opacity:.6}
   .astre i{opacity:.85}
   .parcours{height:auto}
   .scene{position:relative;height:auto;min-height:100svh}
-  .doudous{margin-top:9rem}
+  .doudous{margin-top:15.6rem}
 }
 html.calme .scene{--p:1;--t:1;--f:1}
 html.calme .brume,html.calme .lumiere,html.calme .halo-titre,html.calme .ciel::before,html.calme .astre i,html.calme .doudou img,html.calme .doudou::before,html.calme .nuage-bas span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fil-halo,html.calme .fleche,html.calme .ge-halo,html.calme .ge-rayons,html.calme .ge-eclat,html.calme .lien-halo,html.calme .lien,html.calme .voyageur,html.calme .coeur::before,html.calme .coeur::after{animation:none!important}
-html.calme .voyageur{display:none}
+html.calme .flux-o{transform:translate3d(calc(var(--fx) * var(--k,.9)),0,0)}
+html.calme .flux-o i{transform:translate3d(0,calc(var(--fy) * var(--k,.9)),0);opacity:.9}
+html.calme .ge-etincelle{opacity:.7}
 html.calme .ge-eclat{opacity:.8}
 html.calme .coeur::before{opacity:.9}
 html.calme .coeur::after{opacity:.6}
@@ -384,4 +402,4 @@ html.calme .trait-stylo path{animation:none!important;stroke-dashoffset:0}
 html.calme .fleche{display:none}
 html.calme .parcours{height:auto}
 html.calme .scene{position:relative;height:auto;min-height:100svh}
-html.calme .doudous{margin-top:9rem}
+html.calme .doudous{margin-top:15.6rem}

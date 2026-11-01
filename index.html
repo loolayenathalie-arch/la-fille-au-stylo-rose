@@ -71,18 +71,6 @@
     <p class="chapeau-accueil">[texte de Nath]</p>
 
     <div class="doudous">
-     <!-- Fil de lumière, très fin (décoratif) -->
-     <svg class="fil" viewBox="0 0 400 160" aria-hidden="true" focusable="false">
-      <defs>
-       <linearGradient id="fil-degrade" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0" stop-color="#D9A66E" stop-opacity="0"/>
-        <stop offset=".5" stop-color="#D9A66E" stop-opacity="1"/>
-        <stop offset="1" stop-color="#D9A66E" stop-opacity="0"/>
-       </linearGradient>
-      </defs>
-      <path class="fil-halo" d="M26 104 C 110 44, 150 70, 205 58 S 320 52, 374 102" pathLength="1"/>
-      <path class="fil-trait" d="M26 104 C 110 44, 150 70, 205 58 S 320 52, 374 102" pathLength="1"/>
-     </svg>
 
      <!-- Emplacements des Doudous : remplacer les fichiers (même nom, PNG ou SVG fond transparent).
           Si le fichier est un .png, changer l'extension ci-dessous.
@@ -107,24 +95,30 @@
       <span class="ge-nuage"></span>
       <svg viewBox="-100 -100 200 200" focusable="false">
        <defs>
-        <radialGradient id="ge-degrade"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"/><stop offset=".16" stop-color="#FFF3D6" stop-opacity=".95"/><stop offset=".42" stop-color="#F6D9A8" stop-opacity=".6"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient>
+        <radialGradient id="ge-degrade"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"/><stop offset=".14" stop-color="#FFF3D6" stop-opacity=".95"/><stop offset=".38" stop-color="#F6D9A8" stop-opacity=".62"/><stop offset=".7" stop-color="#F0C98A" stop-opacity=".22"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient>
        </defs>
-       <circle class="ge-halo" r="100" fill="url(#ge-degrade)"/>
+       <circle class="ge-halo" r="150" fill="url(#ge-degrade)"/>
        <g class="ge-rayons">
-        <path d="M0 -98 L3.4 -3.4 L98 0 L3.4 3.4 L0 98 L-3.4 3.4 L-98 0 L-3.4 -3.4Z" fill="#FFF3D6" fill-opacity=".92"/>
-        <path d="M0 -60 L2.6 -2.6 L60 0 L2.6 2.6 L0 60 L-2.6 2.6 L-60 0 L-2.6 -2.6Z" fill="#FFF3D6" fill-opacity=".7" transform="rotate(45)"/>
+        <path d="M0 -118 L3.2 -3.2 L118 0 L3.2 3.2 L0 118 L-3.2 3.2 L-118 0 L-3.2 -3.2Z" fill="#FFF3D6" fill-opacity=".95"/>
+        <path d="M0 -62 L2.6 -2.6 L62 0 L2.6 2.6 L0 62 L-2.6 2.6 L-62 0 L-2.6 -2.6Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/>
        </g>
-       <circle r="13" fill="#FFF3D6"/>
-       <circle r="7" fill="#FFFFFF"/>
-       <path class="ge-eclat" d="M-58 -34 L-55.5 -36.5 L-58 -46 L-60.5 -36.5 L-70 -34 L-60.5 -31.5 L-58 -22 L-55.5 -31.5Z" fill="#FFFFFF"/>
-       <path class="ge-eclat" d="M50 -52 L52 -54 L50 -62 L48 -54 L40 -52 L48 -50 L50 -42 L52 -50Z" fill="#FFF3D6"/>
-       <path class="ge-eclat" d="M62 30 L64 28 L62 20 L60 28 L52 30 L60 32 L62 40 L64 32Z" fill="#FFFFFF"/>
-       <path class="ge-eclat" d="M-44 48 L-42 46 L-44 38 L-46 46 L-54 48 L-46 50 L-44 58 L-42 50Z" fill="#FFF3D6"/>
+       <g class="ge-coeur"><circle r="15" fill="#FFF3D6"/><circle r="8.5" fill="#FFFFFF"/></g>
+       <path class="ge-eclat" d="M-70 -42 L-67 -45 L-70 -58 L-73 -45 L-86 -42 L-73 -39 L-70 -26 L-67 -39Z" fill="#FFFFFF"/>
+       <path class="ge-eclat" d="M64 -66 L66.5 -68.5 L64 -78 L61.5 -68.5 L52 -66 L61.5 -63.5 L64 -54 L66.5 -63.5Z" fill="#FFF3D6"/>
+       <path class="ge-eclat" d="M82 36 L84.5 33.5 L82 24 L79.5 33.5 L70 36 L79.5 38.5 L82 48 L84.5 38.5Z" fill="#FFFFFF"/>
+       <path class="ge-eclat" d="M-56 62 L-53.5 59.5 L-56 50 L-58.5 59.5 L-68 62 L-58.5 64.5 L-56 74 L-53.5 64.5Z" fill="#FFF3D6"/>
+       <path class="ge-eclat" d="M18 -88 L19.8 -89.8 L18 -97 L16.2 -89.8 L9 -88 L16.2 -86.2 L18 -79 L19.8 -86.2Z" fill="#FFFFFF"/>
+       <path class="ge-eclat" d="M30 84 L31.8 82.2 L30 75 L28.2 82.2 L21 84 L28.2 85.8 L30 93 L31.8 85.8Z" fill="#FFF3D6"/>
+       <circle class="ge-etincelle" cx="-92" cy="8" r="2.2" fill="#FFFFFF"/><circle class="ge-etincelle" cx="40" cy="-40" r="1.8" fill="#FFF3D6"/>
+       <circle class="ge-etincelle" cx="-30" cy="-76" r="2" fill="#FFFFFF"/><circle class="ge-etincelle" cx="96" cy="-12" r="2.3" fill="#FFF3D6"/>
+       <circle class="ge-etincelle" cx="-48" cy="30" r="1.7" fill="#FFFFFF"/><circle class="ge-etincelle" cx="58" cy="62" r="2" fill="#FFF3D6"/>
+       <circle class="ge-etincelle" cx="-10" cy="96" r="2.1" fill="#FFFFFF"/><circle class="ge-etincelle" cx="12" cy="-110" r="1.9" fill="#FFF3D6"/>
+       <circle class="ge-etincelle" cx="104" cy="52" r="1.6" fill="#FFFFFF"/><circle class="ge-etincelle" cx="-104" cy="-34" r="2" fill="#FFF3D6"/>
       </svg>
      </div>
-     <!-- Les fils de lumière vers le cœur des Doudous (tracés par js/accueil.js) -->
-     <svg class="liens" aria-hidden="true" focusable="false"><path class="lien-halo lien-halo-g"/><path class="lien lien-g"/><path class="lien-halo lien-halo-d"/><path class="lien lien-d"/></svg>
-     <div class="voyageurs" aria-hidden="true"><span class="voyageur voyageur-g"></span><span class="voyageur voyageur-d"></span></div>
+     <!-- Le flux d'éclats : de l'étoile vers le cœur de chaque Doudou (éclats créés par js/accueil.js) -->
+     <div class="flux flux-g" aria-hidden="true"></div>
+     <div class="flux flux-d" aria-hidden="true"></div>
 
      <!-- Un nuage doux qui enveloppe les Doudous -->
      <div class="nuage-bas" aria-hidden="true"><span></span><span></span><span></span></div>

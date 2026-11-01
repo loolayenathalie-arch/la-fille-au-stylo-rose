@@ -64,29 +64,60 @@
   function borne(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
   function adoucit(x) { return x * x * (3 - 2 * x); } /* départ et arrivée en douceur */
 
-  /* Les fils de lumière : de la grande étoile jusqu'au cœur de chaque Doudou (repères .coeur).
-     Recalculés quand la page change de taille ou que les Doudous bougent avec le défilement. */
+  /* La grande étoile et le flux d'éclats.
+     L'étoile se place au milieu de l'espace libre entre le texte d'accroche et les Doudous (jamais sur un texte),
+     sa taille suit cet espace (80 à 100 px sur téléphone, 120 à 160 px sur ordinateur).
+     Du centre de l'étoile au cœur de chaque Doudou (repères .coeur), un petit flux d'éclats minuscules coule en boucle :
+     ici on ne pose que les distances ; le mouvement est en CSS (transform et opacity). */
   var etoile = document.querySelector('.grande-etoile');
   var zone = document.querySelector('.doudous');
+  var texte = document.querySelector('.chapeau-accueil');
   var coeurs = document.querySelectorAll('.coeur');
-  var cotes = [['g', 0], ['d', 1]];
+  var flux = [document.querySelector('.flux-g'), document.querySelector('.flux-d')];
+  var gardeCle = '';
+  var nbEclats = window.innerWidth < 700 ? 8 : 13;
+  for (var q = 0; q < flux.length; q++) {
+    if (!flux[q]) { continue; }
+    for (var s = 0; s < nbEclats; s++) {
+      var o = document.createElement('span');
+      o.className = 'flux-o';
+      var dur = 5 + Math.random() * 3.5;
+      o.style.setProperty('--fd', dur.toFixed(1) + 's');
+      o.style.setProperty('--fl', (-Math.random() * dur).toFixed(1) + 's');
+      o.style.setProperty('--jx', ((Math.random() - 0.5) * 22).toFixed(0) + 'px');
+      o.style.setProperty('--jy', ((Math.random() - 0.5) * 16).toFixed(0) + 'px');
+      o.style.setProperty('--k', (0.72 + Math.random() * 0.28).toFixed(2));
+      o.style.setProperty('--s', (2.2 + Math.random() * 2.6).toFixed(1) + 'px');
+      o.appendChild(document.createElement('i'));
+      flux[q].appendChild(o);
+    }
+  }
   function trace() {
-    if (!etoile || !zone || coeurs.length < 2) { return; }
-    var z = zone.getBoundingClientRect(), e = etoile.getBoundingClientRect();
-    var sx = e.left + e.width / 2 - z.left, sy = e.top + e.height / 2 - z.top;
-    for (var n = 0; n < cotes.length; n++) {
-      var c = coeurs[cotes[n][1]].getBoundingClientRect();
-      var hx = c.left - z.left, hy = c.top - z.top;
-      var d = 'M' + sx.toFixed(1) + ' ' + (sy + e.height * 0.12).toFixed(1) +
-              ' Q' + (hx + (sx - hx) * 0.1).toFixed(1) + ' ' + (sy + (hy - sy) * 0.45).toFixed(1) +
-              ' ' + hx.toFixed(1) + ' ' + hy.toFixed(1);
-      var ids = ['.lien-halo-' + cotes[n][0], '.lien-' + cotes[n][0]];
-      for (var m = 0; m < ids.length; m++) {
-        var ch = document.querySelector(ids[m]);
-        if (ch) { ch.setAttribute('d', d); ch.setAttribute('pathLength', '1'); }
-      }
-      var v = document.querySelector('.voyageur-' + cotes[n][0]);
-      if (v) { v.style.setProperty('offset-path', "path('" + d + "')"); }
+    if (!etoile || !zone || !texte || coeurs.length < 2) { return; }
+    var z = zone.getBoundingClientRect();
+    var bas = texte.getBoundingClientRect().bottom;
+    var libre = z.top - bas;                       /* ciel libre entre le texte et les Doudous */
+    var max = window.innerWidth < 700 ? 100 : 160;
+    var taille = Math.max(72, Math.min(max, libre * 0.92));
+    var cy = -libre / 2;                           /* milieu de l'espace libre, relatif aux Doudous */
+    var cx = z.width / 2;
+    var cle = [taille, cy, cx].map(Math.round).join();
+    var coeurPos = [];
+    for (var n = 0; n < 2; n++) {
+      var c = coeurs[n].getBoundingClientRect();
+      coeurPos.push([c.left - z.left, c.top - z.top]);
+      cle += ',' + Math.round(c.left - z.left) + ',' + Math.round(c.top - z.top);
+    }
+    if (cle === gardeCle) { return; }
+    gardeCle = cle;
+    etoile.style.width = taille.toFixed(0) + 'px';
+    etoile.style.top = cy.toFixed(1) + 'px';
+    for (var m = 0; m < 2; m++) {
+      if (!flux[m]) { continue; }
+      flux[m].style.left = cx.toFixed(1) + 'px';
+      flux[m].style.top = cy.toFixed(1) + 'px';
+      flux[m].style.setProperty('--fx', (coeurPos[m][0] - cx).toFixed(1) + 'px');
+      flux[m].style.setProperty('--fy', (coeurPos[m][1] - cy).toFixed(1) + 'px');
     }
   }
   window.addEventListener('resize', trace);

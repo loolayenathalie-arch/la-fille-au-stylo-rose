@@ -91,14 +91,41 @@
       <div class="doudou-flotte" data-vie="13">
        <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (provisoire : ours crème assis, petit) -->
        <img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+       <!-- Le cœur : on règle --cx / --cy (en %) dans css/accueil.css pour le poser au centre de la poitrine de la vraie illustration -->
+       <span class="coeur" aria-hidden="true"></span>
       </div>
      </div>
      <div class="doudou doudou-droite">
       <div class="doudou-flotte" data-vie="17">
        <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (provisoire : chien brun caramel assis, plus grand) -->
        <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
+       <span class="coeur" aria-hidden="true"></span>
       </div>
      </div>
+     <!-- La grande étoile (l'âme) : apparaît au-dessus des Doudous et se relie à leur cœur par un fil de lumière -->
+     <div class="grande-etoile" aria-hidden="true">
+      <span class="ge-nuage"></span>
+      <svg viewBox="-100 -100 200 200" focusable="false">
+       <defs>
+        <radialGradient id="ge-degrade"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"/><stop offset=".16" stop-color="#FFF3D6" stop-opacity=".95"/><stop offset=".42" stop-color="#F6D9A8" stop-opacity=".6"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient>
+       </defs>
+       <circle class="ge-halo" r="100" fill="url(#ge-degrade)"/>
+       <g class="ge-rayons">
+        <path d="M0 -98 L3.4 -3.4 L98 0 L3.4 3.4 L0 98 L-3.4 3.4 L-98 0 L-3.4 -3.4Z" fill="#FFF3D6" fill-opacity=".92"/>
+        <path d="M0 -60 L2.6 -2.6 L60 0 L2.6 2.6 L0 60 L-2.6 2.6 L-60 0 L-2.6 -2.6Z" fill="#FFF3D6" fill-opacity=".7" transform="rotate(45)"/>
+       </g>
+       <circle r="13" fill="#FFF3D6"/>
+       <circle r="7" fill="#FFFFFF"/>
+       <path class="ge-eclat" d="M-58 -34 L-55.5 -36.5 L-58 -46 L-60.5 -36.5 L-70 -34 L-60.5 -31.5 L-58 -22 L-55.5 -31.5Z" fill="#FFFFFF"/>
+       <path class="ge-eclat" d="M50 -52 L52 -54 L50 -62 L48 -54 L40 -52 L48 -50 L50 -42 L52 -50Z" fill="#FFF3D6"/>
+       <path class="ge-eclat" d="M62 30 L64 28 L62 20 L60 28 L52 30 L60 32 L62 40 L64 32Z" fill="#FFFFFF"/>
+       <path class="ge-eclat" d="M-44 48 L-42 46 L-44 38 L-46 46 L-54 48 L-46 50 L-44 58 L-42 50Z" fill="#FFF3D6"/>
+      </svg>
+     </div>
+     <!-- Les fils de lumière vers le cœur des Doudous (tracés par js/accueil.js) -->
+     <svg class="liens" aria-hidden="true" focusable="false"><path class="lien-halo lien-halo-g"/><path class="lien lien-g"/><path class="lien-halo lien-halo-d"/><path class="lien lien-d"/></svg>
+     <div class="voyageurs" aria-hidden="true"><span class="voyageur voyageur-g"></span><span class="voyageur voyageur-d"></span></div>
+
      <!-- Un nuage doux qui enveloppe les Doudous -->
      <div class="nuage-bas" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>

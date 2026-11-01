@@ -47,7 +47,7 @@
       i.style.setProperty('--dr', ((Math.random() - 0.5) * 18).toFixed(0) + 'px');
       if (k >= grandes && k < grandes + versDoudous) {
         /* cible : autour des deux Doudous, en bas de la scène */
-        var cx = 50 + (Math.random() - 0.5) * 56, cy = 66 + Math.random() * 20;
+        var cx = 50 + (Math.random() - 0.5) * 60, cy = 52 + Math.random() * 30;
         a.style.setProperty('--dx', (cx - gauche).toFixed(1) + 'vw');
         a.style.setProperty('--dy', (cy - haut).toFixed(1) + 'svh');
       }
@@ -64,6 +64,34 @@
   function borne(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
   function adoucit(x) { return x * x * (3 - 2 * x); } /* départ et arrivée en douceur */
 
+  /* Les fils de lumière : de la grande étoile jusqu'au cœur de chaque Doudou (repères .coeur).
+     Recalculés quand la page change de taille ou que les Doudous bougent avec le défilement. */
+  var etoile = document.querySelector('.grande-etoile');
+  var zone = document.querySelector('.doudous');
+  var coeurs = document.querySelectorAll('.coeur');
+  var cotes = [['g', 0], ['d', 1]];
+  function trace() {
+    if (!etoile || !zone || coeurs.length < 2) { return; }
+    var z = zone.getBoundingClientRect(), e = etoile.getBoundingClientRect();
+    var sx = e.left + e.width / 2 - z.left, sy = e.top + e.height / 2 - z.top;
+    for (var n = 0; n < cotes.length; n++) {
+      var c = coeurs[cotes[n][1]].getBoundingClientRect();
+      var hx = c.left - z.left, hy = c.top - z.top;
+      var d = 'M' + sx.toFixed(1) + ' ' + (sy + e.height * 0.12).toFixed(1) +
+              ' Q' + (hx + (sx - hx) * 0.1).toFixed(1) + ' ' + (sy + (hy - sy) * 0.45).toFixed(1) +
+              ' ' + hx.toFixed(1) + ' ' + hy.toFixed(1);
+      var ids = ['.lien-halo-' + cotes[n][0], '.lien-' + cotes[n][0]];
+      for (var m = 0; m < ids.length; m++) {
+        var ch = document.querySelector(ids[m]);
+        if (ch) { ch.setAttribute('d', d); ch.setAttribute('pathLength', '1'); }
+      }
+      var v = document.querySelector('.voyageur-' + cotes[n][0]);
+      if (v) { v.style.setProperty('offset-path', "path('" + d + "')"); }
+    }
+  }
+  window.addEventListener('resize', trace);
+  window.addEventListener('load', trace);
+
   function pose(p, t, f) {
     var cle = p.toFixed(3) + t.toFixed(3) + f.toFixed(3);
     if (cle === dernier) { return; }
@@ -71,6 +99,7 @@
     scene.style.setProperty('--p', p.toFixed(3));
     scene.style.setProperty('--t', t.toFixed(3));
     scene.style.setProperty('--f', f.toFixed(3));
+    trace();
   }
 
   function met() {
@@ -92,6 +121,7 @@
       scene.style.removeProperty('--t');
       scene.style.removeProperty('--f');
       dernier = '';
+      trace();
     } else {
       demande();
     }

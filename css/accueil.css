@@ -134,7 +134,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 @keyframes respire-e{0%{opacity:.38;scale:.8}100%{opacity:1;scale:1.12}}
 @keyframes derive{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(var(--dr,6px),var(--dv,-12vh),0)}}
 
-/* ---------- Le nuage d'ouverture : arrive lentement, enveloppe l'écran, puis se dissipe (≈ 8 s) ---------- */
+/* ---------- Le nuage d'ouverture : là tout de suite, enveloppe l'écran, puis se dissipe (≈ 3,5 s) ---------- */
 .nuage-ouverture{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 .n{
   position:absolute;opacity:0;will-change:transform,opacity;
@@ -145,18 +145,72 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
     radial-gradient(ellipse 52% 56% at 50% 50%,rgba(246,217,168,.4),rgba(246,217,168,0) 100%);
   animation:nuage-arrive var(--du,7.5s) cubic-bezier(.35,0,.3,1) var(--de,0s) forwards;
 }
-.n0{inset:-12%;--x0:0%;--y0:30%;--x1:0%;--y1:-14%;--du:8s;--de:0s;
+.n0{inset:-12%;--x0:0%;--y0:30%;--x1:0%;--y1:-14%;--du:3.8s;--de:0s;
   background:radial-gradient(ellipse 80% 70% at 50% 55%,rgba(255,250,238,.97) 0,rgba(255,246,227,.9) 55%,rgba(255,246,227,.55) 100%)}
-.n1{left:-40%;bottom:-25%;width:150%;height:85%;--x0:-10%;--y0:60%;--x1:18%;--y1:-24%;--du:7.2s;--de:.2s}
-.n2{right:-45%;top:5%;width:150%;height:70%;--x0:40%;--y0:10%;--x1:-26%;--y1:-18%;--du:7.8s;--de:.5s}
-.n3{left:-30%;top:-18%;width:140%;height:75%;--x0:-30%;--y0:-10%;--x1:14%;--y1:-26%;--du:6.8s;--de:.4s}
-.n4{left:-20%;bottom:-12%;width:140%;height:60%;--x0:10%;--y0:70%;--x1:-16%;--y1:-10%;--du:7.6s;--de:.9s}
+.n1{left:-40%;bottom:-25%;width:150%;height:85%;--x0:-10%;--y0:60%;--x1:18%;--y1:-24%;--du:3.4s;--de:0s}
+.n2{right:-45%;top:5%;width:150%;height:70%;--x0:40%;--y0:10%;--x1:-26%;--y1:-18%;--du:3.6s;--de:.1s}
+.n3{left:-30%;top:-18%;width:140%;height:75%;--x0:-30%;--y0:-10%;--x1:14%;--y1:-26%;--du:3.2s;--de:.05s}
+.n4{left:-20%;bottom:-12%;width:140%;height:60%;--x0:10%;--y0:70%;--x1:-16%;--y1:-10%;--du:3.6s;--de:.2s}
 @keyframes nuage-arrive{
-  0%{opacity:0;transform:translate3d(var(--x0),var(--y0),0) scale(1)}
-  26%{opacity:1;transform:translate3d(0,0,0) scale(1.02)}
-  46%{opacity:1;transform:translate3d(calc(var(--x1) * .12),calc(var(--y1) * .12),0) scale(1.05)}
+  0%{opacity:.85;transform:translate3d(calc(var(--x0) * .4),calc(var(--y0) * .4),0) scale(1)}
+  22%{opacity:1;transform:translate3d(0,0,0) scale(1.02)}
+  40%{opacity:1;transform:translate3d(calc(var(--x1) * .12),calc(var(--y1) * .12),0) scale(1.05)}
   100%{opacity:0;transform:translate3d(var(--x1),var(--y1),0) scale(1.22)}
 }
+
+/* ---------- La grande étoile, reliée au cœur de chaque Doudou ----------
+   --r : l'étoile apparaît (quand les Doudous apparaissent) ; --r2 : les fils se tracent, les cœurs s'illuminent. */
+.doudous{--r:clamp(0,calc((var(--p) - .5) * 2.4),1);--r2:clamp(0,calc((var(--p) - .72) * 3.6),1)}
+.grande-etoile{
+  position:absolute;left:50%;bottom:calc(min(33vw,13rem) + 3.4rem);width:clamp(4.6rem,20vw,7.4rem);aspect-ratio:1;z-index:3;pointer-events:none;
+  opacity:var(--r);transform:translateX(-50%) scale(calc(.8 + var(--r) * .2));
+}
+.grande-etoile svg{display:block;width:100%;height:100%;overflow:visible}
+.ge-halo{transform-origin:center;transform-box:fill-box;animation:ge-pulse 7s ease-in-out infinite alternate}
+.ge-rayons{transform-origin:center;animation:ge-tourne 90s linear infinite}
+.ge-eclat{transform-box:fill-box;transform-origin:center;opacity:0;animation:ge-eclat 5.5s ease-in-out infinite}
+.ge-eclat:nth-of-type(2){animation-delay:-1.4s;animation-duration:6.8s}
+.ge-eclat:nth-of-type(3){animation-delay:-3.1s;animation-duration:4.9s}
+.ge-eclat:nth-of-type(4){animation-delay:-4.4s;animation-duration:7.6s}
+@keyframes ge-pulse{0%{opacity:.6;transform:scale(.9)}100%{opacity:1;transform:scale(1.08)}}
+@keyframes ge-tourne{to{transform:rotate(360deg)}}
+@keyframes ge-eclat{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1)}70%{opacity:.2;transform:scale(.7)}}
+/* Un petit nuage qui s'écarte pour la laisser apparaître */
+.ge-nuage{
+  position:absolute;inset:-30%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,252,243,.97) 0,rgba(255,247,230,.7) 45%,rgba(255,247,230,0) 72%);
+  opacity:calc(1 - var(--r));transform:scale(calc(1 + var(--r) * .6));
+}
+/* Les fils de lumière : de l'étoile au cœur de chaque Doudou */
+.liens{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3}
+.liens path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--r2))}
+.lien-halo{stroke:#FFF3D6;stroke-width:7;opacity:.5;animation:fil-vie 6.5s ease-in-out -1s infinite alternate}
+.lien{stroke:#E9B968;stroke-width:1.8;animation:fil-vie 5s ease-in-out -3s infinite alternate}
+.voyageurs{position:absolute;inset:0;pointer-events:none;z-index:3;opacity:var(--r2)}
+.voyageur{
+  position:absolute;left:0;top:0;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;opacity:0;offset-rotate:0deg;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 30%,rgba(246,217,168,.8) 55%,rgba(246,217,168,0) 75%);
+  box-shadow:0 0 .6rem .15rem rgba(246,217,168,.7);
+  animation:voyage 7s ease-in-out infinite;
+}
+.voyageur-d{animation-delay:.6s}
+@keyframes voyage{0%{offset-distance:0%;opacity:0}10%{opacity:1}86%{opacity:1}100%{offset-distance:100%;opacity:0}}
+/* Le cœur de chaque Doudou : une petite lumière qui s'allume quand la lumière l'atteint, puis le halo se réchauffe */
+.doudou-flotte{position:relative}
+.coeur{position:absolute;left:var(--cx,50%);top:var(--cy,70%);width:0;height:0;pointer-events:none}
+.coeur::before{
+  content:"";position:absolute;width:2.1rem;height:2.1rem;margin:-1.05rem 0 0 -1.05rem;border-radius:50%;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 24%,rgba(246,217,168,.85) 48%,rgba(246,217,168,0) 72%);
+  opacity:0;animation:coeur 7s ease-in-out var(--cd,0s) infinite;
+}
+.coeur::after{
+  content:"";position:absolute;z-index:-1;width:11rem;height:11rem;margin:-5.5rem 0 0 -5.5rem;border-radius:50%;
+  background:radial-gradient(circle,rgba(238,190,120,.62) 0,rgba(240,200,140,.3) 40%,rgba(240,200,140,0) 70%);
+  opacity:0;animation:chaud 7s ease-in-out var(--cd,0s) infinite;
+}
+.doudou-droite .coeur{--cd:.6s}
+@keyframes coeur{0%,68%{opacity:calc(var(--r2) * .25);scale:.7}86%{opacity:var(--r2);scale:1.5}100%{opacity:calc(var(--r2) * .45);scale:1}}
+@keyframes chaud{0%,74%{opacity:calc(var(--r2) * .25)}92%{opacity:var(--r2)}100%{opacity:calc(var(--r2) * .6)}}
 
 /* ---------- Le nuage qui reste : dérive très lentement et enveloppe les Doudous ---------- */
 .nuage-bas{position:absolute;inset:-34% -26% -22%;pointer-events:none;z-index:2;opacity:calc(.95 - var(--p) * .8)}
@@ -202,10 +256,10 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 }
 .titre .ligne{
   display:block;opacity:0;
-  animation:encre 7.5s cubic-bezier(.4,0,.25,1) forwards;
+  animation:encre 2.4s cubic-bezier(.4,0,.25,1) forwards;
 }
-.titre .l1{animation-delay:4.2s}
-.titre .l2{animation-delay:5.8s;animation-duration:8.5s}
+.titre .l1{animation-delay:0s;animation-duration:2.2s}
+.titre .l2{animation-delay:.5s;animation-duration:2.4s}
 @keyframes encre{
   0%{opacity:0;filter:blur(11px);color:#5A3F2B}
   38%{opacity:.62;filter:blur(5px);color:#614630}
@@ -217,7 +271,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .auteur-accueil{
   margin:.7rem 0 0;text-align:center;font-family:var(--police-fine);font-style:italic;font-weight:500;
   font-size:clamp(1.3rem,5vw,1.7rem);line-height:1.2;color:var(--encre-douce);
-  opacity:0;animation:signature 6s ease-in-out 10s forwards;
+  opacity:0;animation:signature 2s ease-in-out 1.6s forwards;
 }
 @keyframes signature{0%{opacity:0;filter:blur(4px)}100%{opacity:1;filter:blur(0)}}
 
@@ -226,7 +280,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 .trait-stylo path{
   fill:none;stroke:var(--rose-poudre);stroke-width:2.2;stroke-linecap:round;
   stroke-dasharray:1;stroke-dashoffset:1;
-  animation:trait 4.8s cubic-bezier(.45,0,.3,1) 13s forwards;
+  animation:trait 1.8s cubic-bezier(.45,0,.3,1) 2.2s forwards;
 }
 @keyframes trait{to{stroke-dashoffset:0}}
 
@@ -305,16 +359,24 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
    Titre posé, trait de stylo tracé, Doudous nets et tournés l'un vers l'autre, fil visible, plus de mouvement. */
 @media (prefers-reduced-motion:reduce){
   .scene{--p:1;--t:1;--f:1}
-  .brume,.lumiere,.halo-titre,.ciel::before,.astre i,.doudou img,.doudou::before,.nuage-bas span,.doudou-flotte,.fil-trait,.fil-halo,.fleche{animation:none!important}
+  .brume,.lumiere,.halo-titre,.ciel::before,.astre i,.doudou img,.doudou::before,.nuage-bas span,.doudou-flotte,.fil-trait,.fil-halo,.fleche,.ge-halo,.ge-rayons,.ge-eclat,.lien-halo,.lien,.voyageur,.coeur::before,.coeur::after{animation:none!important}
   .titre .ligne,.auteur-accueil{animation:none!important;opacity:1;filter:none}
   .trait-stylo path{animation:none!important;stroke-dashoffset:0}
-  .fleche,.nuage-ouverture{display:none}
+  .fleche,.nuage-ouverture,.voyageur{display:none}
+  .ge-eclat{opacity:.8}
+  .coeur::before{opacity:.9}
+  .coeur::after{opacity:.6}
   .astre i{opacity:.85}
   .parcours{height:auto}
   .scene{position:relative;height:auto;min-height:100svh}
+  .doudous{margin-top:9rem}
 }
 html.calme .scene{--p:1;--t:1;--f:1}
-html.calme .brume,html.calme .lumiere,html.calme .halo-titre,html.calme .ciel::before,html.calme .astre i,html.calme .doudou img,html.calme .doudou::before,html.calme .nuage-bas span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fil-halo,html.calme .fleche{animation:none!important}
+html.calme .brume,html.calme .lumiere,html.calme .halo-titre,html.calme .ciel::before,html.calme .astre i,html.calme .doudou img,html.calme .doudou::before,html.calme .nuage-bas span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fil-halo,html.calme .fleche,html.calme .ge-halo,html.calme .ge-rayons,html.calme .ge-eclat,html.calme .lien-halo,html.calme .lien,html.calme .voyageur,html.calme .coeur::before,html.calme .coeur::after{animation:none!important}
+html.calme .voyageur{display:none}
+html.calme .ge-eclat{opacity:.8}
+html.calme .coeur::before{opacity:.9}
+html.calme .coeur::after{opacity:.6}
 html.calme .astre i{opacity:.85}
 html.calme .nuage-ouverture{display:none}
 html.calme .titre .ligne,html.calme .auteur-accueil{animation:none!important;opacity:1;filter:none}
@@ -322,3 +384,4 @@ html.calme .trait-stylo path{animation:none!important;stroke-dashoffset:0}
 html.calme .fleche{display:none}
 html.calme .parcours{height:auto}
 html.calme .scene{position:relative;height:auto;min-height:100svh}
+html.calme .doudous{margin-top:9rem}

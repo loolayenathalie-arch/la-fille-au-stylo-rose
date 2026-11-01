@@ -221,7 +221,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   background:radial-gradient(circle,rgba(238,190,120,.62) 0,rgba(240,200,140,.3) 40%,rgba(240,200,140,0) 70%);
   opacity:0;animation:chaud 5.4s ease-in-out var(--cd,0s) infinite alternate;
 }
-.doudou-droite .coeur{--cd:.6s}
+.coeur-chien{--cx:72%;--cy:68%;--cd:.6s}   /* centre de la poitrine du chien */
 @keyframes coeur{0%{opacity:calc(var(--r2) * .4);scale:.9}100%{opacity:var(--r2);scale:1.35}}
 @keyframes chaud{0%{opacity:calc(var(--r2) * .35)}100%{opacity:calc(var(--r2) * .85)}}
 
@@ -309,14 +309,11 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   opacity:calc(.2 + var(--p) * .78);
   will-change:transform,filter,opacity;
 }
-.doudou-gauche{width:clamp(5rem,22vw,8.5rem);transform:translateX(calc(var(--t) * 2.2vw)) rotate(calc(var(--t) * 4deg));transform-origin:50% 92%}
-.doudou-droite{width:clamp(7.5rem,33vw,13rem);transform:translateX(calc(var(--t) * -2.2vw)) rotate(calc(var(--t) * -3deg));transform-origin:50% 92%}
+.doudou-duo{width:clamp(13rem,64vw,24rem)}
 .doudou-flotte{animation:flotte-a var(--d,13s) ease-in-out var(--dl,-3s) infinite alternate}
-.doudou-droite .doudou-flotte{animation-name:flotte-b}
 @keyframes flotte-a{0%{transform:translate3d(0,0,0) rotate(0)}37%{transform:translate3d(1px,-4px,0) rotate(.5deg)}100%{transform:translate3d(-1px,-7px,0) rotate(-.3deg)}}
 @keyframes flotte-b{0%{transform:translate3d(0,-5px,0) rotate(.3deg)}46%{transform:translate3d(-2px,-1px,0) rotate(-.4deg)}100%{transform:translate3d(1px,-6px,0) rotate(.4deg)}}
-.doudou img{width:100%;height:auto;transform-origin:50% 92%;animation:gonfle 5s ease-in-out infinite alternate}
-.doudou-droite img{animation-duration:5.6s;animation-delay:-2s}
+.doudou img{display:block;width:100%;height:auto;transform-origin:50% 92%;animation:gonfle 5s ease-in-out infinite alternate}
 @keyframes gonfle{0%{transform:scale(1)}100%{transform:scale(1.035)}}
 /* Une veilleuse dorée derrière chacun */
 .doudou::before{
@@ -324,7 +321,6 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   background:radial-gradient(circle,rgba(255,243,214,.95) 0,rgba(246,217,168,.7) 36%,rgba(246,217,168,0) 70%);
   animation:veilleuse 9s ease-in-out infinite alternate;
 }
-.doudou-droite::before{animation-duration:11s;animation-delay:-4s}
 @keyframes veilleuse{0%{opacity:.6;transform:scale(.92)}100%{opacity:1;transform:scale(1.08)}}
 
 /* Fil de lumière : lumineux, bien visible, qui scintille doucement */

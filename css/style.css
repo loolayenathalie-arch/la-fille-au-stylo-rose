@@ -266,3 +266,13 @@ html.calme .etoile,html.calme .etoile-ame::before,html.calme .etoile-ame i{anima
 html.calme .etoile-ame i{opacity:1}
 .collection{margin:0 0 .3rem;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.15rem;color:var(--brun-fonce)}
 .cadre-portrait img[src$=".png"]{aspect-ratio:560/900}
+
+/* ===== 14. Images détourées (PNG sans fond) : elles flottent à peine ; la scène respire très lentement ===== */
+.flotte-douce{max-width:22rem;margin:0 auto 1.5rem;animation:flotte-douce 11s ease-in-out infinite alternate}
+.flotte-douce img.detoure{width:100%;height:auto;filter:drop-shadow(0 10px 16px rgba(124,92,67,.22))}
+@keyframes flotte-douce{0%{transform:translate3d(0,0,0) rotate(-.3deg)}100%{transform:translate3d(0,-7px,0) rotate(.3deg)}}
+
+.cadre-aquarelle.scene-vivante img{animation:respire-scene 26s ease-in-out infinite alternate;transform-origin:50% 55%}
+@keyframes respire-scene{0%{transform:scale(1)}100%{transform:scale(1.025)}}
+html.calme .flotte-douce,html.calme .cadre-aquarelle.scene-vivante img{animation:none}
+@media (prefers-reduced-motion:reduce){.flotte-douce,.cadre-aquarelle.scene-vivante img{animation:none}}

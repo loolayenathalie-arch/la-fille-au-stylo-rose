@@ -77,19 +77,13 @@
      <!-- Emplacements des Doudous : remplacer les fichiers (même nom, PNG ou SVG fond transparent).
           Si le fichier est un .png, changer l'extension ci-dessous.
           Le flou final (silhouettes douces) se règle avec --flou-final dans css/accueil.css. -->
-     <div class="doudou doudou-gauche">
-      <div class="doudou-flotte" data-vie="13">
-       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (provisoire : ours crème assis, petit) -->
-       <img src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
-       <!-- Le cœur : on règle --cx / --cy (en %) dans css/accueil.css pour le poser au centre de la poitrine de la vraie illustration -->
-       <span class="coeur" aria-hidden="true"></span>
-      </div>
-     </div>
-     <div class="doudou doudou-droite">
-      <div class="doudou-flotte" data-vie="17">
-       <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (provisoire : chien brun caramel assis, plus grand) -->
-       <img src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]">
-       <span class="coeur" aria-hidden="true"></span>
+     <!-- EMPLACEMENT IMAGE : images/personnages/doudous-duo.png (l'ours blanc et le chien brun ensemble, PNG sans fond ; remplacer le fichier, même nom).
+          Les deux cœurs (.coeur) se règlent avec --cx / --cy (en %) dans css/accueil.css : .coeur-ours et .coeur-chien. -->
+     <div class="doudou doudou-duo">
+      <div class="doudou-flotte" data-vie="15">
+       <img src="images/personnages/doudous-duo.png" width="750" height="848" alt="[texte de Nath : description de l’image]">
+       <span class="coeur coeur-ours" aria-hidden="true"></span>
+       <span class="coeur coeur-chien" aria-hidden="true"></span>
       </div>
      </div>
      <!-- La grande étoile (l'âme) : apparaît au-dessus des Doudous et se relie à leur cœur par un fil de lumière -->

@@ -183,12 +183,20 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   100%{opacity:1;filter:blur(0);color:var(--encre)}
 }
 
-/* Petit trait de stylo rose, discret, qui se dépose sous le titre */
-.trait-stylo{display:block;width:min(46vw,10rem);height:auto;margin:.55rem auto 0;overflow:visible}
+/* Signature de l'autrice : « La fille au stylo rose », écriture fine, apparaît après le titre */
+.auteur-accueil{
+  margin:.7rem 0 0;text-align:center;font-family:var(--police-fine);font-style:italic;font-weight:500;
+  font-size:clamp(1.3rem,5vw,1.7rem);line-height:1.2;color:var(--encre-douce);
+  opacity:0;animation:signature 6s ease-in-out 7.4s forwards;
+}
+@keyframes signature{0%{opacity:0;filter:blur(4px)}100%{opacity:1;filter:blur(0)}}
+
+/* Petit trait de stylo rose, discret, qui se dépose sous la signature */
+.trait-stylo{display:block;width:min(40vw,9rem);height:auto;margin:.15rem auto 0;overflow:visible}
 .trait-stylo path{
   fill:none;stroke:var(--rose-poudre);stroke-width:2.2;stroke-linecap:round;
   stroke-dasharray:1;stroke-dashoffset:1;
-  animation:trait 4.8s cubic-bezier(.45,0,.3,1) 8.6s forwards;
+  animation:trait 4.8s cubic-bezier(.45,0,.3,1) 11.2s forwards;
 }
 @keyframes trait{to{stroke-dashoffset:0}}
 
@@ -257,7 +265,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 @media (prefers-reduced-motion:reduce){
   .scene{--p:1;--t:1;--f:1}
   .brume,.lumiere,.halo-titre,.ciel::before,.poussiere span,.doudou-flotte,.fil-trait,.fleche{animation:none!important}
-  .titre .ligne{animation:none!important;opacity:1;filter:none}
+  .titre .ligne,.auteur-accueil{animation:none!important;opacity:1;filter:none}
   .trait-stylo path{animation:none!important;stroke-dashoffset:0}
   .poussiere,.fleche{display:none}
   .parcours{height:auto}
@@ -265,7 +273,7 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
 }
 html.calme .scene{--p:1;--t:1;--f:1}
 html.calme .brume,html.calme .lumiere,html.calme .halo-titre,html.calme .ciel::before,html.calme .poussiere span,html.calme .doudou-flotte,html.calme .fil-trait,html.calme .fleche{animation:none!important}
-html.calme .titre .ligne{animation:none!important;opacity:1;filter:none}
+html.calme .titre .ligne,html.calme .auteur-accueil{animation:none!important;opacity:1;filter:none}
 html.calme .trait-stylo path{animation:none!important;stroke-dashoffset:0}
 html.calme .poussiere,html.calme .fleche{display:none}
 html.calme .parcours{height:auto}

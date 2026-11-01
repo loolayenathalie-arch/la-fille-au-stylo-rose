@@ -46,7 +46,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--grain),var(--creme);color:var(--texte);font-family:var(--police-texte);font-size:1.125rem;line-height:1.7}
+body{position:relative;margin:0;background:var(--grain),var(--creme);color:var(--texte);font-family:var(--police-texte);font-size:1.125rem;line-height:1.7}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--brun);text-underline-offset:.2em}
 a:hover{text-decoration-thickness:.15em}
@@ -72,7 +72,9 @@ blockquote,.citation{
 /* ===== 3. En-tête et menu ===== */
 .entete{position:relative;background:var(--grain),var(--sable-clair);padding:1rem 1rem .9rem;border-bottom:1px solid var(--lisere)}
 .entete-interieur{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1.5rem}
-.nom-du-site{font-family:var(--police-titre);font-weight:700;font-size:1.9rem;line-height:1.1;color:var(--brun);text-decoration:none}
+/* Le titre du site est « Les Doudous de Lili » ; « La fille au stylo rose » est l'autrice, en signature. */
+.nom-du-site{display:flex;flex-direction:column;font-family:var(--police-titre);font-weight:700;font-size:1.9rem;line-height:1.05;color:var(--brun);text-decoration:none}
+.nom-du-site small{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.05rem;line-height:1.2;color:var(--brun-fonce)}
 .menu ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.1rem .35rem}
 /* Menu simple : pas de pastille. La page en cours est soulignée d'un petit trait de stylo rose fait main. */
 .menu a{position:relative;display:inline-block;padding:.5rem .7rem .7rem;min-height:44px;line-height:1.5;color:var(--brun-fonce);text-decoration:none;font-weight:700;font-size:1rem}
@@ -97,8 +99,7 @@ main{display:block}
 /* ===== 5. Cartes et cadres ===== */
 /* Carte : coins arrondis, ombre chaude très douce, fin liseré doré, léger grain de papier. */
 .carte,.bandeau{
-  position:relative;border:1px solid var(--lisere);border-left:4px solid var(--or);  /* le trait doré sur le côté, comme sur armonilux */
-  border-radius:var(--rayon);box-shadow:var(--ombre);
+  position:relative;border:1px solid var(--lisere);border-radius:var(--rayon);box-shadow:var(--ombre);
   background:var(--grain),var(--papier);
 }
 .carte{padding:1.25rem;text-align:center;transition:transform .5s ease,box-shadow .5s ease}
@@ -165,8 +166,7 @@ main{display:block}
 .formulaire textarea{min-height:9rem;resize:vertical}
 
 /* ===== 9. Pied de page ===== */
-.pied{position:relative;margin-top:2.5rem;background:var(--grain),var(--sable-clair);padding:2.2rem 1rem 2rem;border-top:1px solid var(--lisere)}
-.pied::before{content:"";position:absolute;left:0;right:0;top:-1.6rem;height:2rem;background:url("../images/decor/lavis-sable.svg") center/100% 100% no-repeat;pointer-events:none}
+.pied{position:relative;margin-top:2.5rem;background:var(--grain),var(--sable-clair);padding:2.2rem 1rem 2rem}
 .pied-interieur{max-width:64rem;margin:0 auto}
 .pied ul{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
 .pied a{display:inline-block;padding:.5rem 0;min-height:44px;color:var(--brun-fonce);font-weight:700}
@@ -183,6 +183,19 @@ main{display:block}
   .deux-colonnes{grid-template-columns:16rem 1fr}
   .contenu{padding:2rem 1.5rem 4rem}
 }
+
+/* Fil doré le long du bord de la page, comme sur armonilux : un fil pâle toujours visible,
+   et un fil vif qui se dessine au défilement, avec une petite fleur au bout (construit par js/site.js). */
+.fil-lateral{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:3}
+.fil-lateral svg{position:absolute;top:0;left:0}
+.fil-pale,.fil-vif{fill:none;stroke:var(--or);vector-effect:non-scaling-stroke}
+.fil-pale{stroke-width:1;opacity:.16}
+.fil-vif{stroke-width:2;opacity:.9;stroke-linecap:round}
+.fil-fleur-halo{fill:rgba(246,217,168,.4);stroke:none}
+.fil-fleur circle:not(.fil-fleur-halo){fill:rgba(255,250,235,.75);stroke:var(--or);stroke-width:.8}
+@media (max-width:840px){.fil-vif{stroke-width:1.4;opacity:.7}.fil-pale{opacity:.1}}
+@media (max-width:699px){.fil-vif{stroke-width:1.2;opacity:.6}}
+html.calme .fil-fleur{display:none}
 
 /* ===== 10. Mouvement : tout est lent et doux ===== */
 /* Apparition au défilement : fondu léger qui monte à peine (js/site.js pose .visible). */

@@ -64,5 +64,85 @@
     else if (mq.addListener) { mq.addListener(suit); }
   }
 
+  /* ---------- Fil doré le long du bord (comme sur armonilux) ----------
+     Un fil pâle toujours là, un fil vif qui se dessine au défilement, une petite fleur au bout.
+     Tracé ondulant et irrégulier (deux ondes mêlées), recalculé si la page change de hauteur. */
+  var NS = 'http://www.w3.org/2000/svg';
+  var fil = null, pale = null, vif = null, fleur = null, longueur = 0, attenteFil = false;
+
+  function el(nom, attrs) {
+    var e = document.createElementNS(NS, nom);
+    for (var cle in attrs) { if (attrs.hasOwnProperty(cle)) { e.setAttribute(cle, attrs[cle]); } }
+    return e;
+  }
+
+  function construitFil() {
+    var L = racine.clientWidth;
+    var H = document.body.offsetHeight;
+    var etroit = L < 700;
+    var base = etroit ? 9 : 34, amp = etroit ? 7 : 26, pas = 60;
+    var pts = [], i;
+    for (i = 0; i * pas <= H + pas; i++) {
+      var y = i * pas;
+      pts.push([base + amp * (0.62 * Math.sin(y / 330 + 1.3) + 0.38 * Math.sin(y / 127 + 4.1)), y]);
+    }
+    var d = 'M' + pts[0][0].toFixed(1) + ' 0';
+    for (i = 1; i < pts.length - 1; i++) {
+      var mx = (pts[i][0] + pts[i + 1][0]) / 2, my = (pts[i][1] + pts[i + 1][1]) / 2;
+      d += ' Q' + pts[i][0].toFixed(1) + ' ' + pts[i][1] + ' ' + mx.toFixed(1) + ' ' + my.toFixed(1);
+    }
+    if (!fil) {
+      fil = el('svg', { 'aria-hidden': 'true', focusable: 'false', preserveAspectRatio: 'none' });
+      pale = el('path', { 'class': 'fil-pale' });
+      vif = el('path', { 'class': 'fil-vif' });
+      fleur = el('g', { 'class': 'fil-fleur' });
+      fleur.appendChild(el('circle', { 'class': 'fil-fleur-halo', r: 13 }));
+      var cx = [[0, 0], [6.5, 0], [-6.5, 0], [3.25, 5.63], [-3.25, 5.63], [3.25, -5.63], [-3.25, -5.63]];
+      for (i = 0; i < cx.length; i++) { fleur.appendChild(el('circle', { r: 6.5, cx: cx[i][0], cy: cx[i][1] })); }
+      fil.appendChild(pale); fil.appendChild(vif); fil.appendChild(fleur);
+      var porte = document.createElement('div');
+      porte.className = 'fil-lateral';
+      porte.setAttribute('aria-hidden', 'true');
+      porte.appendChild(fil);
+      document.body.appendChild(porte);
+    }
+    fil.setAttribute('width', L);
+    fil.setAttribute('height', H);
+    fil.setAttribute('viewBox', '0 0 ' + L + ' ' + H);
+    pale.setAttribute('d', d);
+    vif.setAttribute('d', d);
+    longueur = vif.getTotalLength();
+    vif.setAttribute('stroke-dasharray', longueur);
+    metFil();
+  }
+
+  function metFil() {
+    attenteFil = false;
+    if (!fil) { return; }
+    var h = racine.scrollHeight - window.innerHeight;
+    var p = calme ? 1 : (h > 0 ? Math.min(1, Math.max(0, (window.pageYOffset || racine.scrollTop) / h)) : 1);
+    vif.setAttribute('stroke-dashoffset', (longueur * (1 - p)).toFixed(1));
+    if (calme || p < 0.005) {
+      fleur.setAttribute('opacity', 0);
+    } else {
+      var pt = vif.getPointAtLength(longueur * p);
+      var echelle = racine.clientWidth < 700 ? 0.62 : 0.85;
+      fleur.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ' ' + pt.y.toFixed(1) + ') rotate(' + (p * 540).toFixed(1) + ') scale(' + echelle + ')');
+      fleur.setAttribute('opacity', 1);
+    }
+  }
+  function demandeFil() {
+    metFil(); /* très léger : deux attributs à poser, pas besoin d'attendre l'image suivante */
+  }
+  var minuteur = null;
+  function reconstruit() { window.clearTimeout(minuteur); minuteur = window.setTimeout(construitFil, 200); }
+
+  construitFil();
+  window.addEventListener('scroll', demandeFil, { passive: true });
+  window.addEventListener('resize', reconstruit);
+  window.addEventListener('load', reconstruit);
+  if (window.ResizeObserver) { new ResizeObserver(reconstruit).observe(document.body); }
+  document.addEventListener('calme-change', demandeFil);
+
   applique(false);
 })();

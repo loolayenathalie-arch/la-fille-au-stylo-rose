@@ -97,7 +97,8 @@ main{display:block}
 /* ===== 5. Cartes et cadres ===== */
 /* Carte : coins arrondis, ombre chaude très douce, fin liseré doré, léger grain de papier. */
 .carte,.bandeau{
-  position:relative;border:1px solid var(--lisere);border-radius:var(--rayon);box-shadow:var(--ombre);
+  position:relative;border:1px solid var(--lisere);border-left:4px solid var(--or);  /* le trait doré sur le côté, comme sur armonilux */
+  border-radius:var(--rayon);box-shadow:var(--ombre);
   background:var(--grain),var(--papier);
 }
 .carte{padding:1.25rem;text-align:center;transition:transform .5s ease,box-shadow .5s ease}

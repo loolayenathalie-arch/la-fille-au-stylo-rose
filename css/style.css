@@ -184,16 +184,6 @@ main{display:block}
   .contenu{padding:2rem 1.5rem 4rem}
 }
 
-/* Fil doré le long du bord de la page, comme sur armonilux : un fil pâle toujours visible,
-   et un fil vif qui se dessine au défilement, avec une petite fleur au bout (construit par js/site.js). */
-.fil-lateral{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:3}
-.fil-lateral svg{position:absolute;top:0;left:0}
-.fil-pale,.fil-vif{fill:none;stroke:var(--or);vector-effect:non-scaling-stroke}
-.fil-pale{stroke-width:1;opacity:.16}
-.fil-vif{stroke-width:2;opacity:.9;stroke-linecap:round}
-@media (max-width:840px){.fil-vif{stroke-width:1.4;opacity:.7}.fil-pale{opacity:.1}}
-@media (max-width:699px){.fil-vif{stroke-width:1.2;opacity:.6}}
-html.calme .fil-fleur{display:none}
 
 /* ===== 10. Mouvement : tout est lent et doux ===== */
 /* Apparition au défilement : fondu léger qui monte à peine (js/site.js pose .visible). */

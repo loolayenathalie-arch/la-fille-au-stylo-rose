@@ -80,7 +80,7 @@ blockquote,.citation{
 /* Le titre du site est « Les Doudous et l'Étoile » ; « La fille au stylo rose » est l'autrice, en signature. */
 .nom-du-site{display:flex;flex-direction:column;justify-content:center;min-height:44px;font-family:var(--police-titre);font-weight:700;font-size:1.9rem;line-height:1.05;color:var(--brun);text-decoration:none}
 .nom-du-site.signe{animation:signe 2.2s cubic-bezier(.45,0,.3,1) .2s both}
-@keyframes signe{0%{clip-path:inset(-10% 100% -10% 0);opacity:.6}100%{clip-path:inset(-10% 0 -10% 0);opacity:1}}
+@keyframes signe{0%{clip-path:inset(-10% 100% -10% -6%);opacity:.6}100%{clip-path:inset(-10% -12% -10% -6%);opacity:1}}   /* marges : les lettres manuscrites dépassent de la boîte */
 html.calme .nom-du-site.signe{animation:none}
 .nom-du-site small{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.05rem;line-height:1.2;color:var(--brun-fonce)}
 /* Accueil sur téléphone : en-tête compact, nom et sous-titre sur la même ligne */

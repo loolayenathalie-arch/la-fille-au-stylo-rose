@@ -70,11 +70,29 @@
   var ciel = document.createElement('div');
   ciel.className = 'etoiles';
   ciel.setAttribute('aria-hidden', 'true');
+  /* Brumes colorées et nuages qui passent */
+  var brumes = ['brume-peche', 'brume-eau', 'brume-vert'];
+  for (var b = 0; b < brumes.length; b++) {
+    var br = document.createElement('span');
+    br.className = 'brume-page ' + brumes[b];
+    ciel.appendChild(br);
+  }
+  var nbNuages = window.innerWidth < 700 ? 2 : 3;
+  for (var q = 0; q < nbNuages; q++) {
+    var nu = document.createElement('span');
+    nu.className = 'nuage-passe';
+    nu.style.top = (12 + q * 30 + Math.random() * 12).toFixed(0) + '%';
+    var nd = 90 + Math.random() * 30;
+    nu.style.setProperty('--nd', nd.toFixed(0) + 's');
+    nu.style.setProperty('--nl', (-Math.random() * nd).toFixed(0) + 's');
+    nu.style.setProperty('--ny', ((Math.random() - 0.5) * 8).toFixed(1) + 'vh');
+    ciel.appendChild(nu);
+  }
   var nb = window.innerWidth < 700 ? 9 : 15;
   for (var n = 0; n < nb; n++) {
     var e = document.createElement('span');
     var teinte = Math.random();
-    e.className = 'etoile' + (teinte < 0.1 ? ' rose' : (teinte < 0.2 ? ' bleu' : ''));
+    e.className = 'etoile' + (teinte < 0.17 ? ' rose' : (teinte < 0.34 ? ' bleu' : ''));
     e.style.left = (Math.random() * 96 + 1).toFixed(1) + '%';
     e.style.top = (Math.random() * 94 + 2).toFixed(1) + '%';
     e.style.setProperty('--t', (n < 2 ? 18 + Math.random() * 8 : 4 + Math.random() * 6).toFixed(1) + 'px');
@@ -105,7 +123,67 @@
     '<path class="ve-eclat" d="M60 -58 L62.5 -60.5 L60 -70 L57.5 -60.5 L48 -58 L57.5 -55.5 L60 -46 L62.5 -55.5Z" fill="#FFF3D6"/>' +
     '<path class="ve-eclat" d="M52 52 L54.5 49.5 L52 40 L49.5 49.5 L40 52 L49.5 54.5 L52 64 L54.5 54.5Z" fill="#FFFFFF"/>' +
     '</svg>';
+  veille.setAttribute('role', 'button');
+  veille.setAttribute('aria-label', "L'étoile qui veille (un petit secret)");
+  veille.removeAttribute('aria-hidden');
+  veille.setAttribute('tabindex', '0');
+  function etoileRepond() {
+    if (calme || veille.classList.contains('touche')) { return; }
+    veille.classList.add('touche');
+    for (var p = 0; p < 4; p++) {
+      var pou = document.createElement('span');
+      pou.className = 've-poussiere';
+      pou.style.setProperty('--px', ((Math.random() - 0.5) * 60).toFixed(0) + 'px');
+      pou.style.setProperty('--py', (-(55 + Math.random() * 50)).toFixed(0) + 'px');
+      pou.style.animationDelay = (p * 0.12).toFixed(2) + 's';
+      veille.appendChild(pou);
+    }
+    window.setTimeout(function () {
+      veille.classList.remove('touche');
+      var vieux = veille.querySelectorAll('.ve-poussiere');
+      for (var v = 0; v < vieux.length; v++) { veille.removeChild(vieux[v]); }
+    }, 2300);
+  }
+  veille.addEventListener('click', etoileRepond);
+  veille.addEventListener('mouseenter', etoileRepond);
+  veille.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); etoileRepond(); } });
   document.body.appendChild(veille);
+
+  /* Poussière d'étoile autour du titre à l'arrivée (quatre perles, 2 s, puis plus rien) */
+  var tete = document.querySelector('.page-tete');
+  if (tete && !calme) {
+    for (var t = 0; t < 4; t++) {
+      var pt = document.createElement('span');
+      pt.className = 'poussiere-titre';
+      pt.setAttribute('aria-hidden', 'true');
+      pt.style.left = (18 + Math.random() * 64).toFixed(0) + '%';
+      pt.style.top = (10 + Math.random() * 70).toFixed(0) + '%';
+      pt.style.setProperty('--pl', (0.4 + t * 0.25).toFixed(2) + 's');
+      pt.style.setProperty('--px', ((Math.random() - 0.5) * 30).toFixed(0) + 'px');
+      tete.appendChild(pt);
+    }
+  }
+  /* Titres de section hors .apparait : le trait rose se dessine quand le titre entre à l'écran */
+  var titres = document.querySelectorAll('.contenu h2, .pied h2');
+  if (observateur) {
+    var obsTitres = new IntersectionObserver(function (entrees) {
+      for (var i = 0; i < entrees.length; i++) {
+        if (entrees[i].isIntersecting) { entrees[i].target.parentNode.classList.add('trait-vu'); obsTitres.unobserve(entrees[i].target); }
+      }
+    }, { threshold: 0.5 });
+    for (var tt = 0; tt < titres.length; tt++) { obsTitres.observe(titres[tt]); }
+  } else {
+    for (var tu = 0; tu < titres.length; tu++) { titres[tu].parentNode.classList.add('trait-vu'); }
+  }
+
+  /* Un cœur de lumière dans chaque cadre portrait (L'univers) */
+  var cadres = document.querySelectorAll('.cadre-portrait');
+  for (var c = 0; c < cadres.length; c++) {
+    var coeur = document.createElement('span');
+    coeur.className = 'coeur-page';
+    coeur.setAttribute('aria-hidden', 'true');
+    cadres[c].appendChild(coeur);
+  }
 
   applique(false);
 })();

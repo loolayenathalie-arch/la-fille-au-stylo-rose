@@ -164,6 +164,25 @@ main{display:block}
 .cadre-scene{max-width:40rem}
 .cadre-scene img{aspect-ratio:4/3}
 .cadre-portrait{max-width:17rem}
+/* Veilleuse dorée qui respire derrière chaque personnage ; un petit cœur de lumière s'allume quand la carte arrive ou au survol. */
+.cadre-portrait::after,.flotte-douce::after{
+  content:"";position:absolute;inset:-18%;z-index:-2;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,243,214,.95) 0,rgba(246,217,168,.6) 38%,rgba(246,217,168,0) 70%);
+  animation:veilleuse-page 8s ease-in-out infinite alternate;
+}
+.flotte-douce{position:relative;isolation:isolate}
+.flotte-douce::after{inset:4% 0 -6%}
+@keyframes veilleuse-page{0%{opacity:.55;transform:scale(.94)}100%{opacity:1;transform:scale(1.06)}}
+.coeur-page{position:absolute;left:50%;top:58%;width:0;height:0;pointer-events:none;z-index:2}
+.coeur-page::before{
+  content:"";position:absolute;width:2.4rem;height:2.4rem;margin:-1.2rem 0 0 -1.2rem;border-radius:50%;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 24%,rgba(246,217,168,.85) 48%,rgba(246,217,168,0) 72%);
+  opacity:0;transform:scale(.6);transition:opacity 1.2s ease,transform 1.2s ease;
+}
+.apparait.visible .coeur-page::before{opacity:.9;transform:scale(1);animation:coeur-page 3.4s ease-in-out 1.2s infinite alternate}
+.bandeau:hover .coeur-page::before{opacity:1;transform:scale(1.4)}
+@keyframes coeur-page{0%{opacity:.5;transform:scale(.9)}100%{opacity:1;transform:scale(1.25)}}
+html.calme .cadre-portrait::after,html.calme .flotte-douce::after,html.calme .coeur-page::before{animation:none}
 .cadre-portrait img{aspect-ratio:1/1}
 
 /* ===== 6. Séparateurs : lavis et traits de pinceau, jamais de lignes droites ===== */
@@ -190,14 +209,21 @@ main{display:block}
 .formulaire textarea{min-height:9rem;resize:vertical}
 
 /* ===== 9. Pied de page ===== */
-.pied{position:relative;margin-top:5.5rem;background:var(--grain),var(--sable-clair);padding:2.2rem 1rem 2rem}
+.pied{position:relative;margin-top:5.5rem;padding:2.6rem 1rem 2.4rem;
+  background:var(--grain),linear-gradient(180deg,#EFE3CE 0%,#E6D3B5 55%,#DCC4A0 100%)}
+.pied::after{ /* lueur douce en haut à droite, comme une lampe qu'on laisse allumée */
+  content:"";position:absolute;right:0;top:-10%;width:55%;height:70%;pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,246,222,.7),rgba(255,246,222,0) 70%);
+}
+.pied-interieur{position:relative;z-index:1}
+.bas-bloc h2+p{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.25rem;line-height:1.45;color:var(--brun-fonce)}
 .pied::before{ /* nuage doux qui monte vers la page : la transition se fait en fondu, sans ligne */
   content:"";position:absolute;left:0;right:0;top:-5.5rem;height:5.6rem;pointer-events:none;
   background:
     radial-gradient(ellipse 34% 100% at 18% 100%,rgba(239,227,206,.95),rgba(239,227,206,0) 70%),
     radial-gradient(ellipse 40% 100% at 62% 100%,rgba(239,227,206,.95),rgba(239,227,206,0) 70%),
     radial-gradient(ellipse 30% 90% at 94% 100%,rgba(239,227,206,.9),rgba(239,227,206,0) 70%),
-    linear-gradient(180deg,rgba(239,227,206,0),rgba(239,227,206,.85));
+    linear-gradient(180deg,rgba(239,227,206,0),rgba(239,227,206,1));
 }
 .pied-interieur{max-width:64rem;margin:0 auto}
 .pied ul{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
@@ -238,6 +264,20 @@ main{display:block}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.55s;animation-timing-function:ease}
 @keyframes entree{from{opacity:0}to{opacity:1}}
 .js .page-tete h1{animation:encre-page 1.5s cubic-bezier(.4,0,.25,1) both}
+.page-tete{position:relative}
+.poussiere-titre{position:absolute;width:7px;height:7px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 40%,rgba(246,217,168,0) 80%);box-shadow:0 0 .5rem .12rem rgba(246,217,168,.9);
+  opacity:0;animation:poussiere-titre 2.2s ease-out var(--pl,0s) both}
+@keyframes poussiere-titre{0%{opacity:0;transform:translate3d(0,8px,0) scale(.4)}35%{opacity:1;transform:translate3d(0,0,0) scale(1)}100%{opacity:0;transform:translate3d(var(--px,0px),-14px,0) scale(.5)}}
+html.calme .poussiere-titre{display:none}
+/* Le trait de stylo rose se dessine sous chaque titre de section quand elle entre à l'écran (comme sous le menu). */
+.contenu h2,.pied h2{position:relative;display:inline-block;padding-bottom:.15em}
+.contenu h2::after,.pied h2::after{
+  content:"";position:absolute;left:.1em;right:.1em;bottom:0;height:.32em;pointer-events:none;
+  background:url("../images/decor/trait-stylo.svg") center/100% 100% no-repeat;
+  opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .4s ease .3s,transform 1.1s cubic-bezier(.3,.6,.3,1) .3s;
+}
+.js .apparait.visible h2::after,.js .trait-vu h2::after,html.calme h2::after,html:not(.js) h2::after{opacity:.85;transform:scaleX(1)}
 @keyframes encre-page{0%{opacity:0;filter:blur(8px);transform:translateY(6px)}60%{opacity:.9;filter:blur(1px)}100%{opacity:1;filter:blur(0);transform:none}}
 .js .page-tete+*,.js .page-tete+*+*{animation:entree 1.2s ease .25s both}
 .js body::after{ /* voile de lumière qui s'ouvre à l'arrivée */
@@ -293,8 +333,32 @@ body::before{
     radial-gradient(ellipse 60% 40% at 88% 100%,rgba(223,200,167,.5),rgba(223,200,167,0) 70%);
 }
 .etoiles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+/* Brumes colorées : une pointe de rose-pêche en haut, un souffle de bleu pluie en bas, qui dérivent comme le soir qui tombe. */
+.brume-page{position:absolute;border-radius:50%;will-change:transform;filter:blur(2px)}
+.brume-peche{left:-20%;top:-18%;width:90%;height:48%;background:radial-gradient(ellipse at 50% 50%,rgba(240,196,178,.55),rgba(230,184,162,.22) 45%,rgba(230,184,162,0) 72%);animation:brume-a 46s ease-in-out -12s infinite alternate}
+.brume-eau{right:-25%;bottom:-20%;width:95%;height:52%;background:radial-gradient(ellipse at 50% 50%,rgba(160,190,205,.45),rgba(137,168,184,.18) 45%,rgba(137,168,184,0) 72%);animation:brume-b 58s ease-in-out -30s infinite alternate}
+.brume-vert{left:30%;top:40%;width:60%;height:40%;background:radial-gradient(ellipse at 50% 50%,rgba(220,233,227,.5),rgba(220,233,227,0) 70%);animation:brume-a 70s ease-in-out -40s infinite alternate}
+@keyframes brume-a{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(8vw,4vh,0) scale(1.12)}}
+@keyframes brume-b{0%{transform:translate3d(0,0,0) scale(1.05)}100%{transform:translate3d(-9vw,-5vh,0) scale(.95)}}
+/* Nuages de lumière qui passent lentement derrière le contenu (90 à 120 s la traversée). */
+.nuage-passe{position:absolute;left:-40vw;width:min(70vw,34rem);height:min(28vw,13rem);border-radius:50%;will-change:transform;
+  background:radial-gradient(ellipse at 50% 55%,rgba(255,252,243,.92),rgba(255,247,230,.5) 48%,rgba(255,247,230,0) 72%);
+  animation:nuage-passe var(--nd,100s) linear var(--nl,0s) infinite}
+@keyframes nuage-passe{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(calc(100vw + 60vw),var(--ny,-3vh),0)}}
+html.calme .brume-page,html.calme .nuage-passe{animation:none}
+html.calme .nuage-passe{display:none}
 .entete,main,.pied{position:relative;z-index:1}
-.veille{position:fixed;right:5%;bottom:8vh;z-index:4;pointer-events:none;width:3.4rem;height:3.4rem}
+.veille{position:fixed;right:5%;bottom:8vh;z-index:4;width:3.4rem;height:3.4rem;cursor:pointer;background:none;border:0;padding:0;margin:0}
+.veille::before{content:"";position:absolute;inset:-.5rem}   /* zone tactile 44 px */
+.veille:focus-visible{outline:3px solid var(--focus);outline-offset:6px;border-radius:50%}
+.veille.touche .ve-coeur{animation-duration:.5s}
+.veille.touche .ve-halo{animation:ve-pulse-fort 1.6s ease-out 1}
+@keyframes ve-pulse-fort{0%{opacity:1;transform:scale(1)}40%{opacity:1;transform:scale(1.8)}100%{opacity:.7;transform:scale(1)}}
+.ve-poussiere{position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 40%,rgba(246,217,168,0) 80%);box-shadow:0 0 .4rem .1rem rgba(246,217,168,.9);
+  animation:ve-poussiere 1.6s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes ve-poussiere{0%{opacity:0;transform:translate3d(0,0,0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translate3d(var(--px,0px),var(--py,-70px),0) scale(.3)}}
+html.calme .ve-poussiere{display:none}
 /* Perles de lumière : de petits points ronds avec un halo doux, qui respirent et montent à peine (comme sur l'accueil). */
 .etoile{
   position:absolute;width:var(--t,8px);height:var(--t,8px);border-radius:50%;opacity:.5;will-change:transform,opacity;

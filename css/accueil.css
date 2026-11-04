@@ -398,9 +398,15 @@ html.calme .note-doudou{display:none}
   .calmer::after{content:"";position:absolute;inset:-9px -6px}
 }
 @media (min-width:48rem){
-  .scene{--haut:1116px}
-  .scene-contenu{padding-top:5.5rem}
-  .doudous{margin-bottom:1.5rem}
+  /* Ordinateur : titre, étoile et Doudous tiennent dans le premier écran (la scène ne dépasse pas la hauteur de la fenêtre, 900 px au minimum) */
+  .scene{--haut:820px;--entete:5.25rem;   /* hauteur de l en-tête : la scène remplit le reste du premier écran */
+    top:min(0px,calc(100vh - var(--entete) - var(--haut)));top:min(0px,calc(100svh - var(--entete) - var(--haut)));
+    height:max(calc(100vh - var(--entete)),var(--haut));height:max(calc(100svh - var(--entete)),var(--haut))}
+  .scene-contenu{padding-top:2rem}
+  .titre{font-size:clamp(2.5rem,8vh,4rem)}
+  .chapeau-accueil{margin-top:1rem}
+  .doudou-duo{width:clamp(240px,36vh,400px)}
+  .doudous{margin-bottom:1rem}
 }
 @media (max-height:520px){
   .parcours{height:320vh}

@@ -374,6 +374,24 @@ html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
   .bas-blocs{grid-template-columns:repeat(3,1fr);gap:2rem}
 }
 
+/* ===== 12 bis. L'introduction du livre : trois volets, comme trois pages qu'on tourne ===== */
+.intro{margin:1.5rem 0 2rem}
+.intro h2{display:block;text-align:center;margin:0 auto .8rem}
+.intro-volets{display:grid;gap:1.25rem}
+.intro-volet{margin:0;padding:1.5rem 1.4rem 1.3rem}
+.intro-volet h3{margin-bottom:.35em}
+.intro-volet p{margin-bottom:.8em;font-size:1.0625rem;line-height:1.75}
+.intro-volet p:last-child{margin-bottom:0}
+.intro-fin{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.3rem!important;line-height:1.45!important;color:var(--brun-fonce);margin-top:1.2em!important}
+@media (min-width:48rem){
+  .intro-volets{grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start}
+  .intro-volet:nth-child(2){margin-top:1.2rem}
+  .intro-volet:nth-child(3){grid-column:1 / -1;max-width:44rem;margin:.5rem auto 0}
+}
+.js .intro-volet.apparait{transition-delay:.15s}
+.js .intro-volet.apparait:nth-child(2){transition-delay:.35s}
+.js .intro-volet.apparait:nth-child(3){transition-delay:.55s}
+
 /* ===== 13. Ciel rêveur : lueur douce en fond, étoiles qui scintillent, étoile de l'âme ===== */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;

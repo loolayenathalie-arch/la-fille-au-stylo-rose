@@ -405,8 +405,9 @@ html.calme .note-doudou{display:none}
   .scene-contenu{padding-top:2rem}
   .titre{font-size:clamp(2.5rem,8vh,4rem)}
   .chapeau-accueil{margin-top:1rem}
-  .doudou-duo{width:clamp(240px,36vh,400px)}
-  .doudous{margin-bottom:clamp(3rem,12vh,9rem)}   /* les Doudous flottent au-dessus du bas de la scène */
+  .doudou-duo{width:clamp(300px,46vh,560px)}   /* grands Doudous : ils remplissent le ciel */
+  .chapeau-accueil{font-size:clamp(1.5rem,2.6vh,1.9rem);max-width:36rem}
+  .doudous{margin-bottom:clamp(2rem,6vh,5rem)}   /* les Doudous flottent au-dessus du bas de la scène */
 }
 @media (max-height:520px){
   .parcours{height:320vh}

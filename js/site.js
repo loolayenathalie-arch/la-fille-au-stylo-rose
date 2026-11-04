@@ -120,17 +120,6 @@
     pose(no, '--nl', (-Math.random() * ndn).toFixed(1) + 's');
     ciel.appendChild(no);
   }
-  var nbGouttes = petit ? 8 : 14;
-  for (var ng = 0; ng < nbGouttes; ng++) {
-    var go = document.createElement('span');
-    go.className = 'goutte';
-    pose(go, '--gx', (Math.random() * 100).toFixed(1) + '%');
-    pose(go, '--gh', (14 + Math.random() * 16).toFixed(0) + 'px');
-    var gd = 8 + Math.random() * 7;
-    pose(go, '--gd', gd.toFixed(1) + 's');
-    pose(go, '--gl', (-Math.random() * gd).toFixed(1) + 's');
-    ciel.appendChild(go);
-  }
 
   var nb = window.innerWidth < 700 ? 9 : 15;
   for (var n = 0; n < nb; n++) {

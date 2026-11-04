@@ -70,6 +70,22 @@
   var ciel = document.createElement('div');
   ciel.className = 'etoiles';
   ciel.setAttribute('aria-hidden', 'true');
+  /* Le soir qui tombe : --nuit suit le défilement (0 en haut, 1 en bas de page) */
+  var nuit = document.createElement('div');
+  nuit.className = 'nuit';
+  nuit.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(nuit);
+  var nuitAttente = false;
+  function poseNuit() {
+    nuitAttente = false;
+    var course = document.documentElement.scrollHeight - window.innerHeight;
+    var p = course > 0 ? Math.min(1, Math.max(0, window.scrollY / course)) : 0;
+    racine.style.setProperty('--nuit', (p * p).toFixed(3));
+  }
+  window.addEventListener('scroll', function () { if (!nuitAttente) { nuitAttente = true; window.requestAnimationFrame(poseNuit); } }, { passive: true });
+  window.addEventListener('resize', poseNuit);
+  poseNuit();
+
   /* Brumes colorées et nuages qui passent */
   var brumes = ['brume-peche', 'brume-eau', 'brume-vert'];
   for (var b = 0; b < brumes.length; b++) {
@@ -107,7 +123,7 @@
   }
   var glyphes = ['\u266A', '\u266B', '\u2669', '\u266A'];
   var couleurs = ['#B87A46', '#C06A82', '#89A8B8', '#B87A46'];
-  var nbNotes = petit ? 4 : 7;
+  var nbNotes = petit ? 2 : 3;
   for (var nn = 0; nn < nbNotes; nn++) {
     var no = document.createElement('span');
     no.className = 'note';
@@ -115,13 +131,26 @@
     pose(no, '--nx', (6 + Math.random() * 88).toFixed(0) + '%');
     pose(no, '--ns', (1.1 + Math.random() * 1).toFixed(2) + 'rem');
     pose(no, '--nc', couleurs[nn % couleurs.length]);
-    var ndn = 13 + Math.random() * 9;
+    var ndn = 20 + Math.random() * 12;
     pose(no, '--nd', ndn.toFixed(1) + 's');
     pose(no, '--nl', (-Math.random() * ndn).toFixed(1) + 's');
     ciel.appendChild(no);
   }
 
   var nb = window.innerWidth < 700 ? 9 : 15;
+  /* Des étoiles qui ne s'allument que la nuit venue */
+  var nbNuit = window.innerWidth < 700 ? 6 : 12;
+  for (var nn2 = 0; nn2 < nbNuit; nn2++) {
+    var en = document.createElement('span');
+    en.className = 'etoile nuit-seule' + (Math.random() < 0.3 ? ' bleu' : '');
+    en.style.left = (Math.random() * 96 + 1).toFixed(1) + '%';
+    en.style.top = (Math.random() * 94 + 2).toFixed(1) + '%';
+    en.style.setProperty('--t', (3 + Math.random() * 4).toFixed(1) + 'px');
+    var durN = 3 + Math.random() * 4;
+    en.style.setProperty('--d', durN.toFixed(1) + 's');
+    en.style.setProperty('--dl', (-Math.random() * durN).toFixed(1) + 's');
+    ciel.appendChild(en);
+  }
   for (var n = 0; n < nb; n++) {
     var e = document.createElement('span');
     var teinte = Math.random();
@@ -209,6 +238,27 @@
     for (var tu = 0; tu < titres.length; tu++) { titres[tu].parentNode.classList.add('trait-vu'); }
   }
 
+  /* L'introduction (Le livre) : chaque phrase arrive l'une après l'autre, comme une lecture lente ; le cœur du Doudou qui parle s'allume */
+  var volets = document.querySelectorAll('.intro-volet');
+  for (var vo = 0; vo < volets.length; vo++) {
+    var paras = volets[vo].querySelectorAll('p');
+    var rang = 0;
+    for (var pa = 0; pa < paras.length; pa++) {
+      var morceaux = paras[pa].innerHTML.split(/([.!?\u2026])\s+(?=[^<\s])/);
+      var phrases = [];
+      for (var mo = 0; mo < morceaux.length; mo += 2) { phrases.push(morceaux[mo] + (morceaux[mo + 1] || '')); }
+      paras[pa].innerHTML = phrases.map(function (m) {
+        var d = 0.25 + rang * 0.55; rang++;
+        return '<span class="phrase" style="transition-delay:' + d.toFixed(2) + 's">' + m + '</span>';
+      }).join(' ');
+    }
+    var vc = document.createElement('span');
+    vc.className = 'volet-coeur';
+    vc.setAttribute('aria-hidden', 'true');
+    volets[vo].appendChild(vc);
+    (function (el, n) { window.setTimeout(function () { el.classList.add('lu'); }, 1200 + n * 600); })(volets[vo], rang);
+  }
+
   /* Un cœur de lumière dans chaque cadre portrait (L'univers) */
   var cadres = document.querySelectorAll('.cadre-portrait');
   for (var c = 0; c < cadres.length; c++) {
@@ -241,6 +291,38 @@
       nom.classList.add('signe');
       try { window.sessionStorage.setItem('signe', '1'); } catch (e) { /* tant pis */ }
     }
+  }
+
+  /* Le secret du gilet (L'univers) */
+  var lili = document.querySelector('.bandeau-rose .cadre-portrait');
+  if (lili) {
+    var manche = document.createElement('span');
+    manche.className = 'manche-doudou';
+    manche.setAttribute('aria-hidden', 'true');
+    manche.innerHTML = '<img src="images/personnages/doudou-dort.webp" width="280" height="396" alt="">';
+    lili.appendChild(manche);
+    lili.setAttribute('role', 'button'); lili.setAttribute('tabindex', '0');
+    lili.setAttribute('aria-label', 'Lili et son gilet (un petit secret)');
+    var blotti = function () {
+      if (calme || lili.classList.contains('blotti')) { return; }
+      lili.classList.add('blotti');
+      for (var nm = 0; nm < 2; nm++) {
+        var note = document.createElement('span');
+        note.className = 'note-manche';
+        note.textContent = nm ? '\u266B' : '\u266A';
+        note.style.setProperty('--nl', (0.4 + nm * 0.35).toFixed(2) + 's');
+        note.style.setProperty('--nx', ((Math.random() - 0.5) * 50).toFixed(0) + 'px');
+        note.style.setProperty('--nc', nm ? '#89A8B8' : '#C06A82');
+        lili.appendChild(note);
+      }
+      window.setTimeout(function () {
+        lili.classList.remove('blotti');
+        var vn = lili.querySelectorAll('.note-manche');
+        for (var x = 0; x < vn.length; x++) { lili.removeChild(vn[x]); }
+      }, 3400);
+    };
+    lili.addEventListener('click', blotti);
+    lili.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blotti(); } });
   }
 
   applique(false);

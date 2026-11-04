@@ -33,7 +33,7 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <header class="page-tete"><h1>Le livre</h1></header>
+ <header class="page-tete"><h1>Le livre</h1><p class="mot-doux vide">[texte de Nath]</p></header>
  <div class="livre-fiche">
   <!-- EMPLACEMENT IMAGE : images/livres/livre-1-couverture.svg (couverture ; remplacer le fichier, même nom) -->
   <div class="cadre-aquarelle cadre-livre apparait"><img class="format-livre" src="images/livres/livre-1-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]"></div>
@@ -60,6 +60,8 @@
    <button class="bouton" type="submit" disabled>Être prévenu(e) de la sortie</button>
   </form>
  </section>
+ <!-- EMPLACEMENT IMAGE : images/personnages/doudou-dort.png (petit Doudou qui dort, PNG sans fond ; remplacer le fichier, même nom) -->
+ <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img src="images/personnages/doudou-dort.png" width="360" height="509" alt="[texte de Nath : description de l’image]"></picture><span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>z</i></span></div>
 </div>
 </main>
 <footer class="pied">
@@ -95,7 +97,13 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
-  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+  <div class="pied-boutons">
+   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+   <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).
+        Le bouton reste caché tant que le fichier n'existe pas ; jamais de lecture automatique. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter la boîte à musique</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/boite-a-musique.mp3"></audio>
+  </div>
  </div>
 
 </footer>

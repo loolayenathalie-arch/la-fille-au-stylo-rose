@@ -33,7 +33,7 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <header class="page-tete"><h1>L'univers</h1></header>
+ <header class="page-tete"><h1>L'univers</h1><p class="mot-doux vide">[texte de Nath]</p></header>
  <!-- EMPLACEMENT IMAGE : images/personnages/lili-et-ses-doudous.png (PNG sans fond ; remplacer le fichier, même nom) -->
  <div class="flotte-douce apparait"><picture><source type="image/webp" srcset="images/personnages/lili-et-ses-doudous.webp"><img class="detoure" src="images/personnages/lili-et-ses-doudous.png" width="827" height="1092" alt="[texte de Nath : description de l’image]"></picture></div>
  <section class="bandeau bandeau-rose apparait" aria-labelledby="lili">
@@ -92,7 +92,13 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
-  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+  <div class="pied-boutons">
+   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+   <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).
+        Le bouton reste caché tant que le fichier n'existe pas ; jamais de lecture automatique. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter la boîte à musique</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/boite-a-musique.mp3"></audio>
+  </div>
  </div>
 
 </footer>

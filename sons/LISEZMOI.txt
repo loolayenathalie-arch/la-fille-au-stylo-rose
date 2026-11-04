@@ -1,0 +1,2 @@
+Déposer ici le fichier boite-a-musique.mp3 (environ 30 s, en boucle, libre de droits).
+Le bouton « Écouter la boîte à musique » du bas de page n'''apparaît que si ce fichier existe.

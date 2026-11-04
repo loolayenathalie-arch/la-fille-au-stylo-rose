@@ -232,6 +232,15 @@ html:not(.js) .scene{--p:1;--t:1;--f:1}
   opacity:0;animation:chaud 5.4s ease-in-out var(--cd,0s) infinite alternate;
 }
 .coeur-chien{--cx:72%;--cy:68%;--cd:.6s}   /* centre de la poitrine du chien */
+/* Quand on touche les Doudous : les cœurs s'allument fort et des notes s'échappent */
+.doudou-flotte{cursor:pointer;border-radius:30px}
+.doudou-flotte:focus-visible{outline:3px solid var(--focus);outline-offset:8px}
+.scene.calin .coeur::before{animation-duration:.7s;opacity:1}
+.scene.calin .coeur::after{animation-duration:1s}
+.note-doudou{position:absolute;left:var(--cx,50%);top:var(--cy,60%);font-family:"Segoe UI Symbol","Apple Symbols",var(--police-fine);font-size:1.5rem;line-height:1;color:var(--nc,#B87A46);opacity:0;pointer-events:none;z-index:4;
+  animation:note-doudou 2.4s ease-out var(--nl,0s) forwards}
+@keyframes note-doudou{0%{opacity:0;transform:translate3d(0,0,0) rotate(-10deg) scale(.6)}15%{opacity:1;transform:translate3d(0,-.8rem,0) rotate(0) scale(1)}100%{opacity:0;transform:translate3d(var(--nx,0px),-5.5rem,0) rotate(12deg) scale(.9)}}
+html.calme .note-doudou{display:none}
 @keyframes coeur{0%{opacity:calc(var(--r2) * .4);scale:.9}100%{opacity:var(--r2);scale:1.35}}
 @keyframes chaud{0%{opacity:calc(var(--r2) * .35)}100%{opacity:calc(var(--r2) * .85)}}
 

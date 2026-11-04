@@ -76,6 +76,38 @@
   }
   document.addEventListener('calme-change', function (e) { if (e.detail && e.detail.calme) { revele(); } });
 
+  /* Toucher les Doudous : les cœurs s'allument fort, trois notes s'échappent, puis tout se calme. */
+  var flotte = document.querySelector('.doudou-flotte');
+  var coeursTouche = document.querySelectorAll('.coeur');
+  function calin() {
+    if (calme || scene.classList.contains('calin')) { return; }
+    scene.classList.add('calin');
+    var glyphes = ['\u266A', '\u266B', '\u2669'];
+    var couleurs = ['#B87A46', '#C06A82', '#89A8B8'];
+    for (var n = 0; n < 3; n++) {
+      var note = document.createElement('span');
+      note.className = 'note-doudou';
+      note.setAttribute('aria-hidden', 'true');
+      note.textContent = glyphes[n];
+      var src = coeursTouche[n % coeursTouche.length];
+      note.style.setProperty('--cx', src ? getComputedStyle(src).left : '50%');
+      note.style.setProperty('--cy', src ? getComputedStyle(src).top : '60%');
+      note.style.setProperty('--nc', couleurs[n]);
+      note.style.setProperty('--nl', (n * 0.25).toFixed(2) + 's');
+      note.style.setProperty('--nx', ((Math.random() - 0.5) * 60).toFixed(0) + 'px');
+      flotte.appendChild(note);
+    }
+    window.setTimeout(function () {
+      scene.classList.remove('calin');
+      var vieilles = flotte.querySelectorAll('.note-doudou');
+      for (var v = 0; v < vieilles.length; v++) { flotte.removeChild(vieilles[v]); }
+    }, 3200);
+  }
+  if (flotte) {
+    flotte.addEventListener('click', calin);
+    flotte.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); calin(); } });
+  }
+
   function borne(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
   function adoucit(x) { return x * x * (3 - 2 * x); } /* départ et arrivée en douceur */
 

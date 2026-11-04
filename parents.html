@@ -33,13 +33,13 @@
 </header>
 <main id="contenu">
 <div class="contenu">
- <header class="page-tete"><h1>Parents</h1></header>
+ <header class="page-tete"><h1>Parents</h1><p class="mot-doux vide">[texte de Nath]</p></header>
  <section class="section" aria-labelledby="maison">
   <h2 id="maison">À la maison</h2>
   <ul class="grille">
-  <li class="carte apparait"><h3>Une respiration à deux</h3><p class="vide">[texte de Nath]</p></li>
-  <li class="carte apparait"><h3>Un coin des émotions</h3><p class="vide">[texte de Nath]</p></li>
-  <li class="carte apparait"><h3>Une échelle pour dire comment ça va</h3><p class="vide">[texte de Nath]</p></li>
+  <li class="carte carte-pli apparait"><details><summary><h3>Une respiration à deux</h3></summary><p class="vide">[texte de Nath]</p></details></li>
+  <li class="carte carte-pli apparait"><details><summary><h3>Un coin des émotions</h3></summary><p class="vide">[texte de Nath]</p></details></li>
+  <li class="carte carte-pli apparait"><details><summary><h3>Une échelle pour dire comment ça va</h3></summary><p class="vide">[texte de Nath]</p></details></li>
   </ul>
  </section>
  <section class="bandeau apparait" aria-labelledby="fiche">
@@ -55,6 +55,8 @@
  <!-- Une seule ligne, discrète, vers le cabinet ArmoniLux. -->
  <!-- TODO : remplacer ce texte par la ligne voulue avec le lien vers le site du cabinet ArmoniLux (adresse à fournir par Nath). -->
  <p class="vide"><small>[texte de Nath]</small></p>
+ <!-- EMPLACEMENT IMAGE : images/personnages/doudou-dort.png (petit Doudou qui dort, PNG sans fond ; remplacer le fichier, même nom) -->
+ <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img src="images/personnages/doudou-dort.png" width="360" height="509" alt="[texte de Nath : description de l’image]"></picture><span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>z</i></span></div>
 </div>
 </main>
 <footer class="pied">
@@ -90,7 +92,13 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
-  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+  <div class="pied-boutons">
+   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+   <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).
+        Le bouton reste caché tant que le fichier n'existe pas ; jamais de lecture automatique. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter la boîte à musique</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/boite-a-musique.mp3"></audio>
+  </div>
  </div>
 
 </footer>

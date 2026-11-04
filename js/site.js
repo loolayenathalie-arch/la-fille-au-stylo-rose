@@ -218,5 +218,30 @@
     cadres[c].appendChild(coeur);
   }
 
+  /* Boîte à musique facultative : le bouton n'apparaît que si le fichier son existe ; jamais de lecture automatique. */
+  var ecouter = document.querySelector('[data-ecouter]');
+  var boite = document.getElementById('boite-a-musique');
+  if (ecouter && boite && window.fetch) {
+    fetch(boite.getAttribute('src'), { method: 'HEAD' }).then(function (r) {
+      if (!r.ok) { return; }
+      ecouter.hidden = false;
+      ecouter.addEventListener('click', function () {
+        if (boite.paused) { boite.volume = 0.5; boite.play().then(function () { ecouter.setAttribute('aria-pressed', 'true'); ecouter.textContent = 'Arrêter la boîte à musique'; }).catch(function () {}); }
+        else { boite.pause(); ecouter.setAttribute('aria-pressed', 'false'); ecouter.textContent = 'Écouter la boîte à musique'; }
+      });
+    }).catch(function () {});
+  }
+
+  /* Le nom du site s'écrit à la main une fois par visite, sur l'accueil */
+  var nom = document.querySelector('.page-accueil .nom-du-site');
+  if (nom && !calme) {
+    var signe = null;
+    try { signe = window.sessionStorage.getItem('signe'); } catch (e) { signe = null; }
+    if (!signe) {
+      nom.classList.add('signe');
+      try { window.sessionStorage.setItem('signe', '1'); } catch (e) { /* tant pis */ }
+    }
+  }
+
   applique(false);
 })();

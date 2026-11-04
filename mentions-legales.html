@@ -79,7 +79,13 @@
    </ul>
   </nav>
   <p>[texte de Nath]</p>
-  <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+  <div class="pied-boutons">
+   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+   <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).
+        Le bouton reste caché tant que le fichier n'existe pas ; jamais de lecture automatique. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter la boîte à musique</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/boite-a-musique.mp3"></audio>
+  </div>
  </div>
 
 </footer>

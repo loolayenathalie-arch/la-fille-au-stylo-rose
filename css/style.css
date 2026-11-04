@@ -79,6 +79,9 @@ blockquote,.citation{
 .entete-interieur{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1.5rem}
 /* Le titre du site est « Les Doudous et l'Étoile » ; « La fille au stylo rose » est l'autrice, en signature. */
 .nom-du-site{display:flex;flex-direction:column;justify-content:center;min-height:44px;font-family:var(--police-titre);font-weight:700;font-size:1.9rem;line-height:1.05;color:var(--brun);text-decoration:none}
+.nom-du-site.signe{animation:signe 2.2s cubic-bezier(.45,0,.3,1) .2s both}
+@keyframes signe{0%{clip-path:inset(-10% 100% -10% 0);opacity:.6}100%{clip-path:inset(-10% 0 -10% 0);opacity:1}}
+html.calme .nom-du-site.signe{animation:none}
 .nom-du-site small{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.05rem;line-height:1.2;color:var(--brun-fonce)}
 /* Accueil sur téléphone : en-tête compact, nom et sous-titre sur la même ligne */
 @media (max-width:47.99rem){
@@ -125,6 +128,26 @@ main{display:block}
   background:radial-gradient(ellipse 60% 45% at 18% 0,rgba(255,246,222,.85),rgba(255,246,222,0) 70%),radial-gradient(ellipse 50% 40% at 100% 100%,rgba(223,200,167,.35),rgba(223,200,167,0) 70%);
 }
 .carte>*,.bandeau>*{position:relative;z-index:1}
+/* Cartes qui s'ouvrent (Parents) : le titre d'abord, le texte au toucher, une veilleuse qui s'allume. */
+.carte-pli{padding:0}
+.carte-pli summary{list-style:none;cursor:pointer;padding:1.3rem 3rem 1.2rem 1.25rem;position:relative;min-height:44px;border-radius:var(--rayon)}
+.carte-pli summary::-webkit-details-marker{display:none}
+.carte-pli summary h3{margin:0}
+.carte-pli summary::after{ /* petite étoile qui tourne quand la carte s'ouvre */
+  content:"";position:absolute;right:1.1rem;top:50%;width:1.1rem;height:1.1rem;margin-top:-.55rem;background:#E7B66F;
+  clip-path:polygon(50% 0,59% 38%,100% 50%,59% 62%,50% 100%,41% 62%,0 50%,41% 38%);
+  transition:transform .8s cubic-bezier(.3,.6,.3,1),opacity .5s ease;opacity:.75;
+}
+.carte-pli details[open] summary::after{transform:rotate(135deg) scale(1.2);opacity:1}
+.carte-pli summary:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+.carte-pli details>p{margin:0;padding:0 1.25rem 1.4rem;animation:entree .9s ease both}
+.carte-pli details[open]{box-shadow:inset 0 0 0 1px rgba(246,217,168,.6)}
+.carte-pli details[open]::before{ /* veilleuse qui s'allume */
+  content:"";position:absolute;left:50%;top:0;width:70%;height:60%;transform:translateX(-50%);pointer-events:none;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,243,214,.9),rgba(246,217,168,0) 70%);animation:entree 1.2s ease both;
+}
+.carte-pli details{position:relative;border-radius:var(--rayon)}
+html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{animation:none}
 .bandeau{overflow:hidden}
 .carte:hover{transform:translateY(-4px);box-shadow:var(--ombre-haute)}
 .carte h2,.carte h3{font-size:1.7rem;margin-bottom:.3em}
@@ -234,6 +257,12 @@ html.calme .cadre-portrait::after,html.calme .flotte-douce::after,html.calme .co
   padding:.4rem 1rem;border:1px solid var(--or);border-radius:999px;
 }
 .calmer-pied:hover{background:rgba(246,217,168,.45)}
+.pied-boutons{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.ecouter{font:inherit;font-size:.9rem;color:var(--brun-fonce);background:transparent;cursor:pointer;min-height:44px;padding:.4rem 1rem .4rem 2.2rem;border:1px solid var(--or);border-radius:999px;position:relative}
+.ecouter::before{content:"\266B";position:absolute;left:.9rem;top:50%;transform:translateY(-50%);font-family:"Segoe UI Symbol","Apple Symbols",var(--police-fine);color:var(--caramel)}
+.ecouter[aria-pressed="true"]{background:rgba(246,217,168,.45);box-shadow:inset 0 -3px 0 var(--or)}
+.ecouter[aria-pressed="true"]::before{animation:note-bat 1.2s ease-in-out infinite alternate}
+@keyframes note-bat{0%{transform:translateY(-50%) rotate(-8deg)}100%{transform:translateY(-50%) rotate(8deg) scale(1.15)}}
 .calmer-pied[aria-pressed="true"]{box-shadow:inset 0 -3px 0 var(--or)}
 
 @media (max-width:47.99rem){
@@ -265,6 +294,19 @@ html.calme .cadre-portrait::after,html.calme .flotte-douce::after,html.calme .co
 @keyframes entree{from{opacity:0}to{opacity:1}}
 .js .page-tete h1{animation:encre-page 1.5s cubic-bezier(.4,0,.25,1) both}
 .page-tete{position:relative}
+/* Sous le titre : un trait de stylo rose se dessine, puis un mot doux en écriture fine (à compléter par Nath). */
+.page-tete h1{position:relative;display:inline-block;padding:0 .2em .12em}
+.page-tete h1::after{
+  content:"";position:absolute;left:.25em;right:.25em;bottom:0;height:.26em;pointer-events:none;
+  background:url("../images/decor/trait-stylo.svg") center/100% 100% no-repeat;
+  transform:scaleX(0);transform-origin:left center;opacity:.9;
+}
+.js .page-tete h1::after{animation:trait-titre 1.2s cubic-bezier(.45,0,.3,1) 1.1s both}
+@keyframes trait-titre{to{transform:scaleX(1)}}
+.mot-doux{max-width:30rem;margin:.2rem auto 0;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:clamp(1.25rem,4.2vw,1.5rem);line-height:1.4;color:var(--brun-fonce)}
+.js .mot-doux{animation:entree 1.4s ease 1.9s both}
+html.calme .page-tete h1::after{animation:none;transform:scaleX(1)}
+html.calme .mot-doux{animation:none}
 .poussiere-titre{position:absolute;width:7px;height:7px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 40%,rgba(246,217,168,0) 80%);box-shadow:0 0 .5rem .12rem rgba(246,217,168,.9);
   opacity:0;animation:poussiere-titre 2.2s ease-out var(--pl,0s) both}
@@ -311,7 +353,16 @@ html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.cal
 /* ===== 12. Page « Le livre » et bas de page (autrice, contact, lettre) ===== */
 .livre-fiche{display:grid;gap:1.5rem;align-items:center;justify-items:center;text-align:center}
 .cadre-livre{max-width:14rem;margin:0}
-.cadre-livre img{aspect-ratio:3/4}
+.cadre-livre img{aspect-ratio:3/4;transform-origin:50% 100%;animation:balance-livre 9s ease-in-out infinite alternate}
+@keyframes balance-livre{0%{transform:rotate(-1.4deg) translateY(0)}100%{transform:rotate(1.4deg) translateY(-3px)}}
+.cadre-livre{overflow:hidden}
+.cadre-livre::after{ /* reflet doré qui passe de temps en temps sur la couverture */
+  content:"";position:absolute;top:-20%;bottom:-20%;left:-40%;width:35%;pointer-events:none;
+  background:linear-gradient(105deg,rgba(255,246,222,0),rgba(255,246,222,.55) 50%,rgba(255,246,222,0));
+  transform:skewX(-12deg) translateX(0);animation:reflet 11s ease-in-out infinite;
+}
+@keyframes reflet{0%,70%{transform:skewX(-12deg) translateX(0)}100%{transform:skewX(-12deg) translateX(520%)}}
+html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
 .etiquette{display:inline-block;margin:0 0 .8rem;padding:.25rem 1rem;border-radius:999px;background:var(--vert-eau);color:var(--brun-fonce);font-weight:700;font-size:1rem}
 .age{margin:0}
 .bas-blocs{display:grid;gap:1.5rem;margin-bottom:1.5rem}
@@ -403,6 +454,22 @@ html.calme .etoile{opacity:.6;transform:none}
 html.calme .ve-eclat{opacity:0}
 .collection{margin:0 0 .3rem;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.15rem;color:var(--brun-fonce)}
 .cadre-portrait img[src$=".png"]{aspect-ratio:560/900}
+
+/* ===== 15. Un Doudou qui dort en bas de page : il respire doucement, trois petits z s'envolent ===== */
+.doudou-dort{position:relative;width:min(8.5rem,38vw);margin:2.5rem auto 0;isolation:isolate}
+.doudou-dort img{width:100%;height:auto;transform-origin:50% 100%;
+  -webkit-mask-image:radial-gradient(ellipse 48% 46% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 48% 46% at 50% 50%,#000 55%,transparent 100%);   /* bords fondus : image provisoire recadrée */
+  animation:dort-respire 5.5s ease-in-out infinite alternate;filter:drop-shadow(0 8px 12px rgba(124,92,67,.2))}
+.doudou-dort::before{content:"";position:absolute;inset:-14% -22% -10%;z-index:-1;border-radius:50%;background:radial-gradient(ellipse,rgba(255,243,214,.9),rgba(246,217,168,0) 70%);animation:veilleuse-page 7s ease-in-out infinite alternate}
+@keyframes dort-respire{0%{transform:scale(1)}100%{transform:scale(1.03) translateY(-2px)}}
+.zzz{position:absolute;right:-6%;top:6%;font-family:var(--police-titre);font-weight:700;color:var(--caramel);pointer-events:none}
+.zzz i{position:absolute;font-style:normal;opacity:0;animation:zzz 4.5s ease-in-out infinite}
+.zzz i:nth-child(1){font-size:1rem;animation-delay:0s}
+.zzz i:nth-child(2){font-size:1.3rem;animation-delay:1.5s}
+.zzz i:nth-child(3){font-size:1.6rem;animation-delay:3s}
+@keyframes zzz{0%{opacity:0;transform:translate3d(0,0,0)}20%{opacity:.9}100%{opacity:0;transform:translate3d(1rem,-2.6rem,0)}}
+html.calme .doudou-dort img,html.calme .doudou-dort::before,html.calme .zzz i{animation:none}
+html.calme .zzz{display:none}
 
 /* ===== 14. Images détourées (PNG sans fond) : elles flottent à peine ; la scène respire très lentement ===== */
 .flotte-douce{max-width:22rem;margin:0 auto 1.5rem;animation:flotte-douce 11s ease-in-out infinite alternate}

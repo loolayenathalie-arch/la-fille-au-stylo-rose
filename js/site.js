@@ -65,7 +65,7 @@
   }
 
   /* ---------- Ciel d'étoiles ----------
-     Quelques perles de lumière qui respirent doucement, et une étoile plus grande (l'âme) qui brille tout le temps.
+     Quelques perles de lumière qui respirent doucement, et une étoile qui veille (la même que sur l'accueil, en petit).
      Purement décoratif ; figé en mode calme (CSS). */
   var ciel = document.createElement('div');
   ciel.className = 'etoiles';
@@ -88,11 +88,24 @@
     e.style.setProperty('--dr', ((Math.random() - 0.5) * 16).toFixed(0) + 'px');
     ciel.appendChild(e);
   }
-  var ame = document.createElement('span');
-  ame.className = 'etoile-ame';
-  ame.appendChild(document.createElement('i'));
-  ciel.appendChild(ame);
   document.body.appendChild(ciel);
+
+  /* L'étoile qui veille : la même étoile scintillante que sur l'accueil, en petit, au-dessus de tout (jamais sur un champ : coin bas droit). */
+  var veille = document.createElement('div');
+  veille.className = 'veille';
+  veille.setAttribute('aria-hidden', 'true');
+  veille.innerHTML =
+    '<svg viewBox="-100 -100 200 200" focusable="false">' +
+    '<defs><radialGradient id="ve-degrade"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"/><stop offset=".3" stop-color="#FAE2B8" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs>' +
+    '<circle class="ve-halo" r="120" fill="url(#ve-degrade)"/>' +
+    '<g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/>' +
+    '<path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g>' +
+    '<g class="ve-coeur"><circle r="14" fill="#FFF3D6"/><circle r="7.5" fill="#FFFFFF"/></g>' +
+    '<path class="ve-eclat" d="M-62 -40 L-59 -43 L-62 -56 L-65 -43 L-78 -40 L-65 -37 L-62 -24 L-59 -37Z" fill="#FFFFFF"/>' +
+    '<path class="ve-eclat" d="M60 -58 L62.5 -60.5 L60 -70 L57.5 -60.5 L48 -58 L57.5 -55.5 L60 -46 L62.5 -55.5Z" fill="#FFF3D6"/>' +
+    '<path class="ve-eclat" d="M52 52 L54.5 49.5 L52 40 L49.5 49.5 L40 52 L49.5 54.5 L52 64 L54.5 54.5Z" fill="#FFFFFF"/>' +
+    '</svg>';
+  document.body.appendChild(veille);
 
   applique(false);
 })();

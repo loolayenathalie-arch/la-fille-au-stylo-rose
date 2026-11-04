@@ -14,7 +14,8 @@
   background:#FAF7F0;
 }
 .page-accueil .nom-du-site{color:var(--encre)}
-.page-accueil .etoiles{display:none}  /* l'accueil a ses propres étoiles */
+.page-accueil .etoiles,.page-accueil .veille{display:none}  /* l'accueil a ses propres étoiles et sa grande étoile */
+.page-accueil body::after,.js .page-accueil::after{display:none}  /* l'accueil a son propre nuage d'ouverture */
 
 .accueil{overflow-x:clip}
 .parcours{position:relative;height:250vh;height:250svh}

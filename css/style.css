@@ -345,9 +345,30 @@ body::before{
   background:radial-gradient(ellipse at 50% 55%,rgba(255,252,243,.92),rgba(255,247,230,.5) 48%,rgba(255,247,230,0) 72%);
   animation:nuage-passe var(--nd,100s) linear var(--nl,0s) infinite}
 @keyframes nuage-passe{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(calc(100vw + 60vw),var(--ny,-3vh),0)}}
+/* ===== Ce qui bouge : nuages ronds qui volent, notes de musique qui montent, pluie de lumière bleu pluie ===== */
+/* Nuages dodus (trois bosses), blancs crème, qui traversent lentement le ciel à des hauteurs différentes */
+.nuage-vol{position:absolute;left:-30vw;width:var(--nw,9rem);height:calc(var(--nw,9rem) * .42);pointer-events:none;will-change:transform;opacity:var(--no,.9);
+  animation:nuage-vol var(--nd,80s) linear var(--nl,0s) infinite}
+.nuage-vol::before,.nuage-vol::after,.nuage-vol i{content:"";position:absolute;bottom:0;border-radius:50%;background:radial-gradient(circle at 50% 45%,#FFFDF6 0,#FFF8EA 55%,rgba(255,248,234,.75) 100%);box-shadow:0 10px 24px -10px rgba(124,92,67,.18)}
+.nuage-vol::before{left:0;width:48%;height:70%}
+.nuage-vol::after{right:0;width:52%;height:62%}
+.nuage-vol i{left:22%;width:56%;height:100%;display:block}
+.nuage-vol.loin{filter:blur(1.5px)}
+@keyframes nuage-vol{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(calc(50vw + 15vw),var(--ny,-2vh),0)}100%{transform:translate3d(calc(100vw + 30vw),0,0)}}
+/* Notes de musique : elles montent doucement en se balançant, comme sorties du piano de Lili */
+.note{position:absolute;bottom:-3rem;left:var(--nx,50%);font-family:"Segoe UI Symbol","Apple Symbols","Noto Sans Symbols2",var(--police-fine);font-size:var(--ns,1.4rem);line-height:1;color:var(--nc,#B87A46);opacity:0;pointer-events:none;will-change:transform,opacity;
+  animation:note-monte var(--nd,14s) ease-in-out var(--nl,0s) infinite}
+@keyframes note-monte{0%{opacity:0;transform:translate3d(0,0,0) rotate(-8deg)}12%{opacity:.75}50%{transform:translate3d(1.2rem,-50vh,0) rotate(8deg)}88%{opacity:.6}100%{opacity:0;transform:translate3d(-.6rem,-105vh,0) rotate(-6deg)}}
+/* Pluie de lumière : de fines gouttes bleu pluie qui descendent très lentement et se dissolvent */
+.goutte{position:absolute;top:-6vh;left:var(--gx,50%);width:2px;height:var(--gh,22px);border-radius:999px;pointer-events:none;will-change:transform,opacity;opacity:0;
+  background:linear-gradient(180deg,rgba(137,168,184,0),rgba(160,190,205,.9) 50%,rgba(255,255,255,.9));box-shadow:0 0 .3rem rgba(137,168,184,.5);
+  animation:goutte var(--gd,9s) linear var(--gl,0s) infinite}
+@keyframes goutte{0%{opacity:0;transform:translate3d(0,0,0)}10%{opacity:.85}80%{opacity:.5}100%{opacity:0;transform:translate3d(-1.5vw,112vh,0)}}
+html.calme .nuage-vol,html.calme .note,html.calme .goutte{display:none}
 html.calme .brume-page,html.calme .nuage-passe{animation:none}
 html.calme .nuage-passe{display:none}
 .entete,main,.pied{position:relative;z-index:1}
+.entete{z-index:3}   /* rien ne passe devant le nom du site ni le menu */
 .veille{position:fixed;right:5%;bottom:8vh;z-index:4;width:3.4rem;height:3.4rem;cursor:pointer;background:none;border:0;padding:0;margin:0}
 .veille::before{content:"";position:absolute;inset:-.5rem}   /* zone tactile 44 px */
 .veille:focus-visible{outline:3px solid var(--focus);outline-offset:6px;border-radius:50%}

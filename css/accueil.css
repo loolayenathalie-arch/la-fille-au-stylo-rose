@@ -14,7 +14,11 @@
   background:#FAF7F0;
 }
 .page-accueil .nom-du-site{color:var(--encre)}
-.page-accueil .etoiles,.page-accueil .veille{display:none}  /* l'accueil a ses propres étoiles et sa grande étoile */
+.page-accueil .etoiles{display:block;z-index:2}   /* sur l accueil, nuages, notes et pluie passent devant la scène, en plus transparent */
+.page-accueil .nuage-vol{opacity:.55}
+.page-accueil .etoiles .etoile,.page-accueil .etoiles .brume-page,.page-accueil .etoiles .nuage-passe{display:none}
+.page-accueil .veille{display:none}   /* l'accueil a sa grande étoile */
+.page-accueil .nuage-vol.loin{opacity:.4}
 .page-accueil body::after,.js .page-accueil::after{display:none}  /* l'accueil a son propre nuage d'ouverture */
 
 .accueil{overflow-x:clip}

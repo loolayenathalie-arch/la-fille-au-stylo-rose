@@ -88,6 +88,50 @@
     nu.style.setProperty('--ny', ((Math.random() - 0.5) * 8).toFixed(1) + 'vh');
     ciel.appendChild(nu);
   }
+  /* Nuages ronds qui volent, notes de musique, pluie de lumière (moins nombreux sur téléphone) */
+  var petit = window.innerWidth < 700;
+  function pose(el, cle, val) { el.style.setProperty(cle, val); }
+  var nbVol = petit ? 3 : 5;
+  for (var nv = 0; nv < nbVol; nv++) {
+    var nuV = document.createElement('span');
+    nuV.className = 'nuage-vol' + (nv % 2 ? ' loin' : '');
+    nuV.appendChild(document.createElement('i'));
+    nuV.style.top = (4 + nv * (petit ? 24 : 16) + Math.random() * 8).toFixed(0) + '%';
+    pose(nuV, '--nw', (petit ? 5.5 + Math.random() * 3 : 7 + Math.random() * 6).toFixed(1) + 'rem');
+    var ndv = 70 + Math.random() * 50;
+    pose(nuV, '--nd', ndv.toFixed(0) + 's');
+    pose(nuV, '--nl', (-Math.random() * ndv).toFixed(0) + 's');
+    pose(nuV, '--ny', ((Math.random() - 0.5) * 6).toFixed(1) + 'vh');
+    pose(nuV, '--no', (nv % 2 ? 0.7 : 0.92).toFixed(2));
+    ciel.appendChild(nuV);
+  }
+  var glyphes = ['\u266A', '\u266B', '\u2669', '\u266A'];
+  var couleurs = ['#B87A46', '#C06A82', '#89A8B8', '#B87A46'];
+  var nbNotes = petit ? 4 : 7;
+  for (var nn = 0; nn < nbNotes; nn++) {
+    var no = document.createElement('span');
+    no.className = 'note';
+    no.textContent = glyphes[nn % glyphes.length];
+    pose(no, '--nx', (6 + Math.random() * 88).toFixed(0) + '%');
+    pose(no, '--ns', (1.1 + Math.random() * 1).toFixed(2) + 'rem');
+    pose(no, '--nc', couleurs[nn % couleurs.length]);
+    var ndn = 13 + Math.random() * 9;
+    pose(no, '--nd', ndn.toFixed(1) + 's');
+    pose(no, '--nl', (-Math.random() * ndn).toFixed(1) + 's');
+    ciel.appendChild(no);
+  }
+  var nbGouttes = petit ? 8 : 14;
+  for (var ng = 0; ng < nbGouttes; ng++) {
+    var go = document.createElement('span');
+    go.className = 'goutte';
+    pose(go, '--gx', (Math.random() * 100).toFixed(1) + '%');
+    pose(go, '--gh', (14 + Math.random() * 16).toFixed(0) + 'px');
+    var gd = 8 + Math.random() * 7;
+    pose(go, '--gd', gd.toFixed(1) + 's');
+    pose(go, '--gl', (-Math.random() * gd).toFixed(1) + 's');
+    ciel.appendChild(go);
+  }
+
   var nb = window.innerWidth < 700 ? 9 : 15;
   for (var n = 0; n < nb; n++) {
     var e = document.createElement('span');

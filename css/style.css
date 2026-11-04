@@ -375,6 +375,10 @@ html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.cal
 html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
 .livre-texte h2{margin-bottom:.1em}
 .livre-texte .sous-titre{margin:0 0 .9rem;font-size:clamp(1.25rem,4.2vw,1.5rem)}
+.resume{max-width:36rem}
+.resume .chapeau{margin-bottom:.8em}
+.resume p{margin-bottom:.8em}
+.resume-ecoute{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.2rem;color:var(--brun-fonce)}
 .etiquette{display:inline-block;margin:0 0 .8rem;padding:.25rem 1rem;border-radius:999px;background:var(--vert-eau);color:var(--brun-fonce);font-weight:700;font-size:1rem}
 .age{margin:0}
 .bas-blocs{display:grid;gap:1.5rem;margin-bottom:1.5rem}

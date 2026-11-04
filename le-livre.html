@@ -69,6 +69,31 @@
   </div>
  </section>
  <div class="lavis" aria-hidden="true"></div>
+ <!-- La fenêtre de Lili : composée en CSS (provisoire, en attendant le dessin de Sylvia). L'Étoile veille derrière la vitre,
+      le rideau frémit, et un fil de lumière descend de l'Étoile jusqu'au cœur des Doudous quand on arrive dessus. -->
+ <section class="fenetre-scene apparait" aria-label="La fenêtre de Lili">
+  <div class="fenetre">
+   <div class="fenetre-ciel">
+    <span class="fenetre-nuage n1"></span><span class="fenetre-nuage n2"></span>
+    <svg class="fenetre-etoile" viewBox="-100 -100 200 200" focusable="false" aria-hidden="true">
+     <defs><radialGradient id="fe-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".3" stop-color="#FAE2B8" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs>
+     <circle class="ve-halo" r="120" fill="url(#fe-degrade)"/>
+     <g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/><path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g>
+     <g class="ve-coeur"><circle r="14" fill="#FFF3D6"/><circle r="7.5" fill="#FFFFFF"/></g>
+    </svg>
+    <svg class="fil-etoile" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+     <path class="fil-etoile-halo" d="M50 14 C 46 34, 58 52, 50 68 S 40 86, 44 96"/>
+     <path class="fil-etoile-trait" d="M50 14 C 46 34, 58 52, 50 68 S 40 86, 44 96"/>
+    </svg>
+    <!-- EMPLACEMENT IMAGE : images/personnages/doudous-duo.webp (les Doudous à la fenêtre ; même fichier que l'accueil) -->
+    <picture class="fenetre-doudous"><source type="image/webp" srcset="images/personnages/doudous-duo.webp"><img src="images/personnages/doudous-duo.png" width="750" height="848" alt="[texte de Nath : description de l’image]"></picture>
+   </div>
+   <span class="fenetre-croisillon" aria-hidden="true"></span>
+   <span class="fenetre-rideau" aria-hidden="true"></span>
+  </div>
+  <p class="fenetre-legende">Le soir, on aime bien regarder par la fenêtre. Il y a notre Étoile, toujours tout près de nous.</p>
+ </section>
+ <div class="lavis" aria-hidden="true"></div>
  <!-- EMPLACEMENT IMAGE : images/pages/lili-au-piano.webp (scène ; remplacer le fichier, même nom) -->
  <div class="cadre-aquarelle cadre-scene scene-vivante apparait"><img src="images/pages/lili-au-piano.webp" width="1200" height="896" alt="[texte de Nath : description de l’image]"></div>
  <!-- RÈGLE : rien de commercial sur cette page (pas de prix, pas de bouton d'achat, pas de QR code). -->

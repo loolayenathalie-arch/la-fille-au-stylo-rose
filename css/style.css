@@ -206,6 +206,16 @@ html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{anim
 .bandeau:hover .coeur-page::before{opacity:1;transform:scale(1.4)}
 @keyframes coeur-page{0%{opacity:.5;transform:scale(.9)}100%{opacity:1;transform:scale(1.25)}}
 html.calme .cadre-portrait::after,html.calme .flotte-douce::after,html.calme .coeur-page::before{animation:none}
+/* Le secret du gilet : un petit Doudou glisse dans la manche de Lili, deux notes s'échappent */
+.bandeau-rose .cadre-portrait{cursor:pointer}
+.bandeau-rose .cadre-portrait:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+.manche-doudou{position:absolute;left:52%;top:56%;width:22%;pointer-events:none;z-index:3;opacity:0;transform:translate(40%,-10%) rotate(10deg) scale(.8)}
+.manche-doudou img{width:100%;height:auto;-webkit-mask-image:radial-gradient(ellipse 50% 48% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 48% at 50% 50%,#000 55%,transparent 100%)}
+.blotti .manche-doudou{animation:blotti 3.2s ease-in-out forwards}
+@keyframes blotti{0%{opacity:0;transform:translate(40%,-10%) rotate(10deg) scale(.8)}25%{opacity:1;transform:translate(10%,0) rotate(0) scale(1)}70%{opacity:1;transform:translate(-6%,10%) rotate(-6deg) scale(.7)}100%{opacity:0;transform:translate(-12%,16%) rotate(-10deg) scale(.4)}}
+.note-manche{position:absolute;left:58%;top:50%;font-family:"Segoe UI Symbol","Apple Symbols",var(--police-fine);font-size:1.4rem;color:var(--nc,#C06A82);opacity:0;pointer-events:none;z-index:4;animation:note-doudou-page 2.4s ease-out var(--nl,0s) forwards}
+@keyframes note-doudou-page{0%{opacity:0;transform:translate3d(0,0,0) scale(.6)}15%{opacity:1;transform:translate3d(0,-.6rem,0) scale(1)}100%{opacity:0;transform:translate3d(var(--nx,0px),-5rem,0) rotate(12deg)}}
+html.calme .manche-doudou,html.calme .note-manche{display:none}
 .cadre-portrait img{aspect-ratio:1/1}
 
 /* ===== 6. Séparateurs : lavis et traits de pinceau, jamais de lignes droites ===== */
@@ -233,7 +243,7 @@ html.calme .cadre-portrait::after,html.calme .flotte-douce::after,html.calme .co
 
 /* ===== 9. Pied de page ===== */
 .pied{position:relative;margin-top:5.5rem;padding:2.6rem 1rem 2.4rem;
-  background:var(--grain),linear-gradient(180deg,#EFE3CE 0%,#E6D3B5 55%,#DCC4A0 100%)}
+  background:var(--grain),linear-gradient(180deg,#EFE3CE 0%,#DCC6AE 45%,#C4B3AE 100%)}   /* vers le crépuscule : le brun reste lisible (≥ 5:1) */
 .pied::after{ /* lueur douce en haut à droite, comme une lampe qu'on laisse allumée */
   content:"";position:absolute;right:0;top:-10%;width:55%;height:70%;pointer-events:none;border-radius:50%;
   background:radial-gradient(ellipse,rgba(255,246,222,.7),rgba(255,246,222,0) 70%);
@@ -374,6 +384,41 @@ html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
   .bas-blocs{grid-template-columns:repeat(3,1fr);gap:2rem}
 }
 
+/* ===== 12 ter. La fenêtre de Lili : cadre de bois doux, vitre sur le ciel du soir, rideau pêche, l'Étoile et son fil ===== */
+.fenetre-scene{max-width:30rem;margin:2.5rem auto}
+.fenetre{position:relative;aspect-ratio:4/5;border-radius:34px 34px 14px 14px;padding:.9rem;isolation:isolate;
+  background:linear-gradient(180deg,#C7AB8B,#B08C6A);box-shadow:var(--ombre-haute),inset 0 0 0 1px rgba(255,246,222,.35)}
+.fenetre-ciel{position:absolute;inset:.9rem;overflow:hidden;border-radius:26px 26px 8px 8px;
+  background:linear-gradient(180deg,#F3D9A8 0%,#E8B98A 38%,#B8A4B2 70%,#6E6F9A 100%)}
+.fenetre-nuage{position:absolute;width:46%;height:16%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,250,238,.95),rgba(255,247,230,0) 70%);filter:blur(2px);animation:fenetre-nuage 40s ease-in-out infinite alternate}
+.fenetre-nuage.n1{left:-10%;top:22%}
+.fenetre-nuage.n2{right:-12%;top:40%;animation-delay:-20s;animation-duration:52s}
+@keyframes fenetre-nuage{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(12%,-3%,0)}}
+.fenetre-etoile{position:absolute;left:50%;top:14%;width:34%;transform:translate(-50%,-50%);overflow:visible}
+.fil-etoile{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fil-etoile path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
+.fil-etoile-halo{stroke:#FFF3D6;stroke-width:7;opacity:.5}
+.fil-etoile-trait{stroke:#FFF8EA;stroke-width:2.2}
+.js .apparait.visible .fil-etoile path{animation:fil-trace 3.2s cubic-bezier(.45,0,.3,1) .6s forwards,fil-vie 5s ease-in-out 3.8s infinite alternate}
+@keyframes fil-trace{to{stroke-dashoffset:0}}
+@keyframes fil-vie{0%{opacity:.55}100%{opacity:1}}
+.fenetre-doudous{position:absolute;left:50%;bottom:-6%;width:62%;transform:translateX(-50%);display:block}
+.fenetre-doudous img{width:100%;height:auto;animation:dort-respire 6s ease-in-out infinite alternate;transform-origin:50% 100%;
+  -webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent 100%);mask-image:linear-gradient(to bottom,#000 70%,transparent 100%)}
+.fenetre-croisillon{position:absolute;inset:.9rem;pointer-events:none;border-radius:26px 26px 8px 8px;
+  background:linear-gradient(90deg,transparent calc(50% - 4px),#B08C6A calc(50% - 4px),#B08C6A calc(50% + 4px),transparent calc(50% + 4px)),
+             linear-gradient(180deg,transparent calc(42% - 4px),#B08C6A calc(42% - 4px),#B08C6A calc(42% + 4px),transparent calc(42% + 4px));
+  box-shadow:inset 0 0 40px rgba(255,246,222,.35)}
+.fenetre-rideau{position:absolute;left:-2%;top:-3%;width:40%;height:108%;pointer-events:none;border-radius:0 40% 60% 0 / 0 30% 70% 0;
+  background:linear-gradient(90deg,rgba(240,196,178,.98),rgba(230,184,162,.9) 60%,rgba(230,184,162,.35));
+  box-shadow:6px 0 18px -6px rgba(124,92,67,.35);transform-origin:0 0;animation:rideau 9s ease-in-out infinite alternate}
+.fenetre-rideau::before{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 6px,rgba(0,0,0,0) 6px 18px)}
+@keyframes rideau{0%{transform:skewY(0) scaleX(1)}100%{transform:skewY(1.2deg) scaleX(1.03)}}
+.fenetre-legende{text-align:center;margin:1rem auto 0;max-width:26rem;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.3rem;line-height:1.45;color:var(--brun-fonce)}
+html.calme .fenetre-nuage,html.calme .fenetre-rideau,html.calme .fenetre-doudous img,html.calme .fil-etoile path,html.calme .fenetre-etoile *{animation:none!important}
+html.calme .fil-etoile path{stroke-dashoffset:0}
+
 /* ===== 12 bis. L'introduction du livre : trois volets, comme trois pages qu'on tourne ===== */
 .intro{margin:1.5rem 0 2rem}
 .intro h2{display:block;text-align:center;margin:0 auto .8rem}
@@ -388,6 +433,15 @@ html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
   .intro-volet:nth-child(2){margin-top:1.2rem}
   .intro-volet:nth-child(3){grid-column:1 / -1;max-width:44rem;margin:.5rem auto 0}
 }
+.phrase{display:inline;opacity:0;transition:opacity 1.1s ease,transform 1.1s ease;transform:translateY(4px)}
+.js .apparait.visible .phrase{opacity:1;transform:none}
+.volet-coeur{position:absolute;right:1.2rem;top:1.3rem;width:.9rem;height:.9rem;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,#FFFFFF 0,#FFF3D6 30%,rgba(246,217,168,.8) 55%,rgba(246,217,168,0) 75%);
+  box-shadow:0 0 .6rem .15rem rgba(246,217,168,.8);opacity:0;transform:scale(.6);transition:opacity .8s ease,transform .8s ease}
+.js .apparait.visible .volet-coeur{opacity:1;transform:scale(1);animation:coeur-page 2.2s ease-in-out 1s infinite alternate}
+.js .apparait.lu .volet-coeur{animation:coeur-page 4s ease-in-out infinite alternate;opacity:.6}
+html.calme .phrase{opacity:1;transform:none;transition:none}
+html.calme .volet-coeur{animation:none}
 .js .intro-volet.apparait{transition-delay:.15s}
 .js .intro-volet.apparait:nth-child(2){transition-delay:.35s}
 .js .intro-volet.apparait:nth-child(3){transition-delay:.55s}
@@ -402,6 +456,11 @@ body::before{
     radial-gradient(ellipse 60% 40% at 88% 100%,rgba(223,200,167,.5),rgba(223,200,167,0) 70%);
 }
 .etoiles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+/* Le soir qui tombe : plus on descend, plus le ciel se teinte de bleu nuit (--nuit de 0 à 1, posé par js/site.js) */
+.nuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:var(--nuit,0);transition:opacity .4s linear;
+  background:linear-gradient(180deg,rgba(137,168,184,0) 0%,rgba(120,140,170,.28) 45%,rgba(84,92,130,.55) 100%)}
+.nuit::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 100%,rgba(60,66,110,.5),rgba(60,66,110,0) 70%)}
+html.calme .nuit{transition:none}
 /* Brumes colorées : une pointe de rose-pêche en haut, un souffle de bleu pluie en bas, qui dérivent comme le soir qui tombe. */
 .brume-page{position:absolute;border-radius:50%;will-change:transform;filter:blur(2px)}
 .brume-peche{left:-20%;top:-18%;width:90%;height:48%;background:radial-gradient(ellipse at 50% 50%,rgba(240,196,178,.55),rgba(230,184,162,.22) 45%,rgba(230,184,162,0) 72%);animation:brume-a 46s ease-in-out -12s infinite alternate}
@@ -453,7 +512,10 @@ html.calme .ve-poussiere{display:none}
 }
 .etoile.rose{background:radial-gradient(circle,#FFF3D6 0,#FFF3D6 16%,rgba(240,200,190,.95) 34%,rgba(230,184,162,.42) 56%,rgba(230,184,162,0) 72%)}
 .etoile.bleu{background:radial-gradient(circle,#FFF6E3 0,#FFF6E3 16%,rgba(176,203,216,.95) 34%,rgba(137,168,184,.4) 56%,rgba(137,168,184,0) 72%)}
-@keyframes perle{0%{opacity:.3;scale:.8}100%{opacity:1;scale:1.12}}
+@keyframes perle{0%{opacity:calc(.3 + var(--nuit,0) * .3);scale:.8}100%{opacity:1;scale:1.12}}
+@keyframes perle-nuit{0%{opacity:calc(var(--nuit,0) * .25);scale:.8}100%{opacity:calc(var(--nuit,0) * .95);scale:1.1}}
+.etoile.nuit-seule{animation:perle-nuit var(--d,5s) ease-in-out var(--dl,0s) infinite alternate}
+html.calme .etoile.nuit-seule{opacity:calc(var(--nuit,0) * .7)}
 @keyframes perle-monte{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(var(--dr,6px),var(--dv,-8vh),0)}}
 /* L'étoile qui veille : la même étoile scintillante que sur l'accueil, en plus petit, toujours là (js/site.js la dessine). */
 .veille svg{display:block;width:100%;height:100%;overflow:visible}

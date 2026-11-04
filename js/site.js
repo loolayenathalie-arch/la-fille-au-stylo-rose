@@ -282,6 +282,17 @@
     }).catch(function () {});
   }
 
+  /* Le stylo rose écrit la dernière ligne de l'accroche, une fois par visite */
+  var ecrit = document.querySelector('.page-accueil .ecrit');
+  if (ecrit && !calme) {
+    var dejaEcrit = null;
+    try { dejaEcrit = window.sessionStorage.getItem('ecrit'); } catch (e) { dejaEcrit = null; }
+    if (!dejaEcrit) {
+      ecrit.classList.add('ecrit-vif');
+      try { window.sessionStorage.setItem('ecrit', '1'); } catch (e) { /* tant pis */ }
+    }
+  }
+
   /* Le nom du site s'écrit à la main une fois par visite, sur l'accueil */
   var nom = document.querySelector('.page-accueil .nom-du-site');
   if (nom && !calme) {
@@ -290,6 +301,21 @@
     if (!signe) {
       nom.classList.add('signe');
       try { window.sessionStorage.setItem('signe', '1'); } catch (e) { /* tant pis */ }
+    }
+  }
+
+  /* La page L'Étoile : de petites étoiles fixes dans la nuit */
+  var cielEtoile = document.querySelector('.etoile-ciel');
+  if (cielEtoile) {
+    for (var ce = 0; ce < 28; ce++) {
+      var pt = document.createElement('span');
+      pt.className = 'etoile-pt';
+      pt.style.left = (Math.random() * 96 + 2).toFixed(1) + '%';
+      pt.style.top = (Math.random() * 96 + 2).toFixed(1) + '%';
+      var dpt = 3 + Math.random() * 5;
+      pt.style.setProperty('--d', dpt.toFixed(1) + 's');
+      pt.style.setProperty('--dl', (-Math.random() * dpt).toFixed(1) + 's');
+      cielEtoile.appendChild(pt);
     }
   }
 

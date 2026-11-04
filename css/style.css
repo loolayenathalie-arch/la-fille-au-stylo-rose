@@ -101,7 +101,7 @@ html.calme .nom-du-site.signe{animation:none}
 .menu a:hover::after{opacity:.4;transform:scaleX(1)}
 /* Petits téléphones (360 px) : les quatre entrées tiennent sur une seule ligne, zones tactiles toujours ≥ 44 px */
 @media (max-width:26rem){
-  .menu ul{flex-wrap:nowrap;gap:0 .1rem;justify-content:space-between}
+  .menu ul{flex-wrap:wrap;gap:0 .2rem;justify-content:flex-start}   /* cinq entrées : deux lignes propres sur petit téléphone */
   .menu a{padding:.5rem .4rem .7rem}
 }
 .menu a[aria-current="page"]::after{opacity:1;transform:scaleX(1)}
@@ -418,6 +418,19 @@ html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
 .fenetre-legende{text-align:center;margin:1rem auto 0;max-width:26rem;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.3rem;line-height:1.45;color:var(--brun-fonce)}
 html.calme .fenetre-nuage,html.calme .fenetre-rideau,html.calme .fenetre-doudous img,html.calme .fil-etoile path,html.calme .fenetre-etoile *{animation:none!important}
 html.calme .fil-etoile path{stroke-dashoffset:0}
+
+/* ===== 12 quater. La page L'Étoile : la nuit, l'Étoile seule, le fil qui descend vers les mots ===== */
+.page-etoile .page-tete{margin-bottom:1rem}
+.etoile-nuit{max-width:34rem;margin:0 auto 2rem}
+.etoile-ciel{position:relative;aspect-ratio:1/1;max-height:70vh;margin:0 auto;border-radius:50% 50% 46% 46% / 48% 48% 52% 52%;overflow:hidden;isolation:isolate;
+  background:radial-gradient(ellipse 70% 60% at 50% 30%,#8E86A8 0%,#5F6390 45%,#3E4470 100%);box-shadow:var(--ombre-haute),inset 0 0 60px rgba(255,246,222,.12)}
+.etoile-voile{position:absolute;inset:-20%;background:radial-gradient(ellipse 40% 30% at 30% 70%,rgba(137,168,184,.35),rgba(137,168,184,0) 70%),radial-gradient(ellipse 40% 30% at 75% 35%,rgba(230,184,162,.22),rgba(230,184,162,0) 70%);animation:brume-a 60s ease-in-out -20s infinite alternate}
+.etoile-grande{position:absolute;left:50%;top:30%;width:46%;transform:translate(-50%,-50%);overflow:visible}
+.etoile-ciel .etoile-pt{position:absolute;width:3px;height:3px;border-radius:50%;background:#FFF3D6;box-shadow:0 0 6px 1px rgba(255,243,214,.9);animation:perle var(--d,5s) ease-in-out var(--dl,0s) infinite alternate}
+.etoile-mots{max-width:28rem;margin:1.5rem auto 0;text-align:center}
+.etoile-mots .citation{padding:0;margin:0 0 1rem;font-size:clamp(1.45rem,5vw,1.8rem)}
+.page-etoile h1{color:var(--brun)}
+html.calme .etoile-voile,html.calme .etoile-pt{animation:none}
 
 /* ===== 12 bis. L'introduction du livre : trois volets, comme trois pages qu'on tourne ===== */
 .intro{margin:1.5rem 0 2rem}

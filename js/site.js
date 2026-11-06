@@ -178,7 +178,7 @@
   veille.setAttribute('aria-hidden', 'true');
   veille.innerHTML =
     '<svg viewBox="-100 -100 200 200" focusable="false">' +
-    '<defs><radialGradient id="ve-degrade"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"/><stop offset=".3" stop-color="#FAE2B8" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs>' +
+    '<defs><radialGradient id="ve-degrade"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"/><stop offset=".3" stop-color="#F2C97D" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs>' +
     '<circle class="ve-halo" r="120" fill="url(#ve-degrade)"/>' +
     '<g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/>' +
     '<path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g>' +

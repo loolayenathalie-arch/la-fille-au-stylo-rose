@@ -488,7 +488,7 @@ html.calme .stylo{display:none}
 
 /* Le ciel du soir en haut de la scène d accueil : bleu poudré, lavande très pâle, pêche, par-dessus les lumières (doux, jamais saturé) */
 .scene-contenu::before{content:"";position:absolute;left:-50vw;right:-50vw;top:0;height:62%;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(220,230,239,.9) 0%,rgba(231,226,240,.7) 36%,rgba(247,227,214,.45) 68%,rgba(247,227,214,0) 100%)}
+  background:linear-gradient(180deg,rgba(220,230,239,.9) 0%,rgba(231,226,240,.7) 34%,rgba(246,213,195,.55) 62%,rgba(246,213,195,0) 100%)}
 
 /* Rien de décoratif ne passe devant un texte : sur l accueil, la section de l Étoile et le pied de page restent au-dessus du ciel (nuages, notes) */
 .page-accueil .apres,.page-accueil .pied{position:relative;z-index:3}
@@ -505,6 +505,7 @@ html.nuit-mode .chapeau-accueil{color:var(--encre-douce)}
 html.nuit-mode .ecrit{color:#E6B8A2}
 html.nuit-mode .calmer{color:var(--encre-douce);background:rgba(35,42,71,.85);border-color:rgba(247,233,211,.35)}
 html.nuit-mode .apres{background:linear-gradient(180deg,#3A3356 0%,#1C2140 55%)}
+.apres{background:linear-gradient(180deg,#F6D5C3 0%,#FFFDF6 55%)}
 html.nuit-mode .doudou::before{opacity:.35}
 html.nuit-mode .accueil-liens .bouton{color:#2B3254;background:linear-gradient(180deg,#F7E9D3,#E7C79A)}
 html.nuit-mode .accueil-liens .bouton-doux{color:#F7E9D3;background:linear-gradient(180deg,#3A4466,#2B3254)}

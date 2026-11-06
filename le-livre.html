@@ -68,25 +68,13 @@
   </div>
  </div>
  <div class="lavis" aria-hidden="true"></div>
- <!-- L'introduction du livre : texte de Nath (mise en page seulement). Le seul passage entre crochets reste à écrire par elle. -->
+ <!-- L'introduction du livre : texte de Nath (mise en page seulement). -->
  <section class="intro" aria-labelledby="intro">
   <h2 id="intro">Pour commencer</h2>
   <div class="intro-volets">
    <article class="bandeau intro-volet apparait" aria-labelledby="intro-1">
     <h3 id="intro-1">Doudou Tout-Mou</h3>
     <p>Bonjour toi ! Je vais me présenter. Je suis Doudou Tout-Mou, farceur et bavard. Je suis petit, tout blanc, tout doux. Je suis tout mou parce qu’on me serre très fort, toutes les nuits. Tu peux me regarder… et peut-être sentir déjà combien je suis doux.</p>
-   </article>
-   <article class="bandeau bandeau-miel intro-volet apparait" aria-labelledby="intro-2">
-    <h3 id="intro-2">Doudou Grosse Tête</h3>
-    <p>Mon frère, c’est Doudou Grosse Tête. Il est un peu vieux… Son âge, c’est un secret !<br>Il est grand, avec son poil un peu usé, à force d’être serré depuis très, très longtemps.</p>
-    <p>Il a une grosse tête. Un jour, il est allé à la clinique des doudous. Mamie l’a réparé… et elle a mis tellement d’amour dans sa tête qu’elle est devenue un peu lourde. Alors parfois, il tombe sur le côté. Il est rigolo.</p>
-    <p>Il parle tout doucement, surtout avec ses dessins. Il a un cœur d’artiste, comme notre maman.<br>C’est mon frère.</p>
-   </article>
-   <article class="bandeau bandeau-bleu intro-volet apparait" aria-labelledby="intro-3">
-    <h3 id="intro-3">L’Étoile et Lili</h3>
-    <p>Le soir, on aime bien regarder par la fenêtre. Il y a notre Étoile, toujours tout près de nous. Elle brille en veillant sur nous, reliée à notre cœur.<br>Nous sommes trois… et nous sommes un.<br><span class="vide">[texte de Nath : l’Étoile nous guide jusqu’à la fenêtre de Lili]</span></p>
-    <p>On te présente notre amie Lili. On l’aime beaucoup.<br>Elle a un drôle de gilet, trop grand pour elle. Il est tout doux, on aime se blottir dedans.<br>Il va jusqu’au sol… on pourrait dire comme les oreilles de Doudou Grosse Tête, hihihi !<br>Elle a de grandes et larges manches. J’aime me blottir à l’intérieur : comme je suis petit, je tiens dedans. Et en m’y blottissant, je me sens tout au chaud.</p>
-    <p class="intro-fin">Chaque soir, avant que Lili s’endorme, une histoire commence.<br>Et toi, en t’installant bien confortablement…<br><em>L’histoire va commencer…</em></p>
    </article>
   </div>
  </section>
@@ -124,11 +112,8 @@
   <!-- TODO Brevo : brancher ce formulaire à la liste d'inscription (même démarche que la lettre du bas de page) :
        (1) liste + formulaire dans Brevo ; (2) autoriser le domaine Brevo dans vercel.json (form-action) ;
        (3) case de consentement + mention RGPD. Aucun script de suivi. Bouton désactivé tant que ce n'est pas branché. -->
-  <form class="formulaire" method="post" action="" aria-describedby="note-prevenir">
-   <div><label for="prevenir-courriel">Votre adresse e-mail</label><input id="prevenir-courriel" name="courriel" type="email" autocomplete="email" required></div>
-   <p id="note-prevenir" class="vide">[texte de Nath]</p>
-   <button class="bouton" type="submit" disabled>Être prévenu(e) de la sortie</button>
-  </form>
+  <!-- Pas encore relié à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+  <p class="etiquette">Inscriptions bientôt ouvertes</p>
  </section>
  <!-- EMPLACEMENT IMAGE : images/personnages/doudou-dort.png (petit Doudou qui dort, PNG sans fond ; remplacer le fichier, même nom) -->
  <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt="[texte de Nath : description de l’image]"></picture><span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>z</i></span></div>
@@ -151,10 +136,8 @@
     <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
          domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
          Bouton désactivé tant que ce n'est pas branché. -->
-    <form class="formulaire formulaire-bas" method="post" action="">
-     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
-     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
-    </form>
+    <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>
   <nav aria-label="Pied de page">

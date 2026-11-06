@@ -392,6 +392,10 @@ html.calme .accueil-liens{transition:none}
 /* ---------- Après la scène ---------- */
 .apres{background:linear-gradient(180deg,#DFC8A7 0%,#FAF7F0 55%)}
 .apres .chapeau{font-size:1rem;color:var(--encre-douce)}
+.apres-etoile{text-align:center;max-width:36rem;margin:0 auto}
+.apres-etoile h2{display:block;margin-bottom:.4rem}
+.apres-etoile .chapeau{font-size:clamp(1.25rem,4.2vw,1.5rem)}
+.apres-etoile .bouton{text-decoration:none;display:inline-flex;align-items:center}
 
 /* Téléphone : texte, étoile et Doudous se suivent, sans grand vide entre eux ; bouton en petite pastille */
 @media (max-width:47.99rem){

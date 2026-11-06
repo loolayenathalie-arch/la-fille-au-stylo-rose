@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/ecouter", "destination": "/ecouter.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",

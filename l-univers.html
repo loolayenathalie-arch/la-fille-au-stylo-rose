@@ -12,7 +12,7 @@
 <!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
 <meta name="robots" content="noindex, nofollow">
 <!-- TODO : description de la page -->
-<meta name="description" content="Lili, Doudou tout mou, Doudou Grosse Tête et leur Étoile.">
+<meta name="description" content="Lili, Doudou Tout-Mou, Doudou Grosse Tête et leur Étoile.">
 <meta name="theme-color" content="#EFE3CE">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -44,21 +44,27 @@
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/lili-piano.png (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
    <div class="cadre-aquarelle cadre-portrait"><picture><source type="image/webp" srcset="images/personnages/lili-piano.webp"><img loading="lazy" src="images/personnages/lili-piano.png" width="560" height="900" alt="[texte de Nath : description de l’image]"></picture></div>
-   <div><h2 id="lili">Lili</h2><p>Lili a 6 ans. Elle porte un long gilet de laine chaude, avec de longues manches, qui traîne jusqu'au sol. Quand les mots se cachent, un Doudou lui tend un stylo rose.</p></div>
+   <div><h2 id="lili">Lili</h2><p>Lili est l'amie des Doudous. Elle porte un drôle de gilet de laine, trop grand pour elle, qui traîne jusqu'au sol, avec de grandes manches où Doudou Tout-Mou aime se blottir. Certains soirs, ses mots restent coincés… alors les Doudous viennent la rejoindre.</p></div>
   </div>
  </section>
  <section class="bandeau  apparait" aria-labelledby="tout-mou">
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
    <div class="cadre-aquarelle cadre-portrait"><img loading="lazy" src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
-   <div><h2 id="tout-mou">Doudou tout mou</h2><p>Bonjour ! Moi, je suis Doudou tout mou. Je suis le plus petit des trois, si doux et si mou qu'on peut me plier en deux, me serrer fort, me câliner longtemps. C'est moi qui parle le plus, et je taquine un peu. Quand Lili cherche ses mots, je reste tout contre elle.</p></div>
+   <div><h2 id="tout-mou">Doudou Tout-Mou</h2><p>Bonjour ! Moi, je suis Doudou Tout-Mou. Je suis petit, tout blanc, tout doux, et tout mou parce qu'on me serre très fort, toutes les nuits. Je suis farceur et bavard : c'est moi qui raconte les histoires !</p></div>
   </div>
  </section>
  <section class="bandeau bandeau-miel apparait" aria-labelledby="grosse-tete">
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
    <div class="cadre-aquarelle cadre-portrait"><img loading="lazy" src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
-   <div><h2 id="grosse-tete">Doudou Grosse Tête</h2><p>Je suis Doudou Grosse Tête. Je suis le plus grand, avec une tête un peu plus grosse que la normale. J'ai plus de 40 ans, et quelques trous, tout recousus avec amour. Je suis là depuis toujours, tout près de Lili.</p></div>
+   <div><h2 id="grosse-tete">Doudou Grosse Tête</h2><p>Voici mon grand frère, Doudou Grosse Tête. Il est un peu vieux… mais son âge, c'est un secret ! Sa tête est si pleine d'amour qu'elle est devenue un peu lourde : alors parfois, il tombe sur le côté. Il parle peu, surtout avec ses dessins. Et il sait souvent les choses avant tout le monde.</p></div>
+  </div>
+ </section>
+ <section class="bandeau bandeau-bleu apparait" aria-labelledby="etoile">
+  <div class="deux-colonnes">
+   <div class="cadre-aquarelle cadre-portrait cadre-etoile"><span class="portrait-etoile" role="img" aria-label="L'Étoile"><svg viewBox="-100 -100 200 200" focusable="false" aria-hidden="true"><defs><radialGradient id="pe-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".3" stop-color="#FAE2B8" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="125" fill="url(#pe-degrade)"/><g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/><path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="14" fill="#FFF3D6"/><circle r="7.5" fill="#FFFFFF"/></g></svg></span></div>
+   <div><h2 id="etoile">L'Étoile</h2><p>Notre Étoile brille à la fenêtre et veille sur nous. Quand un enfant a besoin de nous, elle nous montre sa fenêtre avec un petit rayon de lumière.</p></div>
   </div>
  </section>
 </div>
@@ -80,10 +86,8 @@
     <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
          domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
          Bouton désactivé tant que ce n'est pas branché. -->
-    <form class="formulaire formulaire-bas" method="post" action="">
-     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
-     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
-    </form>
+    <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>
   <nav aria-label="Pied de page">

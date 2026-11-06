@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Écouter l'histoire – Les Doudous et l'Étoile</title>
+<meta property="og:title" content="Écouter l'histoire – Les Doudous et l'Étoile">
+<meta property="og:site_name" content="Les Doudous et l'Étoile">
+<meta property="og:image" content="https://www.lafilleaustylorose.com/images/partage.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:type" content="website"><meta property="og:locale" content="fr_FR">
+<!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
+<meta name="robots" content="noindex, nofollow">
+<!-- TODO : description de la page -->
+<meta name="description" content="Le petit caillou de papier, raconté par l'autrice.">
+<meta name="theme-color" content="#EFE3CE">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
+<header class="entete">
+ <div class="entete-interieur">
+  <a class="nom-du-site" href="index.html">Les Doudous et l'Étoile<small>La fille au stylo rose</small></a>
+  <nav class="menu" aria-label="Menu principal">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="l-etoile.html">L'Étoile</a></li>
+    <li><a href="parents.html">Les astuces des Doudous</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="contenu">
+<div class="contenu page-ecouter">
+ <header class="page-tete"><h1>Écouter l'histoire</h1><p class="mot-doux">Le petit caillou de papier, raconté par l'autrice</p></header>
+ <section class="bandeau bandeau-bleu apparait ecouter-bloc" aria-labelledby="ecoute">
+  <h2 id="ecoute">L'enregistrement arrive bientôt.</h2>
+  <!-- EMPLACEMENT AUDIO : déposer le fichier sons/le-petit-caillou-de-papier.mp3, puis retirer l'attribut hidden ci-dessous. Aucune inscription, aucune vente. -->
+  <audio class="lecteur" controls preload="none" src="sons/le-petit-caillou-de-papier.mp3" hidden>Votre navigateur ne sait pas lire ce fichier audio.</audio>
+  <p class="etiquette">Bientôt disponible</p>
+ </section>
+ <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt="Un Doudou qui dort"></picture></div>
+</div>
+</main>
+<footer class="pied">
+ <div class="pied-interieur">
+  <div class="bas-blocs">
+   <section class="bas-bloc" aria-labelledby="bas-autrice">
+    <h2 id="bas-autrice">L'autrice</h2>
+    <p class="vide">[texte de Nath]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-contact">
+    <h2 id="bas-contact">Contact</h2>
+    <!-- TODO : adresse contact@lafilleaustylorose.com à créer chez OVH ; la remplacer ici, puis en faire un lien mailto:. -->
+    <p class="vide">[adresse e-mail à compléter]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-lettre">
+    <h2 id="bas-lettre">La lettre</h2>
+    <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
+         domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
+         Bouton désactivé tant que ce n'est pas branché. -->
+    <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <p class="etiquette">Inscriptions bientôt ouvertes</p>
+   </section>
+  </div>
+  <nav aria-label="Pied de page">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="l-etoile.html">L'Étoile</a></li>
+    <li><a href="parents.html">Les astuces des Doudous</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+   </ul>
+  </nav>
+  <p>[texte de Nath]</p>
+  <div class="pied-boutons">
+   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+   <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).
+        Le bouton reste caché tant que le fichier n'existe pas ; jamais de lecture automatique. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter la boîte à musique</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/boite-a-musique.mp3"></audio>
+  </div>
+ </div>
+
+</footer>
+</body>
+</html>

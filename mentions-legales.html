@@ -39,15 +39,18 @@
 <div class="contenu">
  <header class="page-tete"><h1>Mentions légales</h1></header>
  <div class="lavis" aria-hidden="true"></div>
- <!-- TODO : compléter tout ce qui est marqué [à compléter]. Seuls les éléments donnés par Nath sont renseignés. -->
  <section class="section" aria-labelledby="editrice"><h2 id="editrice">Éditrice du site</h2>
-  <p>Amotessa S.à r.l.-S<br>RCS Luxembourg B279710<br>Gérante : Nathalie Diaz<br>
-  Siège social : [à compléter]<br>E-mail : [à compléter] <!-- TODO : contact@lafilleaustylorose.com quand la boîte existe --><br>
-  Numéro de TVA / autorisation d'établissement : [à compléter]</p></section>
- <section class="section" aria-labelledby="directeur"><h2 id="directeur">Direction de la publication</h2><p>[à compléter]</p></section>
- <section class="section" aria-labelledby="hebergeur"><h2 id="hebergeur">Hébergement</h2><p>[à compléter] <!-- Hébergeur actuel : Vercel Inc. (adresse à vérifier avant publication) --></p></section>
- <section class="section" aria-labelledby="pi"><h2 id="pi">Propriété intellectuelle</h2><p>[à compléter]</p></section>
- <section class="section" aria-labelledby="donnees"><h2 id="donnees">Données personnelles et cookies</h2><p>[à compléter]</p></section>
+  <p>Amotessa S.à r.l.-S<br>RCS Luxembourg B279710<br>Siège social : 1, rue Charles Gounod, L-1640 Luxembourg<br>
+  Autorisation d'établissement n° 10135061<br>
+  E-mail : [à compléter] <!-- TODO : contact@lafilleaustylorose.com quand la boîte existe --></p></section>
+ <section class="section" aria-labelledby="directeur"><h2 id="directeur">Direction de la publication</h2><p>Nathalie Diaz</p></section>
+ <section class="section" aria-labelledby="hebergeur"><h2 id="hebergeur">Hébergement</h2>
+  <p>Le site est hébergé par Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis.<br>
+  Le nom de domaine est enregistré chez OVH.</p></section>
+ <section class="section" aria-labelledby="pi"><h2 id="pi">Propriété intellectuelle</h2>
+  <p>Textes © Nathalie Diaz, tous droits réservés. Toute reproduction est interdite sans autorisation.</p></section>
+ <section class="section" aria-labelledby="donnees"><h2 id="donnees">Données personnelles et cookies</h2>
+  <p>Ce site ne dépose aucun cookie et n'utilise aucun outil de statistiques ni de suivi. Le choix « Réduire les animations » est gardé dans la mémoire de l'onglet le temps de la visite (sessionStorage) et n'est envoyé nulle part. Les formulaires de lettre d'information ne sont pas encore en service : aucune adresse e-mail n'est collectée pour l'instant.</p></section>
 </div>
 </main>
 <footer class="pied">
@@ -67,10 +70,8 @@
     <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
          domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
          Bouton désactivé tant que ce n'est pas branché. -->
-    <form class="formulaire formulaire-bas" method="post" action="">
-     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
-     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
-    </form>
+    <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>
   <nav aria-label="Pied de page">

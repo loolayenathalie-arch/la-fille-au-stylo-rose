@@ -439,6 +439,12 @@ html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
 html.calme .fenetre-nuage,html.calme .fenetre-rideau,html.calme .fenetre-doudous img,html.calme .fil-etoile path,html.calme .fenetre-etoile *{animation:none!important}
 html.calme .fil-etoile path{stroke-dashoffset:0}
 
+/* L'Étoile dans L'univers : même cadre que les personnages, le ciel du soir derrière elle */
+.cadre-etoile{background:linear-gradient(180deg,#8E86A8 0%,#5F6390 55%,#3E4470 100%)}
+.cadre-etoile::after{display:none}
+.portrait-etoile{display:block;aspect-ratio:1/1;border-radius:18px}
+.portrait-etoile svg{display:block;width:100%;height:100%;overflow:visible}
+
 /* ===== 12 quater. La page L'Étoile : la nuit, l'Étoile seule, le fil qui descend vers les mots ===== */
 .page-etoile .page-tete{margin-bottom:1rem}
 .etoile-nuit{max-width:34rem;margin:0 auto 2rem}
@@ -451,6 +457,15 @@ html.calme .fil-etoile path{stroke-dashoffset:0}
 .etoile-mots .citation{padding:0;margin:0 0 1rem;font-size:clamp(1.45rem,5vw,1.8rem)}
 .page-etoile h1{color:var(--brun)}
 html.calme .etoile-voile,html.calme .etoile-pt{animation:none}
+
+.pour-finir{text-align:center;max-width:32rem;margin:1.5rem auto 0;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.3rem;line-height:1.45;color:var(--brun-fonce)}
+
+/* ===== Page « Écouter l'histoire » ===== */
+.page-ecouter{text-align:center}
+.ecouter-bloc{max-width:36rem;margin:1.5rem auto}
+.ecouter-bloc h2{display:block;font-size:1.6rem}
+.lecteur{display:block;width:100%;max-width:28rem;margin:1rem auto}
+.lecteur[hidden]{display:none}
 
 /* ===== Page « Oups » (404) ===== */
 .page-oups{text-align:center;min-height:50vh}
@@ -468,7 +483,7 @@ html.calme .etoile-voile,html.calme .etoile-pt{animation:none}
 .intro-volet p:last-child{margin-bottom:0}
 .intro-fin{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.3rem!important;line-height:1.45!important;color:var(--brun-fonce);margin-top:1.2em!important}
 @media (min-width:48rem){
-  .intro-volets{grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start}
+  .intro-volets{grid-template-columns:1fr;max-width:40rem;margin:0 auto;gap:1.5rem;align-items:start}
   .intro-volet:nth-child(2){margin-top:1.2rem}
   .intro-volet:nth-child(3){grid-column:1 / -1;max-width:44rem;margin:.5rem auto 0}
 }
@@ -559,7 +574,7 @@ html.calme .etoile.nuit-seule{opacity:calc(var(--nuit,0) * .7)}
 /* L'étoile qui veille : la même étoile scintillante que sur l'accueil, en plus petit, toujours là (js/site.js la dessine). */
 .veille svg{display:block;width:100%;height:100%;overflow:visible}
 .ve-halo{transform-origin:center;transform-box:fill-box;animation:ve-pulse 6s ease-in-out infinite alternate}
-.ve-rayons{transform-origin:center;animation:ve-tourne 110s linear infinite}
+.ve-rayons{transform-origin:center;transform-box:fill-box;animation:ve-tourne 110s linear infinite}
 .ve-coeur{transform-origin:center;transform-box:fill-box;animation:ve-scintille 1.9s ease-in-out infinite alternate}
 .ve-eclat{transform-box:fill-box;transform-origin:center;opacity:0;animation:ve-eclat 3.3s ease-in-out infinite}
 .ve-eclat:nth-of-type(2){animation-delay:-1.2s;animation-duration:4.1s}

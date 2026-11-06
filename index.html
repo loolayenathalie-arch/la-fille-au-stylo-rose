@@ -12,7 +12,7 @@
 <!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
 <meta name="robots" content="noindex, nofollow">
 <!-- TODO : description de la page -->
-<meta name="description" content="[texte de Nath]">
+<meta name="description" content="Les Doudous et l'Étoile : des histoires du soir tout en douceur, pour les enfants de 4 à 7 ans.">
 <meta name="theme-color" content="#F0E4CE">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -86,6 +86,7 @@
      <!-- Emplacements des Doudous : remplacer les fichiers (même nom, PNG ou SVG fond transparent).
           Si le fichier est un .png, changer l'extension ci-dessous.
           Le flou final (silhouettes douces) se règle avec --flou-final dans css/accueil.css. -->
+     <!-- Image provisoire, à remplacer par les illustrations de Sylvia (chien grand, ours petit) -->
      <!-- EMPLACEMENT IMAGE : images/personnages/doudous-duo.png (l'ours blanc et le chien brun ensemble, PNG sans fond ; remplacer le fichier, même nom).
           Les deux cœurs (.coeur) se règlent avec --cx / --cy (en %) dans css/accueil.css : .coeur-ours et .coeur-chien. -->
      <div class="doudou doudou-duo">
@@ -140,7 +141,11 @@
 
  <div class="apres">
   <div class="contenu">
-   <p class="chapeau">[texte de Nath]</p>
+   <section class="apres-etoile" aria-labelledby="apres-etoile">
+    <h2 id="apres-etoile">L'Étoile</h2>
+    <p class="chapeau">Le soir, on aime bien regarder par la fenêtre. Il y a notre Étoile, toujours tout près de nous.</p>
+    <p><a class="bouton bouton-doux" href="l-etoile.html">Découvrir l'Étoile</a></p>
+   </section>
   </div>
  </div>
 </main>
@@ -161,10 +166,8 @@
     <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
          domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
          Bouton désactivé tant que ce n'est pas branché. -->
-    <form class="formulaire formulaire-bas" method="post" action="">
-     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="courriel" type="email" autocomplete="email" required></div>
-     <button class="bouton" type="submit" disabled>Recevoir la lettre</button>
-    </form>
+    <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>
   <nav aria-label="Pied de page">

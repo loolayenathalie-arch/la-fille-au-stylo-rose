@@ -6,10 +6,13 @@
 <title>Le livre – Les Doudous et l'Étoile</title>
 <meta property="og:title" content="Le livre – Les Doudous et l'Étoile">
 <meta property="og:site_name" content="Les Doudous et l'Étoile">
+<meta property="og:image" content="https://www.lafilleaustylorose.com/images/partage.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:type" content="website"><meta property="og:locale" content="fr_FR">
 <!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
 <meta name="robots" content="noindex, nofollow">
 <!-- TODO : description de la page -->
-<meta name="description" content="[texte de Nath]">
+<meta name="description" content="Le petit caillou de papier, Les Doudous du soir · Tome 1 : certains soirs, les mots ont envie de sortir… et restent coincés.">
 <meta name="theme-color" content="#EFE3CE">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -37,7 +40,18 @@
  <header class="page-tete"><h1>Le livre</h1><p class="mot-doux">Chaque soir, avant que Lili s’endorme, une histoire commence.</p></header>
  <div class="livre-fiche">
   <!-- EMPLACEMENT IMAGE : images/livres/livre-1-couverture.svg (couverture ; remplacer le fichier, même nom) -->
-  <div class="cadre-aquarelle cadre-livre apparait"><img class="format-livre" src="images/livres/livre-1-couverture.svg" width="300" height="400" alt="[texte de Nath : description de l’image]"></div>
+  <!-- EMPLACEMENT IMAGE : quand la vraie couverture existe, remplacer tout le <div class="couverture"> par
+       <img class="format-livre" src="images/livres/livre-1-couverture.webp" width="300" height="400" alt="…"> -->
+  <div class="cadre-aquarelle cadre-livre apparait">
+   <div class="couverture" role="img" aria-label="Couverture provisoire : Le petit caillou de papier">
+    <span class="couv-collection">Les Doudous du soir</span>
+    <span class="couv-etoile" aria-hidden="true"><svg viewBox="-100 -100 200 200" focusable="false"><circle r="110" fill="url(#couv-degrade)"/><defs><radialGradient id="couv-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".35" stop-color="#FAE2B8" stop-opacity=".5"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><path d="M0 -70 L3 -3 L70 0 L3 3 L0 70 L-3 3 L-70 0 L-3 -3Z" fill="#FFF3D6"/><path d="M0 -38 L2.2 -2.2 L38 0 L2.2 2.2 L0 38 L-2.2 2.2 L-38 0 L-2.2 -2.2Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/><circle r="9" fill="#FFFFFF"/></svg></span>
+    <span class="couv-titre">Le petit caillou<br>de papier</span>
+    <span class="couv-sous">Quand les mots restent coincés</span>
+    <span class="couv-caillou" aria-hidden="true"></span>
+    <span class="couv-autrice">La fille au stylo rose</span>
+   </div>
+  </div>
   <div class="livre-texte apparait">
    <p class="collection">Les Doudous du soir · Tome 1</p>
    <h2>Le petit caillou de papier</h2>
@@ -94,7 +108,7 @@
      <path class="fil-etoile-trait" d="M50 14 C 46 34, 58 52, 50 68 S 40 86, 44 96"/>
     </svg>
     <!-- EMPLACEMENT IMAGE : images/personnages/doudous-duo.webp (les Doudous à la fenêtre ; même fichier que l'accueil) -->
-    <picture class="fenetre-doudous"><source type="image/webp" srcset="images/personnages/doudous-duo.webp"><img src="images/personnages/doudous-duo.png" width="750" height="848" alt="[texte de Nath : description de l’image]"></picture>
+    <picture class="fenetre-doudous"><source type="image/webp" srcset="images/personnages/doudous-duo.webp"><img loading="lazy" src="images/personnages/doudous-duo.png" width="750" height="848" alt="[texte de Nath : description de l’image]"></picture>
    </div>
    <span class="fenetre-croisillon" aria-hidden="true"></span>
    <span class="fenetre-rideau" aria-hidden="true"></span>
@@ -103,7 +117,7 @@
  </section>
  <div class="lavis" aria-hidden="true"></div>
  <!-- EMPLACEMENT IMAGE : images/pages/lili-au-piano.webp (scène ; remplacer le fichier, même nom) -->
- <div class="cadre-aquarelle cadre-scene scene-vivante apparait"><img src="images/pages/lili-au-piano.webp" width="1200" height="896" alt="[texte de Nath : description de l’image]"></div>
+ <div class="cadre-aquarelle cadre-scene scene-vivante apparait"><img loading="lazy" src="images/pages/lili-au-piano.webp" width="1200" height="896" alt="[texte de Nath : description de l’image]"></div>
  <!-- RÈGLE : rien de commercial sur cette page (pas de prix, pas de bouton d'achat, pas de QR code). -->
  <section class="bandeau bandeau-bleu apparait" aria-labelledby="prevenir">
   <h2 id="prevenir">Être prévenu(e) de la sortie</h2>
@@ -117,7 +131,7 @@
   </form>
  </section>
  <!-- EMPLACEMENT IMAGE : images/personnages/doudou-dort.png (petit Doudou qui dort, PNG sans fond ; remplacer le fichier, même nom) -->
- <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img src="images/personnages/doudou-dort.png" width="360" height="509" alt="[texte de Nath : description de l’image]"></picture><span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>z</i></span></div>
+ <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt="[texte de Nath : description de l’image]"></picture><span class="zzz" aria-hidden="true"><i>z</i><i>z</i><i>z</i></span></div>
 </div>
 </main>
 <footer class="pied">

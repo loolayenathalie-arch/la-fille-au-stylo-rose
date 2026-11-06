@@ -453,17 +453,21 @@ html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.cal
 @keyframes balance-livre{0%{transform:rotate(-1.4deg) translateY(0)}100%{transform:rotate(1.4deg) translateY(-3px)}}
 .cadre-livre{overflow:visible}
 /* Couverture provisoire composée en CSS : ciel du soir, l'Étoile, le titre, un petit mot plié */
-.couverture{position:relative;aspect-ratio:3/4;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:1rem .8rem;
+.couverture{position:relative;aspect-ratio:3/4;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:.7rem .6rem .6rem;
   background:radial-gradient(ellipse 80% 50% at 50% 22%,#FFF3D6 0%,rgba(255,243,214,0) 70%),linear-gradient(180deg,#F3D9A8 0%,#E8B98A 45%,#C9A5A2 80%,#8E86A8 100%);
   box-shadow:inset 0 0 0 1px rgba(255,246,222,.5),inset 0 -40px 60px -30px rgba(94,86,130,.35);
   animation:balance-livre 9s ease-in-out infinite alternate;transform-origin:50% 100%}
-.couv-collection{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.8rem;color:var(--brun-fonce);letter-spacing:.02em}
-.couv-etoile{display:block;width:44%;margin:.1rem auto 0}
+.couv-collection{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.72rem;line-height:1.2;color:var(--brun-fonce);letter-spacing:.02em}
+.couv-etoile{display:block;width:30%;margin:0 auto}
 .couv-etoile svg{display:block;width:100%;height:auto;overflow:visible}
-.couv-titre{display:block;font-family:var(--police-titre);font-weight:700;font-size:clamp(1.5rem,7vw,1.9rem);line-height:1.05;color:#5B4330;margin-top:-.3rem}
-.couv-sous{display:block;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.85rem;line-height:1.25;color:var(--brun-fonce);margin-top:.35rem;max-width:11rem}
-.couv-caillou{display:block;width:2.1rem;height:1.6rem;margin:auto auto .4rem;background:linear-gradient(160deg,#FFFDF6,#EFE3CE);border-radius:60% 55% 50% 65% / 55% 60% 50% 55%;box-shadow:0 3px 6px -2px rgba(94,86,130,.5),inset -3px -3px 6px rgba(199,171,139,.5);transform:rotate(-8deg)}
-.couv-autrice{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.85rem;color:#FFF8EA;text-shadow:0 1px 3px rgba(94,86,130,.6)}
+.couv-titre{display:block;font-family:var(--police-titre);font-weight:700;font-size:clamp(1.25rem,5.5vw,1.55rem);line-height:1.05;color:#5B4330;margin-top:-.35rem}
+.couv-sous{display:block;font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.74rem;line-height:1.2;color:var(--brun-fonce);margin-top:.25rem;max-width:11rem}
+/* Un petit papier plié : rectangle blanc cassé, un pli au milieu, posé de travers */
+.couv-pli{position:relative;display:block;width:1.9rem;height:1.25rem;margin:auto auto .2rem;background:linear-gradient(90deg,#FFFDF6 0%,#F6EEDF 49%,#EADFCB 51%,#FFFDF6 100%);border-radius:3px;box-shadow:0 3px 6px -2px rgba(94,86,130,.45);transform:rotate(-6deg)}
+.couv-pli::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(124,92,67,.25)}
+.couv-pli::after{content:"";position:absolute;left:8%;right:8%;top:35%;height:1px;background:rgba(124,92,67,.12);box-shadow:0 .35rem 0 rgba(124,92,67,.12)}
+.couv-autrice{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.8rem;line-height:1.15;color:#FFF8EA;text-shadow:0 1px 3px rgba(94,86,130,.6)}
+.couv-edition{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.62rem;line-height:1.2;color:#FFF8EA;opacity:.9;text-shadow:0 1px 3px rgba(94,86,130,.6)}
 html.calme .couverture{animation:none}
 .couverture::after{ /* reflet doré qui passe de temps en temps sur la couverture */
   content:"";position:absolute;top:-20%;bottom:-20%;left:-40%;width:35%;pointer-events:none;

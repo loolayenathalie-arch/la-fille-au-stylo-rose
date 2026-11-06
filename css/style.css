@@ -304,10 +304,10 @@ html.calme .manche-doudou,html.calme .note-manche{display:none}
 .pied a{display:inline-block;padding:.5rem 0;min-height:44px;color:var(--brun-fonce);font-weight:400;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.25em;text-decoration-color:rgba(91,67,48,.45)}
 .pied a:hover,.pied a:focus-visible{text-decoration-thickness:.14em;text-decoration-color:var(--rose-stylo)}
 .pied p{margin:0 0 .6rem;font-size:1rem}
-.pied-illustration{position:relative;width:7rem;margin:1.5rem auto 1rem;isolation:isolate}
+.pied-illustration{position:relative;width:10.5rem;margin:1.8rem auto 1.2rem;isolation:isolate}
 .pied-illustration picture{display:block}
-.pied-illustration img{width:100%;height:auto;-webkit-mask-image:radial-gradient(ellipse 48% 46% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 48% 46% at 50% 50%,#000 55%,transparent 100%);animation:dort-respire 5.5s ease-in-out infinite alternate;transform-origin:50% 100%}
-.pied-etoile{position:absolute;left:50%;top:-2.4rem;width:3.2rem;height:3.2rem;margin-left:-1.6rem;z-index:1;overflow:visible}
+.pied-illustration img{width:100%;height:auto;filter:contrast(1.12) saturate(1.1);-webkit-mask-image:radial-gradient(ellipse 50% 48% at 50% 50%,#000 68%,transparent 100%);mask-image:radial-gradient(ellipse 50% 48% at 50% 50%,#000 68%,transparent 100%);animation:dort-respire 5.5s ease-in-out infinite alternate;transform-origin:50% 100%}
+.pied-etoile{position:absolute;left:50%;top:-2.6rem;width:3.8rem;height:3.8rem;margin-left:-1.9rem;z-index:1;overflow:visible}
 .pied-fin{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.1rem;color:var(--brun-fonce);margin-top:.4rem}
 .pied-boutons{justify-content:center}
 .bas-bloc{text-align:center}
@@ -604,7 +604,7 @@ html.calme .brume-page,html.calme .nuage-passe{animation:none}
 html.calme .nuage-passe{display:none}
 .entete,main,.pied{position:relative;z-index:1}
 .entete{z-index:3}   /* rien ne passe devant le nom du site ni le menu */
-.veille{position:fixed;right:5%;bottom:8vh;z-index:4;width:3.4rem;height:3.4rem;cursor:pointer;background:none;border:0;padding:0;margin:0}
+.veille{position:fixed;right:5%;bottom:8vh;z-index:0;   /* derrière le contenu : jamais sur un texte */width:3.4rem;height:3.4rem;cursor:pointer;background:none;border:0;padding:0;margin:0}
 .veille::before{content:"";position:absolute;inset:-.5rem}   /* zone tactile 44 px */
 .veille:focus-visible{outline:3px solid var(--focus);outline-offset:6px;border-radius:50%}
 .veille.touche .ve-coeur{animation-duration:.5s}

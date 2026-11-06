@@ -168,7 +168,9 @@
     e.style.setProperty('--dr', ((Math.random() - 0.5) * 16).toFixed(0) + 'px');
     ciel.appendChild(e);
   }
-  document.body.appendChild(ciel);
+  /* Sur l'accueil, le ciel vivant est posé DANS la scène, derrière le texte et les boutons : rien ne passe devant un texte. */
+  var hoteCiel = document.querySelector('.page-accueil .scene .ciel') || document.body;
+  hoteCiel.appendChild(ciel);
 
   /* L'étoile qui veille : la même étoile scintillante que sur l'accueil, en petit, au-dessus de tout (jamais sur un champ : coin bas droit). */
   var veille = document.createElement('div');

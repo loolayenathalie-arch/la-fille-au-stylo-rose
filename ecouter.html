@@ -9,12 +9,19 @@
 <meta property="og:image" content="https://www.lafilleaustylorose.com/images/partage.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:type" content="website"><meta property="og:locale" content="fr_FR">
+<meta property="og:description" content="Le petit caillou de papier, raconté par l'autrice.">
+<meta property="og:url" content="https://www.lafilleaustylorose.com/ecouter">
+<meta property="og:image:alt" content="Le petit caillou de papier, Les Doudous et l'Étoile : l'Étoile et les Doudous dans le ciel du soir">
+<meta name="twitter:card" content="summary_large_image">
 <!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
 <meta name="robots" content="noindex, nofollow">
 <!-- TODO : description de la page -->
 <meta name="description" content="Le petit caillou de papier, raconté par l'autrice.">
 <meta name="theme-color" content="#EFE3CE">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <script src="js/site.js" defer></script>
@@ -72,6 +79,21 @@
          domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
          Bouton désactivé tant que ce n'est pas branché. -->
     <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <!-- ===== Lettre d'information (Brevo) : PRÉPARÉ, PAS BRANCHÉ =====
+         Pour l'activer : (1) remplacer ACTION_BREVO par l'adresse d'envoi du formulaire Brevo ;
+         (2) ajouter le domaine Brevo (https://sibforms.com) à "form-action" dans vercel.json ;
+         (3) retirer l'attribut hidden du <form> et supprimer l'étiquette « Inscriptions bientôt ouvertes » ;
+         (4) dans Brevo : liste « La lettre des Doudous », formulaire avec double confirmation, cadeau = la fiche des Doudous. -->
+    <form class="formulaire formulaire-bas lettre-brevo" method="post" action="ACTION_BREVO" hidden data-brevo>
+     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="EMAIL" type="email" autocomplete="email" required></div>
+     <div class="consentement">
+      <input id="lettre-accord" name="OPT_IN" type="checkbox" value="1" required>
+      <label for="lettre-accord">J'accepte de recevoir la lettre des Doudous et l'Étoile</label>
+     </div>
+     <p class="lettre-note">En cadeau de bienvenue : la fiche des Doudous à imprimer. Vous pouvez vous désinscrire à tout moment, d'un clic en bas de chaque lettre.</p>
+     <button class="bouton" type="submit">Recevoir la lettre</button>
+     <p class="lettre-merci" hidden role="status">Merci ! Un petit message vient de partir vers votre boîte : ouvrez-le pour confirmer votre adresse. La fiche des Doudous vous attend juste après.</p>
+    </form>
     <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>

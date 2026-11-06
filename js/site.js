@@ -351,5 +351,18 @@
     lili.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blotti(); } });
   }
 
+  /* Menu repliable (téléphone) */
+  var menuBouton = document.querySelector('[data-menu]');
+  var menuNav = document.querySelector('.menu');
+  if (menuBouton && menuNav) {
+    menuBouton.addEventListener('click', function () {
+      var ouvert = menuNav.classList.toggle('ouvert');
+      menuBouton.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menuNav.classList.contains('ouvert')) { menuNav.classList.remove('ouvert'); menuBouton.setAttribute('aria-expanded', 'false'); menuBouton.focus(); }
+    });
+  }
+
   applique(false);
 })();

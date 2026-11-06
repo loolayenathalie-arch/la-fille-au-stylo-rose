@@ -24,13 +24,14 @@
 <header class="entete">
  <div class="entete-interieur">
   <a class="nom-du-site" href="index.html">Les Doudous et l'Étoile<small>La fille au stylo rose</small></a>
+  <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-liste" data-menu><span class="menu-trait" aria-hidden="true"></span>Menu</button>
   <nav class="menu" aria-label="Menu principal">
-   <ul>
+   <ul id="menu-liste">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="le-livre.html">Le livre</a></li>
     <li><a href="l-univers.html">L'univers</a></li>
     <li><a href="l-etoile.html">L'Étoile</a></li>
-    <li><a href="parents.html">Les astuces des Doudous</a></li>
+    <li><a href="parents.html">Les astuces</a></li>
    </ul>
   </nav>
  </div>
@@ -43,8 +44,13 @@
   <!-- EMPLACEMENT AUDIO : déposer le fichier sons/le-petit-caillou-de-papier.mp3, puis retirer l'attribut hidden ci-dessous. Aucune inscription, aucune vente. -->
   <audio class="lecteur" controls preload="none" src="sons/le-petit-caillou-de-papier.mp3" hidden>Votre navigateur ne sait pas lire ce fichier audio.</audio>
   <p class="etiquette">Bientôt disponible</p>
+  <!-- Le texte de l'histoire, à lire en même temps : Nath le fournira. -->
+  <details class="texte-histoire">
+   <summary class="bouton bouton-doux">Lire le texte de l'histoire</summary>
+   <div class="texte-histoire-corps"><p class="vide">[texte de Nath]</p></div>
+  </details>
  </section>
- <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt="Un Doudou qui dort"></picture></div>
+ <div class="doudou-dort apparait"><picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt=""></picture></div>
 </div>
 </main>
 <footer class="pied">
@@ -68,6 +74,11 @@
     <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>
+  <!-- Les Doudous endormis sous l'Étoile (image décorative) -->
+  <div class="pied-illustration" aria-hidden="true">
+   <svg class="pied-etoile" viewBox="-100 -100 200 200" focusable="false"><defs><radialGradient id="pied-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".35" stop-color="#FAE2B8" stop-opacity=".5"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="110" fill="url(#pied-degrade)"/><g class="ve-rayons"><path d="M0 -70 L3 -3 L70 0 L3 3 L0 70 L-3 3 L-70 0 L-3 -3Z" fill="#FFF8EA"/><path d="M0 -38 L2.2 -2.2 L38 0 L2.2 2.2 L0 38 L-2.2 2.2 L-38 0 L-2.2 -2.2Z" fill="#FFF8EA" fill-opacity=".85" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="9" fill="#FFFFFF"/></g></svg>
+   <picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt=""></picture>
+  </div>
   <nav aria-label="Pied de page">
    <ul>
     <li><a href="index.html">Accueil</a></li>
@@ -75,10 +86,11 @@
     <li><a href="l-univers.html">L'univers</a></li>
     <li><a href="l-etoile.html">L'Étoile</a></li>
     <li><a href="parents.html">Les astuces des Doudous</a></li>
+    <li><a href="ecouter.html">Écouter l'histoire</a></li>
     <li><a href="mentions-legales.html">Mentions légales</a></li>
    </ul>
   </nav>
-  <p>[texte de Nath]</p>
+  <p class="pied-fin">© 2026 Nathalie Diaz · Éditions La fille au stylo rose</p>
   <div class="pied-boutons">
    <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
    <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).

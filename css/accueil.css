@@ -32,6 +32,7 @@
   position:sticky;top:min(0px,calc(100vh - var(--haut)));top:min(0px,calc(100svh - var(--haut)));
   height:max(100vh,var(--haut));height:max(100svh,var(--haut));overflow:hidden;isolation:isolate;
   background:
+    linear-gradient(180deg,#DCE6EF 0%,rgba(231,226,240,.9) 24%,rgba(247,227,214,.75) 44%,rgba(247,227,214,0) 62%),
     radial-gradient(ellipse 52% 40% at 50% 38%,#FFF6E3 0%,rgba(255,246,227,.85) 38%,rgba(255,246,227,0) 100%),
     radial-gradient(ellipse 75% 34% at 50% 104%,rgba(230,184,162,.9),rgba(230,184,162,0) 100%),
     radial-gradient(ellipse 42% 34% at 100% 6%,rgba(137,168,184,.42),rgba(137,168,184,0) 100%),
@@ -390,7 +391,7 @@ html.calme .accueil-liens{transition:none}
 .calmer[aria-pressed="true"]{box-shadow:inset 0 -3px 0 #8A6D52}
 
 /* ---------- Après la scène ---------- */
-.apres{background:linear-gradient(180deg,#DFC8A7 0%,#FAF7F0 55%)}
+.apres{background:linear-gradient(180deg,#F7E3D6 0%,#FFFDF6 55%)}
 .apres .chapeau{font-size:1rem;color:var(--encre-douce)}
 .apres-etoile{text-align:center;max-width:36rem;margin:0 auto}
 .apres-etoile h2{display:block;margin-bottom:.4rem}
@@ -482,3 +483,7 @@ html.calme .chapeau-accueil{opacity:1;animation:none}
 @keyframes stylo{0%{opacity:0;left:0;transform:rotate(-8deg)}6%{opacity:1}50%{transform:rotate(4deg)}94%{opacity:1}100%{opacity:0;left:100%;transform:rotate(-8deg)}}
 html.calme .ecrit-vif .ecrit-texte{animation:none;clip-path:none}
 html.calme .stylo{display:none}
+
+/* Le ciel du soir en haut de la scène d accueil : bleu poudré, lavande très pâle, pêche, par-dessus les lumières (doux, jamais saturé) */
+.scene-contenu::before{content:"";position:absolute;left:-50vw;right:-50vw;top:0;height:62%;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(220,230,239,.9) 0%,rgba(231,226,240,.7) 36%,rgba(247,227,214,.45) 68%,rgba(247,227,214,0) 100%)}

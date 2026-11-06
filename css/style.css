@@ -49,8 +49,8 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{position:relative;margin:0;background:var(--grain),var(--creme);color:var(--texte);font-family:var(--police-texte);font-size:1.125rem;line-height:1.7}
 img{max-width:100%;height:auto;display:block}
-a{color:var(--brun);text-underline-offset:.2em}
-a:hover{text-decoration-thickness:.15em}
+a{color:var(--brun);text-underline-offset:.2em;text-decoration-thickness:.06em;text-decoration-color:rgba(192,106,130,.55)}
+a:hover,a:focus-visible{text-decoration-thickness:.12em;text-decoration-color:var(--rose-stylo)}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
 p{margin:0 0 1em}
 
@@ -71,10 +71,10 @@ blockquote,.citation{
 .passer-au-contenu:focus{top:1rem}
 
 /* ===== 3. En-tête et menu ===== */
-.entete{position:relative;background:var(--grain),var(--sable-clair);padding:1rem 1rem .9rem}
+.entete{position:relative;background:var(--grain),linear-gradient(180deg,#FFFDF6,#F3F0F3);padding:1rem 1rem .9rem}
 .entete::after{ /* voile de lumière qui s'estompe sous l'en-tête, à la place du trait */
   content:"";position:absolute;left:0;right:0;top:100%;height:2.6rem;pointer-events:none;
-  background:linear-gradient(180deg,rgba(239,227,206,.9),rgba(239,227,206,0));
+  background:linear-gradient(180deg,rgba(243,240,243,.9),rgba(243,240,243,0));
 }
 .entete-interieur{max-width:64rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1.5rem}
 /* Le titre du site est « Les Doudous et l'Étoile » ; « La fille au stylo rose » est l'autrice, en signature. */
@@ -99,15 +99,46 @@ html.calme .nom-du-site.signe{animation:none}
   opacity:0;transform:scaleX(.6);transform-origin:left center;transition:opacity .5s ease,transform .6s ease;
 }
 .menu a:hover::after{opacity:.4;transform:scaleX(1)}
-/* Petits téléphones (360 px) : les quatre entrées tiennent sur une seule ligne, zones tactiles toujours ≥ 44 px */
-@media (max-width:26rem){
-  .menu ul{flex-wrap:wrap;gap:0 .2rem;justify-content:flex-start}   /* cinq entrées : deux lignes propres sur petit téléphone */
-  .menu a{padding:.5rem .4rem .7rem}
+/* Ordinateur : tout sur une ligne */
+.menu ul{flex-wrap:nowrap}
+/* Téléphone : menu repliable (bouton aria-expanded, liens navigables au clavier) */
+.menu-bouton{display:none;font:inherit;font-weight:700;font-size:1rem;color:var(--brun-fonce);background:transparent;border:1px solid var(--lisere);border-radius:999px;min-height:44px;padding:.4rem 1rem .4rem 2.6rem;position:relative;cursor:pointer}
+.menu-trait,.menu-trait::before,.menu-trait::after{position:absolute;left:1rem;width:1.1rem;height:2px;border-radius:2px;background:var(--brun-fonce);transition:transform .4s ease,opacity .3s ease}
+.menu-trait{top:50%;margin-top:-1px}
+.menu-trait::before,.menu-trait::after{content:"";left:0}
+.menu-trait::before{top:-6px}
+.menu-trait::after{top:6px}
+.menu-bouton[aria-expanded="true"] .menu-trait{background:transparent}
+.menu-bouton[aria-expanded="true"] .menu-trait::before{transform:translateY(6px) rotate(45deg)}
+.menu-bouton[aria-expanded="true"] .menu-trait::after{transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:47.99rem){
+  .menu-bouton{display:inline-flex;align-items:center}
+  .menu{flex-basis:100%}
+  .menu ul{flex-direction:column;flex-wrap:wrap;gap:0;padding:.3rem 0 .2rem;display:none}
+  .js .menu ul{display:none}
+  .menu.ouvert ul,html:not(.js) .menu ul{display:flex}
+  .menu a{display:block;padding:.6rem .4rem;border-top:1px solid rgba(223,200,167,.45)}
+  .menu li:first-child a{border-top:0}
+  .menu a::after{left:.4rem;right:auto;width:4.5rem}
+  .entete-interieur{row-gap:.3rem}
 }
 .menu a[aria-current="page"]::after{opacity:1;transform:scaleX(1)}
 
 /* ===== 4. Mise en page ===== */
-main{display:block}
+main{display:block;position:relative}
+/* Ciel du soir en haut de chaque page : bleu poudré, lavande très pâle, pêche, qui se fond dans le papier */
+main:not(.accueil)::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:min(34rem,60vh);z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,#DCE6EF 0%,#E7E2F0 38%,#F7E3D6 68%,rgba(255,253,246,0) 100%);
+}
+/* L'Étoile qui brille au-dessus du titre de page */
+.page-tete::before{
+  content:"";position:absolute;left:50%;top:-1.6rem;width:5.5rem;height:5.5rem;margin-left:-2.75rem;z-index:-1;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-100 -100 200 200'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23FFF3D6'/%3E%3Cstop offset='.35' stop-color='%23FAE2B8' stop-opacity='.5'/%3E%3Cstop offset='1' stop-color='%23F6D9A8' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle r='100' fill='url(%23g)'/%3E%3Cpath d='M0 -70 L3 -3 L70 0 L3 3 L0 70 L-3 3 L-70 0 L-3 -3Z' fill='%23FFF8EA'/%3E%3Cpath d='M0 -38 L2.2 -2.2 L38 0 L2.2 2.2 L0 38 L-2.2 2.2 L-38 0 L-2.2 -2.2Z' fill='%23FFF8EA' fill-opacity='.85' transform='rotate(45)'/%3E%3Ccircle r='9' fill='%23FFFFFF'/%3E%3C/svg%3E") center/contain no-repeat;
+  animation:etoile-titre 4.5s ease-in-out infinite alternate;
+}
+@keyframes etoile-titre{0%{opacity:.75;transform:scale(.92)}100%{opacity:1;transform:scale(1.08)}}
+html.calme .page-tete::before{animation:none}
 .contenu{max-width:64rem;margin:0 auto;padding:1.5rem 1rem 3rem}
 .page-tete{text-align:center;margin-bottom:.5rem}
 .page-tete h1{margin-top:.3rem}
@@ -122,6 +153,8 @@ main{display:block}
   position:relative;border:1px solid var(--lisere);border-radius:var(--rayon);box-shadow:var(--ombre);
   background:var(--grain),var(--papier);
 }
+/* Fond des pages : blanc chaud, le crème seulement en touches */
+body{background:var(--grain),var(--papier)}
 .carte{padding:1.4rem 1.25rem 1.3rem;text-align:center;overflow:hidden;transition:transform .5s ease,box-shadow .5s ease}
 .carte::before,.bandeau::before{ /* lueur chaude dans un coin, comme une veilleuse */
   content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;z-index:0;
@@ -152,10 +185,17 @@ html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{anim
 .carte:hover{transform:translateY(-4px);box-shadow:var(--ombre-haute)}
 .carte h2,.carte h3{font-size:1.7rem;margin-bottom:.3em}
 /* Bandeaux : même famille que les cartes, teintes sable (les noms de classes gardent leurs anciens noms). */
-.bandeau{background:var(--grain),var(--sable-clair);padding:1.5rem;margin:1.5rem 0}
-.bandeau-bleu{background:var(--grain),#E4ECEE}
-.bandeau-rose{background:var(--grain),#F8E8DF}
-.bandeau-miel{background:var(--grain),#EBD6B6}
+.bandeau{background:var(--grain),var(--papier);padding:1.5rem;margin:1.5rem 0}
+/* Teintes très douces, en touche : bleu glacier, pêche, caramel clair, or pâle */
+.bandeau-bleu{background:var(--grain),linear-gradient(180deg,#FFFDF6,#EEF3F7)}
+.bandeau-rose{background:var(--grain),linear-gradient(180deg,#FFFDF6,#FBEEE6)}
+.bandeau-miel{background:var(--grain),linear-gradient(180deg,#FFFDF6,#F6E8D6)}
+.bandeau-or{background:var(--grain),linear-gradient(180deg,#FFFDF6,#FBF2DC)}
+/* L'univers : une teinte par personnage (cadre et ombre), le texte reste sur blanc chaud */
+.perso-tout-mou .cadre-portrait{background:radial-gradient(ellipse 60% 70% at 8% 12%,rgba(220,232,240,.7),rgba(220,232,240,0) 70%),var(--grain),#FFFFFF;box-shadow:0 12px 28px -12px rgba(137,168,184,.55),0 2px 6px -2px rgba(137,168,184,.3)}
+.perso-grosse-tete .cadre-portrait{background:radial-gradient(ellipse 60% 70% at 8% 12%,rgba(246,217,168,.6),rgba(246,217,168,0) 70%),var(--grain),#F8EBDA}
+.perso-lili .cadre-portrait{background:radial-gradient(ellipse 60% 70% at 8% 12%,rgba(240,196,178,.55),rgba(240,196,178,0) 70%),var(--grain),#FBEDE3}
+.perso-etoile .cadre-portrait{box-shadow:0 12px 28px -12px rgba(231,182,111,.6),0 2px 6px -2px rgba(231,182,111,.35)}
 .grille{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
 
 /* Images : « photo posée » dans un cadre doux, formats fixes. */
@@ -244,7 +284,7 @@ html.calme .manche-doudou,html.calme .note-manche{display:none}
 
 /* ===== 9. Pied de page ===== */
 .pied{position:relative;margin-top:5.5rem;padding:2.6rem 1rem 2.4rem;
-  background:var(--grain),linear-gradient(180deg,#EFE3CE 0%,#DCC6AE 45%,#C4B3AE 100%)}   /* vers le crépuscule : le brun reste lisible (≥ 5:1) */
+  background:var(--grain),linear-gradient(180deg,#F7E3D6 0%,#E7E2F0 50%,#DCE6EF 100%)}   /* le soir qui tombe : pêche, lavande, bleu poudré (brun-fonce ≥ 7:1) */
 .pied::after{ /* lueur douce en haut à droite, comme une lampe qu'on laisse allumée */
   content:"";position:absolute;right:0;top:-10%;width:55%;height:70%;pointer-events:none;border-radius:50%;
   background:radial-gradient(ellipse,rgba(255,246,222,.7),rgba(255,246,222,0) 70%);
@@ -254,15 +294,26 @@ html.calme .manche-doudou,html.calme .note-manche{display:none}
 .pied::before{ /* nuage doux qui monte vers la page : la transition se fait en fondu, sans ligne */
   content:"";position:absolute;left:0;right:0;top:-5.5rem;height:5.6rem;pointer-events:none;
   background:
-    radial-gradient(ellipse 34% 100% at 18% 100%,rgba(239,227,206,.95),rgba(239,227,206,0) 70%),
-    radial-gradient(ellipse 40% 100% at 62% 100%,rgba(239,227,206,.95),rgba(239,227,206,0) 70%),
-    radial-gradient(ellipse 30% 90% at 94% 100%,rgba(239,227,206,.9),rgba(239,227,206,0) 70%),
-    linear-gradient(180deg,rgba(239,227,206,0),rgba(239,227,206,1));
+    radial-gradient(ellipse 34% 100% at 18% 100%,rgba(247,227,214,.95),rgba(247,227,214,0) 70%),
+    radial-gradient(ellipse 40% 100% at 62% 100%,rgba(247,227,214,.95),rgba(247,227,214,0) 70%),
+    radial-gradient(ellipse 30% 90% at 94% 100%,rgba(247,227,214,.9),rgba(247,227,214,0) 70%),
+    linear-gradient(180deg,rgba(247,227,214,0),rgba(247,227,214,1));
 }
-.pied-interieur{max-width:64rem;margin:0 auto}
-.pied ul{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem}
-.pied a{display:inline-block;padding:.5rem 0;min-height:44px;color:var(--brun-fonce);font-weight:700}
+.pied-interieur{max-width:64rem;margin:0 auto;text-align:center}
+.pied ul{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.2rem 1.4rem}
+.pied a{display:inline-block;padding:.5rem 0;min-height:44px;color:var(--brun-fonce);font-weight:400;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.25em;text-decoration-color:rgba(91,67,48,.45)}
+.pied a:hover,.pied a:focus-visible{text-decoration-thickness:.14em;text-decoration-color:var(--rose-stylo)}
 .pied p{margin:0 0 .6rem;font-size:1rem}
+.pied-illustration{position:relative;width:7rem;margin:1.5rem auto 1rem;isolation:isolate}
+.pied-illustration picture{display:block}
+.pied-illustration img{width:100%;height:auto;-webkit-mask-image:radial-gradient(ellipse 48% 46% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 48% 46% at 50% 50%,#000 55%,transparent 100%);animation:dort-respire 5.5s ease-in-out infinite alternate;transform-origin:50% 100%}
+.pied-etoile{position:absolute;left:50%;top:-2.4rem;width:3.2rem;height:3.2rem;margin-left:-1.6rem;z-index:1;overflow:visible}
+.pied-fin{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.1rem;color:var(--brun-fonce);margin-top:.4rem}
+.pied-boutons{justify-content:center}
+.bas-bloc{text-align:center}
+.bas-bloc h2{display:block;width:fit-content;margin-left:auto;margin-right:auto}
+.bas-bloc .etiquette{display:block;width:fit-content;margin:.2rem auto 0}
+html.calme .pied-illustration img{animation:none}
 .calmer-pied{
   font:inherit;font-size:.9rem;color:var(--brun-fonce);background:transparent;cursor:pointer;min-height:44px;
   padding:.4rem 1rem;border:1px solid var(--or);border-radius:999px;
@@ -466,6 +517,13 @@ html.calme .etoile-voile,html.calme .etoile-pt{animation:none}
 .ecouter-bloc h2{display:block;font-size:1.6rem}
 .lecteur{display:block;width:100%;max-width:28rem;margin:1rem auto}
 .lecteur[hidden]{display:none}
+.texte-histoire{margin:1.2rem auto 0;max-width:36rem;text-align:left}
+.texte-histoire summary{list-style:none;display:inline-flex;align-items:center;margin:0 auto;cursor:pointer}
+.texte-histoire summary::-webkit-details-marker{display:none}
+.texte-histoire summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.texte-histoire-corps{margin-top:1rem;padding:1.2rem 1.3rem;border-radius:var(--rayon);background:var(--grain),var(--papier);border:1px solid var(--lisere);animation:entree .8s ease both}
+.page-ecouter .texte-histoire{text-align:center}
+.page-ecouter .texte-histoire-corps{text-align:left}
 
 /* ===== Page « Oups » (404) ===== */
 .page-oups{text-align:center;min-height:50vh}

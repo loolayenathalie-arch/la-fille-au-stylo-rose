@@ -24,13 +24,14 @@
 <header class="entete">
  <div class="entete-interieur">
   <a class="nom-du-site" href="index.html">Les Doudous et l'Étoile<small>La fille au stylo rose</small></a>
+  <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-liste" data-menu><span class="menu-trait" aria-hidden="true"></span>Menu</button>
   <nav class="menu" aria-label="Menu principal">
-   <ul>
+   <ul id="menu-liste">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="le-livre.html">Le livre</a></li>
     <li><a href="l-univers.html" aria-current="page">L'univers</a></li>
     <li><a href="l-etoile.html">L'Étoile</a></li>
-    <li><a href="parents.html">Les astuces des Doudous</a></li>
+    <li><a href="parents.html">Les astuces</a></li>
    </ul>
   </nav>
  </div>
@@ -39,29 +40,29 @@
 <div class="contenu">
  <header class="page-tete"><h1>L'univers</h1><p class="mot-doux vide">[texte de Nath]</p></header>
  <!-- EMPLACEMENT IMAGE : images/personnages/lili-et-ses-doudous.png (PNG sans fond ; remplacer le fichier, même nom) -->
- <div class="flotte-douce apparait"><picture><source type="image/webp" srcset="images/personnages/lili-et-ses-doudous.webp"><img class="detoure" src="images/personnages/lili-et-ses-doudous.png" width="827" height="1092" alt="[texte de Nath : description de l’image]"></picture></div>
- <section class="bandeau bandeau-rose apparait" aria-labelledby="lili">
+ <div class="flotte-douce apparait"><picture><source type="image/webp" srcset="images/personnages/lili-et-ses-doudous.webp"><img class="detoure" src="images/personnages/lili-et-ses-doudous.png" width="827" height="1092" alt="Lili, dans son grand gilet, assise avec Doudou Tout-Mou, le petit ours blanc, et Doudou Grosse Tête, le grand chien marron."></picture></div>
+ <section class="bandeau bandeau-rose perso-lili apparait" aria-labelledby="lili">
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/lili-piano.png (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
-   <div class="cadre-aquarelle cadre-portrait"><picture><source type="image/webp" srcset="images/personnages/lili-piano.webp"><img loading="lazy" src="images/personnages/lili-piano.png" width="560" height="900" alt="[texte de Nath : description de l’image]"></picture></div>
+   <div class="cadre-aquarelle cadre-portrait"><picture><source type="image/webp" srcset="images/personnages/lili-piano.webp"><img loading="lazy" src="images/personnages/lili-piano.png" width="560" height="900" alt="Lili joue du piano dans sa chambre."></picture></div>
    <div><h2 id="lili">Lili</h2><p>Lili est l'amie des Doudous. Elle porte un drôle de gilet de laine, trop grand pour elle, qui traîne jusqu'au sol, avec de grandes manches où Doudou Tout-Mou aime se blottir. Certains soirs, ses mots restent coincés… alors les Doudous viennent la rejoindre.</p></div>
   </div>
  </section>
- <section class="bandeau  apparait" aria-labelledby="tout-mou">
+ <section class="bandeau bandeau-bleu perso-tout-mou apparait" aria-labelledby="tout-mou">
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-tout-mou.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
-   <div class="cadre-aquarelle cadre-portrait"><img loading="lazy" src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+   <div class="cadre-aquarelle cadre-portrait"><img loading="lazy" src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="Doudou Tout-Mou, petit ours blanc tout doux."></div>
    <div><h2 id="tout-mou">Doudou Tout-Mou</h2><p>Bonjour ! Moi, je suis Doudou Tout-Mou. Je suis petit, tout blanc, tout doux, et tout mou parce qu'on me serre très fort, toutes les nuits. Je suis farceur et bavard : c'est moi qui raconte les histoires !</p></div>
   </div>
  </section>
- <section class="bandeau bandeau-miel apparait" aria-labelledby="grosse-tete">
+ <section class="bandeau bandeau-miel perso-grosse-tete apparait" aria-labelledby="grosse-tete">
   <div class="deux-colonnes">
    <!-- EMPLACEMENT IMAGE : images/personnages/doudou-grosse-tete.svg (remplacer le fichier, même nom, PNG ou SVG fond transparent) -->
-   <div class="cadre-aquarelle cadre-portrait"><img loading="lazy" src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="[texte de Nath : description de l’image]"></div>
+   <div class="cadre-aquarelle cadre-portrait"><img loading="lazy" src="images/personnages/doudou-grosse-tete.svg" width="300" height="300" alt="Doudou Grosse Tête, grand chien marron à la tête toute ronde."></div>
    <div><h2 id="grosse-tete">Doudou Grosse Tête</h2><p>Voici mon grand frère, Doudou Grosse Tête. Il est un peu vieux… mais son âge, c'est un secret ! Sa tête est si pleine d'amour qu'elle est devenue un peu lourde : alors parfois, il tombe sur le côté. Il parle peu, surtout avec ses dessins. Et il sait souvent les choses avant tout le monde.</p></div>
   </div>
  </section>
- <section class="bandeau bandeau-bleu apparait" aria-labelledby="etoile">
+ <section class="bandeau bandeau-or perso-etoile apparait" aria-labelledby="etoile">
   <div class="deux-colonnes">
    <div class="cadre-aquarelle cadre-portrait cadre-etoile"><span class="portrait-etoile" role="img" aria-label="L'Étoile"><svg viewBox="-100 -100 200 200" focusable="false" aria-hidden="true"><defs><radialGradient id="pe-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".3" stop-color="#FAE2B8" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="125" fill="url(#pe-degrade)"/><g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/><path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="14" fill="#FFF3D6"/><circle r="7.5" fill="#FFFFFF"/></g></svg></span></div>
    <div><h2 id="etoile">L'Étoile</h2><p>Notre Étoile brille à la fenêtre et veille sur nous. Quand un enfant a besoin de nous, elle nous montre sa fenêtre avec un petit rayon de lumière.</p></div>
@@ -90,6 +91,11 @@
     <p class="etiquette">Inscriptions bientôt ouvertes</p>
    </section>
   </div>
+  <!-- Les Doudous endormis sous l'Étoile (image décorative) -->
+  <div class="pied-illustration" aria-hidden="true">
+   <svg class="pied-etoile" viewBox="-100 -100 200 200" focusable="false"><defs><radialGradient id="pied-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".35" stop-color="#FAE2B8" stop-opacity=".5"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="110" fill="url(#pied-degrade)"/><g class="ve-rayons"><path d="M0 -70 L3 -3 L70 0 L3 3 L0 70 L-3 3 L-70 0 L-3 -3Z" fill="#FFF8EA"/><path d="M0 -38 L2.2 -2.2 L38 0 L2.2 2.2 L0 38 L-2.2 2.2 L-38 0 L-2.2 -2.2Z" fill="#FFF8EA" fill-opacity=".85" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="9" fill="#FFFFFF"/></g></svg>
+   <picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt=""></picture>
+  </div>
   <nav aria-label="Pied de page">
    <ul>
     <li><a href="index.html">Accueil</a></li>
@@ -97,10 +103,11 @@
     <li><a href="l-univers.html">L'univers</a></li>
     <li><a href="l-etoile.html">L'Étoile</a></li>
     <li><a href="parents.html">Les astuces des Doudous</a></li>
+    <li><a href="ecouter.html">Écouter l'histoire</a></li>
     <li><a href="mentions-legales.html">Mentions légales</a></li>
    </ul>
   </nav>
-  <p>[texte de Nath]</p>
+  <p class="pied-fin">© 2026 Nathalie Diaz · Éditions La fille au stylo rose</p>
   <div class="pied-boutons">
    <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
    <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).

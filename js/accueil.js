@@ -25,7 +25,7 @@
   var astres = document.querySelector('.astres');
   if (astres) {
     var mobile = window.innerWidth < 700;
-    var total = mobile ? 12 : 26, grandes = mobile ? 2 : 4, versDoudous = mobile ? 4 : 7;
+    var total = mobile ? 6 : 13, grandes = mobile ? 1 : 2, versDoudous = mobile ? 2 : 4;
     for (var k = 0; k < total; k++) {
       var a = document.createElement('span');
       var g = k < grandes;

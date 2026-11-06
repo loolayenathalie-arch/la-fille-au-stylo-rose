@@ -93,7 +93,7 @@
     br.className = 'brume-page ' + brumes[b];
     ciel.appendChild(br);
   }
-  var nbNuages = window.innerWidth < 700 ? 2 : 3;
+  var nbNuages = window.innerWidth < 700 ? 1 : 2;
   for (var q = 0; q < nbNuages; q++) {
     var nu = document.createElement('span');
     nu.className = 'nuage-passe';
@@ -107,7 +107,7 @@
   /* Nuages ronds qui volent, notes de musique, pluie de lumière (moins nombreux sur téléphone) */
   var petit = window.innerWidth < 700;
   function pose(el, cle, val) { el.style.setProperty(cle, val); }
-  var nbVol = petit ? 3 : 5;
+  var nbVol = petit ? 2 : 3;
   for (var nv = 0; nv < nbVol; nv++) {
     var nuV = document.createElement('span');
     nuV.className = 'nuage-vol' + (nv % 2 ? ' loin' : '');
@@ -123,7 +123,7 @@
   }
   var glyphes = ['\u266A', '\u266B', '\u2669', '\u266A'];
   var couleurs = ['#B87A46', '#C06A82', '#89A8B8', '#B87A46'];
-  var nbNotes = petit ? 2 : 3;
+  var nbNotes = petit ? 1 : 2;
   for (var nn = 0; nn < nbNotes; nn++) {
     var no = document.createElement('span');
     no.className = 'note';
@@ -137,9 +137,9 @@
     ciel.appendChild(no);
   }
 
-  var nb = window.innerWidth < 700 ? 9 : 15;
+  var nb = window.innerWidth < 700 ? 5 : 8;
   /* Des étoiles qui ne s'allument que la nuit venue */
-  var nbNuit = window.innerWidth < 700 ? 6 : 12;
+  var nbNuit = window.innerWidth < 700 ? 3 : 6;
   for (var nn2 = 0; nn2 < nbNuit; nn2++) {
     var en = document.createElement('span');
     en.className = 'etoile nuit-seule' + (Math.random() < 0.3 ? ' bleu' : '');
@@ -352,6 +352,25 @@
     lili.addEventListener('click', blotti);
     lili.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); blotti(); } });
   }
+
+  /* Mode veilleuse : bleu nuit tamisé, gardé le temps de la visite (sessionStorage, jamais envoyé) */
+  var boutonsLune = document.querySelectorAll('[data-veilleuse]');
+  var nuitMode = false;
+  try { nuitMode = window.sessionStorage.getItem('veilleuse') === '1'; } catch (e) { nuitMode = false; }
+  function appliqueLune() {
+    racine.classList.toggle('nuit-mode', nuitMode);
+    for (var l = 0; l < boutonsLune.length; l++) { boutonsLune[l].setAttribute('aria-pressed', nuitMode ? 'true' : 'false'); }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) { meta.setAttribute('content', nuitMode ? '#232A47' : '#EFE3CE'); }
+  }
+  for (var m = 0; m < boutonsLune.length; m++) {
+    boutonsLune[m].addEventListener('click', function () {
+      nuitMode = !nuitMode;
+      try { window.sessionStorage.setItem('veilleuse', nuitMode ? '1' : '0'); } catch (e) { /* tant pis */ }
+      appliqueLune();
+    });
+  }
+  appliqueLune();
 
   /* Menu repliable (téléphone) */
   var menuBouton = document.querySelector('[data-menu]');

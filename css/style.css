@@ -102,6 +102,13 @@ html.calme .nom-du-site.signe{animation:none}
 /* Ordinateur : tout sur une ligne */
 .menu ul{flex-wrap:nowrap}
 /* Téléphone : menu repliable (bouton aria-expanded, liens navigables au clavier) */
+/* Bouton lune : mode veilleuse */
+.veilleuse{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;border:1px solid var(--lisere);border-radius:50%;background:transparent;color:var(--brun-fonce);cursor:pointer;order:2}
+.veilleuse svg{width:1.35rem;height:1.35rem}
+.veilleuse .lune-etoile{opacity:.6}
+.veilleuse[aria-pressed="true"]{background:#2B3254;color:#F7E9D3;border-color:rgba(247,233,211,.4)}
+.menu{order:3}
+@media (max-width:47.99rem){.veilleuse{margin-left:0;order:1}.menu-bouton{order:2}}
 .menu-bouton{display:none;font:inherit;font-weight:700;font-size:1rem;color:var(--brun-fonce);background:transparent;border:1px solid var(--lisere);border-radius:999px;min-height:44px;padding:.4rem 1rem .4rem 2.6rem;position:relative;cursor:pointer}
 .menu-trait,.menu-trait::before,.menu-trait::after{position:absolute;left:1rem;width:1.1rem;height:2px;border-radius:2px;background:var(--brun-fonce);transition:transform .4s ease,opacity .3s ease}
 .menu-trait{top:50%;margin-top:-1px}
@@ -143,27 +150,34 @@ html.calme .page-tete::before{animation:none}
 .page-tete{text-align:center;margin-bottom:.5rem}
 .page-tete h1{margin-top:.3rem}
 .page-tete .chapeau,.page-tete .accroche{max-width:36rem;margin:0 auto 1rem}
-.section{margin:2rem 0}
+.section{margin:3rem 0}
+/* Colonnes de lecture : jamais plus d'une soixantaine de caractères */
+.bandeau p,.section>p,.carte p,.intro-volet p,.resume p,.etoile-mots p,.pour-finir,.fenetre-legende,.mentions p{max-width:60ch}
+.deux-colonnes>div>p{max-width:60ch}
+.page-tete .mot-doux,.section>p,.carte p,.etoile-mots p{margin-left:auto;margin-right:auto}
 .image-large{margin:1.5rem auto;max-width:44rem}
 .deux-colonnes{display:grid;gap:1.5rem;align-items:center}
 
 /* ===== 5. Cartes et cadres ===== */
 /* Carte : coins arrondis, ombre chaude très douce, fin liseré doré, léger grain de papier. */
+/* Bords d'aquarelle irréguliers (masque SVG) : le fond est peint sur ::before, l'ombre suit la forme. Aucune bordure nette. */
 .carte,.bandeau{
-  position:relative;border:1px solid var(--lisere);border-radius:var(--rayon);box-shadow:var(--ombre);
-  background:var(--grain),var(--papier);
+  --fond:var(--papier);
+  position:relative;border:0;border-radius:var(--rayon);box-shadow:none;background:none;
+  filter:drop-shadow(0 12px 18px rgba(124,92,67,.16)) drop-shadow(0 2px 4px rgba(124,92,67,.08));
 }
 /* Fond des pages : blanc chaud, le crème seulement en touches */
 body{background:var(--grain),var(--papier)}
-.carte{padding:1.4rem 1.25rem 1.3rem;text-align:center;overflow:hidden;transition:transform .5s ease,box-shadow .5s ease}
-.carte::before,.bandeau::before{ /* lueur chaude dans un coin, comme une veilleuse */
-  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;z-index:0;
-  background:radial-gradient(ellipse 60% 45% at 18% 0,rgba(255,246,222,.85),rgba(255,246,222,0) 70%),radial-gradient(ellipse 50% 40% at 100% 100%,rgba(223,200,167,.35),rgba(223,200,167,0) 70%);
+.carte{padding:1.6rem 1.5rem 1.5rem;text-align:center;transition:transform .5s ease,filter .5s ease}
+.carte::before,.bandeau::before{ /* le fond de la carte, aux bords d'aquarelle, avec une lueur chaude dans un coin */
+  content:"";position:absolute;inset:-.6rem;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 60% 45% at 18% 0,rgba(255,246,222,.85),rgba(255,246,222,0) 70%),radial-gradient(ellipse 50% 40% at 100% 100%,rgba(223,200,167,.3),rgba(223,200,167,0) 70%),var(--grain),var(--fond);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.016' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='26'/%3E%3C/filter%3E%3Crect x='16' y='16' width='568' height='368' rx='40' fill='%23000' filter='url(%23r)'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.016' numOctaves='3' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='26'/%3E%3C/filter%3E%3Crect x='16' y='16' width='568' height='368' rx='40' fill='%23000' filter='url(%23r)'/%3E%3C/svg%3E") center/100% 100% no-repeat;
 }
 .carte>*,.bandeau>*{position:relative;z-index:1}
 /* Cartes qui s'ouvrent (Parents) : le titre d'abord, le texte au toucher, une veilleuse qui s'allume. */
 .carte-pli{padding:0}
-.carte-pli summary{list-style:none;cursor:pointer;padding:1.3rem 3rem 1.2rem 1.25rem;position:relative;min-height:44px;border-radius:var(--rayon)}
+.carte-pli summary{list-style:none;cursor:pointer;padding:1.5rem 3rem 1.4rem 1.5rem;position:relative;min-height:44px;border-radius:var(--rayon)}
 .carte-pli summary::-webkit-details-marker{display:none}
 .carte-pli summary h3{margin:0}
 .carte-pli summary::after{ /* petite étoile qui tourne quand la carte s'ouvre */
@@ -174,29 +188,29 @@ body{background:var(--grain),var(--papier)}
 .carte-pli details[open] summary::after{transform:rotate(135deg) scale(1.2);opacity:1}
 .carte-pli summary:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
 .carte-pli details>p{margin:0;padding:0 1.25rem 1.4rem;animation:entree .9s ease both}
-.carte-pli details[open]{box-shadow:inset 0 0 0 1px rgba(246,217,168,.6)}
+.carte-pli details[open]{box-shadow:none}
 .carte-pli details[open]::before{ /* veilleuse qui s'allume */
   content:"";position:absolute;left:50%;top:0;width:70%;height:60%;transform:translateX(-50%);pointer-events:none;border-radius:50%;
   background:radial-gradient(ellipse,rgba(255,243,214,.9),rgba(246,217,168,0) 70%);animation:entree 1.2s ease both;
 }
 .carte-pli details{position:relative;border-radius:var(--rayon)}
 html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{animation:none}
-.bandeau{overflow:hidden}
-.carte:hover{transform:translateY(-4px);box-shadow:var(--ombre-haute)}
+.bandeau{overflow:visible}
+.carte:hover{transform:translateY(-4px);filter:drop-shadow(0 18px 24px rgba(124,92,67,.2)) drop-shadow(0 2px 4px rgba(124,92,67,.08))}
 .carte h2,.carte h3{font-size:1.7rem;margin-bottom:.3em}
 /* Bandeaux : même famille que les cartes, teintes sable (les noms de classes gardent leurs anciens noms). */
-.bandeau{background:var(--grain),var(--papier);padding:1.5rem;margin:1.5rem 0}
+.bandeau{padding:1.9rem 1.8rem;margin:2.4rem 0}
 /* Teintes très douces, en touche : bleu glacier, pêche, caramel clair, or pâle */
-.bandeau-bleu{background:var(--grain),linear-gradient(180deg,#FFFDF6,#EEF3F7)}
-.bandeau-rose{background:var(--grain),linear-gradient(180deg,#FFFDF6,#FBEEE6)}
-.bandeau-miel{background:var(--grain),linear-gradient(180deg,#FFFDF6,#F6E8D6)}
-.bandeau-or{background:var(--grain),linear-gradient(180deg,#FFFDF6,#FBF2DC)}
+.bandeau-bleu{--fond:linear-gradient(180deg,#FFFDF6,#EEF3F7)}
+.bandeau-rose{--fond:linear-gradient(180deg,#FFFDF6,#FBEEE6)}
+.bandeau-miel{--fond:linear-gradient(180deg,#FFFDF6,#F6E8D6)}
+.bandeau-or{--fond:linear-gradient(180deg,#FFFDF6,#FBF2DC)}
 /* L'univers : une teinte par personnage (cadre et ombre), le texte reste sur blanc chaud */
-.perso-tout-mou .cadre-portrait{background:radial-gradient(ellipse 60% 70% at 8% 12%,rgba(220,232,240,.7),rgba(220,232,240,0) 70%),var(--grain),#FFFFFF;box-shadow:0 12px 28px -12px rgba(137,168,184,.55),0 2px 6px -2px rgba(137,168,184,.3)}
-.perso-grosse-tete .cadre-portrait{background:radial-gradient(ellipse 60% 70% at 8% 12%,rgba(246,217,168,.6),rgba(246,217,168,0) 70%),var(--grain),#F8EBDA}
-.perso-lili .cadre-portrait{background:radial-gradient(ellipse 60% 70% at 8% 12%,rgba(240,196,178,.55),rgba(240,196,178,0) 70%),var(--grain),#FBEDE3}
-.perso-etoile .cadre-portrait{box-shadow:0 12px 28px -12px rgba(231,182,111,.6),0 2px 6px -2px rgba(231,182,111,.35)}
-.grille{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
+.perso-tout-mou .cadre-portrait{--fond-cadre:#FFFFFF;filter:drop-shadow(0 12px 16px rgba(137,168,184,.4))}
+.perso-grosse-tete .cadre-portrait{--fond-cadre:#F8EBDA}
+.perso-lili .cadre-portrait{--fond-cadre:#FBEDE3}
+.perso-etoile .cadre-portrait{filter:drop-shadow(0 12px 16px rgba(231,182,111,.45))}
+.grille{display:grid;gap:1.9rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin:1.5rem 0;padding:0;list-style:none}
 
 /* Images : « photo posée » dans un cadre doux, formats fixes. */
 .carte img{
@@ -210,25 +224,31 @@ html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{anim
 
 /* Cadre aquarelle : emplacement d'illustration (scène 4/3 ou portrait carré), bords doux comme un lavis. */
 .cadre-aquarelle{
-  position:relative;isolation:isolate;margin:0 auto 1.25rem;padding:clamp(.6rem,3vw,1.1rem);
-  border:1px solid var(--lisere);border-radius:30px 38px 32px 42px / 36px 30px 40px 32px;
+  --fond-cadre:var(--voile-or);
+  position:relative;isolation:isolate;margin:0 auto 1.25rem;padding:clamp(.8rem,3vw,1.2rem);
+  border:0;border-radius:30px 38px 32px 42px / 36px 30px 40px 32px;background:none;box-shadow:none;
+  filter:drop-shadow(0 10px 16px rgba(124,92,67,.18));
+}
+/* la lampe de chevet : un halo chaud et diffus derrière chaque illustration */
+.cadre-aquarelle::after{
+  content:"";position:absolute;inset:-22%;z-index:-2;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,243,214,.95) 0,rgba(246,217,168,.55) 38%,rgba(246,217,168,0) 70%);
+  animation:veilleuse-page 8s ease-in-out infinite alternate;
+}
+.cadre-aquarelle::before{ /* le fond du cadre, aux bords d'aquarelle */
+  content:"";position:absolute;inset:-.4rem;z-index:-1;pointer-events:none;
   background:
     radial-gradient(ellipse 60% 70% at 8% 12%,rgba(230,184,162,.35),rgba(230,184,162,0) 70%),
     radial-gradient(ellipse 55% 60% at 94% 92%,rgba(137,168,184,.22),rgba(137,168,184,0) 70%),
-    var(--grain),var(--voile-or);
-  box-shadow:var(--ombre);
-}
-.cadre-aquarelle::before{ /* halo de lavis qui déborde un peu du cadre */
-  content:"";position:absolute;inset:-9px;z-index:-1;border-radius:40px 46px 38px 50px / 44px 38px 48px 40px;
-  background:radial-gradient(ellipse 70% 80% at 30% 20%,rgba(228,210,184,.7),rgba(228,210,184,0) 72%),radial-gradient(ellipse 60% 70% at 80% 85%,rgba(216,194,148,.45),rgba(216,194,148,0) 72%);
-  filter:blur(7px);
+    var(--grain),var(--fond-cadre);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.02' numOctaves='3' seed='3'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='22'/%3E%3C/filter%3E%3Crect x='14' y='14' width='372' height='472' rx='36' fill='%23000' filter='url(%23r)'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500' preserveAspectRatio='none'%3E%3Cfilter id='r' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.02' numOctaves='3' seed='3'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='22'/%3E%3C/filter%3E%3Crect x='14' y='14' width='372' height='472' rx='36' fill='%23000' filter='url(%23r)'/%3E%3C/svg%3E") center/100% 100% no-repeat;
 }
 .cadre-aquarelle img{width:100%;height:auto;object-fit:contain;border-radius:18px}
 .cadre-scene{max-width:40rem}
 .cadre-scene img{aspect-ratio:4/3}
 .cadre-portrait{max-width:17rem}
 /* Veilleuse dorée qui respire derrière chaque personnage ; un petit cœur de lumière s'allume quand la carte arrive ou au survol. */
-.cadre-portrait::after,.flotte-douce::after{
+.flotte-douce::after{
   content:"";position:absolute;inset:-18%;z-index:-2;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle,rgba(255,243,214,.95) 0,rgba(246,217,168,.6) 38%,rgba(246,217,168,0) 70%);
   animation:veilleuse-page 8s ease-in-out infinite alternate;
@@ -245,7 +265,7 @@ html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{anim
 .apparait.visible .coeur-page::before{opacity:.9;transform:scale(1);animation:coeur-page 3.4s ease-in-out 1.2s infinite alternate}
 .bandeau:hover .coeur-page::before{opacity:1;transform:scale(1.4)}
 @keyframes coeur-page{0%{opacity:.5;transform:scale(.9)}100%{opacity:1;transform:scale(1.25)}}
-html.calme .cadre-portrait::after,html.calme .flotte-douce::after,html.calme .coeur-page::before{animation:none}
+html.calme .cadre-aquarelle::after,html.calme .flotte-douce::after,html.calme .coeur-page::before{animation:none}
 /* Le secret du gilet : un petit Doudou glisse dans la manche de Lili, deux notes s'échappent */
 .bandeau-rose .cadre-portrait{cursor:pointer}
 .bandeau-rose .cadre-portrait:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
@@ -290,6 +310,11 @@ html.calme .manche-doudou,html.calme .note-manche{display:none}
   background:radial-gradient(ellipse,rgba(255,246,222,.7),rgba(255,246,222,0) 70%);
 }
 .pied-interieur{position:relative;z-index:1}
+.pied-interieur::before{ /* texture de laine, en écho au gilet de Lili : à peine visible */
+  content:"";position:absolute;inset:-1.5rem -1rem;z-index:-1;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(45deg,rgba(124,92,67,.07) 0 1.5px,transparent 1.5px 10px),repeating-linear-gradient(-45deg,rgba(124,92,67,.07) 0 1.5px,transparent 1.5px 10px);
+  -webkit-mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 70% 80% at 50% 50%,#000 30%,transparent 100%);
+}
 .bas-bloc h2+p{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:1.25rem;line-height:1.45;color:var(--brun-fonce)}
 .pied::before{ /* nuage doux qui monte vers la page : la transition se fait en fondu, sans ligne */
   content:"";position:absolute;left:0;right:0;top:-5.5rem;height:5.6rem;pointer-events:none;
@@ -329,9 +354,9 @@ html.calme .pied-illustration img{animation:none}
 
 @media (max-width:47.99rem){
   .contenu{padding:1.25rem 1rem 2.5rem}
-  .section{margin:1.5rem 0}
-  .bandeau{padding:1.25rem 1.1rem;margin:1.25rem 0}
-  .grille{gap:1.1rem;margin:1.1rem 0}
+  .section{margin:2.2rem 0}
+  .bandeau{padding:1.5rem 1.25rem;margin:1.8rem 0}
+  .grille{gap:1.4rem;margin:1.4rem 0}
   .formulaire .bouton{justify-self:stretch;width:100%}
   .pied ul{gap:.2rem 1rem}
   .pied{margin-top:4rem}
@@ -346,7 +371,7 @@ html.calme .pied-illustration img{animation:none}
 
 /* ===== 10. Mouvement : tout est lent et doux ===== */
 /* Apparition au défilement : fondu léger qui monte à peine (js/site.js pose .visible). */
-.js .apparait{opacity:0;transform:translateY(10px);transition:opacity 1.3s ease,transform 1.5s cubic-bezier(.3,.6,.3,1)}
+.js .apparait{opacity:0;transform:translateY(8px);transition:opacity 1.1s ease,transform 1.2s cubic-bezier(.3,.6,.3,1)}
 .js .apparait.visible{opacity:1;transform:none}
 
 /* Transitions de page en fondu : fondu croisé natif quand le navigateur sait le faire,
@@ -417,7 +442,7 @@ html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.cal
 .cadre-livre{max-width:14rem;margin:0}
 .cadre-livre img{aspect-ratio:3/4;transform-origin:50% 100%;animation:balance-livre 9s ease-in-out infinite alternate}
 @keyframes balance-livre{0%{transform:rotate(-1.4deg) translateY(0)}100%{transform:rotate(1.4deg) translateY(-3px)}}
-.cadre-livre{overflow:hidden}
+.cadre-livre{overflow:visible}
 /* Couverture provisoire composée en CSS : ciel du soir, l'Étoile, le titre, un petit caillou de papier */
 .couverture{position:relative;aspect-ratio:3/4;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:1rem .8rem;
   background:radial-gradient(ellipse 80% 50% at 50% 22%,#FFF3D6 0%,rgba(255,243,214,0) 70%),linear-gradient(180deg,#F3D9A8 0%,#E8B98A 45%,#C9A5A2 80%,#8E86A8 100%);
@@ -431,13 +456,13 @@ html.calme::view-transition-group(*),html.calme::view-transition-old(*),html.cal
 .couv-caillou{display:block;width:2.1rem;height:1.6rem;margin:auto auto .4rem;background:linear-gradient(160deg,#FFFDF6,#EFE3CE);border-radius:60% 55% 50% 65% / 55% 60% 50% 55%;box-shadow:0 3px 6px -2px rgba(94,86,130,.5),inset -3px -3px 6px rgba(199,171,139,.5);transform:rotate(-8deg)}
 .couv-autrice{font-family:var(--police-fine);font-style:italic;font-weight:500;font-size:.85rem;color:#FFF8EA;text-shadow:0 1px 3px rgba(94,86,130,.6)}
 html.calme .couverture{animation:none}
-.cadre-livre::after{ /* reflet doré qui passe de temps en temps sur la couverture */
+.couverture::after{ /* reflet doré qui passe de temps en temps sur la couverture */
   content:"";position:absolute;top:-20%;bottom:-20%;left:-40%;width:35%;pointer-events:none;
   background:linear-gradient(105deg,rgba(255,246,222,0),rgba(255,246,222,.55) 50%,rgba(255,246,222,0));
   transform:skewX(-12deg) translateX(0);animation:reflet 11s ease-in-out infinite;
 }
 @keyframes reflet{0%,70%{transform:skewX(-12deg) translateX(0)}100%{transform:skewX(-12deg) translateX(520%)}}
-html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
+html.calme .cadre-livre img,html.calme .couverture::after{animation:none}
 .livre-texte h2{margin-bottom:.1em}
 .livre-texte .sous-titre{margin:0 0 .9rem;font-size:clamp(1.25rem,4.2vw,1.5rem)}
 .resume{max-width:36rem}
@@ -457,6 +482,8 @@ html.calme .cadre-livre img,html.calme .cadre-livre::after{animation:none}
 
 /* ===== 12 ter. La fenêtre de Lili : cadre de bois doux, vitre sur le ciel du soir, rideau pêche, l'Étoile et son fil ===== */
 .fenetre-scene{max-width:30rem;margin:2.5rem auto}
+.fenetre::after{content:"";position:absolute;inset:-18%;z-index:-1;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,243,214,.9) 0,rgba(246,217,168,.5) 38%,rgba(246,217,168,0) 70%);animation:veilleuse-page 9s ease-in-out infinite alternate}
+.fenetre-scene{position:relative;isolation:isolate}
 .fenetre{position:relative;aspect-ratio:4/5;border-radius:34px 34px 14px 14px;padding:.9rem;isolation:isolate;
   background:linear-gradient(180deg,#C7AB8B,#B08C6A);box-shadow:var(--ombre-haute),inset 0 0 0 1px rgba(255,246,222,.35)}
 .fenetre-ciel{position:absolute;inset:.9rem;overflow:hidden;border-radius:26px 26px 8px 8px;
@@ -491,8 +518,7 @@ html.calme .fenetre-nuage,html.calme .fenetre-rideau,html.calme .fenetre-doudous
 html.calme .fil-etoile path{stroke-dashoffset:0}
 
 /* L'Étoile dans L'univers : même cadre que les personnages, le ciel du soir derrière elle */
-.cadre-etoile{background:linear-gradient(180deg,#8E86A8 0%,#5F6390 55%,#3E4470 100%)}
-.cadre-etoile::after{display:none}
+.cadre-etoile{--fond-cadre:linear-gradient(180deg,#8E86A8 0%,#5F6390 55%,#3E4470 100%)}
 .portrait-etoile{display:block;aspect-ratio:1/1;border-radius:18px}
 .portrait-etoile svg{display:block;width:100%;height:100%;overflow:visible}
 
@@ -672,3 +698,54 @@ html.calme .zzz{display:none}
 @keyframes respire-scene{0%{transform:scale(1)}100%{transform:scale(1.025)}}
 html.calme .flotte-douce,html.calme .cadre-aquarelle.scene-vivante img{animation:none}
 @media (prefers-reduced-motion:reduce){.flotte-douce,.cadre-aquarelle.scene-vivante img{animation:none}}
+
+/* ===== 16. Mode veilleuse (html.nuit-mode) : bleu nuit tamisé, texte crème doux, l'Étoile qui brille, aucune couleur vive =====
+   Contrastes : crème #F1E7D6 sur #232A47 = 11,7:1 ; #F7E9D3 sur #2B3254 = 10,9:1 ; boutons #2B3254 sur crème = 10,9:1. */
+html.nuit-mode{
+  --creme:#1F2541;--papier:#232A47;--sable-clair:#262D4B;--sable:#2E3558;--beige:#2E3558;--voile-or:#2B3254;
+  --texte:#F1E7D6;--brun:#F7E9D3;--brun-fonce:#FBF1E2;--encre:#F7E9D3;--encre-douce:#F1E7D6;--caramel:#E7C79A;--or:#E7C79A;--or-clair:#4A4C78;
+  --lisere:rgba(247,233,211,.14);--focus:#FFF3D6;--vert-eau:#3A4A5E;
+  --ombre:0 10px 30px -14px rgba(0,0,0,.6),0 2px 6px -2px rgba(0,0,0,.4);--ombre-haute:0 16px 36px -14px rgba(0,0,0,.7),0 3px 8px -2px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+html.nuit-mode body{background:var(--grain),#1C2140;color:var(--texte)}
+html.nuit-mode body::before{background:radial-gradient(ellipse 70% 45% at 12% 8%,rgba(94,86,130,.5),rgba(94,86,130,0) 70%),radial-gradient(ellipse 60% 40% at 92% 38%,rgba(137,168,184,.14),rgba(137,168,184,0) 70%)}
+html.nuit-mode .entete{background:var(--grain),linear-gradient(180deg,#232A47,#1F2541)}
+html.nuit-mode .entete::after{background:linear-gradient(180deg,rgba(31,37,65,.9),rgba(31,37,65,0))}
+html.nuit-mode main:not(.accueil)::before{background:linear-gradient(180deg,#1B2240 0%,#262C4E 38%,#3A3356 68%,rgba(28,33,64,0) 100%)}
+html.nuit-mode .carte,html.nuit-mode .bandeau{--fond:#2B3254;filter:drop-shadow(0 12px 18px rgba(0,0,0,.45))}
+html.nuit-mode .bandeau-bleu{--fond:linear-gradient(180deg,#2B3254,#27345A)}
+html.nuit-mode .bandeau-rose{--fond:linear-gradient(180deg,#2B3254,#3A2F4E)}
+html.nuit-mode .bandeau-miel{--fond:linear-gradient(180deg,#2B3254,#3B3350)}
+html.nuit-mode .bandeau-or{--fond:linear-gradient(180deg,#2B3254,#3C3752)}
+html.nuit-mode .carte::before,html.nuit-mode .bandeau::before{background:radial-gradient(ellipse 60% 45% at 18% 0,rgba(247,233,211,.12),rgba(247,233,211,0) 70%),var(--grain),var(--fond)}
+html.nuit-mode .cadre-aquarelle{--fond-cadre:#333A5E}
+html.nuit-mode .perso-tout-mou .cadre-portrait{--fond-cadre:#3A4466}
+html.nuit-mode .perso-grosse-tete .cadre-portrait,html.nuit-mode .perso-lili .cadre-portrait{--fond-cadre:#3A3556}
+html.nuit-mode .cadre-aquarelle::after,html.nuit-mode .flotte-douce::after,html.nuit-mode .doudou-dort::before,html.nuit-mode .fenetre::after{background:radial-gradient(circle,rgba(246,217,168,.35) 0,rgba(246,217,168,.15) 38%,rgba(246,217,168,0) 70%)}
+html.nuit-mode .bouton{color:#2B3254;background:linear-gradient(180deg,#F7E9D3,#E7C79A);border-color:transparent;box-shadow:0 3px 10px -4px rgba(0,0,0,.6)}
+html.nuit-mode .bouton-doux{color:#F7E9D3;background:linear-gradient(180deg,#3A4466,#2B3254);border-color:rgba(247,233,211,.3)}
+html.nuit-mode .etiquette{background:#3A4A5E;color:#F7E9D3}
+html.nuit-mode .calmer-pied,html.nuit-mode .ecouter,html.nuit-mode .menu-bouton{color:var(--brun-fonce);border-color:rgba(247,233,211,.35)}
+html.nuit-mode .calmer-pied:hover{background:rgba(247,233,211,.12)}
+html.nuit-mode .pied{background:var(--grain),linear-gradient(180deg,#232A47 0%,#1F2541 50%,#161B33 100%)}
+html.nuit-mode .pied::before{background:radial-gradient(ellipse 34% 100% at 18% 100%,rgba(35,42,71,.95),rgba(35,42,71,0) 70%),radial-gradient(ellipse 40% 100% at 62% 100%,rgba(35,42,71,.95),rgba(35,42,71,0) 70%),linear-gradient(180deg,rgba(35,42,71,0),rgba(35,42,71,1))}
+html.nuit-mode .pied::after{background:radial-gradient(ellipse,rgba(246,217,168,.18),rgba(246,217,168,0) 70%)}
+html.nuit-mode .pied-interieur::before{background:repeating-linear-gradient(45deg,rgba(247,233,211,.06) 0 1.5px,transparent 1.5px 10px),repeating-linear-gradient(-45deg,rgba(247,233,211,.06) 0 1.5px,transparent 1.5px 10px)}
+html.nuit-mode .pied a{color:var(--brun-fonce);text-decoration-color:rgba(247,233,211,.45)}
+html.nuit-mode a{color:var(--brun)}
+html.nuit-mode .menu a{color:var(--brun-fonce)}
+html.nuit-mode .nuit{display:none}
+html.nuit-mode .nuage-vol,html.nuit-mode .nuage-passe{opacity:.18}
+html.nuit-mode .brume-page{opacity:.35}
+html.nuit-mode .note{color:#E7C79A}
+html.nuit-mode .etoile{opacity:1}
+html.nuit-mode .mot-doux,html.nuit-mode .sous-titre,html.nuit-mode .chapeau,html.nuit-mode .accroche,html.nuit-mode blockquote,html.nuit-mode .citation,html.nuit-mode .collection,html.nuit-mode .resume-ecoute,html.nuit-mode .pour-finir,html.nuit-mode .fenetre-legende,html.nuit-mode .pied-fin,html.nuit-mode .bas-bloc h2+p{color:var(--brun-fonce)}
+html.nuit-mode .couverture{background:radial-gradient(ellipse 80% 50% at 50% 22%,rgba(246,217,168,.35) 0%,rgba(246,217,168,0) 70%),linear-gradient(180deg,#3A3F6A 0%,#2B3254 45%,#262C4E 80%,#1C2140 100%)}
+html.nuit-mode .couv-titre{color:#F7E9D3}
+html.nuit-mode .couv-collection,html.nuit-mode .couv-sous{color:#F1E7D6}
+html.nuit-mode .texte-histoire-corps,html.nuit-mode .formulaire input,html.nuit-mode .formulaire textarea{background:var(--grain),#2B3254;color:var(--texte);border-color:rgba(247,233,211,.3)}
+html.nuit-mode .etoile-ciel{box-shadow:0 16px 36px -14px rgba(0,0,0,.8),inset 0 0 60px rgba(255,246,222,.08)}
+html.nuit-mode .page-tete::before{opacity:1}
+html.nuit-mode .carte-pli summary::after{background:#E7C79A}
+html.nuit-mode .menu a::after{filter:brightness(1.3)}

@@ -650,7 +650,7 @@
 
   /* La veillée (accueil) : trois phrases de Doudou Tout-Mou, puis le livre ; le site passe en mode veilleuse */
   var boutonVeillee = document.querySelector('[data-veillee]');
-  var boiteVeillee = document.querySelector('[data-veillee-boiteVeillee]');
+  var boiteVeillee = document.querySelector('[data-veillee-boite]');
   if (boutonVeillee && boiteVeillee) {
     var phrases = [
       'Bonjour toi ! Je suis Doudou Tout-Mou, farceur et bavard.',

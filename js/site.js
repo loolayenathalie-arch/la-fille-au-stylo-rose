@@ -25,6 +25,15 @@
     racine.classList.toggle('calme', calme);
     for (var i = 0; i < boutons.length; i++) {
       boutons[i].setAttribute('aria-pressed', calme ? 'true' : 'false');
+      if (boutons[i].classList.contains('calmer-pied') || boutons[i].classList.contains('calmer')) {
+        boutons[i].textContent = calme ? 'Réveiller les animations' : 'Réduire les animations';
+      }
+    }
+    var note = document.querySelector('.calme-note');
+    if (note) {
+      note.textContent = (choix === null && mq && mq.matches)
+        ? 'Votre appareil demande moins d’animations : le site est au repos. Appuyez sur « Réveiller les animations » pour que les Doudous, l’Étoile et les nuages répondent au doigt.'
+        : 'Animations réduites : les Doudous, l’Étoile et les nuages ne bougent plus quand on les touche. Appuyez pour les réveiller.';
     }
     if (calme) { montreTout(); }
     if (annonce) {
@@ -419,7 +428,7 @@
   var cadreGT = document.querySelector('.perso-grosse-tete .cadre-portrait');
   if (cadreGT) {
     cadreGT.addEventListener('pointerdown', function () {
-      if (calme || cadreGT.classList.contains('tombe')) { return; }
+      if (cadreGT.classList.contains('tombe')) { return; }
       cadreGT.classList.add('tombe');
       window.setTimeout(function () { cadreGT.classList.remove('tombe'); }, 2700);
     });
@@ -427,7 +436,7 @@
   var cadreTM = document.querySelector('.perso-tout-mou .cadre-portrait');
   if (cadreTM) {
     var serreDebut = 0;
-    cadreTM.addEventListener('pointerdown', function () { if (calme) { return; } serreDebut = Date.now(); cadreTM.classList.add('serre'); });
+    cadreTM.addEventListener('pointerdown', function () { serreDebut = Date.now(); cadreTM.classList.add('serre'); });
     function lacheTM() {
       if (!cadreTM.classList.contains('serre')) { return; }
       cadreTM.classList.remove('serre');
@@ -452,7 +461,7 @@
   }
   /* Les nuages vivent derrière le contenu : on cherche sous le doigt celui qu'on a touché (elementsFromPoint) */
   function pouf(nu) {
-    if (calme || nu.classList.contains('pouf')) { return; }
+    if (nu.classList.contains('pouf')) { return; }
     nu.classList.add('pouf'); vibre();
     window.setTimeout(function () { nu.classList.remove('pouf'); }, 1400);
   }

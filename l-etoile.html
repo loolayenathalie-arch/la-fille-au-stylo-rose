@@ -52,8 +52,10 @@
  <header class="page-tete"><h1>L'Étoile</h1><p class="mot-doux">Elle brille en veillant sur nous, reliée à notre cœur.</p></header>
  <!-- La page la plus intime du site : l'Étoile seule dans la nuit, le fil de lumière qui descend, et les mots de Nath. -->
  <section class="etoile-nuit apparait" aria-label="L'Étoile dans la nuit">
-  <div class="etoile-ciel">
+  <div class="etoile-ciel" data-ciel-etoile>
    <span class="etoile-voile"></span>
+   <span class="lueur-doigt" aria-hidden="true"></span>
+   <span class="ciel-indice" aria-hidden="true">Appuie sur l’Étoile et garde le doigt…</span>
    <svg class="etoile-grande" viewBox="-100 -100 200 200" focusable="false" aria-hidden="true">
     <defs><radialGradient id="eg-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".3" stop-color="#F2C97D" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs>
     <circle class="ve-halo" r="130" fill="url(#eg-degrade)"/>
@@ -72,7 +74,7 @@
   <!-- Respirer avec l'Étoile : appuyer longtemps = inspirer, relâcher = expirer, trois fois. Rien n'est mesuré ni enregistré. -->
   <div class="souffle" data-souffle>
    <button class="souffle-bouton" type="button" aria-describedby="souffle-aide">Respirer avec l’Étoile</button>
-   <p id="souffle-aide" class="souffle-aide">Appuie et garde le doigt : l’Étoile grandit pendant que tu inspires. Relâche : elle redescend pendant que tu expires. Trois fois, tout doucement.</p>
+   <p id="souffle-aide" class="souffle-aide">Appuie sur l’Étoile et garde le doigt : elle grandit pendant que tu inspires. Relâche : elle redescend pendant que tu expires. Trois fois, tout doucement.</p>
    <div class="souffle-pas" aria-hidden="true"><i></i><i></i><i></i></div>
    <p class="souffle-fin" hidden>La main sur le cœur… ça y est, tu respires avec elle.</p>
   </div>

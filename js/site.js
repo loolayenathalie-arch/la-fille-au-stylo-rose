@@ -304,7 +304,7 @@
   function lanceSon() {
     if (!boite) { return; }
     boite.volume = 0;
-    boite.play().then(function () { fonduSon(0.32, 2500); etatSon(true); sonVoulu = true; try { window.sessionStorage.setItem('bols', '1'); } catch (e) { /* tant pis */ } }).catch(function () { etatSon(false); });
+    boite.play().then(function () { fonduSon(0.7, 2500); etatSon(true); sonVoulu = true; try { window.sessionStorage.setItem('bols', '1'); } catch (e) { /* tant pis */ } }).catch(function () { etatSon(false); });
   }
   function arreteSon() {
     if (!boite || boite.paused) { etatSon(false); return; }
@@ -386,6 +386,11 @@
         if (respirations === 3) { sFin.hidden = false; }
       }
     }
+    cielEtoileS.addEventListener('pointerdown', function (e) { cielEtoileS.classList.add('touchee'); inspire(e); });
+    cielEtoileS.addEventListener('pointerup', expire);
+    cielEtoileS.addEventListener('pointercancel', expire);
+    cielEtoileS.addEventListener('pointerleave', expire);
+    cielEtoileS.addEventListener('contextmenu', function (e) { e.preventDefault(); });
     sBouton.addEventListener('pointerdown', inspire);
     sBouton.addEventListener('pointerup', expire);
     sBouton.addEventListener('pointercancel', expire);
@@ -393,6 +398,21 @@
     sBouton.addEventListener('keydown', inspire);
     sBouton.addEventListener('keyup', expire);
     sBouton.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  }
+
+  /* La lueur qui suit le doigt sur le ciel de l'Étoile (transform et opacity seulement) */
+  var cielDoigt = document.querySelector('[data-ciel-etoile]');
+  var lueur = cielDoigt ? cielDoigt.querySelector('.lueur-doigt') : null;
+  if (cielDoigt && lueur && !calme) {
+    var lueurMinuteur = null;
+    cielDoigt.addEventListener('pointermove', function (e) {
+      var r = cielDoigt.getBoundingClientRect();
+      lueur.style.transform = 'translate3d(' + (e.clientX - r.left).toFixed(0) + 'px,' + (e.clientY - r.top).toFixed(0) + 'px,0)';
+      lueur.classList.add('visible');
+      window.clearTimeout(lueurMinuteur);
+      lueurMinuteur = window.setTimeout(function () { lueur.classList.remove('visible'); }, 900);
+    });
+    cielDoigt.addEventListener('pointerleave', function () { lueur.classList.remove('visible'); });
   }
 
   /* L'univers : toucher un personnage, il dit sa première phrase (texte de Nath) dans une bulle qui s'efface */

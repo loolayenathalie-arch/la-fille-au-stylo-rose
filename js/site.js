@@ -14,6 +14,12 @@
   var calme = choix !== null ? choix === '1' : !!(mq && mq.matches);
 
   var boutons = document.querySelectorAll('[data-calmer]');
+  /* Vibration à peine sentie (téléphone), jamais en mode calme ni si l'appareil ne sait pas */
+  function vibre() {
+    if (calme) { return; }
+    try { if (navigator.vibrate) { navigator.vibrate(10); } } catch (e) { /* tant pis */ }
+  }
+  window.vibreDoux = vibre;
 
   function applique(annonce) {
     racine.classList.toggle('calme', calme);
@@ -70,6 +76,12 @@
   var ciel = document.createElement('div');
   ciel.className = 'etoiles';
   ciel.setAttribute('aria-hidden', 'true');
+  /* Le ciel suit l'heure de l'appareil : le matin plus clair, le soir déjà lavande, la nuit plus étoilée. Rien n'est envoyé. */
+  var heure = new Date().getHours();
+  var moment = heure >= 5 && heure < 11 ? 'matin' : (heure >= 11 && heure < 18 ? 'jour' : 'soir');
+  racine.classList.add('heure-' + moment);
+  var nuitBase = moment === 'soir' ? (heure >= 21 || heure < 5 ? 0.35 : 0.2) : 0;
+
   /* Le soir qui tombe : --nuit suit le défilement (0 en haut, 1 en bas de page) */
   var nuit = document.createElement('div');
   nuit.className = 'nuit';
@@ -80,7 +92,7 @@
     nuitAttente = false;
     var course = document.documentElement.scrollHeight - window.innerHeight;
     var p = course > 0 ? Math.min(1, Math.max(0, window.scrollY / course)) : 0;
-    racine.style.setProperty('--nuit', (p * p).toFixed(3));
+    racine.style.setProperty('--nuit', Math.min(1, nuitBase + p * p * (1 - nuitBase)).toFixed(3));
   }
   window.addEventListener('scroll', function () { if (!nuitAttente) { nuitAttente = true; window.requestAnimationFrame(poseNuit); } }, { passive: true });
   window.addEventListener('resize', poseNuit);
@@ -194,6 +206,7 @@
   function etoileRepond() {
     if (calme || veille.classList.contains('touche')) { return; }
     veille.classList.add('touche');
+    vibre();
     for (var p = 0; p < 4; p++) {
       var pou = document.createElement('span');
       pou.className = 've-poussiere';
@@ -321,6 +334,42 @@
     }
   }
 
+  /* Respirer avec l'Étoile (page L'Étoile) : appuyer = inspirer, relâcher = expirer, trois fois */
+  var souffle = document.querySelector('[data-souffle]');
+  var cielEtoileS = document.querySelector('.etoile-ciel');
+  if (souffle && cielEtoileS) {
+    var sBouton = souffle.querySelector('.souffle-bouton');
+    var sPoints = souffle.querySelectorAll('.souffle-pas i');
+    var sFin = souffle.querySelector('.souffle-fin');
+    var respirations = 0, enCours = false, debut = 0;
+    function inspire(e) {
+      if (enCours) { return; }
+      if (e && e.type === 'keydown' && e.key !== ' ' && e.key !== 'Enter') { return; }
+      if (e && e.preventDefault) { e.preventDefault(); }
+      enCours = true; debut = Date.now();
+      cielEtoileS.classList.add('inspire'); souffle.classList.add('en-cours');
+      vibre();
+    }
+    function expire(e) {
+      if (!enCours) { return; }
+      if (e && e.type === 'keyup' && e.key !== ' ' && e.key !== 'Enter') { return; }
+      enCours = false;
+      cielEtoileS.classList.remove('inspire'); souffle.classList.remove('en-cours');
+      if (Date.now() - debut > 1200 && respirations < 3) {
+        respirations++;
+        for (var sp = 0; sp < sPoints.length; sp++) { sPoints[sp].classList.toggle('fait', sp < respirations); }
+        if (respirations === 3) { sFin.hidden = false; }
+      }
+    }
+    sBouton.addEventListener('pointerdown', inspire);
+    sBouton.addEventListener('pointerup', expire);
+    sBouton.addEventListener('pointercancel', expire);
+    sBouton.addEventListener('pointerleave', expire);
+    sBouton.addEventListener('keydown', inspire);
+    sBouton.addEventListener('keyup', expire);
+    sBouton.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  }
+
   /* L'univers : toucher un personnage, il dit sa première phrase (texte de Nath) dans une bulle qui s'efface */
   var persos = document.querySelectorAll('.bandeau[class*="perso-"]');
   for (var pe = 0; pe < persos.length; pe++) {
@@ -336,6 +385,7 @@
       cadre.appendChild(bulle);
       var minuteur = null;
       function parle() {
+        vibre();
         bulle.classList.add('visible');
         window.clearTimeout(minuteur);
         minuteur = window.setTimeout(function () { bulle.classList.remove('visible'); }, 4200);
@@ -352,6 +402,7 @@
   if (fenetreScene && rideauBouton) {
     var ouvreRideau = function () {
       fenetreScene.classList.add('ouverte');
+      vibre();
       rideauBouton.setAttribute('aria-expanded', 'true');
     };
     if (calme) { ouvreRideau(); }
@@ -373,6 +424,7 @@
     var blotti = function () {
       if (calme || lili.classList.contains('blotti')) { return; }
       lili.classList.add('blotti');
+      vibre();
       for (var nm = 0; nm < 2; nm++) {
         var note = document.createElement('span');
         note.className = 'note-manche';

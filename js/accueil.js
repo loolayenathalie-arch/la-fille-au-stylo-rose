@@ -82,6 +82,7 @@
   function calin() {
     if (calme || scene.classList.contains('calin')) { return; }
     scene.classList.add('calin');
+    if (window.vibreDoux) { window.vibreDoux(); }
     var glyphes = ['\u266A', '\u266B', '\u2669'];
     var couleurs = ['#B87A46', '#C06A82', '#89A8B8'];
     for (var n = 0; n < 3; n++) {

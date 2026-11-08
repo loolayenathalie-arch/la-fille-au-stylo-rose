@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La chambre de Lili – Les Doudous et l'Étoile</title>
+<meta property="og:title" content="La chambre de Lili – Les Doudous et l'Étoile">
+<link rel="canonical" href="https://www.lafilleaustylorose.com/chambre.html">
+<meta property="og:site_name" content="Les Doudous et l'Étoile">
+<meta property="og:image" content="https://www.lafilleaustylorose.com/images/partage.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:type" content="website"><meta property="og:locale" content="fr_FR">
+<meta property="og:description" content="La chambre de Lili : promène-toi, chaque objet est une porte vers l'univers des Doudous et l'Étoile.">
+<meta property="og:url" content="https://www.lafilleaustylorose.com/chambre.html">
+<meta property="og:image:alt" content="Le petit mot plié, Les Doudous du soir : l'Étoile et les Doudous dans le ciel du soir">
+<meta name="twitter:card" content="summary_large_image">
+<!-- TODO (avant le lancement public) : retirer la ligne noindex ci-dessous ET vider robots.txt -->
+<meta name="robots" content="noindex, nofollow">
+<!-- TODO : description de la page -->
+<meta name="description" content="La chambre de Lili : promène-toi, chaque objet est une porte vers l'univers des Doudous et l'Étoile.">
+<meta name="theme-color" content="#EFE3CE">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="fonts/caveat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js" defer></script>
+</head>
+<body class="page-chambre">
+<a class="passer-au-contenu" href="#contenu">Aller au contenu</a>
+<header class="entete">
+ <div class="entete-interieur">
+  <a class="nom-du-site" href="index.html">Les Doudous et l'Étoile<small>La fille au stylo rose</small></a>
+  <button class="veilleuse" type="button" data-veilleuse aria-pressed="false" aria-label="Mode veilleuse : lire en bleu nuit tamisé"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="lune" d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A9.5 9.5 0 0 1 15.5 3.5z" fill="currentColor"/><circle class="lune-etoile" cx="6.5" cy="6.5" r="1.1" fill="currentColor"/><circle class="lune-etoile" cx="9.5" cy="3.5" r=".8" fill="currentColor"/></svg></button>
+  <button class="bols" type="button" data-bols aria-pressed="false" aria-label="Bols chantants : écouter ou arrêter" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10h16a8 8 0 0 1-16 0z" fill="currentColor"/><path d="M8 20h8M12 18v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="bols-onde" d="M3 6.5q2-2 4 0t4 0 4 0 4 0 2 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+  <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-liste" data-menu><span class="menu-trait" aria-hidden="true"></span>Menu</button>
+  <nav class="menu" aria-label="Menu principal">
+   <ul id="menu-liste">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="l-etoile.html">L'Étoile</a></li>
+    <li><a href="parents.html">Les astuces des Doudous</a></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="contenu">
+<div class="contenu page-chambre">
+ <header class="page-tete"><h1>La chambre de Lili</h1><p class="mot-doux">Promène-toi : la fenêtre, le piano, le lit, le livre, le coffre… chaque chose est une porte.</p></header>
+ <!-- Maquette composée en CSS avec les images provisoires ; chaque objet se remplace par un dessin de Sylvia (même emplacement, même lien). -->
+ <div class="chambre" data-chambre>
+  <div class="chambre-mur" aria-hidden="true"></div>
+  <div class="chambre-sol" aria-hidden="true"></div>
+  <div class="chambre-tapis" aria-hidden="true"></div>
+  <a class="objet objet-fenetre" href="l-etoile.html">
+   <span class="fenetre-mini" aria-hidden="true"><span class="fm-ciel"><span class="fm-etoile"></span></span><span class="fm-croix"></span><span class="fm-rideau"></span></span>
+   <span class="objet-nom">L’Étoile</span>
+  </a>
+  <a class="objet objet-piano" href="ecouter.html">
+   <img src="images/personnages/lili-piano.png" width="560" height="900" alt="Lili joue du piano" loading="lazy">
+   <span class="objet-nom">Écouter l’histoire</span>
+  </a>
+  <a class="objet objet-lit" href="index.html#veillee">
+   <span class="lit" aria-hidden="true"><span class="lit-tete"></span><span class="lit-couette"></span><span class="lit-oreiller"></span></span>
+   <picture><source type="image/webp" srcset="images/personnages/doudous-duo.webp"><img src="images/personnages/doudous-duo.png" width="750" height="848" alt="Doudou Tout-Mou et Doudou Grosse Tête dans le lit" loading="lazy"></picture>
+   <span class="objet-nom">La veillée</span>
+  </a>
+  <a class="objet objet-livre" href="le-livre.html">
+   <span class="livre-mini" aria-hidden="true"><span class="lm-etoile"></span><span class="lm-titre">Le petit<br>mot plié</span></span>
+   <span class="objet-nom">Le livre</span>
+  </a>
+  <a class="objet objet-coffre" href="parents.html">
+   <span class="coffre" aria-hidden="true"><span class="coffre-couvercle"></span><span class="coffre-corps"></span><span class="coffre-serrure"></span></span>
+   <span class="objet-nom">Les astuces des Doudous</span>
+  </a>
+  <a class="objet objet-cadre" href="l-univers.html">
+   <span class="cadre-mini" aria-hidden="true"><img src="images/personnages/lili-et-ses-doudous.webp" width="827" height="1092" alt="" loading="lazy"></span>
+   <span class="objet-nom">L’univers</span>
+  </a>
+  <span class="chambre-lampe" aria-hidden="true"></span>
+ </div>
+ <p class="chambre-aide">Sur ordinateur, le nom apparaît quand on passe dessus ; sur téléphone, il est toujours écrit.</p>
+</div>
+</main>
+<footer class="pied">
+ <div class="pied-interieur">
+  <div class="bas-blocs">
+   <section class="bas-bloc" aria-labelledby="bas-autrice">
+    <h2 id="bas-autrice">L'autrice</h2>
+    <p class="vide">[texte de Nath]</p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-contact">
+    <h2 id="bas-contact">Contact</h2>
+    <p>Écrire à Nathalie : <a href="mailto:contact@lafilleaustylorose.com">contact@lafilleaustylorose.com</a></p>
+   </section>
+   <section class="bas-bloc" aria-labelledby="bas-lettre">
+    <h2 id="bas-lettre">La lettre</h2>
+    <!-- TODO newsletter : brancher ce champ à Brevo (liste, vérification du domaine d'envoi SPF/DKIM/DMARC,
+         domaine Brevo autorisé dans vercel.json form-action, case de consentement + mention RGPD, aucun script de suivi).
+         Bouton désactivé tant que ce n'est pas branché. -->
+    <!-- Lettre d'information : pas encore reliée à un service d'envoi (aucune adresse n'est collectée). À brancher plus tard (Brevo). -->
+    <!-- ===== Lettre d'information (Brevo) : PRÉPARÉ, PAS BRANCHÉ =====
+         Pour l'activer : (1) remplacer ACTION_BREVO par l'adresse d'envoi du formulaire Brevo ;
+         (2) ajouter le domaine Brevo (https://sibforms.com) à "form-action" dans vercel.json ;
+         (3) retirer l'attribut hidden du <form> et supprimer l'étiquette « Inscriptions bientôt ouvertes » ;
+         (4) dans Brevo : liste « La lettre des Doudous », formulaire avec double confirmation, cadeau = la fiche des Doudous. -->
+    <form class="formulaire formulaire-bas lettre-brevo" method="post" action="ACTION_BREVO" hidden data-brevo>
+     <div><label for="lettre-courriel">Votre adresse e-mail</label><input id="lettre-courriel" name="EMAIL" type="email" autocomplete="email" required></div>
+     <div class="consentement">
+      <input id="lettre-accord" name="OPT_IN" type="checkbox" value="1" required>
+      <label for="lettre-accord">J'accepte de recevoir la lettre des Doudous et l'Étoile</label>
+     </div>
+     <p class="lettre-note">En cadeau de bienvenue : la fiche des Doudous à imprimer. Vous pouvez vous désinscrire à tout moment, d'un clic en bas de chaque lettre.</p>
+     <button class="bouton" type="submit">Recevoir la lettre</button>
+     <p class="lettre-merci" hidden role="status">Merci ! Un petit message vient de partir vers votre boîte : ouvrez-le pour confirmer votre adresse. La fiche des Doudous vous attend juste après.</p>
+    </form>
+    <p class="etiquette">Inscriptions bientôt ouvertes</p>
+   </section>
+  </div>
+  <!-- Les Doudous endormis sous l'Étoile (image décorative) -->
+  <div class="pied-illustration" aria-hidden="true">
+   <svg class="pied-etoile" viewBox="-100 -100 200 200" focusable="false"><defs><radialGradient id="pied-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".35" stop-color="#FAE2B8" stop-opacity=".5"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="110" fill="url(#pied-degrade)"/><g class="ve-rayons"><path d="M0 -70 L3 -3 L70 0 L3 3 L0 70 L-3 3 L-70 0 L-3 -3Z" fill="#FFF8EA"/><path d="M0 -38 L2.2 -2.2 L38 0 L2.2 2.2 L0 38 L-2.2 2.2 L-38 0 L-2.2 -2.2Z" fill="#FFF8EA" fill-opacity=".85" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="9" fill="#FFFFFF"/></g></svg>
+   <picture><source type="image/webp" srcset="images/personnages/doudou-dort.webp"><img loading="lazy" src="images/personnages/doudou-dort.png" width="360" height="509" alt=""></picture>
+  </div>
+  <nav aria-label="Pied de page">
+   <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="le-livre.html">Le livre</a></li>
+    <li><a href="l-univers.html">L'univers</a></li>
+    <li><a href="l-etoile.html">L'Étoile</a></li>
+    <li><a href="parents.html">Les astuces des Doudous</a></li>
+    <li><a href="ecouter.html">Écouter l'histoire</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+   </ul>
+  </nav>
+  <p class="pied-fin">© 2026 Nathalie Diaz · Éditions La fille au stylo rose · Tous droits réservés</p>
+  <div class="pied-boutons">
+   <button class="eteindre" type="button" data-eteindre>Éteindre la lumière</button>
+   <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
+   <p class="calme-note" role="status">Animations réduites : les Doudous, l’Étoile et les nuages ne bougent plus quand on les touche. Appuyez à nouveau pour les réveiller.</p>
+   <!-- Le son du soir : les bols chantants (sons/bols-chantants.mp3, 60 s en boucle, volume bas). Jamais de lecture automatique :
+        lancé par la lune (mode veilleuse) ou par ce bouton, arrêté d'un clic. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter les bols chantants</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/bols-chantants.mp3"></audio>
+  </div>
+ </div>
+
+</footer>
+</body>
+</html>

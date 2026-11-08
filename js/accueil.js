@@ -104,6 +104,34 @@
       for (var v = 0; v < vieilles.length; v++) { flotte.removeChild(vieilles[v]); }
     }, 3200);
   }
+  /* Toucher l'Étoile : elle sursaute et envoie une pluie d'étincelles vers les Doudous, dont les cœurs s'allument */
+  var grandeEtoile = document.querySelector('.grande-etoile');
+  var zoneDoudous = document.querySelector('.doudous');
+  function etincelles() {
+    if (calme || !grandeEtoile || !zoneDoudous) { return; }
+    grandeEtoile.classList.add('touchee');
+    window.setTimeout(function () { grandeEtoile.classList.remove('touchee'); }, 1200);
+    var er = grandeEtoile.getBoundingClientRect(), zr = zoneDoudous.getBoundingClientRect();
+    var ox = er.left + er.width / 2 - zr.left, oy = er.top + er.height / 2 - zr.top;
+    for (var e = 0; e < 10; e++) {
+      var et = document.createElement('span');
+      et.className = 'etincelle-tombe';
+      et.setAttribute('aria-hidden', 'true');
+      et.style.left = ox.toFixed(0) + 'px'; et.style.top = oy.toFixed(0) + 'px';
+      et.style.setProperty('--ex', ((Math.random() - 0.5) * zr.width * 0.7).toFixed(0) + 'px');
+      et.style.setProperty('--ey', (zr.height * (0.45 + Math.random() * 0.4) - oy).toFixed(0) + 'px');
+      et.style.setProperty('--dd', (1.4 + Math.random() * 0.9).toFixed(2) + 's');
+      et.style.setProperty('--dl', (e * 0.07).toFixed(2) + 's');
+      zoneDoudous.appendChild(et);
+      (function (el) { window.setTimeout(function () { if (el.parentNode) { el.parentNode.removeChild(el); } }, 3200); })(et);
+    }
+    window.setTimeout(calin, 900);
+  }
+  if (grandeEtoile) {
+    grandeEtoile.addEventListener('click', etincelles);
+    grandeEtoile.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); etincelles(); } });
+  }
+
   if (flotte) {
     flotte.addEventListener('click', calin);
     flotte.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); calin(); } });

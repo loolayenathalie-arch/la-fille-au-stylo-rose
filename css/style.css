@@ -853,3 +853,20 @@ html.nuit-mode .menu a::after{filter:brightness(1.3)}
 .pied a:hover,.pied a:focus-visible{text-decoration-color:#E6B8A2}
 .pied .calmer-pied,.pied .ecouter{color:#F7E9D3;border-color:rgba(247,233,211,.45)}
 .pied .calmer-pied:hover,.pied .ecouter:hover{background:rgba(247,233,211,.12)}
+
+/* ===== 17. Jeux de doigts (5 ans) : tout répond tout de suite, en grand, sans rien lire ===== */
+/* Doudou Grosse Tête tombe sur le côté quand on le touche, puis se relève */
+.perso-grosse-tete .cadre-portrait img{transform-origin:50% 100%}
+.perso-grosse-tete .cadre-portrait.tombe img{animation:tombe-cote 2.6s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes tombe-cote{0%{transform:rotate(0)}22%{transform:rotate(26deg) translateX(6%)}48%{transform:rotate(22deg) translateX(5%)}72%{transform:rotate(-6deg)}86%{transform:rotate(3deg)}100%{transform:rotate(0)}}
+/* Doudou Tout-Mou se laisse serrer : il s'aplatit tant qu'on appuie, puis rebondit, avec des petits cœurs */
+.perso-tout-mou .cadre-portrait img{transform-origin:50% 100%;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.perso-tout-mou .cadre-portrait.serre img{transform:scale(1.12,.8)}
+.petit-coeur{position:absolute;left:var(--x,50%);top:var(--y,50%);font-size:1.4rem;line-height:1;color:#E6B8A2;pointer-events:none;z-index:5;opacity:0;animation:petit-coeur 1.8s ease-out var(--d,0s) forwards}
+@keyframes petit-coeur{0%{opacity:0;transform:translate(-50%,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx,0px)),-5rem) scale(1.1)}}
+/* Les nuages ronds : on les pousse du doigt, ils font pouf et s'envolent */
+.nuage-vol{pointer-events:auto;cursor:pointer}
+.nuage-vol.pouf::before,.nuage-vol.pouf::after,.nuage-vol.pouf i{animation:pouf 1.3s ease-out both}
+@keyframes pouf{0%{transform:scale(1);opacity:1}100%{transform:scale(1.8);opacity:0}}
+html.calme .perso-grosse-tete .cadre-portrait.tombe img,html.calme .nuage-vol.pouf::before,html.calme .nuage-vol.pouf::after,html.calme .nuage-vol.pouf i,html.calme .petit-coeur{animation:none}
+html.calme .perso-tout-mou .cadre-portrait img{transition:none}

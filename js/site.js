@@ -415,6 +415,51 @@
     cielDoigt.addEventListener('pointerleave', function () { lueur.classList.remove('visible'); });
   }
 
+  /* Jeux de doigts (5 ans) : Grosse Tête tombe sur le côté, Tout-Mou se laisse serrer, les nuages font pouf */
+  var cadreGT = document.querySelector('.perso-grosse-tete .cadre-portrait');
+  if (cadreGT) {
+    cadreGT.addEventListener('click', function () {
+      if (calme || cadreGT.classList.contains('tombe')) { return; }
+      cadreGT.classList.add('tombe');
+      window.setTimeout(function () { cadreGT.classList.remove('tombe'); }, 2700);
+    });
+  }
+  var cadreTM = document.querySelector('.perso-tout-mou .cadre-portrait');
+  if (cadreTM) {
+    var serreDebut = 0;
+    cadreTM.addEventListener('pointerdown', function () { if (calme) { return; } serreDebut = Date.now(); cadreTM.classList.add('serre'); });
+    function lacheTM() {
+      if (!cadreTM.classList.contains('serre')) { return; }
+      cadreTM.classList.remove('serre');
+      var n = Date.now() - serreDebut > 500 ? 3 : 1;
+      for (var c = 0; c < n; c++) {
+        var coeur = document.createElement('span');
+        coeur.className = 'petit-coeur';
+        coeur.setAttribute('aria-hidden', 'true');
+        coeur.textContent = '\u2665';
+        coeur.style.setProperty('--x', (35 + Math.random() * 30).toFixed(0) + '%');
+        coeur.style.setProperty('--y', (40 + Math.random() * 20).toFixed(0) + '%');
+        coeur.style.setProperty('--dx', ((Math.random() - 0.5) * 60).toFixed(0) + 'px');
+        coeur.style.setProperty('--d', (c * 0.15).toFixed(2) + 's');
+        cadreTM.appendChild(coeur);
+        (function (el) { window.setTimeout(function () { if (el.parentNode) { el.parentNode.removeChild(el); } }, 2400); })(coeur);
+      }
+      vibre();
+    }
+    cadreTM.addEventListener('pointerup', lacheTM);
+    cadreTM.addEventListener('pointerleave', lacheTM);
+    cadreTM.addEventListener('pointercancel', lacheTM);
+  }
+  var nuagesVol = document.querySelectorAll('.nuage-vol');
+  for (var nvv = 0; nvv < nuagesVol.length; nvv++) {
+    nuagesVol[nvv].addEventListener('click', function () {
+      var nu = this;
+      if (calme || nu.classList.contains('pouf')) { return; }
+      nu.classList.add('pouf'); vibre();
+      window.setTimeout(function () { nu.classList.remove('pouf'); }, 1400);
+    });
+  }
+
   /* L'univers : toucher un personnage, il dit sa première phrase (texte de Nath) dans une bulle qui s'efface */
   var persos = document.querySelectorAll('.bandeau[class*="perso-"]');
   for (var pe = 0; pe < persos.length; pe++) {

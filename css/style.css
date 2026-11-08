@@ -108,8 +108,16 @@ html.calme .nom-du-site.signe{animation:none}
 .veilleuse svg{width:1.35rem;height:1.35rem}
 .veilleuse .lune-etoile{opacity:.6}
 .veilleuse[aria-pressed="true"]{background:#2B3254;color:#F7E9D3;border-color:rgba(247,233,211,.4)}
+.bols{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:.4rem;border:1px solid var(--lisere);border-radius:50%;background:transparent;color:var(--brun-fonce);cursor:pointer;order:2}
+.bols[hidden]{display:none}
+.bols svg{width:1.35rem;height:1.35rem}
+.bols .bols-onde{opacity:.35}
+.bols[aria-pressed="true"]{background:#2B3254;color:#F7E9D3;border-color:rgba(247,233,211,.4)}
+.bols[aria-pressed="true"] .bols-onde{opacity:1;animation:bols-onde 2.4s ease-in-out infinite alternate}
+@keyframes bols-onde{0%{transform:translateY(0)}100%{transform:translateY(-1.5px)}}
+html.calme .bols-onde{animation:none}
 .menu{order:3}
-@media (max-width:47.99rem){.veilleuse{margin-left:0;order:1}.menu-bouton{order:2}}
+@media (max-width:47.99rem){.veilleuse{margin-left:0;order:1}.bols{order:1}.menu-bouton{order:2}}
 .menu-bouton{display:none;font:inherit;font-weight:700;font-size:1rem;color:var(--brun-fonce);background:transparent;border:1px solid var(--lisere);border-radius:999px;min-height:44px;padding:.4rem 1rem .4rem 2.6rem;position:relative;cursor:pointer}
 .menu-trait,.menu-trait::before,.menu-trait::after{position:absolute;left:1rem;width:1.1rem;height:2px;border-radius:2px;background:var(--brun-fonce);transition:transform .4s ease,opacity .3s ease}
 .menu-trait{top:50%;margin-top:-1px}

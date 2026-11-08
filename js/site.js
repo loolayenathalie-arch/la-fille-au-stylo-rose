@@ -285,15 +285,40 @@
 
   /* Boîte à musique facultative : le bouton n'apparaît que si le fichier son existe ; jamais de lecture automatique. */
   var ecouter = document.querySelector('[data-ecouter]');
+  var bolsBouton = document.querySelector('[data-bols]');
   var boite = document.getElementById('boite-a-musique');
-  if (ecouter && boite && window.fetch) {
+  var sonVoulu = false;
+  try { sonVoulu = window.sessionStorage.getItem('bols') === '1'; } catch (e) { sonVoulu = false; }
+  function etatSon(joue) {
+    if (ecouter) { ecouter.setAttribute('aria-pressed', joue ? 'true' : 'false'); ecouter.textContent = joue ? 'Arrêter les bols chantants' : 'Écouter les bols chantants'; }
+    if (bolsBouton) { bolsBouton.setAttribute('aria-pressed', joue ? 'true' : 'false'); }
+  }
+  function fonduSon(vers, duree) {
+    var depart = boite.volume, t0 = Date.now();
+    (function pas() {
+      var x = Math.min(1, (Date.now() - t0) / duree);
+      boite.volume = depart + (vers - depart) * x;
+      if (x < 1) { window.setTimeout(pas, 60); } else if (vers === 0) { boite.pause(); }
+    })();
+  }
+  function lanceSon() {
+    if (!boite) { return; }
+    boite.volume = 0;
+    boite.play().then(function () { fonduSon(0.32, 2500); etatSon(true); sonVoulu = true; try { window.sessionStorage.setItem('bols', '1'); } catch (e) { /* tant pis */ } }).catch(function () { etatSon(false); });
+  }
+  function arreteSon() {
+    if (!boite || boite.paused) { etatSon(false); return; }
+    fonduSon(0, 1200); etatSon(false); sonVoulu = false;
+    try { window.sessionStorage.setItem('bols', '0'); } catch (e) { /* tant pis */ }
+  }
+  function basculeSon() { if (!boite || boite.paused) { lanceSon(); } else { arreteSon(); } }
+  window.sonDuSoir = { lance: lanceSon, arrete: arreteSon, voulu: function () { return sonVoulu; } };
+  if (boite && window.fetch) {
     fetch(boite.getAttribute('src'), { method: 'HEAD' }).then(function (r) {
       if (!r.ok) { return; }
-      ecouter.hidden = false;
-      ecouter.addEventListener('click', function () {
-        if (boite.paused) { boite.volume = 0.5; boite.play().then(function () { ecouter.setAttribute('aria-pressed', 'true'); ecouter.textContent = 'Arrêter la boîte à musique'; }).catch(function () {}); }
-        else { boite.pause(); ecouter.setAttribute('aria-pressed', 'false'); ecouter.textContent = 'Écouter la boîte à musique'; }
-      });
+      if (ecouter) { ecouter.hidden = false; ecouter.addEventListener('click', basculeSon); }
+      if (bolsBouton) { bolsBouton.hidden = false; bolsBouton.addEventListener('click', basculeSon); }
+      etatSon(false);
     }).catch(function () {});
   }
 
@@ -459,24 +484,25 @@
       nuitMode = !nuitMode;
       try { window.sessionStorage.setItem('veilleuse', nuitMode ? '1' : '0'); } catch (e) { /* tant pis */ }
       appliqueLune();
+      if (window.sonDuSoir) { if (nuitMode) { window.sonDuSoir.lance(); } else { window.sonDuSoir.arrete(); } }
     });
   }
   appliqueLune();
 
   /* La veillée (accueil) : trois phrases de Doudou Tout-Mou, puis le livre ; le site passe en mode veilleuse */
   var boutonVeillee = document.querySelector('[data-veillee]');
-  var boite = document.querySelector('[data-veillee-boite]');
-  if (boutonVeillee && boite) {
+  var boiteVeillee = document.querySelector('[data-veillee-boiteVeillee]');
+  if (boutonVeillee && boiteVeillee) {
     var phrases = [
       'Bonjour toi ! Je suis Doudou Tout-Mou, farceur et bavard.',
       'Je suis petit, tout blanc, tout doux, et tout mou parce qu’on me serre très fort, toutes les nuits.',
       'Et toi, en t’installant bien confortablement… L’histoire va commencer…'
     ];
     var pas = 0, dernierFocus = null;
-    var phraseEl = boite.querySelector('.veillee-phrase');
-    var suite = boite.querySelector('[data-veillee-suite]');
-    var fermer = boite.querySelector('[data-veillee-fermer]');
-    var points = boite.querySelectorAll('.veillee-pas i');
+    var phraseEl = boiteVeillee.querySelector('.veillee-phrase');
+    var suite = boiteVeillee.querySelector('[data-veillee-suite]');
+    var fermer = boiteVeillee.querySelector('[data-veillee-fermer]');
+    var points = boiteVeillee.querySelectorAll('.veillee-pas i');
     function montrePhrase() {
       phraseEl.innerHTML = '';
       var mots = phrases[pas].split(' ');
@@ -493,13 +519,14 @@
       dernierFocus = document.activeElement;
       pas = 0;
       if (!nuitMode) { nuitMode = true; try { window.sessionStorage.setItem('veilleuse', '1'); } catch (e) { /* tant pis */ } appliqueLune(); }
-      boite.hidden = false;
+      if (window.sonDuSoir) { window.sonDuSoir.lance(); }
+      boiteVeillee.hidden = false;
       document.body.style.overflow = 'hidden';
       montrePhrase();
       suite.focus();
     }
     function fermeVeillee() {
-      boite.hidden = true;
+      boiteVeillee.hidden = true;
       document.body.style.overflow = '';
       if (dernierFocus && dernierFocus.focus) { dernierFocus.focus(); }
     }
@@ -509,7 +536,7 @@
       else { window.location.href = 'le-livre.html'; }
     });
     fermer.addEventListener('click', fermeVeillee);
-    boite.addEventListener('keydown', function (e) {
+    boiteVeillee.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { fermeVeillee(); }
       if (e.key === 'Tab') { /* le focus reste dans la boîte */
         var f = [suite, fermer];

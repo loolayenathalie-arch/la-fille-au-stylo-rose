@@ -1,2 +1,3 @@
-Déposer ici le fichier boite-a-musique.mp3 (environ 30 s, en boucle, libre de droits).
-Le bouton « Écouter la boîte à musique » du bas de page n'''apparaît que si ce fichier existe.
+Le son du soir : sons/bols-chantants.mp3 (les bols chantants de Nathalie, 60 s, en boucle, volume bas).
+Il est lancé par la lune (mode veilleuse), par la veillée de l'accueil ou par le bouton du bas de page ; jamais automatiquement.
+Pour la page /ecouter : déposer sons/le-petit-mot-plie.mp3 et retirer l'attribut hidden du lecteur dans ecouter.html.

@@ -34,6 +34,7 @@
  <div class="entete-interieur">
   <a class="nom-du-site" href="index.html">Les Doudous et l'Étoile<small>La fille au stylo rose</small></a>
   <button class="veilleuse" type="button" data-veilleuse aria-pressed="false" aria-label="Mode veilleuse : lire en bleu nuit tamisé"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="lune" d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A9.5 9.5 0 0 1 15.5 3.5z" fill="currentColor"/><circle class="lune-etoile" cx="6.5" cy="6.5" r="1.1" fill="currentColor"/><circle class="lune-etoile" cx="9.5" cy="3.5" r=".8" fill="currentColor"/></svg></button>
+  <button class="bols" type="button" data-bols aria-pressed="false" aria-label="Bols chantants : écouter ou arrêter" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10h16a8 8 0 0 1-16 0z" fill="currentColor"/><path d="M8 20h8M12 18v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="bols-onde" d="M3 6.5q2-2 4 0t4 0 4 0 4 0 2 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
   <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-liste" data-menu><span class="menu-trait" aria-hidden="true"></span>Menu</button>
   <nav class="menu" aria-label="Menu principal">
    <ul id="menu-liste">
@@ -133,10 +134,10 @@
   <p class="pied-fin">© 2026 Nathalie Diaz · Éditions La fille au stylo rose · Tous droits réservés</p>
   <div class="pied-boutons">
    <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
-   <!-- Boîte à musique facultative : déposer le fichier sons/boite-a-musique.mp3 (30 s en boucle, libre de droits).
-        Le bouton reste caché tant que le fichier n'existe pas ; jamais de lecture automatique. -->
-   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter la boîte à musique</button>
-   <audio id="boite-a-musique" preload="none" loop src="sons/boite-a-musique.mp3"></audio>
+   <!-- Le son du soir : les bols chantants (sons/bols-chantants.mp3, 60 s en boucle, volume bas). Jamais de lecture automatique :
+        lancé par la lune (mode veilleuse) ou par ce bouton, arrêté d'un clic. -->
+   <button class="ecouter" data-ecouter type="button" aria-pressed="false" hidden>Écouter les bols chantants</button>
+   <audio id="boite-a-musique" preload="none" loop src="sons/bols-chantants.mp3"></audio>
   </div>
  </div>
 

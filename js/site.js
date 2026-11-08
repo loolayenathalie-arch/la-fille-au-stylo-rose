@@ -418,7 +418,7 @@
   /* Jeux de doigts (5 ans) : Grosse Tête tombe sur le côté, Tout-Mou se laisse serrer, les nuages font pouf */
   var cadreGT = document.querySelector('.perso-grosse-tete .cadre-portrait');
   if (cadreGT) {
-    cadreGT.addEventListener('click', function () {
+    cadreGT.addEventListener('pointerdown', function () {
       if (calme || cadreGT.classList.contains('tombe')) { return; }
       cadreGT.classList.add('tombe');
       window.setTimeout(function () { cadreGT.classList.remove('tombe'); }, 2700);
@@ -450,14 +450,22 @@
     cadreTM.addEventListener('pointerleave', lacheTM);
     cadreTM.addEventListener('pointercancel', lacheTM);
   }
-  var nuagesVol = document.querySelectorAll('.nuage-vol');
-  for (var nvv = 0; nvv < nuagesVol.length; nvv++) {
-    nuagesVol[nvv].addEventListener('click', function () {
-      var nu = this;
-      if (calme || nu.classList.contains('pouf')) { return; }
-      nu.classList.add('pouf'); vibre();
-      window.setTimeout(function () { nu.classList.remove('pouf'); }, 1400);
-    });
+  /* Les nuages vivent derrière le contenu : on cherche sous le doigt celui qu'on a touché (elementsFromPoint) */
+  function pouf(nu) {
+    if (calme || nu.classList.contains('pouf')) { return; }
+    nu.classList.add('pouf'); vibre();
+    window.setTimeout(function () { nu.classList.remove('pouf'); }, 1400);
+  }
+  if (document.elementsFromPoint) {
+    document.addEventListener('pointerdown', function (e) {
+      if (e.target.closest && e.target.closest('a, button, input, textarea, select, summary, label, .cadre-portrait, .doudou-flotte, .grande-etoile, .etoile-ciel, .fenetre, [role="button"]')) { return; }
+      var pile = document.elementsFromPoint(e.clientX, e.clientY);
+      for (var pi = 0; pi < pile.length; pi++) {
+        if (pile[pi].classList && pile[pi].classList.contains('nuage-vol')) { pouf(pile[pi]); return; }
+        var nuP = pile[pi].closest ? pile[pi].closest('.nuage-vol') : null;
+        if (nuP) { pouf(nuP); return; }
+      }
+    }, { passive: true });
   }
 
   /* L'univers : toucher un personnage, il dit sa première phrase (texte de Nath) dans une bulle qui s'efface */

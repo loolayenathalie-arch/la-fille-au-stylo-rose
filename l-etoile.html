@@ -78,6 +78,11 @@
    <div class="souffle-pas" aria-hidden="true"><i></i><i></i><i></i></div>
    <p class="souffle-fin" hidden>La main sur le cœur… ça y est, tu respires avec elle.</p>
   </div>
+  <!-- La bougie : appuyer longtemps l'éteint (le site passe en veilleuse) ; appuyer à nouveau la rallume. -->
+  <div class="bougie-bloc" data-bougie>
+   <button class="bougie" type="button" aria-pressed="false" aria-label="La bougie : garder le doigt pour souffler dessus et passer en veilleuse"><span class="flamme" aria-hidden="true"></span><span class="meche" aria-hidden="true"></span><span class="cire" aria-hidden="true"></span><span class="fumee" aria-hidden="true"></span></button>
+   <p class="bougie-aide">Garde le doigt sur la bougie pour souffler dessus… et dire bonne nuit.</p>
+  </div>
   <div class="etoile-mots">
    <p class="citation">Le soir, on aime bien regarder par la fenêtre. <em>Il y a notre Étoile, toujours tout près de nous.</em></p>
    <p>Pour nous, chacun est relié à une étoile brillante, à une douce lumière qui fait du bien. Elle nous protège, nous rassure, nous enveloppe, comme une couverture de lumière. Quand on la regarde, on se sent tous ensemble : l’Étoile, les Doudous… et toi.</p>
@@ -139,6 +144,7 @@
   </nav>
   <p class="pied-fin">© 2026 Nathalie Diaz · Éditions La fille au stylo rose · Tous droits réservés</p>
   <div class="pied-boutons">
+   <button class="eteindre" type="button" data-eteindre>Éteindre la lumière</button>
    <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
    <p class="calme-note" role="status">Animations réduites : les Doudous, l’Étoile et les nuages ne bougent plus quand on les touche. Appuyez à nouveau pour les réveiller.</p>
    <!-- Le son du soir : les bols chantants (sons/bols-chantants.mp3, 60 s en boucle, volume bas). Jamais de lecture automatique :

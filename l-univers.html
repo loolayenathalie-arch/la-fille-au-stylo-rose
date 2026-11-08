@@ -73,6 +73,19 @@
    <div><h2 id="grosse-tete">Doudou Grosse Tête</h2><p>Voici mon grand frère, Doudou Grosse Tête. Il est un peu vieux… mais son âge, c'est un secret ! Sa tête est si pleine d'amour qu'elle est devenue un peu lourde : alors parfois, il tombe sur le côté. Il parle peu, surtout avec ses dessins. Et il sait souvent les choses avant tout le monde.</p></div>
   </div>
  </section>
+ <!-- Cache-cache : Doudou Tout-Mou se cache derrière un des nuages ; on touche les nuages pour le retrouver. Sans score, sans fin. -->
+ <section class="cache-cache apparait" aria-labelledby="cache-cache-titre" data-cache-cache>
+  <h2 id="cache-cache-titre">Cache-cache</h2>
+  <p class="sous-titre">Doudou Tout-Mou s’est caché derrière un nuage… Touche les nuages pour le retrouver !</p>
+  <div class="cache-ciel" aria-hidden="false">
+   <img class="cache-doudou" src="images/personnages/doudou-tout-mou.svg" width="300" height="300" alt="Doudou Tout-Mou, petit ours blanc tout doux." loading="lazy">
+   <button class="cache-nuage n1" type="button" aria-label="Un nuage"><i></i></button>
+   <button class="cache-nuage n2" type="button" aria-label="Un nuage"><i></i></button>
+   <button class="cache-nuage n3" type="button" aria-label="Un nuage"><i></i></button>
+   <button class="cache-nuage n4" type="button" aria-label="Un nuage"><i></i></button>
+  </div>
+  <p class="cache-encore"><button class="bouton bouton-doux" type="button" data-cache-encore hidden>Encore ?</button></p>
+ </section>
  <section class="bandeau bandeau-or perso-etoile apparait" aria-labelledby="etoile">
   <div class="deux-colonnes">
    <div class="cadre-aquarelle cadre-portrait cadre-etoile"><span class="portrait-etoile" role="img" aria-label="L'Étoile"><svg viewBox="-100 -100 200 200" focusable="false" aria-hidden="true"><defs><radialGradient id="pe-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".3" stop-color="#F2C97D" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="125" fill="url(#pe-degrade)"/><g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/><path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="14" fill="#FFF3D6"/><circle r="7.5" fill="#FFFFFF"/></g></svg></span></div>
@@ -134,6 +147,7 @@
   </nav>
   <p class="pied-fin">© 2026 Nathalie Diaz · Éditions La fille au stylo rose · Tous droits réservés</p>
   <div class="pied-boutons">
+   <button class="eteindre" type="button" data-eteindre>Éteindre la lumière</button>
    <button class="calmer-pied" data-calmer type="button" aria-pressed="false">Réduire les animations</button>
    <p class="calme-note" role="status">Animations réduites : les Doudous, l’Étoile et les nuages ne bougent plus quand on les touche. Appuyez à nouveau pour les réveiller.</p>
    <!-- Le son du soir : les bols chantants (sons/bols-chantants.mp3, 60 s en boucle, volume bas). Jamais de lecture automatique :

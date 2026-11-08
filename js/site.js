@@ -368,6 +368,43 @@
     }
   }
 
+  /* La bougie (L'Étoile) : garder le doigt souffle dessus ; éteinte = veilleuse ; un appui la rallume */
+  var bougieBloc = document.querySelector('[data-bougie]');
+  if (bougieBloc) {
+    var bougie = bougieBloc.querySelector('.bougie');
+    var bougieMinuteur = null;
+    function eteindre() {
+      bougie.classList.remove('souffle'); bougie.classList.add('eteinte'); bougie.setAttribute('aria-pressed', 'true');
+      vibre();
+      if (!nuitMode) { nuitMode = true; try { window.sessionStorage.setItem('veilleuse', '1'); } catch (e) { /* tant pis */ } appliqueLune(); if (window.sonDuSoir) { window.sonDuSoir.lance(); } }
+    }
+    function rallumer() {
+      bougie.classList.remove('eteinte', 'souffle'); bougie.setAttribute('aria-pressed', 'false');
+      if (nuitMode) { nuitMode = false; try { window.sessionStorage.setItem('veilleuse', '0'); } catch (e) { /* tant pis */ } appliqueLune(); if (window.sonDuSoir) { window.sonDuSoir.arrete(); } }
+    }
+    function souffleDebut(e) {
+      if (e && e.type === 'keydown' && e.key !== ' ' && e.key !== 'Enter') { return; }
+      if (e && e.preventDefault) { e.preventDefault(); }
+      if (bougie.classList.contains('eteinte')) { rallumer(); return; }
+      bougie.classList.add('souffle');
+      window.clearTimeout(bougieMinuteur);
+      bougieMinuteur = window.setTimeout(eteindre, calme ? 300 : 1500);
+    }
+    function souffleFin() {
+      window.clearTimeout(bougieMinuteur);
+      bougie.classList.remove('souffle');
+    }
+    bougie.addEventListener('pointerdown', souffleDebut);
+    bougie.addEventListener('pointerup', souffleFin);
+    bougie.addEventListener('pointercancel', souffleFin);
+    bougie.addEventListener('pointerleave', souffleFin);
+    bougie.addEventListener('keydown', souffleDebut);
+    bougie.addEventListener('keyup', souffleFin);
+    bougie.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    var nuitDeja = false; try { nuitDeja = window.sessionStorage.getItem('veilleuse') === '1'; } catch (e) { nuitDeja = false; }
+    if (nuitDeja) { bougie.classList.add('eteinte'); bougie.setAttribute('aria-pressed', 'true'); }
+  }
+
   /* Respirer avec l'Étoile (page L'Étoile) : appuyer = inspirer, relâcher = expirer, trois fois */
   var souffle = document.querySelector('[data-souffle]');
   var cielEtoileS = document.querySelector('.etoile-ciel');
@@ -503,6 +540,46 @@
     })(persos[pe]);
   }
 
+  /* Cache-cache (L'univers) : Doudou Tout-Mou est derrière un des quatre nuages */
+  var cacheCache = document.querySelector('[data-cache-cache]');
+  if (cacheCache) {
+    var cNuages = cacheCache.querySelectorAll('.cache-nuage');
+    var cCiel = cacheCache.querySelector('.cache-ciel');
+    var cDoudou = cacheCache.querySelector('.cache-doudou');
+    var cEncore = cacheCache.querySelector('[data-cache-encore]');
+    var cache = -1;
+    function cacheDepart() {
+      cCiel.classList.remove('trouve');
+      cEncore.hidden = true;
+      cache = Math.floor(Math.random() * cNuages.length);
+      for (var n = 0; n < cNuages.length; n++) {
+        cNuages[n].classList.remove('pouf'); cNuages[n].classList.toggle('cache', n === cache);
+        cNuages[n].disabled = false;
+      }
+      var r = cNuages[cache].getBoundingClientRect(), cr = cCiel.getBoundingClientRect();
+      cDoudou.style.left = (r.left - cr.left + r.width / 2).toFixed(0) + 'px';
+      cDoudou.style.top = (r.top - cr.top + r.height * 0.55).toFixed(0) + 'px';
+    }
+    for (var cn = 0; cn < cNuages.length; cn++) {
+      (function (idx) {
+        cNuages[idx].addEventListener('click', function () {
+          var nu = cNuages[idx];
+          if (nu.classList.contains('pouf')) { return; }
+          nu.classList.add('pouf'); vibre();
+          if (idx === cache) {
+            cCiel.classList.add('trouve');
+            for (var m = 0; m < cNuages.length; m++) { cNuages[m].disabled = true; }
+            cEncore.hidden = false;
+            window.setTimeout(function () { cEncore.focus(); }, 300);
+          }
+        });
+      })(cn);
+    }
+    cEncore.addEventListener('click', cacheDepart);
+    window.addEventListener('resize', function () { if (!cCiel.classList.contains('trouve')) { cacheDepart(); } });
+    cacheDepart();
+  }
+
   /* La fenêtre de Lili (Le livre) : on écarte le rideau soi-même */
   var fenetreScene = document.querySelector('.fenetre-scene');
   var rideauBouton = document.querySelector('[data-rideau]');
@@ -613,6 +690,7 @@
       if (dernierFocus && dernierFocus.focus) { dernierFocus.focus(); }
     }
     boutonVeillee.addEventListener('click', ouvreVeillee);
+    if (window.location.hash === '#veillee') { window.setTimeout(ouvreVeillee, 1200); }
     suite.addEventListener('click', function () {
       if (pas < phrases.length - 1) { pas++; montrePhrase(); }
       else { window.location.href = 'le-livre.html'; }
@@ -625,6 +703,26 @@
         if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[1].focus(); }
         else if (!e.shiftKey && document.activeElement === f[1]) { e.preventDefault(); f[0].focus(); }
       }
+    });
+  }
+
+  /* « Éteindre la lumière » : veilleuse + bols + la veillée de l'accueil, en un geste */
+  var eteindreBouton = document.querySelector('[data-eteindre]');
+  if (eteindreBouton) {
+    eteindreBouton.textContent = nuitMode ? 'Rallumer la lumière' : 'Éteindre la lumière';
+    eteindreBouton.addEventListener('click', function () {
+      if (nuitMode) {
+        nuitMode = false; try { window.sessionStorage.setItem('veilleuse', '0'); } catch (e) { /* tant pis */ } appliqueLune();
+        if (window.sonDuSoir) { window.sonDuSoir.arrete(); }
+        eteindreBouton.textContent = 'Éteindre la lumière';
+        return;
+      }
+      nuitMode = true; try { window.sessionStorage.setItem('veilleuse', '1'); } catch (e) { /* tant pis */ } appliqueLune();
+      if (window.sonDuSoir) { window.sonDuSoir.lance(); }
+      eteindreBouton.textContent = 'Rallumer la lumière';
+      var surAccueil = document.querySelector('[data-veillee]');
+      if (surAccueil) { window.setTimeout(function () { surAccueil.click(); }, 700); }
+      else { window.setTimeout(function () { window.location.href = 'index.html#veillee'; }, 900); }
     });
   }
 

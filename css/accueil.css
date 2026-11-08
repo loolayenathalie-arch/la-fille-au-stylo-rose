@@ -541,3 +541,21 @@ html.calme .veillee-ciel,html.calme .veillee-boite,html.calme .veillee-etoile,ht
   animation:etincelle-tombe var(--dd,1.8s) cubic-bezier(.3,.6,.6,1) var(--dl,0s) forwards}
 @keyframes etincelle-tombe{0%{opacity:0;transform:translate3d(0,0,0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translate3d(var(--ex,0px),var(--ey,160px),0) scale(.3)}}
 html.calme .grande-etoile.touchee svg,html.calme .etincelle-tombe{animation:none}
+
+/* L'entrée de la chambre de Lili, sous la scène : une fenêtre allumée que l'on pousse */
+.apres-chambre{max-width:44rem;margin:0 auto 2.4rem}
+.porte-chambre{display:grid;grid-template-columns:7.5rem 1fr;gap:1.4rem;align-items:center;text-decoration:none;color:var(--brun-fonce);padding:1.2rem 1.4rem;border-radius:26px 30px 24px 32px / 30px 24px 32px 26px;background:var(--grain),linear-gradient(135deg,#F7EEE2,#F0E2D2);box-shadow:var(--ombre);transition:transform .6s cubic-bezier(.3,.6,.3,1),box-shadow .6s ease}
+.porte-chambre:hover,.porte-chambre:focus-visible{transform:translateY(-3px);box-shadow:var(--ombre-haute);outline:none}
+.porte-chambre:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+.porte-chambre .fenetre-mini{position:relative;display:block;width:7.5rem;aspect-ratio:4/5}
+.porte-texte{display:flex;flex-direction:column;align-items:flex-start;gap:.3rem}
+.porte-sur{font-family:var(--police-fine);font-style:italic;font-size:1.1rem}
+.porte-chambre strong{font-family:var(--police-titre);font-weight:700;font-size:clamp(1.7rem,4vw,2.2rem);line-height:1.1;color:#5B4330}
+.porte-mot{font-size:1.02rem;line-height:1.5;max-width:28rem}
+.porte-chambre .bouton{margin-top:.5rem;display:inline-flex;align-items:center;padding:.6rem 1.4rem}
+.porte-chambre:hover .fm-etoile{animation-duration:2.2s}
+html.calme .porte-chambre{transition:none}
+html.nuit-mode .porte-chambre{background:var(--grain),linear-gradient(135deg,#2B3254,#1F2541);color:#F1E7D6}
+html.nuit-mode .porte-chambre strong{color:#F7E9D3}
+html.nuit-mode .porte-chambre .fm-ciel{background:linear-gradient(180deg,#3A3F6A 0%,#2B3254 45%,#1B2240 100%)}
+@media (max-width:47.99rem){.porte-chambre{grid-template-columns:1fr;justify-items:center;text-align:center;padding:1.2rem 1rem}.porte-texte{align-items:center}.porte-chambre .fenetre-mini{width:6rem}}

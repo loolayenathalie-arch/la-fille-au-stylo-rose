@@ -270,6 +270,19 @@ html.calme .carte-pli details>p,html.calme .carte-pli details[open]::before{anim
 .bandeau:hover .coeur-page::before{opacity:1;transform:scale(1.4)}
 @keyframes coeur-page{0%{opacity:.5;transform:scale(.9)}100%{opacity:1;transform:scale(1.25)}}
 html.calme .cadre-aquarelle::after,html.calme .flotte-douce::after,html.calme .coeur-page::before{animation:none}
+/* Les personnages parlent : une bulle manuscrite, dans leur teinte, qui s'efface d'elle-même */
+.bulle{position:absolute;left:50%;top:-1.2rem;transform:translate(-50%,0) scale(.9);z-index:6;max-width:min(18rem,80vw);padding:.7rem 1rem .8rem;border-radius:20px 22px 22px 6px;
+  font-family:var(--police-titre);font-weight:700;font-size:1.2rem;line-height:1.3;text-align:center;color:#5B4330;background:var(--bulle,#FFFDF6);
+  box-shadow:0 10px 22px -10px rgba(94,86,130,.45);opacity:0;pointer-events:none;transition:opacity .7s ease,transform .7s cubic-bezier(.3,.6,.3,1)}
+.bulle.visible{opacity:1;transform:translate(-50%,-100%) scale(1)}
+.perso-tout-mou{--bulle:#F4F8FB}
+.perso-grosse-tete{--bulle:#F6E8D6}
+.perso-lili{--bulle:#FBEDE3}
+.perso-etoile{--bulle:#FBF2DC}
+.deux-colonnes .cadre-portrait{cursor:pointer}
+.deux-colonnes .cadre-portrait:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+html.nuit-mode .bulle{color:#2B3254}
+html.calme .bulle{transition:none}
 /* Le secret du gilet : un petit Doudou glisse dans la manche de Lili, deux notes s'échappent */
 .bandeau-rose .cadre-portrait{cursor:pointer}
 .bandeau-rose .cadre-portrait:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
@@ -526,7 +539,20 @@ html.calme .cadre-livre img,html.calme .couverture::after{animation:none}
 .fil-etoile path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
 .fil-etoile-halo{stroke:#FFF3D6;stroke-width:7;opacity:.5}
 .fil-etoile-trait{stroke:#FFF8EA;stroke-width:2.2}
-.js .apparait.visible .fil-etoile path{animation:fil-trace 3.2s cubic-bezier(.45,0,.3,1) .6s forwards,fil-vie 5s ease-in-out 3.8s infinite alternate}
+.js .fenetre-scene.ouverte .fil-etoile path,html.calme .fil-etoile path,html:not(.js) .fil-etoile path{animation:fil-trace 3.2s cubic-bezier(.45,0,.3,1) .6s forwards,fil-vie 5s ease-in-out 3.8s infinite alternate}
+/* Le rideau est tiré au départ : on l'écarte soi-même (bouton, ou toucher la fenêtre). En mode calme ou sans script, il est ouvert. */
+.js .fenetre-scene:not(.ouverte) .fenetre-rideau{width:104%;border-radius:0;transform:none;animation:none}
+.js .fenetre-scene:not(.ouverte) .fenetre-etoile,.js .fenetre-scene:not(.ouverte) .fenetre-doudous{opacity:.25}
+.fenetre-rideau{transition:width 2.2s cubic-bezier(.4,.1,.3,1),border-radius 2.2s ease}
+.fenetre-etoile,.fenetre-doudous{transition:opacity 1.6s ease .8s}
+.fenetre-ouvrir{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:5;font:inherit;font-weight:700;font-size:1rem;color:#5B4330;background:rgba(255,253,246,.92);border:0;border-radius:999px;min-height:44px;padding:.5rem 1.2rem;cursor:pointer;box-shadow:0 6px 16px -6px rgba(94,86,130,.5);transition:opacity .8s ease,transform .8s ease}
+.fenetre-ouvrir:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.fenetre-scene.ouverte .fenetre-ouvrir{opacity:0;pointer-events:none;transform:translate(-50%,8px)}
+html.calme .fenetre-scene .fenetre-rideau{width:40%}
+html.calme .fenetre-ouvrir{display:none}
+html.calme .fenetre-etoile,html.calme .fenetre-doudous{opacity:1}
+.fenetre{cursor:pointer}
+.fenetre-scene.ouverte .fenetre{cursor:default}
 @keyframes fil-trace{to{stroke-dashoffset:0}}
 @keyframes fil-vie{0%{opacity:.55}100%{opacity:1}}
 .fenetre-doudous{position:absolute;left:50%;bottom:-6%;width:62%;transform:translateX(-50%);display:block}

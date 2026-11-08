@@ -321,6 +321,45 @@
     }
   }
 
+  /* L'univers : toucher un personnage, il dit sa première phrase (texte de Nath) dans une bulle qui s'efface */
+  var persos = document.querySelectorAll('.bandeau[class*="perso-"]');
+  for (var pe = 0; pe < persos.length; pe++) {
+    (function (sec) {
+      var cadre = sec.querySelector('.cadre-portrait');
+      var para = sec.querySelector('.deux-colonnes p');
+      if (!cadre || !para) { return; }
+      var premiere = (para.textContent.match(/^[^.!?…]+[.!?…]+/) || [para.textContent])[0].trim();
+      var bulle = document.createElement('span');
+      bulle.className = 'bulle';
+      bulle.setAttribute('role', 'status');
+      bulle.textContent = premiere;
+      cadre.appendChild(bulle);
+      var minuteur = null;
+      function parle() {
+        bulle.classList.add('visible');
+        window.clearTimeout(minuteur);
+        minuteur = window.setTimeout(function () { bulle.classList.remove('visible'); }, 4200);
+      }
+      cadre.addEventListener('click', parle);
+      if (!cadre.hasAttribute('tabindex')) { cadre.setAttribute('tabindex', '0'); cadre.setAttribute('role', 'button'); cadre.setAttribute('aria-label', sec.querySelector('h2').textContent + ' : écouter sa phrase'); }
+      cadre.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); parle(); } });
+    })(persos[pe]);
+  }
+
+  /* La fenêtre de Lili (Le livre) : on écarte le rideau soi-même */
+  var fenetreScene = document.querySelector('.fenetre-scene');
+  var rideauBouton = document.querySelector('[data-rideau]');
+  if (fenetreScene && rideauBouton) {
+    var ouvreRideau = function () {
+      fenetreScene.classList.add('ouverte');
+      rideauBouton.setAttribute('aria-expanded', 'true');
+    };
+    if (calme) { ouvreRideau(); }
+    rideauBouton.addEventListener('click', ouvreRideau);
+    fenetreScene.querySelector('.fenetre').addEventListener('click', ouvreRideau);
+    document.addEventListener('calme-change', function (e) { if (e.detail && e.detail.calme) { ouvreRideau(); } });
+  }
+
   /* Le secret du gilet (L'univers) */
   var lili = document.querySelector('.bandeau-rose .cadre-portrait');
   if (lili) {
@@ -371,6 +410,62 @@
     });
   }
   appliqueLune();
+
+  /* La veillée (accueil) : trois phrases de Doudou Tout-Mou, puis le livre ; le site passe en mode veilleuse */
+  var boutonVeillee = document.querySelector('[data-veillee]');
+  var boite = document.querySelector('[data-veillee-boite]');
+  if (boutonVeillee && boite) {
+    var phrases = [
+      'Bonjour toi ! Je suis Doudou Tout-Mou, farceur et bavard.',
+      'Je suis petit, tout blanc, tout doux, et tout mou parce qu’on me serre très fort, toutes les nuits.',
+      'Et toi, en t’installant bien confortablement… L’histoire va commencer…'
+    ];
+    var pas = 0, dernierFocus = null;
+    var phraseEl = boite.querySelector('.veillee-phrase');
+    var suite = boite.querySelector('[data-veillee-suite]');
+    var fermer = boite.querySelector('[data-veillee-fermer]');
+    var points = boite.querySelectorAll('.veillee-pas i');
+    function montrePhrase() {
+      phraseEl.innerHTML = '';
+      var mots = phrases[pas].split(' ');
+      for (var mo = 0; mo < mots.length; mo++) {
+        var sp = document.createElement('span');
+        sp.textContent = mots[mo] + (mo < mots.length - 1 ? '\u00A0' : '');
+        sp.style.animationDelay = (calme ? 0 : mo * 0.09).toFixed(2) + 's';
+        phraseEl.appendChild(sp);
+      }
+      for (var pt = 0; pt < points.length; pt++) { points[pt].classList.toggle('fait', pt <= pas); }
+      suite.textContent = pas < phrases.length - 1 ? 'Continuer' : 'Ouvrir le livre';
+    }
+    function ouvreVeillee() {
+      dernierFocus = document.activeElement;
+      pas = 0;
+      if (!nuitMode) { nuitMode = true; try { window.sessionStorage.setItem('veilleuse', '1'); } catch (e) { /* tant pis */ } appliqueLune(); }
+      boite.hidden = false;
+      document.body.style.overflow = 'hidden';
+      montrePhrase();
+      suite.focus();
+    }
+    function fermeVeillee() {
+      boite.hidden = true;
+      document.body.style.overflow = '';
+      if (dernierFocus && dernierFocus.focus) { dernierFocus.focus(); }
+    }
+    boutonVeillee.addEventListener('click', ouvreVeillee);
+    suite.addEventListener('click', function () {
+      if (pas < phrases.length - 1) { pas++; montrePhrase(); }
+      else { window.location.href = 'le-livre.html'; }
+    });
+    fermer.addEventListener('click', fermeVeillee);
+    boite.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { fermeVeillee(); }
+      if (e.key === 'Tab') { /* le focus reste dans la boîte */
+        var f = [suite, fermer];
+        if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[1]) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+  }
 
   /* Menu repliable (téléphone) */
   var menuBouton = document.querySelector('[data-menu]');

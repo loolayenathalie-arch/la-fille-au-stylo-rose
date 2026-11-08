@@ -190,6 +190,7 @@
    <nav class="accueil-liens" aria-label="Pour continuer">
     <a class="bouton" href="le-livre.html">Découvrir le livre</a>
     <a class="bouton bouton-doux" href="l-etoile.html">L’Étoile</a>
+    <button class="bouton bouton-doux bouton-veillee" type="button" data-veillee>Commencer la veillée</button>
     <p class="promesse promesse-accueil">Des histoires du soir pour les grandes émotions des petits</p>
    </nav>
   </div>
@@ -205,6 +206,20 @@
   </div>
  </div>
 </main>
+<!-- La veillée : une entrée rituelle, trois phrases de Doudou Tout-Mou (texte de Nath), puis le livre. Le site passe en mode veilleuse. -->
+<div class="veillee" role="dialog" aria-modal="true" aria-labelledby="veillee-titre" hidden data-veillee-boite>
+ <div class="veillee-ciel" aria-hidden="true"></div>
+ <div class="veillee-boite">
+  <svg class="veillee-etoile" viewBox="-100 -100 200 200" focusable="false" aria-hidden="true"><defs><radialGradient id="vl-degrade"><stop offset="0" stop-color="#FFF3D6"/><stop offset=".3" stop-color="#F2C97D" stop-opacity=".55"/><stop offset="1" stop-color="#F6D9A8" stop-opacity="0"/></radialGradient></defs><circle class="ve-halo" r="125" fill="url(#vl-degrade)"/><g class="ve-rayons"><path d="M0 -92 L3 -3 L92 0 L3 3 L0 92 L-3 3 L-92 0 L-3 -3Z" fill="#FFF3D6" fill-opacity=".95"/><path d="M0 -50 L2.4 -2.4 L50 0 L2.4 2.4 L0 50 L-2.4 2.4 L-50 0 L-2.4 -2.4Z" fill="#FFF3D6" fill-opacity=".8" transform="rotate(45)"/></g><g class="ve-coeur"><circle r="14" fill="#FFF3D6"/><circle r="7.5" fill="#FFFFFF"/></g></svg>
+  <p id="veillee-titre" class="veillee-nom">Doudou Tout-Mou</p>
+  <p class="veillee-phrase" aria-live="polite"></p>
+  <div class="veillee-pas" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="veillee-actions">
+   <button class="bouton" type="button" data-veillee-suite>Continuer</button>
+   <button class="bouton bouton-doux" type="button" data-veillee-fermer>Fermer</button>
+  </div>
+ </div>
+</div>
 <footer class="pied">
  <div class="pied-interieur">
   <div class="bas-blocs">
